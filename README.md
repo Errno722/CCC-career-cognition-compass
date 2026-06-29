@@ -2,7 +2,7 @@
 
 CCC 是 Career Cognition Compass 的缩写。它是一个 AI 求职澄清与行动辅导项目，面向那些正在找工作、想转行、长期 Gap、在职想换工作，或只是觉得“我好像该找工作了，但其实不知道从哪里开始”的人。
 
-CCC 采用开源 + 自愿赞赏的方式维护。公开内容可以免费使用、复制和修改；如果它帮到你，可以通过 star、反馈、分享或赞赏支持继续迭代。
+CCC 采用开源 + 支付宝自愿赞赏的方式维护。公开内容可以免费使用、复制和修改；如果它帮到你，可以通过 star、反馈、分享或支付宝赞赏支持继续迭代。
 
 它不只做简历优化。它更关注简历之前的部分：你现在处在什么状态，你的经历里有哪些证据，你的能力可以迁移到哪里，你真正想解决的是什么，以及接下来两周内最小、最现实的一步是什么。
 
@@ -148,21 +148,19 @@ gap 一年 运营 ai 转行 不知道投什么
 - 项目说明：你正在看的这个 README
 - Skills：[skills/](skills/)
 - Skill 使用说明：[SKILLS.md](SKILLS.md)
-- Coze 公开说明：[coze/README.md](coze/README.md)
-- Coze 系统提示词：[coze/SYSTEM_PROMPT.md](coze/SYSTEM_PROMPT.md)
-- Coze 商店文案：[coze/STORE_LISTING.md](coze/STORE_LISTING.md)
-- 微信订阅号发布说明：[coze/WECHAT_SUBSCRIPTION_ACCOUNT.md](coze/WECHAT_SUBSCRIPTION_ACCOUNT.md)
-- 微信测试号 Bot 示例：[integrations/wechat-bot/README.md](integrations/wechat-bot/README.md)
+- Coze 商店 / 公众号使用说明：[coze/README.md](coze/README.md)
 - 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](prompts/career-cognition-compass-prompt.md)
+- 使用示例：[examples/](examples/)
 - 虚构 demo：[DEMO.md](DEMO.md)
 - 反馈方式：[FEEDBACK.md](FEEDBACK.md)
 - 支持与赞赏：[SUPPORT.md](SUPPORT.md)
-- 发布路线：[PUBLISHING.md](PUBLISHING.md)
 
 `skills/` 用于展示 CCC 的核心方法和可拆分能力：如何从混乱输入中整理状态、证据、方向、技能和下一步行动。
 
-Coze 公开说明用于介绍 CCC 智能体的使用方式、适合场景和隐私边界。Prompt 目录提供普通大模型可复制使用的版本。
+Coze 公开说明用于介绍使用者如何在 Coze 商店和公众号入口使用 CCC。Prompt 目录提供普通大模型可复制使用的版本。
+
+这个公开仓库不包含 Coze 智能体搭建教程、公众号后台配置、服务器配置、AppID、Token 或未脱敏测试材料。这些内容只保留在本地私有区。
 
 这个仓库不公开真实求职材料、未脱敏案例或用户隐私信息。
 
@@ -210,4 +208,4 @@ CCC 不做这些事：
 
 ## 开源与赞赏
 
-CCC 使用 MIT License 开源。赞赏是自愿支持，不影响使用。详见：[SUPPORT.md](SUPPORT.md)。
+CCC 使用 MIT License 开源。支付宝赞赏是自愿支持，不影响使用。详见：[SUPPORT.md](SUPPORT.md)。
