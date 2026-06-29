@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Materials Builder"
+  short_description: "Draft concise editable job materials"
+  default_prompt: "Use $career-materials-builder to create editable resume drafts, templates, portfolio outlines, status wording, platform text, and expression strategy."
+policy:
+  allow_implicit_invocation: true

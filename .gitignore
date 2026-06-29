@@ -1,0 +1,31 @@
+.DS_Store
+*.log
+*.tmp
+*.zip
+
+.env
+.env.*
+
+node_modules/
+__pycache__/
+*.pyc
+
+# Keep private drafts and job-search materials out of the repository.
+private/
+portable/
+marketing/
+personal-data/
+resumes/
+resume-drafts/
+interview-notes/
+jd-notes/
+offers/
+contracts/
+screenshots/
+
+# Avoid accidental upload of personal documents.
+*.pdf
+*.docx
+*.xlsx
+*.numbers
+*.pages

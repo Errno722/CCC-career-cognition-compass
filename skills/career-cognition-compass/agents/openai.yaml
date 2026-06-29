@@ -1,0 +1,6 @@
+interface:
+  display_name: "CCC"
+  short_description: "Orchestrate the full job-search clarity flow"
+  default_prompt: "Use $career-cognition-compass. CCC means Career Cognition Compass. Help me clarify a messy job-search situation spanning intake, direction, transferable skills, hard skills, materials, planning, review, or stability support."
+policy:
+  allow_implicit_invocation: true

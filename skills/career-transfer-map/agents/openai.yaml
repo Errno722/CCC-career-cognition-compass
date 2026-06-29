@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Transfer Map"
+  short_description: "Map experience into transferable roles"
+  default_prompt: "Use $career-transfer-map to translate my experience into transferable skills and 1-3 role families to validate."
+policy:
+  allow_implicit_invocation: true

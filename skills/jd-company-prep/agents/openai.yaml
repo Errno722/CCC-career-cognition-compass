@@ -1,0 +1,6 @@
+interface:
+  display_name: "JD Company Prep"
+  short_description: "Prepare for JDs and target companies"
+  default_prompt: "Use $jd-company-prep to analyze a JD or target company for hard skills, tools, gaps, short practice, interview questions, and role fit."
+policy:
+  allow_implicit_invocation: true

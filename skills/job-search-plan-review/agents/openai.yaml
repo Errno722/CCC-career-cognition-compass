@@ -1,0 +1,6 @@
+interface:
+  display_name: "Job Search Plan Review"
+  short_description: "Plan and review job-search actions"
+  default_prompt: "Use $job-search-plan-review to create a 14-day job-search plan, daily/weekly review, interview waiting plan, feedback follow-up wording, or next 1-3 actions."
+policy:
+  allow_implicit_invocation: true

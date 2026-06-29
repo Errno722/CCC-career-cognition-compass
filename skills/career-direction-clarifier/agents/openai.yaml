@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Direction Clarifier"
+  short_description: "Clarify job-search intent and direction"
+  default_prompt: "Use $career-direction-clarifier to clarify what I am really trying to solve in this job search and choose the next mode."
+policy:
+  allow_implicit_invocation: true

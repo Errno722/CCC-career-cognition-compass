@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Hard Skill KB"
+  short_description: "Build role hard-skill knowledge bases"
+  default_prompt: "Use $career-hard-skill-kb to organize role hard skills, tools, evidence, gaps, glossary terms, and interview questions."
+policy:
+  allow_implicit_invocation: true

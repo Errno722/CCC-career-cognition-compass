@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Intake Clarifier"
+  short_description: "Clarify messy job-search intake and gaps"
+  default_prompt: "Use $career-intake-clarifier to turn my messy job-search notes into current status, evidence, gaps, glossary, and next questions."
+policy:
+  allow_implicit_invocation: true

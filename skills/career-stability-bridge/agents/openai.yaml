@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career Stability Bridge"
+  short_description: "Support low-energy and bridge-work choices"
+  default_prompt: "Use $career-stability-bridge to handle long gap stress, low energy, work fatigue, resignation uncertainty, or bridge/part-time work choices."
+policy:
+  allow_implicit_invocation: true
