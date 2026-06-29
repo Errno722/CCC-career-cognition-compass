@@ -1,7 +1,7 @@
 ---
 name: career-intake-clarifier
 description: >-
-  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, and up to three follow-up questions. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
+  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, long speech-to-text dumps, one-sentence-at-a-time updates, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, and up to three follow-up questions. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
 ---
 
 # Career Intake Clarifier
@@ -12,7 +12,7 @@ Turn unstructured job-search input into a first usable picture. Do not require t
 
 ## Workflow
 
-1. **Receive the mess.** Accept free text, voice transcript, keyword-only/no-punctuation fragments, old resume snippets, JD fragments, interview memories, emotional notes, abbreviations, and scattered project/course names.
+1. **Receive the mess.** Accept free text, voice transcript, long speech-to-text dump, one-sentence-at-a-time updates, keyword-only/no-punctuation fragments, old resume snippets, JD fragments, interview memories, emotional notes, abbreviations, and scattered project/course names.
 2. **Separate certainty.** Label information as `confirmed`, `needs_confirmation`, `inference`, `missing`, or `user_preference`.
 3. **Identify status.** Capture whether the user is a student, new graduate, employed, employed but exhausted, resigned, long Gap, career changer, overseas seeker, or unsure.
 4. **Inventory evidence.** Extract work, internship, coursework, project, volunteer, part-time, self-study, tool, language, and interview evidence.
@@ -40,6 +40,14 @@ Rules:
 - Do not force fragments into a confident story; mark relationships as `inference` or `needs_confirmation`.
 - Ask at most 2 clarifying questions and give 1 small next action.
 - Example input: `gap 一年 运营 ai 转行 不知道投什么`.
+
+## Voice Transcript And Incremental Input
+
+- Accept long speech-to-text content with repetition, pauses, filler words, and mixed order.
+- Do not ask the user to rewrite it into formal language.
+- First extract usable clues, then ask up to 3 high-impact questions.
+- If the user sends one sentence at a time, merge each new sentence into the same temporary picture instead of restarting the intake.
+- Remind users to remove phone, email, ID, salary, offer, contract, and company-internal information before sending transcripts.
 
 ## Output Shape
 
