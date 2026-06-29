@@ -48,6 +48,8 @@ Rules:
 - First extract usable clues, then ask up to 3 high-impact questions.
 - If the user sends one sentence at a time, merge each new sentence into the same temporary picture instead of restarting the intake.
 - Remind users to remove phone, email, ID, salary, offer, contract, and company-internal information before sending transcripts.
+- If the user asks how to start, suggest a concrete flow: record 5-10 minutes on a phone, speak freely about current state, past work, reasons for looking, roles seen, constraints, available time, and biggest blockers; transcribe with a phone/input-method/meeting-note tool; replace sensitive details with placeholders; then send the transcript.
+- For WeChat public-account style channels, prefer one sentence, a few keywords, or short chunks. For LLM/Coze/Codex/Claude Code style environments, long transcripts are acceptable when desensitized.
 
 ## Output Shape
 
@@ -82,6 +84,7 @@ Use a compact response. Rename or merge sections when natural.
 ## Boundaries
 
 - Do not write a resume before the user picture is usable.
+- Do not make resume writing the default next step when the user has not asked for it.
 - Do not force the user to fill every field.
 - Do not store or repeat sensitive personal information; remind the user to desensitize phone numbers, email, IDs, contracts, offers, salary screenshots, and full interview transcripts.
 - If the user expresses severe crisis or self-harm risk, stop job-search coaching and encourage local emergency or trusted support.
