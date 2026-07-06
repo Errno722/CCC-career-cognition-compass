@@ -1,7 +1,7 @@
 ---
 name: career-materials-builder
 description: >-
-  Editable job-search materials builder. Use when the user asks for resume drafts/templates, resume section structure, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
+  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
 ---
 
 # Career Materials Builder
@@ -72,6 +72,49 @@ Currently employed and open to suitable opportunities
 Open to Work
 ```
 
+## English Resume Templates
+
+When the user asks for an English resume template, English resume rewrite, overseas application materials, LinkedIn-oriented resume wording, or bilingual resume adaptation, do not translate the Chinese resume sentence by sentence.
+
+Restructure content for English resume conventions:
+
+```text
+Name
+City, Country | Email | Phone optional | LinkedIn / Portfolio optional
+Target Role or Headline
+Professional Summary (2-3 lines)
+Core Skills
+Professional Experience
+Selected Projects
+Education
+Additional: Certifications / Awards / Publications / Languages when relevant
+```
+
+Prefer concise bullets:
+
+```text
+- [Action verb] [task/scope] for [audience/business/process], using [tools/methods], resulting in [truthful outcome/evidence].
+```
+
+Use stronger ownership verbs when the evidence supports them:
+
+```text
+主导/负责: led, owned, drove, managed, spearheaded
+分析/判断: analyzed, evaluated, synthesized, diagnosed
+搭建/交付: built, implemented, launched, delivered, automated
+协同/支持: coordinated, collaborated, supported, contributed
+掌握/熟练: mastered, developed proficiency in, applied
+```
+
+Rules:
+
+- Use `led`, `owned`, `drove`, or `spearheaded` only when the user actually had ownership or a leading role.
+- Use `analyzed` freely when the user really compared data, users, markets, processes, or problems.
+- Use `mastered` only when the user can defend advanced skill in an interview; otherwise prefer `developed proficiency in`, `applied`, or `used`.
+- Do not copy Chinese resume order mechanically. English resumes usually need shorter summaries, stronger action verbs, fewer adjectives, and clearer scope/outcome.
+- Do not keep long Chinese-style self-evaluation paragraphs. Convert them into a focused `Professional Summary` or remove them.
+- Keep uncertain outcomes editable with markers such as `[confirm metric]`, `[scope]`, or `[tool]`.
+
 ## Resume Version Hygiene
 
 When the user has multiple resume versions, keep these separate:
@@ -101,13 +144,57 @@ Choose one small material unless the user asks for a package:
 ```text
 可编辑简历草稿
 简历模板和写作思路
+英文简历模板和英文 bullet 改写
 作品集主题和大纲
 平台投递文字
+招聘软件打招呼语
 LinkedIn / Open to Work 表达
 简短思维导图
 面试复盘卡
 表达策略建议
 ```
+
+## Platform Greeting Rules
+
+When creating recruiter outreach, BOSS/招聘软件打招呼语, LinkedIn first messages, or application opening text, do not write a compressed resume.
+
+The message should introduce the job seeker as a person:
+
+```text
+我是谁 / 当前状态
+与岗位相关的 1-2 段经历
+为什么这段经历和岗位有关
+希望沟通什么
+```
+
+Do not cram every resume section into one paragraph:
+
+```text
+教育背景 + 工作经历 + 项目经历 + 技能列表 + 求职状态
+```
+
+Default structure:
+
+```text
+你好，我有 [X 年相关/全职/实习/项目] 经历，学历是 [学历/专业/学校可选]。
+之前在 [行业/公司类型] 做过 [岗位/任务]，主要涉及 [1-2 个与岗位相关的经历或能力]。
+目前状态是 [离职随时到岗 / 在职看机会 / Gap 中 / 应届 / 可到岗时间]。
+我对这个岗位比较感兴趣，简历已附上，期待进一步沟通。
+```
+
+Rules:
+
+- Keep it closer to a human opening message than a resume summary.
+- Use 3-5 short sentences for Chinese job platforms unless the user asks for email length.
+- Mention only 1-2 strongest relevant experiences.
+- Mention education only when it helps the role, platform, or user request; otherwise omit it.
+- Mention `简历已附上` only when the resume is actually attached or the platform profile is available.
+- Name a real connection to the role, such as users served, task type, tool, workflow, domain, or project evidence.
+- If fit is indirect, say the connection is transferable rather than pretending direct experience.
+- Avoid generic lines such as `本人学习能力强`, `对贵司岗位非常感兴趣`, or `附件是我的简历请查收` unless the platform context requires them.
+- Do not over-polish into sales copy. The message should sound like a real candidate starting a conversation.
+
+If the user only provides a resume and no JD, ask what role family the greeting is for. If they want a general version, write one neutral greeting and mark the parts that should change for each role.
 
 ## Expression Strategy
 
@@ -159,3 +246,21 @@ For this scenario, ask for at most 3 facts:
 - Do not turn familiarity into mastery.
 - Do not invent data, clients, awards, tools, certificates, or job titles.
 - Keep materials easy for the user to edit; avoid final-sounding claims when evidence is weak.
+
+## Version Record
+
+```text
+v0.3.0 / 2026-07-06
+- Added English resume template support.
+- Added English bullet structure and action verb guidance, including led, mastered, analyzed, and ownership-level checks.
+- Clarified that English resumes should be adapted to English resume conventions, not translated from Chinese resumes line by line.
+
+v0.2.1 / 2026-07-06
+- Updated platform greeting default skeleton to include work years, optional education, prior industry/task, current status, resume attachment, and communication intent.
+- Clarified that education and resume attachment wording are conditional fields.
+
+v0.2.0 / 2026-07-06
+- Added platform greeting rules.
+- Clarified that recruiter greeting messages should introduce who the job seeker is and the most relevant experiences, not compress the whole resume.
+- Added default structure for BOSS/招聘软件/LinkedIn first messages.
+```

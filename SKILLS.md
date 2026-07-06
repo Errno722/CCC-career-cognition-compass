@@ -19,7 +19,7 @@ career-transfer-map           可迁移能力和职业族群
 career-hard-skill-kb          硬技能知识库和术语表
 jd-company-prep               JD / 目标公司准备
 jd-resume-patch               JD 简历修改补丁
-career-materials-builder      简历、作品集、平台材料
+career-materials-builder      中英文简历、作品集、平台材料
 job-search-plan-review        14 天计划、复盘、投递记录
 career-stability-bridge       Gap、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
@@ -89,7 +89,10 @@ jd-resume-patch
 用户收到简历反馈，例如“模块太多”“个人总结太泛”“与 JD 不贴合”“工作年限短但经历堆太满”
 → jd-resume-patch
 
-用户要简历模板、作品集思路、平台表达
+用户要简历模板、作品集思路、平台表达、招聘软件打招呼语
+→ career-materials-builder
+
+用户要英文简历模板、英文 bullet 改写、海外求职材料或 LinkedIn 简历表达
 → career-materials-builder
 
 用户要行动计划、投递记录、面试后等待和复盘
@@ -118,4 +121,16 @@ jd-resume-patch
 - 新增能力聚焦检查：先提炼 JD 最核心的 2-3 个能力，再选择用户最匹配的 2-3 个能力。
 - 新增简历反馈处理：模块太多、个人总结太泛、岗位贴合度不足时，优先做删减和聚焦。
 - 新增短工作年限规则：不把“做得多”当作优势，避免经历堆叠削弱重点。
+
+2026-07-06 / career-materials-builder v0.3.0
+- 新增英文简历模板能力：按英文简历结构重组内容，不逐句照搬中文简历。
+- 新增英文 bullet 动词规则：可使用 led、owned、analyzed、built、mastered 等表达，但必须匹配真实贡献度。
+
+2026-07-06 / career-materials-builder v0.2.1
+- 更新招聘软件打招呼语默认骨架：工作年限、学历按情况、过往行业/岗位、当前状态、岗位兴趣和简历已附上。
+- 明确学历和“简历已附上”是条件字段，不需要每次硬塞。
+
+2026-07-06 / career-materials-builder v0.2.0
+- 新增招聘软件打招呼语规则：先介绍求职者是谁、有什么相关经历，再说明和岗位的连接。
+- 明确打招呼语不是简历的简写版本，不把教育、技能、项目和状态全部压成一段。
 ```
