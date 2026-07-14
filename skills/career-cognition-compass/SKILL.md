@@ -77,7 +77,7 @@ jd-resume-patch
 ├─ JD-driven resume adaptation, matching matrix, resume update patches, changed sections only
 
 career-materials-builder
-├─ editable Chinese/English resume draft, resume template, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map
+├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map
 
 job-search-plan-review
 ├─ 14-day plan, available-time schedule, daily/weekly review, application tracking

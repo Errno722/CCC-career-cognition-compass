@@ -1,7 +1,7 @@
 ---
 name: career-materials-builder
 description: >-
-  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
+  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
 ---
 
 # Career Materials Builder
@@ -71,6 +71,85 @@ Gap 中，随时入职
 Currently employed and open to suitable opportunities
 Open to Work
 ```
+
+## General Resume Market Language
+
+When the user asks for a 通用简历, 中性主简历, general resume, or resume template without a specific JD, ask whether specialized skills that are strongly tied to the user's major, academic background, license, or prior industry should be translated into broader market language.
+
+Use a short question:
+
+```text
+这份通用简历要更偏专业领域，还是更方便跨行业/市场岗位理解？
+如果选择后者，我会保留原专业词，同时加一层市场语言，方便 HR 或业务岗位快速看懂。
+```
+
+Translate specialized skills without erasing the original expertise:
+
+```text
+原专业词 / 专业技能
+├─ 市场语言：更通用的业务、数据、运营、产品、项目、合规、客户或流程表达
+└─ 可投场景：这项能力可能对应的岗位任务或行业场景
+```
+
+Rules:
+
+- Keep the original technical or academic term when it is a keyword for the target field.
+- Do not make the resume vague by replacing all professional terms with generic words.
+- Do not force market language when the user is applying to a highly specialized role where the original term matters more.
+- If the user is unsure, provide two editable versions: `专业保留版` and `市场转译版`.
+
+## Professional Positioning / Persona Rebuild
+
+When the user says `重新做人设`, `换个求职人设`, `包装自己`, `重新定位`, `职业定位`, or `候选人叙事`, translate this into professional positioning. Do not invent a fake persona.
+
+Also infer this need from experience signals. Users often will not say `重新做人设` directly.
+
+Trigger a positioning diagnosis when several signals appear:
+
+```text
+经历很散，简历像多个方向拼在一起
+目标岗位和过往行业 / 岗位身份不匹配
+长期 Gap 后不知道怎么解释自己
+原行业下行，用户不想继续用原行业身份求职
+工作年限短但模块很多，重点被稀释
+用户说“不知道怎么介绍自己 / 不知道我算什么 / 简历不像目标岗位”
+用户同时想投多个方向，但材料会互相污染
+用户的专业背景很强，但目标岗位需要更市场化的表达
+```
+
+When signals are present, do not immediately rewrite materials. First say that the current issue may be positioning rather than wording, then offer a small positioning diagnosis.
+
+First separate:
+
+```text
+真实事实
+可迁移证据
+目标岗位语言
+需要弱化或暂不主动强调的内容
+面试中必须能解释清楚的风险点
+```
+
+Then offer 2-3 positioning cards:
+
+```text
+定位名称
+适合岗位 / 行业
+一句话叙事
+支撑证据
+可强调的技能
+需要弱化的内容
+风险与面试解释点
+下一步可改的材料
+```
+
+Rules:
+
+- Keep the user's real background visible enough that the positioning can survive interviews.
+- Do not fabricate education, company, title, project, data, client, tool, certificate, award, or personality traits.
+- Do not turn a support role into a lead role unless the user can prove ownership.
+- If the user wants a more aggressive positioning, treat it as `平衡策略`: strengthen evidence and order, but mark weak claims as `[待确认]`.
+- Ask the user to choose or reject a positioning before rewriting resume/profile/greeting text.
+- If the user only needs a quick resume patch, keep the diagnosis short and continue with the requested material.
 
 ## English Resume Templates
 
@@ -144,6 +223,7 @@ Choose one small material unless the user asks for a package:
 ```text
 可编辑简历草稿
 简历模板和写作思路
+职业定位 / 候选人叙事卡
 英文简历模板和英文 bullet 改写
 作品集主题和大纲
 平台投递文字
@@ -250,6 +330,18 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.3 / 2026-07-07
+- Added implicit positioning diagnosis.
+- Infer possible professional positioning/persona rebuild needs from scattered experience, gap, career change, industry downturn, short work history, or mismatch between past identity and target roles.
+
+v0.3.2 / 2026-07-07
+- Added professional positioning/persona rebuild guidance.
+- Treat `重新做人设` as evidence-based candidate narrative work, not fabrication or a fake identity.
+
+v0.3.1 / 2026-07-07
+- Added general resume market-language adaptation.
+- For neutral/general resumes, ask whether specialized major- or industry-specific skills should be translated into broader market language while preserving original terms.
+
 v0.3.0 / 2026-07-06
 - Added English resume template support.
 - Added English bullet structure and action verb guidance, including led, mastered, analyzed, and ownership-level checks.

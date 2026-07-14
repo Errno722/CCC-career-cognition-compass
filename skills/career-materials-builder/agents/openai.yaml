@@ -1,6 +1,6 @@
 interface:
   display_name: "Career Materials Builder"
   short_description: "Draft editable job materials and resumes"
-  default_prompt: "Use $career-materials-builder to create editable Chinese or English resume drafts, templates, English resume bullets, portfolio outlines, status wording, platform text, recruiter greeting messages, and expression strategy."
+  default_prompt: "Use $career-materials-builder to create editable Chinese or English resume drafts, neutral resume templates, implicit professional positioning diagnosis, candidate narrative cards, market-language adaptations of specialized skills, English resume bullets, portfolio outlines, status wording, platform text, recruiter greeting messages, and expression strategy."
 policy:
   allow_implicit_invocation: true

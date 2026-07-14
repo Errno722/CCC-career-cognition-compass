@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CCC Local</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Career Cognition Compass</p>
+          <h1>CCC Local</h1>
+        </div>
+        <div class="topbar-actions" aria-label="全局操作">
+          <button class="ghost-button" id="saveButton" type="button">保存</button>
+          <button class="ghost-button danger" id="clearButton" type="button">清空</button>
+        </div>
+      </header>
+
+      <section class="notice" aria-label="使用边界">
+        <strong>本地使用提醒：</strong>
+        CCC Local 只在浏览器本地整理文本，不联网、不上传、不替你做最终决定。粘贴前请先脱敏电话、邮箱、身份证、薪资、offer、合同和公司内部信息。
+      </section>
+
+      <section class="workspace">
+        <aside class="side-panel" aria-label="任务设置">
+          <div class="field-group">
+            <label for="mode">当前任务</label>
+            <select id="mode">
+              <option value="auto">自动判断</option>
+              <option value="clarify">混乱整理</option>
+              <option value="positioning">职业定位</option>
+              <option value="resume">简历材料</option>
+              <option value="jd">JD 分析</option>
+              <option value="review">面试复盘</option>
+              <option value="plan">行动计划</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="status">当前状态</label>
+            <select id="status">
+              <option value="">未确定</option>
+              <option value="Gap 中">Gap 中</option>
+              <option value="离职，随时入职">离职，随时入职</option>
+              <option value="在职，看机会">在职，看机会</option>
+              <option value="校招 / 应届">校招 / 应届</option>
+              <option value="转行 / 转岗">转行 / 转岗</option>
+              <option value="海外求职">海外求职</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="target">目标方向 / JD</label>
+            <input id="target" type="text" placeholder="例如：运营、产品经理、AI Agent 工程师" />
+          </div>
+
+          <div class="field-group">
+            <label for="timeBudget">可用时间</label>
+            <input id="timeBudget" type="text" placeholder="例如：每天 2 小时 / 每周 6 小时" />
+          </div>
+
+          <div class="field-group">
+            <label for="platform">使用出口</label>
+            <select id="platform">
+              <option value="普通 LLM">普通 LLM</option>
+              <option value="Coze / Bot">Coze / Bot</option>
+              <option value="Codex / Claude Code">Codex / Claude Code</option>
+              <option value="公众号短输入">公众号短输入</option>
+              <option value="招聘软件">招聘软件</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="constraints">限制条件</label>
+            <textarea id="constraints" rows="5" placeholder="例如：不想加班、需要远程、现金流压力、不能频繁面试"></textarea>
+          </div>
+        </aside>
+
+        <section class="main-panel">
+          <div class="input-row">
+            <div>
+              <p class="eyebrow">输入</p>
+              <h2>把混乱内容放在这里</h2>
+            </div>
+            <div class="small-actions">
+              <button type="button" id="exampleButton">填入示例</button>
+              <button type="button" id="exportButton">导出 Markdown</button>
+            </div>
+          </div>
+
+          <textarea
+            id="rawInput"
+            class="main-input"
+            placeholder="可以粘贴语音转文字、旧简历片段、JD、面试回忆、碎片词，或一句话：gap 一年 运营 ai 转行 不知道投什么"
+          ></textarea>
+
+          <div class="tabbar" role="tablist" aria-label="输出视图">
+            <button class="tab active" type="button" data-tab="diagnosis">诊断</button>
+            <button class="tab" type="button" data-tab="prompt">任务包</button>
+            <button class="tab" type="button" data-tab="summary">摘要</button>
+            <button class="tab" type="button" data-tab="kb">知识库</button>
+          </div>
+
+          <section class="output-grid">
+            <article class="output-panel active" id="diagnosisPanel" data-panel="diagnosis">
+              <div class="panel-heading">
+                <h3>本地诊断</h3>
+                <button type="button" data-copy="diagnosisText">复制</button>
+              </div>
+              <pre id="diagnosisText"></pre>
+            </article>
+
+            <article class="output-panel" id="promptPanel" data-panel="prompt">
+              <div class="panel-heading">
+                <h3>可复制给 LLM / Agent 的任务包</h3>
+                <button type="button" data-copy="promptText">复制</button>
+              </div>
+              <pre id="promptText"></pre>
+            </article>
+
+            <article class="output-panel" id="summaryPanel" data-panel="summary">
+              <div class="panel-heading">
+                <h3>本轮求职摘要</h3>
+                <button type="button" data-copy="summaryText">复制</button>
+              </div>
+              <pre id="summaryText"></pre>
+            </article>
+
+            <article class="output-panel" id="kbPanel" data-panel="kb">
+              <div class="panel-heading">
+                <h3>本地知识库草稿</h3>
+                <button type="button" data-copy="kbText">复制</button>
+              </div>
+              <textarea id="kbText" class="kb-input" rows="14" placeholder="记录术语、硬技能、面试问题、可迁移证据。内容只保存在本机浏览器。"></textarea>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
