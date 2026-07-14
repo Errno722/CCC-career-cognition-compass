@@ -190,6 +190,9 @@ function buildPrompt(state, signals, inferredMode) {
   const positioningHint = signals.positioning.length >= 2
     ? "我可能需要先做职业定位 / 候选人叙事重建。请先判断这是不是定位问题，再决定是否改材料。"
     : "如果你发现我的经历叙事很散、目标岗位和过往身份不匹配，请提醒我先做职业定位，而不是直接改材料。";
+  const platformHint = state.platform === "WorkBuddy"
+    ? "我会把这段内容发给 WorkBuddy 智能体。请控制回复长度，优先给清晰分段；如果内容较多，请分轮输出并提示我回复“继续”。"
+    : "";
 
   return `请你作为 CCC（Career Cognition Compass），一个求职澄清与辅导助手。
 
@@ -201,6 +204,7 @@ ${lineOrEmpty("当前状态", state.status)}
 ${lineOrEmpty("目标方向 / JD", state.target)}
 ${lineOrEmpty("可用时间", state.timeBudget)}
 ${lineOrEmpty("限制条件", state.constraints)}
+${platformHint ? `平台提醒：${platformHint}` : ""}
 
 请遵守：
 1. 接受混乱输入，不要求我整理成表格。

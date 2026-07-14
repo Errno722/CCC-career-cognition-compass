@@ -24,6 +24,8 @@ job-search-plan-review        14 天计划、复盘、投递记录
 career-stability-bridge       Gap、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
 
+如果部署到 WorkBuddy，可以参考：[workbuddy/](workbuddy/)。
+
 ## 在 Codex 中使用
 
 把 `skills/` 目录作为项目的一部分保留。使用时可以直接说：
