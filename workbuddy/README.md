@@ -40,6 +40,7 @@ SKILLS.md
 prompts/copy-paste-prompt-cn.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
+skills/career-project-experience-miner/SKILL.md
 skills/career-materials-builder/SKILL.md
 skills/jd-resume-patch/SKILL.md
 skills/job-search-plan-review/SKILL.md
@@ -107,6 +108,11 @@ daily_time_budget
 privacy_checked
 confirmed_facts
 needs_confirmation
+project_inventory
+project_cards
+project_evidence_gaps
+project_state_records
+temporary_draft_mode
 hard_skill_kb
 acronym_glossary
 positioning_cards
@@ -119,6 +125,11 @@ current_action_plan
 - `input_type`：混乱输入、JD、简历片段、面试复盘、行动计划；
 - `confirmed_facts`：已经确认的经历事实；
 - `needs_confirmation`：不能直接当事实的推断；
+- `project_inventory`：所有项目总表；
+- `project_cards`：单项目事实卡和个人贡献边界；
+- `project_evidence_gaps`：缺失数据、缺失证据和待确认信息；
+- `project_state_records`：按单个项目记录 DISCOVERED、PARTIALLY_MAPPED 或 EVIDENCE_READY，避免只给用户一个整体项目状态；
+- `temporary_draft_mode`：用户赶投递时是否允许保守临时表达；
 - `hard_skill_kb`：技能、工具、证据、缺口；
 - `positioning_cards`：职业定位 / 候选人叙事；
 - `current_action_plan`：不超过 14 天的小计划。
@@ -143,6 +154,10 @@ current_action_plan
 - 是否一上来就生成简历；
 - 是否能处理很乱的输入；
 - 是否会自动判断职业定位需求；
+- 是否能在项目事实不清晰时先做项目盘点和单项目深挖；
+- 是否会标记 DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY，并阻止未完成项目进入最终材料；
+- 是否知道 EVIDENCE_READY 不等于必须有量化成绩；
+- 是否能在用户明确要求时输出保守临时草稿，并标出未知字段；
 - 是否会主动保护隐私；
 - 是否能处理 JD、面试复盘、在职疲惫和 Gap；
 - 是否不会编造经历、证书、数据或陌生身份。

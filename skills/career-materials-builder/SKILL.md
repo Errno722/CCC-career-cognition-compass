@@ -44,6 +44,31 @@ constraints and available time
 
 If the picture is missing, ask for up to 3 key facts instead of forcing a full form.
 
+If project evidence is only a project name or a vague label, do not immediately turn it into resume bullets, candidate narrative, portfolio outline, or platform copy. Ask for or route to a project fact card first:
+
+```text
+项目背景
+你的个人贡献
+工具 / 方法
+产出
+结果 / 证据
+待确认信息
+```
+
+Use `career-project-experience-miner` when the user needs to remember, inventory, or deep-mine projects before writing materials.
+
+Completion gate:
+
+```text
+DISCOVERED / PARTIALLY_MAPPED
+└─ Do not create final resume bullets, portfolio cases, candidate narrative, or JD-specific project wording.
+
+EVIDENCE_READY
+└─ Safe to create editable wording while preserving boundaries.
+```
+
+If the user asks "帮我把过去做过的项目整理成作品集" and the project facts are incomplete, first route to `career-project-experience-miner`. Do not start with portfolio themes.
+
 ## Resume Scope
 
 Include these common sections when creating a resume draft or template:
@@ -154,6 +179,16 @@ Rules:
 ## English Resume Templates
 
 When the user asks for an English resume template, English resume rewrite, overseas application materials, LinkedIn-oriented resume wording, or bilingual resume adaptation, do not translate the Chinese resume sentence by sentence.
+
+If English bullets or LinkedIn content involve a project, apply the same project fact gate:
+
+```text
+DISCOVERED / PARTIALLY_MAPPED
+└─ Do not write final English project bullets. Use temporary draft mode only if the user explicitly needs a conservative version.
+
+EVIDENCE_READY
+└─ Safe to write English bullets or LinkedIn project wording.
+```
 
 Restructure content for English resume conventions:
 
@@ -330,6 +365,14 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.5 / 2026-07-28
+- Applied the same project fact gate to English resume bullets, LinkedIn wording, and overseas materials.
+- Added temporary draft allowance for conservative English wording from PARTIALLY_MAPPED projects.
+
+v0.3.4 / 2026-07-28
+- Added project fact completion gate.
+- Do not create project bullets, portfolio cases, candidate narrative, or JD-specific project wording until project evidence is EVIDENCE_READY.
+
 v0.3.3 / 2026-07-07
 - Added implicit positioning diagnosis.
 - Infer possible professional positioning/persona rebuild needs from scattered experience, gap, career change, industry downturn, short work history, or mismatch between past identity and target roles.

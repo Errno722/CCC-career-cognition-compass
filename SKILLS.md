@@ -14,6 +14,7 @@ career-cognition-compass
 
 ```text
 career-intake-clarifier       混乱输入整理
+career-project-experience-miner 项目经历盘点与深挖
 career-direction-clarifier    方向澄清
 career-transfer-map           可迁移能力和职业族群
 career-hard-skill-kb          硬技能知识库和术语表
@@ -76,26 +77,32 @@ jd-resume-patch
 用户只说很乱、不知道怎么开始
 → career-intake-clarifier 或 career-cognition-compass
 
+用户想梳理项目经历、说不清自己做过什么、不知道哪些经历算项目、项目没有数据或结果不清晰、简历/作品集缺项目素材
+→ career-project-experience-miner
+
 用户不知道自己到底想找什么
 → career-direction-clarifier
 
 用户想转行、转岗、判断能力迁移
-→ career-transfer-map
+→ career-transfer-map；如果项目事实不清晰，先用 career-project-experience-miner
 
-用户有 JD 或目标公司
+用户有 JD 或目标公司，只分析岗位/公司要求
 → jd-company-prep
 
+用户有 JD 或目标公司，并需要判断自身匹配度、选择项目案例、准备项目回答或简历角度
+→ jd-company-prep；如果涉及项目且项目事实未达到 EVIDENCE_READY，先用 career-project-experience-miner
+
 用户想根据 JD 改已有简历，但不想整份重写
-→ jd-resume-patch
+→ jd-resume-patch；如果项目经历只有模糊名称，先补项目事实卡
 
 用户收到简历反馈，例如“模块太多”“个人总结太泛”“与 JD 不贴合”“工作年限短但经历堆太满”
 → jd-resume-patch
 
 用户要简历模板、通用简历、重新做人设、职业定位、候选人叙事、专业技能市场语言转译、作品集思路、平台表达、招聘软件打招呼语，或用户经历显示可能需要重新定位
-→ career-materials-builder
+→ career-materials-builder；如果项目事实未达到 EVIDENCE_READY，先用 career-project-experience-miner
 
 用户要英文简历模板、英文 bullet 改写、海外求职材料或 LinkedIn 简历表达
-→ career-materials-builder
+→ career-materials-builder；如果涉及项目表达且项目事实未达到 EVIDENCE_READY，先用 career-project-experience-miner
 
 用户要行动计划、投递记录、面试后等待和复盘
 → job-search-plan-review
@@ -120,10 +127,34 @@ jd-resume-patch
 ## 更新记录
 
 ```text
-2026-07-01 / jd-resume-patch v0.2.0
-- 新增能力聚焦检查：先提炼 JD 最核心的 2-3 个能力，再选择用户最匹配的 2-3 个能力。
-- 新增简历反馈处理：模块太多、个人总结太泛、岗位贴合度不足时，优先做删减和聚焦。
-- 新增短工作年限规则：不把“做得多”当作优势，避免经历堆叠削弱重点。
+2026-07-28 / career-project-experience-miner v0.1.2
+- 新增项目与普通任务的判断边界。
+- 新增全景盘点停止条件，避免无限枚举项目。
+- 明确 EVIDENCE_READY 不等于必须有量化数据，而是事实边界、个人贡献、产出和结果状态足够清楚。
+- 新增单项目状态记录格式和临时草稿模式。
+
+2026-07-28 / career-project-experience-miner v0.1.1
+- 新增项目事实完整度检查和三档状态：DISCOVERED、PARTIALLY_MAPPED、EVIDENCE_READY。
+- 明确先做项目全景盘点，再选择单项目深挖，避免只抓住用户最先提到的项目。
+- 增加下游门禁：只有 EVIDENCE_READY 项目才能进入能力迁移、JD 简历补丁、作品集或最终材料表达。
+
+2026-07-28 / career-materials-builder v0.3.5
+- 英文简历、英文 bullet、LinkedIn 和海外材料也统一使用项目事实门禁。
+
+2026-07-28 / career-materials-builder v0.3.4
+- 增加项目事实门禁：项目未达到 EVIDENCE_READY 时，不直接生成项目 bullet、作品集案例、候选人叙事或 JD 定制表达。
+
+2026-07-28 / jd-company-prep v0.1.0
+- 新增 JD / 公司准备中的项目证据门禁：纯 JD 分析不强制项目挖掘，但涉及用户匹配度、项目案例和项目回答时需要先确认项目事实。
+
+2026-07-28 / jd-resume-patch v0.2.1
+- 新增项目事实卡检查：项目只有模糊名称、个人贡献不清或缺少产出/证据时，先补事实卡，再写 JD 定制项目 bullet。
+- 明确复杂项目缺口应先交给 career-project-experience-miner，而不是在简历补丁里强行包装。
+
+2026-07-28 / career-project-experience-miner v0.1.0
+- 新增项目经历盘点与深挖模块：先做记忆唤起、项目总表、单项目事实卡、个人贡献边界和证据缺口，再进入职业定位、JD 匹配或简历表达。
+- 明确失败、暂停、无数据、学习型和个人项目也可以被整理成事实资产，但不能夸大为商业成功。
+- 主流程增加“项目事实层”，避免直接从用户说过的内容跳到岗位标签或简历 bullet。
 
 2026-07-07 / career-materials-builder v0.3.3
 - 新增隐性定位判断：用户不主动说“重新做人设”时，也可根据经历散、Gap、转行、行业下行、目标岗位不匹配等信号判断是否需要职业定位重建。
@@ -148,4 +179,9 @@ jd-resume-patch
 2026-07-06 / career-materials-builder v0.2.0
 - 新增招聘软件打招呼语规则：先介绍求职者是谁、有什么相关经历，再说明和岗位的连接。
 - 明确打招呼语不是简历的简写版本，不把教育、技能、项目和状态全部压成一段。
+
+2026-07-01 / jd-resume-patch v0.2.0
+- 新增能力聚焦检查：先提炼 JD 最核心的 2-3 个能力，再选择用户最匹配的 2-3 个能力。
+- 新增简历反馈处理：模块太多、个人总结太泛、岗位贴合度不足时，优先做删减和聚焦。
+- 新增短工作年限规则：不把“做得多”当作优势，避免经历堆叠削弱重点。
 ```

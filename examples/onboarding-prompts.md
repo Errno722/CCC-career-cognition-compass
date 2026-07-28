@@ -52,6 +52,32 @@ Use $career-cognition-compass.
 我之前所在行业下行，想转行或转岗，但不知道自己的技能能迁移到哪里。请帮我把经历拆成证据和能力，给出 1-3 个可以先验证的方向，并告诉我还需要补什么证据。
 ```
 
+## 项目经历盘点与深挖
+
+```text
+Use $career-project-experience-miner.
+
+我做过一些项目，但说不清楚它们有什么价值，也不知道哪些能写进简历或作品集。请先帮我做项目总表，再选 1 个项目深挖成事实卡，先不要急着写简历。
+```
+
+```text
+Use $career-project-experience-miner.
+
+我搭过一个 Shopify 网站，但没有销售数据，后来也暂停了。我不知道这算不算项目。请帮我还原这个项目：我到底做过什么、能证明什么、不能夸大什么。
+```
+
+```text
+Use $career-project-experience-miner.
+
+我想把做过的项目整理成作品集，但现在每个项目都只有一个名字。请先判断每个项目是 DISCOVERED、PARTIALLY_MAPPED 还是 EVIDENCE_READY；没有到 EVIDENCE_READY 的项目先不要写作品集案例。
+```
+
+```text
+Use $career-project-experience-miner.
+
+我有一个个人 Skill 项目，没有用户量和商业结果，但有仓库、文档、demo 和版本记录。请判断它是否可以达到 EVIDENCE_READY；如果还不够，请告诉我缺哪些事实，不要要求我编不存在的数据。
+```
+
 ## 职业族群筛选
 
 ```text

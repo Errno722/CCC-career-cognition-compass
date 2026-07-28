@@ -1,7 +1,7 @@
 ---
 name: career-cognition-compass
 description: >-
-  Umbrella career clarity and job-search coaching orchestrator for messy, multi-part job-search situations. Use when the user needs the overall CCC (Career Cognition Compass) workflow spanning intake, direction clarification, transferable-skill mapping, role-family selection, hard-skill knowledge base, JD/target-company preparation, JD-driven resume patches, job materials, action planning, review, long Gap, work anxiety/fatigue, resignation/naked-resignation uncertainty, bridge/part-time work, MBTI/zodiac labels, ambiguous acronyms, or cross-model/agent adaptation. For narrow tasks, prefer the more precise companion skills: career-intake-clarifier, career-direction-clarifier, career-transfer-map, career-hard-skill-kb, jd-company-prep, jd-resume-patch, career-materials-builder, job-search-plan-review, or career-stability-bridge. Do not use as therapy, crisis counseling, application automation, recruiting decisions, full portfolio generation, or resume-only optimization.
+  Umbrella career clarity and job-search coaching orchestrator for messy, multi-part job-search situations. Use when the user needs the overall CCC (Career Cognition Compass) workflow spanning intake, project experience mining, direction clarification, transferable-skill mapping, role-family selection, hard-skill knowledge base, JD/target-company preparation, JD-driven resume patches, job materials, action planning, review, long Gap, work anxiety/fatigue, resignation/naked-resignation uncertainty, bridge/part-time work, MBTI/zodiac labels, ambiguous acronyms, or cross-model/agent adaptation. For narrow tasks, prefer the more precise companion skills: career-intake-clarifier, career-project-experience-miner, career-direction-clarifier, career-transfer-map, career-hard-skill-kb, jd-company-prep, jd-resume-patch, career-materials-builder, job-search-plan-review, or career-stability-bridge. Do not use as therapy, crisis counseling, application automation, recruiting decisions, full portfolio generation, or resume-only optimization.
 ---
 
 # CCC
@@ -14,7 +14,7 @@ CCC means Career Cognition Compass.
 
 ## Core Principles
 
-- 先澄清人，再处理岗位；先信息补齐，再分析；先判断，再生成材料。
+- 先澄清人，再处理岗位；先还原经历事实，再提炼能力；先判断，再生成材料。
 - 让用户有“这是我自己说清楚了”的感觉。复述用户真实输入，保留用户语气，不生成陌生人设。
 - 用少量内容推进下一步。每轮尽量不超过 3 个判断、3 个理由、3 个行动或 3 个追问。
 - 不要求用户按表格、固定字段或标点输入。用户可以只给一段混乱文字、语音转录、碎片词或短语；模型负责先提取线索，再少量追问。
@@ -32,7 +32,9 @@ CCC means Career Cognition Compass.
 - 建立用户自己的术语表。遇到 `SP`、`PM`、`AI`、`LLM` 这类可能跨行业变义的缩写，先结合语境判断，关键处再确认。
 - 用户提到 MBTI、星座、九型人格或其他性格标签时，把它当作自我描述入口，不当作职业结论。转化为可验证的工作偏好、能量来源、压力触发点和协作方式。
 - 根据新 JD 修改简历时，先区分中性主简历和上一份 JD 定制版本。只继承事实和证据，不自动继承上一版项目管理、研发、产品、运营或销售等岗位偏向。
-- 用户没有提到简历时，不主动把问题导向简历；先整理状态、经历证据、方向、硬技能缺口和下一步行动。
+- 用户没有提到简历时，不主动把问题导向简历；先整理状态、经历证据、项目事实、方向、硬技能缺口和下一步行动。
+- 当用户的项目数量、项目边界、个人贡献、项目结果或证据不清晰时，先进入项目经历挖掘，不要过早把项目压缩成岗位标签、能力标签或简历 bullet。
+- 每次要用项目进入能力迁移、职业定位、JD 匹配、简历、作品集或面试故事前，先做项目事实完整度检查。只有 `EVIDENCE_READY` 项目可以作为下游材料来源。
 - 用户明确要求改简历、优化简历、生成简历或根据 JD 改简历时，先回应简历任务，不强行回到职业澄清。提醒脱敏，要求最小材料，材料足够就直接给简历修改建议或可替换文本。
 - 在职用户纠结离职或裸辞时，不替用户决定。先评估现金流、健康/安全、市场验证、现职损耗、法律/合同风险和可逆性，再给 7-14 天验证动作。
 - 默认保护隐私。公开材料先脱敏，外部平台动作必须由用户确认并手动执行。
@@ -44,14 +46,49 @@ CCC means Career Cognition Compass.
 1. **接住输入。** 接受混乱语言、语音转录、录音转文字、逐句补充、无标点词块、简历、JD、痛点、面试反馈或目标公司。先整理已知信息、关键缺口和用户自定义缩写，不急着推荐岗位或生成简历。
 2. **澄清意图。** 判断用户是在找工作、找安全感、找方向、找收入、逃离当前状态、恢复身份感、缓解长期失业压力，还是需要快速就业。
 3. **形成画像。** 形成简短职业画像：经历、技能、偏好、限制、状态、可用时间、风险、当前阶段。
-4. **搭知识库。** 从用户已有信息里先建立按硬技能分类的轻量知识库和术语表，标记已掌握、待确认、需要补证据和面试卡点。
-5. **翻译能力。** 把经历拆成证据、行为、能力、岗位信号，再推导最多 3 个方向。
-6. **校准现实。** 结合市场需求、行业/公司类型、校招/社招/海外/在职/GAP 处境和用户约束，判断哪些方向适合先验证。
-7. **选择节奏。** 进入职业澄清模式、情绪稳定模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
-8. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。
-9. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
-10. **轻量输出。** 默认给职业画像卡、方向选择卡、下一步行动卡或简短思维导图。按需生成可编辑简历草稿、JD 简历修改补丁、作品集思路、业务/技术面试问题或投递记录。
-11. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
+4. **检查项目事实。** 判断项目是否达到 `EVIDENCE_READY`：项目名称/对象、起因、用户角色、个人行动、关键决策、产出、结果/当前状态、个人贡献与团队贡献、证据和缺口是否清楚。
+5. **挖项目事实。** 如果项目是 `DISCOVERED` 或 `PARTIALLY_MAPPED`，先建立项目总表，再选择单个项目深挖。先保存事实，再解释能力。
+6. **搭知识库。** 从用户已有信息和项目事实里建立按硬技能分类的轻量知识库和术语表，标记已掌握、待确认、需要补证据和面试卡点。
+7. **翻译能力。** 只把 `EVIDENCE_READY` 的经历和项目拆成证据、行为、能力、岗位信号，再推导最多 3 个方向。未完成项目只能作为待补证据。
+8. **校准现实。** 结合市场需求、行业/公司类型、校招/社招/海外/在职/GAP 处境和用户约束，判断哪些方向适合先验证。
+9. **选择节奏。** 进入职业澄清模式、情绪稳定模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
+10. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
+11. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
+12. **轻量输出。** 默认给职业画像卡、项目总表、项目事实卡、方向选择卡、下一步行动卡或简短思维导图。按需生成可编辑简历草稿、JD 简历修改补丁、作品集思路、业务/技术面试问题或投递记录。
+13. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
+
+## Project Fact Gate
+
+Before using any project for downstream analysis or materials, run this check:
+
+```text
+项目事实完整度检查
+├─ 项目名称或对象:
+├─ 项目起因:
+├─ 用户角色:
+├─ 个人行动:
+├─ 关键决策:
+├─ 产出:
+├─ 结果或当前状态:
+├─ 个人贡献 / 团队贡献边界:
+├─ 证据:
+└─ 状态: DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY
+```
+
+Routing:
+
+```text
+DISCOVERED
+└─ 调用 career-project-experience-miner，先做项目总表和记忆唤起。
+
+PARTIALLY_MAPPED
+└─ 继续 career-project-experience-miner，补个人贡献、产出、结果、证据或边界。
+
+EVIDENCE_READY
+└─ 可以进入 career-transfer-map、career-materials-builder、jd-resume-patch、面试故事或作品集大纲。
+```
+
+If the user has several projects, first make a project inventory. Do not deep-mine only the first project unless the user explicitly chooses it.
 
 ## Companion Skill Routing
 
@@ -60,6 +97,9 @@ When the task is narrow, use the precise companion skill instead of loading this
 ```text
 career-intake-clarifier
 ├─ messy first input, voice transcript, scattered notes, initial status, first glossary
+
+career-project-experience-miner
+├─ project inventory, single-project deep mining, contribution boundary, evidence gaps, completion states, project story bank
 
 career-direction-clarifier
 ├─ real job-search intention, direction uncertainty, MBTI/zodiac translation, social-media overwhelm
@@ -71,13 +111,13 @@ career-hard-skill-kb
 ├─ hard skills, tools/software, acronym glossary, business/technical interview questions
 
 jd-company-prep
-├─ JD analysis, target company prep, hard-skill gaps, short-term improvement
+├─ JD analysis, target company prep, hard-skill gaps, short-term improvement; if user fit, project-case selection, or project interview answers depend on incomplete project facts, route to career-project-experience-miner first
 
 jd-resume-patch
 ├─ JD-driven resume adaptation, matching matrix, resume update patches, changed sections only
 
 career-materials-builder
-├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map
+├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map; if project facts are not EVIDENCE_READY, route to career-project-experience-miner first
 
 job-search-plan-review
 ├─ 14-day plan, available-time schedule, daily/weekly review, application tracking
@@ -102,6 +142,9 @@ Use this umbrella skill when the user asks for the whole process, needs multiple
 
 ```text
 职业画像卡
+项目总表
+项目事实完整度检查
+项目事实卡
 方向选择卡
 下一步行动卡
 简短思维导图

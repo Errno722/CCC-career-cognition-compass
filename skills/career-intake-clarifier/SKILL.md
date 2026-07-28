@@ -1,7 +1,7 @@
 ---
 name: career-intake-clarifier
 description: >-
-  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, long speech-to-text dumps, one-sentence-at-a-time updates, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, and up to three follow-up questions. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
+  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, long speech-to-text dumps, one-sentence-at-a-time updates, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, and up to three follow-up questions. If project details, project boundaries, personal contribution, or evidence are unclear, hand off to career-project-experience-miner. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
 ---
 
 # Career Intake Clarifier
@@ -16,8 +16,9 @@ Turn unstructured job-search input into a first usable picture. Do not require t
 2. **Separate certainty.** Label information as `confirmed`, `needs_confirmation`, `inference`, `missing`, or `user_preference`.
 3. **Identify status.** Capture whether the user is a student, new graduate, employed, employed but exhausted, resigned, long Gap, career changer, overseas seeker, or unsure.
 4. **Inventory evidence.** Extract work, internship, coursework, project, volunteer, part-time, self-study, tool, language, and interview evidence.
-5. **Start the knowledge base.** Build a small hard-skill list and user glossary from whatever is already present.
-6. **Ask lightly.** Ask at most 3 high-impact questions unless the user explicitly requests a full checklist.
+5. **Detect project-mining need.** If the user mentions projects, side projects, fragmented tasks, unclear contribution, no data, failed/paused projects, or "I don't know what counts as a project", mark `handoff: career-project-experience-miner` and assign a rough project state.
+6. **Start the knowledge base.** Build a small hard-skill list and user glossary from whatever is already present.
+7. **Ask lightly.** Ask at most 3 high-impact questions unless the user explicitly requests a full checklist.
 
 ## Keyword Fragment Handling
 
@@ -69,6 +70,11 @@ Use a compact response. Rename or merge sections when natural.
 ├─ 项目/课程:
 └─ 工具/技能:
 
+项目深挖判断
+├─ 是否需要 career-project-experience-miner:
+├─ 初步状态: DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY
+└─ 原因:
+
 初版硬技能知识库
 ├─ 技能:
 ├─ 证据:
@@ -84,6 +90,7 @@ Use a compact response. Rename or merge sections when natural.
 ## Boundaries
 
 - Do not write a resume before the user picture is usable.
+- Do not treat a named project as usable evidence until project role, personal contribution, output, result/current status, and evidence gaps are clear.
 - Do not make resume writing the default next step when the user has not asked for it.
 - Do not force the user to fill every field.
 - Do not store or repeat sensitive personal information; remind the user to desensitize phone numbers, email, IDs, contracts, offers, salary screenshots, and full interview transcripts.

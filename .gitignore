@@ -12,6 +12,7 @@ __pycache__/
 
 # Keep private drafts and job-search materials out of the repository.
 private/
+career-materials/
 portable/
 marketing/
 sponsors-repo/

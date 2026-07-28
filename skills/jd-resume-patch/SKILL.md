@@ -122,10 +122,11 @@ Bias reset output:
 5. **Analyze JD.** Extract core tasks, hard skills, tools/software, domain requirements, hidden expectations, seniority signals, and keywords.
 6. **Run capability focus check.** Identify the JD's 2-3 core capabilities, then select the user's 2-3 strongest matching abilities. Do not try to prove every possible ability.
 7. **Build matching matrix.** Compare JD requirements with confirmed resume evidence. Mark each item as `strong_match`, `partial_match`, `gap`, `do_not_claim`, or `needs_evidence`.
-8. **Select resume modules.** Decide which existing blocks should be kept, moved forward, rewritten lightly, weakened, removed, or held for another role.
-9. **Create patch.** Output only the proposed changes, not the whole resume.
-10. **Ask for confirmation.** Generate replacement bullets or sections only after the user agrees, unless the user explicitly asks for direct text.
-11. **Synthesize full resume only on request.** Do this only when the user says to merge the confirmed patches into a complete version.
+8. **Check project facts.** If a project is only a vague name or role label, mark it as `DISCOVERED` or `PARTIALLY_MAPPED` and ask for a project fact card before writing project bullets. For complex project gaps, hand off to `career-project-experience-miner`. Only `EVIDENCE_READY` projects can become JD-specific project bullets.
+9. **Select resume modules.** Decide which existing blocks should be kept, moved forward, rewritten lightly, weakened, removed, or held for another role.
+10. **Create patch.** Output only the proposed changes, not the whole resume.
+11. **Ask for confirmation.** Generate replacement bullets or sections only after the user agrees, unless the user explicitly asks for direct text.
+12. **Synthesize full resume only on request.** Do this only when the user says to merge the confirmed patches into a complete version.
 
 ## Output Shape
 
@@ -157,7 +158,8 @@ JD 分析卡
 ├─ 可强化匹配:
 ├─ 缺口:
 ├─ 不建议硬写:
-└─ 需要补证据:
+├─ 需要补证据:
+└─ 需要补项目事实卡:
 
 简历修改补丁
 ├─ 保留:
@@ -230,6 +232,8 @@ If the target role is specific, such as IMC, do not assume adjacent media or ope
 - Start each new JD patch from the neutral master resume or confirmed reusable modules, not from the last tailored version.
 - Do not carry over previous role emphasis such as project-management wording into an R&D JD unless the new JD also asks for it.
 - Do not include many modules just because the user has done many things; more coverage can weaken focus, especially for short work histories.
+- Do not turn a vague project name into a polished bullet. Confirm project background, personal contribution, tools/methods, output, result/evidence, and boundaries first.
+- Do not let a JD pull a partially mapped project into overfitted wording. If the project is not `EVIDENCE_READY`, keep it in `需要补项目事实卡`.
 - Prefer a focused 2-3 capability story over a broad list of skills, tasks, and projects.
 - Prefer deleting irrelevant detail over adding unsupported claims.
 - Use JD language only when it matches real experience.
@@ -262,6 +266,11 @@ The profile / personal summary must pass these checks:
 ## Version Record
 
 ```text
+v0.2.1 / 2026-07-28
+- Added project fact-card check before writing JD-specific project bullets.
+- Route vague project names, unclear contribution, missing outputs, or missing evidence to career-project-experience-miner before resume patching.
+- Only EVIDENCE_READY projects can become JD-specific project bullets; DISCOVERED or PARTIALLY_MAPPED projects stay in evidence gaps.
+
 v0.2.0 / 2026-07-01
 - Added capability focus check before matching matrix.
 - Added rules for short work histories where too many modules can dilute role fit.

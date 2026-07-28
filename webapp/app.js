@@ -28,6 +28,7 @@ const elements = {
 const modeLabels = {
   auto: "自动判断",
   clarify: "混乱整理",
+  project: "项目挖掘",
   positioning: "职业定位 / 候选人叙事",
   resume: "简历材料",
   jd: "JD 分析",
@@ -42,6 +43,16 @@ const modeOutputs = {
     "初版硬技能知识库",
     "初版术语/缩写表",
     "下一步最该补充的 1-3 件事",
+  ],
+  project: [
+    "项目总表",
+    "项目事实完整度检查",
+    "单项目事实卡",
+    "单项目状态记录",
+    "个人贡献边界",
+    "证据缺口",
+    "临时草稿边界",
+    "下一步补证据动作",
   ],
   positioning: [
     "真实事实 / 可迁移证据 / 目标岗位语言",
@@ -108,6 +119,7 @@ function detectSignals(text) {
   const signals = [];
   const privacy = [];
   const positioning = [];
+  const project = [];
 
   if (has("gap", "空窗", "一年没工作", "长期没工作")) signals.push("Gap / 空窗");
   if (has("转行", "转岗", "换方向", "行业下行")) signals.push("转行 / 转岗");
@@ -117,6 +129,22 @@ function detectSignals(text) {
   if (has("面试", "复盘", "hr", "反馈", "继续等")) signals.push("面试 / 跟进");
   if (has("兼职", "临时工作", "过渡")) signals.push("兼职 / 过渡");
   if (has("英文简历", "linkedin", "海外", "open to work")) signals.push("海外 / 英文材料");
+  if (has("项目", "作品集", "portfolio", "独立站", "shopify", "网站", "小程序", "agent", "skill")) {
+    signals.push("项目经历");
+    project.push("提到项目或作品素材");
+  }
+  if (has("说不清", "有什么价值", "算不算项目", "没有数据", "没有销售", "失败", "暂停", "写不出来")) {
+    project.push("项目边界 / 结果 / 价值不清晰");
+  }
+  if (has("我做了什么", "亲自", "参与", "协助", "团队", "贡献")) {
+    project.push("需要确认个人贡献边界");
+  }
+  if (has("临时版本", "临时草稿", "赶着投", "先写一个", "保守版本")) {
+    project.push("可能需要临时草稿模式");
+  }
+  if (has("英文", "english", "linkedin", "海外")) {
+    project.push("英文 / LinkedIn 项目表达也需要事实门禁");
+  }
 
   if (has("经历很散", "很散", "不知道怎么介绍", "不知道我算什么")) {
     positioning.push("经历叙事不清");
@@ -140,11 +168,12 @@ function detectSignals(text) {
     privacy.push("可能包含敏感材料");
   }
 
-  return { signals, privacy, positioning };
+  return { signals, privacy, positioning, project };
 }
 
 function inferMode(state, signals) {
   if (state.mode !== "auto") return state.mode;
+  if (signals.project.length >= 1) return "project";
   if (signals.positioning.length >= 2) return "positioning";
   if (signals.signals.includes("JD 分析")) return "jd";
   if (signals.signals.includes("简历需求")) return "resume";
@@ -165,6 +194,14 @@ function buildDiagnosis(state, signals, inferredMode) {
   const positioningText = signals.positioning.length
     ? signals.positioning.map((item) => `- ${item}`).join("\n")
     : "- 暂未看到明显定位重建信号";
+  const projectText = signals.project.length
+    ? signals.project.map((item) => `- ${item}`).join("\n")
+    : "- 暂未看到明显项目深挖信号";
+  const projectState = signals.project.length >= 2
+    ? "DISCOVERED / PARTIALLY_MAPPED"
+    : signals.project.length === 1
+      ? "DISCOVERED"
+      : "未判断";
 
   return `本地诊断
 
@@ -176,11 +213,18 @@ ${signals.signals.length ? signals.signals.map((item) => `- ${item}`).join("\n")
 是否可能需要职业定位 / 候选人叙事重建
 ${positioningText}
 
+是否可能需要项目经历盘点 / 深挖
+${projectText}
+
+项目事实初步状态
+- ${projectState}
+
 隐私检查
 - ${privacyText}
 
 下一步
 - 如果信息很乱：先复制“任务包”给 LLM / Agent。
+- 如果项目事实不清：先让模型做项目总表、完整度检查和单项目事实卡，不要直接写简历 bullet、作品集案例或岗位匹配结论。
 - 如果定位信号较多：先让模型给 2-3 个定位卡，不要直接改简历。
 - 如果只是快速处理材料：让模型只输出 1-3 个修改点或可替换段落。`;
 }
@@ -212,7 +256,10 @@ ${platformHint ? `平台提醒：${platformHint}` : ""}
 3. 不要默认生成大报告。
 4. 不编造学历、公司、岗位、项目、数据、证书、奖项或陌生身份。
 5. ${positioningHint}
-6. 如果涉及简历，请先提醒脱敏；如果材料足够，只给 1-3 个最重要的修改建议。
+6. 如果涉及项目经历，请先做项目总表和项目事实完整度检查，按单个项目标记 DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY；EVIDENCE_READY 不等于必须有量化数据。
+7. 只有 EVIDENCE_READY 项目才能进入正式简历 bullet、英文 bullet、LinkedIn、作品集案例、JD 定制表达或能力迁移。
+8. 如果我明确要求临时版本，可以用 PARTIALLY_MAPPED 项目写保守临时草稿，但必须列出事实依据、未知字段、不能使用的强表述和后续需要补充的内容。
+9. 如果涉及简历，请先提醒脱敏；如果材料足够，只给 1-3 个最重要的修改建议。
 
 请优先输出：
 ${outputs.map((item, index) => `${index + 1}. ${item}`).join("\n")}
@@ -224,7 +271,10 @@ ${state.rawInput || "[这里粘贴我的混乱输入 / JD / 简历片段 / 面�
 ${signals.signals.length ? signals.signals.join("、") : "暂无明显信号"}
 
 可能的定位重建信号：
-${signals.positioning.length ? signals.positioning.join("、") : "暂无明显信号"}`;
+${signals.positioning.length ? signals.positioning.join("、") : "暂无明显信号"}
+
+可能的项目深挖信号：
+${signals.project.length ? signals.project.join("、") : "暂无明显信号"}`;
 }
 
 function buildSummary(state, signals, inferredMode) {
@@ -242,10 +292,17 @@ ${signals.signals.length ? signals.signals.map((item) => `- ${item}`).join("\n")
 定位重建判断：
 ${signals.positioning.length ? signals.positioning.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
 
+项目深挖判断：
+${signals.project.length ? signals.project.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
+
+项目事实状态：
+${signals.project.length ? "- 先按 DISCOVERED / PARTIALLY_MAPPED 处理，补齐后再判断是否 EVIDENCE_READY" : "- 未判断"}
+
 下一步最小动作：
 1. 先确认当前最重要任务：方向 / 简历 / JD / 面试 / 行动计划。
-2. 补充 1 个最能证明自己的经历证据。
-3. 如果要复制给 LLM，使用“任务包”标签页。`;
+2. 如果项目事实不清，先做项目总表，再选 1 个项目补成事实卡。
+3. 如果赶着投递，只做临时草稿并标出未知字段。
+4. 如果要复制给 LLM，使用“任务包”标签页。`;
 }
 
 function render() {
