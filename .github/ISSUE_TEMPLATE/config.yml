@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 使用说明
+    url: https://github.com/Errno722/CCC-career-cognition-compass/blob/main/QUICKSTART.md
+    about: 不知道从哪里开始时，先看快速开始。
+  - name: 反馈模板
+    url: https://github.com/Errno722/CCC-career-cognition-compass/blob/main/FEEDBACK.md
+    about: 不想开 issue 时，可以参考这里整理反馈。

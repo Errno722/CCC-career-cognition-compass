@@ -1,6 +1,83 @@
 # CCC
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Quickstart](https://img.shields.io/badge/start-QUICKSTART-blue.svg)](QUICKSTART.md)
+[![WorkBuddy](https://img.shields.io/badge/deploy-WorkBuddy-orange.svg)](workbuddy/mainland-user-guide.md)
+
 CCC 是 Career Cognition Compass 的缩写。它是一个 AI 求职澄清与行动辅导项目，面向那些正在找工作、想转行、长期 Gap、在职想换工作，或只是觉得“我好像该找工作了，但其实不知道从哪里开始”的人。
+
+**一句话版本：** CCC 帮你把混乱的求职状态整理成事实、选择和下一步小动作，而不是一上来生成一大包简历材料。
+
+**推荐别人时可以这样说：** CCC 不是简历生成器，而是一个帮你从 Gap、转行、在职疲惫、JD 焦虑和信息爆炸里，重新看清自己有什么、想要什么、下一步能做什么的开源求职认知工具。
+
+传播素材、GitHub About 填写建议和社交平台文案见：[SHARE.md](SHARE.md)。
+
+## 3 分钟开始
+
+如果你只是想马上试用，可以从这里开始：
+
+| 入口 | 适合谁 | 怎么开始 |
+| --- | --- | --- |
+| 普通大模型 | 想直接复制 prompt 使用的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
+| Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](SKILLS.md) 和 [skills/](skills/) |
+| WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
+| 飞书入口 | 想让飞书作为聊天入口的人 | 查看 [飞书 × WorkBuddy 配置模板](workbuddy/feishu-config.md) |
+
+更完整的入口选择见：[QUICKSTART.md](QUICKSTART.md)。
+
+## 工作流
+
+```mermaid
+flowchart TD
+  A["混乱输入 / 语音转文字 / JD / 简历片段 / 面试回忆"] --> B["状态与意图澄清"]
+  B --> C["经历事实与项目经历深挖"]
+  C --> D["可迁移能力与硬技能知识库"]
+  D --> E["方向判断 / JD 分析 / 简历补丁 / 面试准备"]
+  E --> F["14 天内行动计划 / 投递后空档期 / 复盘更新"]
+```
+
+## 和简历生成工具有什么不同
+
+CCC 不是：
+
+- 一上来生成完整简历；
+- 帮你包装成陌生人设；
+- 给你一大串岗位清单；
+- 用情绪价值替代行动；
+- 鼓励编造项目、数据、学历或证书。
+
+CCC 更关注：
+
+- 先整理混乱状态；
+- 还原经历和项目事实；
+- 判断能力可以迁移到哪里；
+- 避免被社交媒体和求职软件带着跑；
+- 把下一步压缩到 5-20 分钟也能开始的小动作。
+
+## 快速示例
+
+输入可以很乱：
+
+```text
+gap 一年 运营 ai 转行 不知道投什么
+```
+
+CCC 不会直接生成简历，而会先整理：
+
+```text
+我听到的重点：
+- Gap 一年
+- 有运营经历
+- 接触过 AI
+- 想转行，但不知道投什么
+
+还缺的关键信息：
+1. 之前运营具体做内容、用户、活动、数据，还是其他方向？
+2. AI 学到什么程度：工具使用、prompt、Agent、编程，还是课程了解？
+
+今天先做一件小事：
+- 用 10 分钟列出过去运营里最熟的 3 件事，以及用过的 3 个 AI 工具。
+```
 
 CCC 是开源项目，公开内容可以免费使用、复制和修改。如果它帮到你，可以通过 star、反馈、分享或自愿赞赏支持继续迭代。
 
@@ -225,16 +302,21 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 这个仓库目前主要包含这些公开内容：
 
 - 项目说明：你正在看的这个 README
+- 快速开始：[QUICKSTART.md](QUICKSTART.md)
 - Skills：[skills/](skills/)
 - Skill 使用说明：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署说明：[workbuddy/](workbuddy/)
 - WorkBuddy 大陆用户部署说明：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书 × WorkBuddy 配置模板：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
+- 传播素材：[SHARE.md](SHARE.md)
 - 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](prompts/career-cognition-compass-prompt.md)
 - 使用示例：[examples/](examples/)
 - 虚构 demo：[DEMO.md](DEMO.md)
+- 版本记录：[CHANGELOG.md](CHANGELOG.md)
+- 贡献说明：[CONTRIBUTING.md](CONTRIBUTING.md)
 - 反馈方式：[FEEDBACK.md](FEEDBACK.md)
+- 安全与隐私：[SECURITY.md](SECURITY.md)
 - 支持与赞赏：[SUPPORT.md](SUPPORT.md)
 
 `skills/` 用于展示 CCC 的核心方法和可拆分能力：如何从混乱输入中整理状态、证据、方向、技能和下一步行动。
