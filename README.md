@@ -230,7 +230,6 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - WorkBuddy 部署说明：[workbuddy/](workbuddy/)
 - WorkBuddy 大陆用户部署说明：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书 × WorkBuddy 配置模板：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
-- 本地 Web 应用：[webapp/](webapp/)
 - 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](prompts/career-cognition-compass-prompt.md)
 - 使用示例：[examples/](examples/)
@@ -245,21 +244,6 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 Prompt 目录提供普通大模型可复制使用的版本。
 
 `workbuddy/` 提供 WorkBuddy 这类低代码智能体平台的部署材料，包括系统提示词、部署说明、面向大陆用户的发布说明、飞书配置模板和测试用例。它不包含私有接口或真实求职材料。
-
-`webapp/` 是一个本地静态 Web 应用，不接入 API，不上传数据。它适合把混乱输入、语音转文字、JD、面试回忆或简历片段整理成可复制给 LLM / Agent 的任务包。本地诊断只能做轻量提醒，不能替代人工脱敏检查。
-
-本地打开方式：
-
-```text
-webapp/index.html
-```
-
-或启动本地静态服务：
-
-```bash
-cd webapp
-python3 -m http.server 5173
-```
 
 这个公开仓库只保留适合复用和展示的内容，不包含私有后台配置、服务器配置或未脱敏测试材料。
 
