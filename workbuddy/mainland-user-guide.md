@@ -69,6 +69,8 @@ offer / 合同 / 薪资截图
 
 如果使用的是 WorkBuddy Enterprise，官方快速开始流程大致是：使用分配了企业坐席的个人账号登录企业后台，进入「企业智能体」创建 Agent，填写基础配置和 System Prompt，先用 Test Run 测试，再按需要接入企微 AIBot、QQ 机器人、飞书或钉钉。
 
+如果你准备接入飞书，可以参考：[feishu-config.md](feishu-config.md)。
+
 ### 1. 新建智能体
 
 进入 WorkBuddy 后台，找到类似这些入口：
