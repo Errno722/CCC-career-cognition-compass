@@ -93,6 +93,11 @@ const modeOutputs = {
   plan: [
     "当前阶段判断",
     "可用时间安排",
+    "投递后空档期计划",
+    "投递质量复盘",
+    "JD 共性整理",
+    "可复用资产补充",
+    "信息摄入边界",
     "不超过 14 天行动计划",
     "每天 5-20 分钟小动作",
     "复盘问题",
@@ -129,6 +134,7 @@ function detectSignals(text) {
   const positioning = [];
   const project = [];
   const review = [];
+  const plan = [];
 
   if (has("gap", "空窗", "一年没工作", "长期没工作")) signals.push("Gap / 空窗");
   if (has("转行", "转岗", "换方向", "行业下行")) signals.push("转行 / 转岗");
@@ -136,6 +142,16 @@ function detectSignals(text) {
   if (has("简历", "resume", "cv", "优化简历", "改简历")) signals.push("简历需求");
   if (has("jd", "岗位职责", "任职要求", "职位描述")) signals.push("JD 分析");
   if (has("面试", "复盘", "hr", "反馈", "继续等")) signals.push("面试 / 跟进");
+  if (has("投完", "已投", "投了", "投递后", "没消息", "没有面试", "没有反馈", "等初筛", "等邀约", "空档期", "刷新招聘软件", "刷新软件")) {
+    signals.push("投递后空档期");
+    plan.push("需要投递后空档期计划");
+  }
+  if (has("一直刷新", "反复刷新", "刷招聘软件", "没有回复", "没人回", "还没回复", "还没反馈")) {
+    plan.push("需要信息摄入 / 刷新边界");
+  }
+  if (has("投递质量", "海投", "投了很多", "投了好多", "投了 30", "投了30", "投了一批", "下一批")) {
+    plan.push("需要复盘投递质量和下一批策略");
+  }
   if (has("刚面试", "面试完", "面试复盘", "只记得", "不记得完整问题", "面试官", "hr反馈", "hr 反馈", "recruiter反馈", "反馈说", "经验不足", "没通过原因")) {
     review.push("需要面试复盘 / 反馈挖掘");
   }
@@ -192,7 +208,7 @@ function detectSignals(text) {
     privacy.push("可能包含敏感材料");
   }
 
-  return { signals, privacy, positioning, project, review };
+  return { signals, privacy, positioning, project, review, plan };
 }
 
 function inferMode(state, signals) {
@@ -200,6 +216,7 @@ function inferMode(state, signals) {
   if (signals.review.length >= 1) return "review";
   if (signals.project.length >= 1) return "project";
   if (signals.positioning.length >= 2) return "positioning";
+  if (signals.plan.length >= 1) return "plan";
   if (signals.signals.includes("JD 分析")) return "jd";
   if (signals.signals.includes("简历需求")) return "resume";
   if (signals.signals.includes("面试 / 跟进")) return "review";
@@ -225,6 +242,9 @@ function buildDiagnosis(state, signals, inferredMode) {
   const reviewText = signals.review.length
     ? signals.review.map((item) => `- ${item}`).join("\n")
     : "- 暂未看到明显面试复盘信号";
+  const planText = signals.plan.length
+    ? signals.plan.map((item) => `- ${item}`).join("\n")
+    : "- 暂未看到明显投递后空档期信号";
   const projectState = signals.project.length >= 2
     ? "DISCOVERED / PARTIALLY_MAPPED"
     : signals.project.length === 1
@@ -247,6 +267,9 @@ ${projectText}
 是否可能需要面试复盘 / 面试官反馈挖掘
 ${reviewText}
 
+是否可能需要投递后空档期计划
+${planText}
+
 项目事实初步状态
 - ${projectState}
 
@@ -257,6 +280,7 @@ ${reviewText}
 - 如果信息很乱：先复制“任务包”给 LLM / Agent。
 - 如果项目事实不清：先让模型做项目总表、完整度检查和单项目事实卡，不要直接写简历 bullet、作品集案例或岗位匹配结论。
 - 如果刚面试完或收到反馈：先让模型做面试关键词复盘、面试官反馈卡、反馈可信度判断、重复反馈统计、知识库更新和简历/面试/JD 方向调整。
+- 如果投完简历但没有消息：先做投递后空档期计划，复盘投递质量、整理 JD 共性、补一个可复用资产，并设置信息摄入边界。
 - 如果定位信号较多：先让模型给 2-3 个定位卡，不要直接改简历。
 - 如果只是快速处理材料：让模型只输出 1-3 个修改点或可替换段落。`;
 }
@@ -296,6 +320,7 @@ ${platformHint ? `平台提醒：${platformHint}` : ""}
 11. 如果我说答得不好，请先判断卡点类型：没听懂题、没有结构、没有案例、有案例但没说成岗位语言、项目事实不清、技术/工具不会、紧张表达断裂，或题目和 JD 不匹配。
 12. 面试复盘后最多生成 1-3 张下次面试回答卡，并评估面试体验；不要把所有问题都归因到我身上。
 13. 如果涉及简历，请先提醒脱敏；如果材料足够，只给 1-3 个最重要的修改建议。
+14. 如果是投递后空档期，请输出当前阶段、暂时不建议做的事、投递质量复盘、JD 共性整理、一个可补硬技能 / 项目证据 / 回答卡 / 投递记录等可复用资产、信息摄入边界和今天 5-20 分钟动作；不要只建议继续海投、反复刷新或无限大改简历。
 
 请优先输出：
 ${outputs.map((item, index) => `${index + 1}. ${item}`).join("\n")}
@@ -313,7 +338,10 @@ ${signals.positioning.length ? signals.positioning.join("、") : "暂无明显�
 ${signals.project.length ? signals.project.join("、") : "暂无明显信号"}
 
 可能的面试复盘信号：
-${signals.review.length ? signals.review.join("、") : "暂无明显信号"}`;
+${signals.review.length ? signals.review.join("、") : "暂无明显信号"}
+
+可能的投递后空档期信号：
+${signals.plan.length ? signals.plan.join("、") : "暂无明显信号"}`;
 }
 
 function buildSummary(state, signals, inferredMode) {
@@ -337,6 +365,9 @@ ${signals.project.length ? signals.project.map((item) => `- ${item}`).join("\n")
 面试复盘判断：
 ${signals.review.length ? signals.review.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
 
+投递后空档期判断：
+${signals.plan.length ? signals.plan.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
+
 项目事实状态：
 ${signals.project.length ? "- 先按 DISCOVERED / PARTIALLY_MAPPED 处理，补齐后再判断是否 EVIDENCE_READY" : "- 未判断"}
 
@@ -344,8 +375,9 @@ ${signals.project.length ? "- 先按 DISCOVERED / PARTIALLY_MAPPED 处理，补�
 1. 先确认当前最重要任务：方向 / 简历 / JD / 面试 / 行动计划。
 2. 如果项目事实不清，先做项目总表，再选 1 个项目补成事实卡。
 3. 如果有面试官反馈，先记录来源类型、来源岗位、可信度和重复次数，再转成简历 / 面试 / JD 方向 / 知识库更新项。
-4. 如果赶着投递，只做临时草稿并标出未知字段。
-5. 如果要复制给 LLM，使用“任务包”标签页。`;
+4. 如果投完简历但没有消息，先复盘投递质量和 JD 共性，再补一个可复用资产，不要一直刷新软件。
+5. 如果赶着投递，只做临时草稿并标出未知字段。
+6. 如果要复制给 LLM，使用“任务包”标签页。`;
 }
 
 function render() {

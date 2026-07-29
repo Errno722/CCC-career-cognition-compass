@@ -123,6 +123,7 @@ interview_experience_signals
 acronym_glossary
 positioning_cards
 current_action_plan
+post_application_idle_plan
 ```
 
 变量用途：
@@ -145,6 +146,7 @@ current_action_plan
 - `interview_experience_signals`：面试问题是否匹配 JD、职责是否清楚、是否有模糊职责或过度要求；
 - `positioning_cards`：职业定位 / 候选人叙事；
 - `current_action_plan`：不超过 14 天的小计划。
+- `post_application_idle_plan`：投完简历但未收到反馈时的空档期计划，包括投递质量复盘、JD 共性、可复用资产、信息摄入边界和当天 5-20 分钟动作。
 
 ## 更新流程
 
@@ -172,6 +174,7 @@ current_action_plan
 - 是否能在用户明确要求时输出保守临时草稿，并标出未知字段；
 - 是否会主动保护隐私；
 - 是否能处理 JD、面试复盘、在职疲惫和 Gap；
+- 是否能处理投完简历后的空档期，不把等待变成反复刷新、无目的刷社媒或无限改简历；
 - 是否能把“xx 方面经验不足”等面试官反馈转成简历、面试回答、JD 方向和知识库更新；
 - 是否能把 HR 转述、泛化拒信或用户自我感觉先降级为低/未知可信度，不直接改主简历；
 - 是否在 WorkBuddy / 公众号场景下保持短回复，不一次输出过长内容；

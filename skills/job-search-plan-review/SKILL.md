@@ -1,7 +1,7 @@
 ---
 name: job-search-plan-review
 description: >-
-  Short job-search planning and review. Use when the user needs a plan based on available time, daily or weekly review, application tracking, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
+  Short job-search planning and review. Use when the user needs a plan based on available time, daily or weekly review, application tracking, post-application idle-period planning after submitting resumes, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
 ---
 
 # Job Search Plan Review
@@ -35,10 +35,47 @@ Use modes:
 转行验证
 目标公司准备
 面试等待
+投递后空档期
 复盘修正
 低能量恢复
 兼职/过渡
 ```
+
+## Post-Application Idle Period
+
+Use this when the user has submitted resumes/applications and is waiting for screening, interview invitations, or early feedback.
+
+Examples:
+
+```text
+简历投完了，但还没有面试消息
+今天投了 20 份，接下来不知道该干什么
+投递后空档期很焦虑，总想刷新消息
+等初筛的时候要不要继续改简历
+```
+
+Output:
+
+```text
+投递后空档期计划
+├─ 当前阶段: 已投递 / 等初筛 / 等邀约 / 等反馈
+├─ 不建议做:
+├─ 应该继续做:
+├─ 投递质量复盘:
+├─ JD 共性整理:
+├─ 可补硬技能 / 项目证据:
+├─ 下一批投递策略:
+├─ 信息摄入边界:
+└─ 今天 5-20 分钟动作:
+```
+
+Rules:
+
+- Do not let the user fill the empty period with endless social media scrolling, repeated refreshes, or rewriting the whole resume every day.
+- Do not assume the only answer is "apply more". Check whether the last batch had clear role family, JD fit, resume version, and tracking.
+- Use the idle period to improve one reusable asset: JD pattern notes, one project fact card, one hard-skill practice, one interview answer card, or one application tracker update.
+- If the user is anxious or low energy, give one 5-20 minute action and one stopping rule.
+- Follow-up is usually for recruiter conversations or active processes. For cold applications with no interaction, prefer improving pipeline quality and continuing small-batch applications over chasing every company.
 
 ## Interview Waiting And Feedback
 
@@ -109,6 +146,10 @@ For weekly review:
 ## Version Record
 
 ```text
+v0.2.4 / 2026-07-29
+- Added post-application idle-period planning for the gap after submitting resumes but before interviews or feedback.
+- Added rules to use waiting time for JD pattern notes, project facts, hard-skill practice, answer cards, or application tracking instead of endless refreshes.
+
 v0.2.3 / 2026-07-29
 - Clarified pure interview waiting and HR follow-up wording should stay in this skill.
 - Added short-response shape for waiting scenarios.
