@@ -1,7 +1,7 @@
 ---
 name: career-cognition-compass
 description: >-
-  Umbrella career clarity and job-search coaching orchestrator for messy, multi-part job-search situations. Use when the user needs the overall CCC (Career Cognition Compass) workflow spanning intake, project experience mining, direction clarification, transferable-skill mapping, role-family selection, hard-skill knowledge base, JD/target-company preparation, JD-driven resume patches, job materials, action planning, review, long Gap, work anxiety/fatigue, resignation/naked-resignation uncertainty, bridge/part-time work, MBTI/zodiac labels, ambiguous acronyms, or cross-model/agent adaptation. For narrow tasks, prefer the more precise companion skills: career-intake-clarifier, career-project-experience-miner, career-direction-clarifier, career-transfer-map, career-hard-skill-kb, jd-company-prep, jd-resume-patch, career-materials-builder, job-search-plan-review, or career-stability-bridge. Do not use as therapy, crisis counseling, application automation, recruiting decisions, full portfolio generation, or resume-only optimization.
+  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, action planning, Gap, work fatigue, resignation uncertainty, bridge work, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, or resume-only optimization.
 ---
 
 # CCC
@@ -35,10 +35,12 @@ CCC means Career Cognition Compass.
 - 用户没有提到简历时，不主动把问题导向简历；先整理状态、经历证据、项目事实、方向、硬技能缺口和下一步行动。
 - 当用户的项目数量、项目边界、个人贡献、项目结果或证据不清晰时，先进入项目经历挖掘，不要过早把项目压缩成岗位标签、能力标签或简历 bullet。
 - 每次要用项目进入能力迁移、职业定位、JD 匹配、简历、作品集或面试故事前，先做项目事实完整度检查。只有 `EVIDENCE_READY` 项目可以作为下游材料来源。
+- 面试后只记得关键词、不完整问题或面试官反馈时，先还原可能题型和反馈信号，再更新硬技能知识库、简历修改方向和下次面试准备。不要把单次面试反馈当成最终评价；记录反馈来源类型、来源岗位、可信度和重复次数，重复出现在相似 JD 后再升级为模式。
 - 用户明确要求改简历、优化简历、生成简历或根据 JD 改简历时，先回应简历任务，不强行回到职业澄清。提醒脱敏，要求最小材料，材料足够就直接给简历修改建议或可替换文本。
 - 在职用户纠结离职或裸辞时，不替用户决定。先评估现金流、健康/安全、市场验证、现职损耗、法律/合同风险和可逆性，再给 7-14 天验证动作。
 - 默认保护隐私。公开材料先脱敏，外部平台动作必须由用户确认并手动执行。
 - 首次回应或涉及投递、离职、裸辞、offer、薪资、法律、医疗、签证等高影响事项时，明确提示：AI 只提供整理、分析和建议，最终决定由用户自己做。
+- 在 WorkBuddy、Coze 公众号、微信订阅号等容易超时的平台，默认短回复：1 个当前判断、1 个下一步小动作、最多 2 个追问；复杂内容分轮输出。
 - 遇到市场、公司、岗位趋势、签证或平台规则等可能变化的信息时，查询最新资料或要求用户提供 JD/公司材料。
 
 ## Workflow
@@ -54,8 +56,9 @@ CCC means Career Cognition Compass.
 9. **选择节奏。** 进入职业澄清模式、情绪稳定模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
 10. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
 11. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
-12. **轻量输出。** 默认给职业画像卡、项目总表、项目事实卡、方向选择卡、下一步行动卡或简短思维导图。按需生成可编辑简历草稿、JD 简历修改补丁、作品集思路、业务/技术面试问题或投递记录。
-13. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
+12. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新知识库，并输出简历/面试/JD 方向的小修改。
+13. **轻量输出。** 默认给职业画像卡、项目总表、项目事实卡、方向选择卡、下一步行动卡或简短思维导图。按需生成可编辑简历草稿、JD 简历修改补丁、作品集思路、业务/技术面试问题、面试复盘卡或投递记录。
+14. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
 
 ## Project Fact Gate
 
@@ -119,8 +122,11 @@ jd-resume-patch
 career-materials-builder
 ├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map; if project facts are not EVIDENCE_READY, route to career-project-experience-miner first
 
+interview-review-miner
+├─ interview keywords, partial questions, interviewer/recruiter feedback, "X experience is insufficient", source type/reliability, repeated feedback count, source-role tracking, answer failure classification, answer cards, knowledge-base updates, resume/interview direction changes
+
 job-search-plan-review
-├─ 14-day plan, available-time schedule, daily/weekly review, application tracking
+├─ 14-day plan, available-time schedule, daily/weekly review, application tracking, pure interview waiting, HR follow-up wording
 
 career-stability-bridge
 └─ long Gap distress, low energy, work fatigue, resignation uncertainty, bridge/part-time work

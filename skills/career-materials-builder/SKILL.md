@@ -69,6 +69,34 @@ EVIDENCE_READY
 
 If the user asks "帮我把过去做过的项目整理成作品集" and the project facts are incomplete, first route to `career-project-experience-miner`. Do not start with portfolio themes.
 
+If the user wants to revise materials based on interviewer feedback such as "X experience is insufficient", "project depth is not enough", or "business understanding is weak", first route through `interview-review-miner` to separate feedback原话, source type, source role/JD, repeated count, feedback reliability, inference, resume impact, interview-answer impact, and JD/direction impact. Do not rewrite the resume from one interview comment without this check.
+
+Post-interview material changes must choose a level:
+
+```text
+answer_prep_only
+└─ 简历不改，只准备下次回答卡。
+
+small_resume_patch
+└─ 只前移、补证据或重排相关表达。
+
+reposition_scope
+└─ 多次相似反馈后，重新检查投递方向或候选人叙事。
+```
+
+Use reliability before applying changes:
+
+```text
+low / unknown feedback
+└─ 不改简历，只记录或准备回答卡。
+
+medium feedback
+└─ 只在目标 JD 版本中做小补丁。
+
+high repeated feedback
+└─ 才考虑调整主简历、候选人叙事或投递范围。
+```
+
 ## Resume Scope
 
 Include these common sections when creating a resume draft or template:
@@ -365,6 +393,17 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.8 / 2026-07-29
+- Added feedback reliability checks before turning interview feedback into material changes.
+
+v0.3.7 / 2026-07-29
+- Added post-interview material change levels: answer_prep_only, small_resume_patch, reposition_scope.
+- Require source role/JD and repeated feedback count before applying interviewer feedback to materials.
+
+v0.3.6 / 2026-07-29
+- Added interviewer-feedback gate before revising materials from comments such as "X experience is insufficient".
+- Route post-interview material changes through interview-review-miner before rewriting resume/profile wording.
+
 v0.3.5 / 2026-07-28
 - Applied the same project fact gate to English resume bullets, LinkedIn wording, and overseas materials.
 - Added temporary draft allowance for conservative English wording from PARTIALLY_MAPPED projects.

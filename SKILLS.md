@@ -21,6 +21,7 @@ career-hard-skill-kb          硬技能知识库和术语表
 jd-company-prep               JD / 目标公司准备
 jd-resume-patch               JD 简历修改补丁
 career-materials-builder      中英文简历、作品集、平台材料
+interview-review-miner        面试关键词、面试官反馈和后续修改
 job-search-plan-review        14 天计划、复盘、投递记录
 career-stability-bridge       Gap、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
@@ -55,6 +56,12 @@ Use $jd-resume-patch.
 Use $jd-resume-patch.
 
 别人反馈我的简历模块太多、个人总结太泛，和目标 JD 不够贴合。请先提炼 JD 最核心的 2-3 个能力，再帮我判断哪些经历应该保留、前移、弱化或删除。
+```
+
+```text
+Use $interview-review-miner.
+
+我刚面试完，只记得关键词：留存、SQL join、用户分层。面试官反馈说我 B 端经验不足。请帮我复盘可能题型，并判断简历和下次面试要怎么调整。
 ```
 
 ## 在 Claude Code 中使用
@@ -104,7 +111,10 @@ jd-resume-patch
 用户要英文简历模板、英文 bullet 改写、海外求职材料或 LinkedIn 简历表达
 → career-materials-builder；如果涉及项目表达且项目事实未达到 EVIDENCE_READY，先用 career-project-experience-miner
 
-用户要行动计划、投递记录、面试后等待和复盘
+用户刚面试完、只记得面试关键词、不完整问题、面试官反馈，或想把“xx 经验不足”等反馈用于后续简历/面试方向调整
+→ interview-review-miner
+
+用户要行动计划、投递记录、纯面试等待、询问 HR 进度/反馈话术和求职节奏复盘
 → job-search-plan-review
 
 用户长期 Gap、低能量、在职疲惫、离职犹豫、需要兼职过渡
@@ -127,6 +137,59 @@ jd-resume-patch
 ## 更新记录
 
 ```text
+2026-07-29 / interview-review-miner v0.2.2
+- 将来源类型、可信度、重复状态和动作等级写入改简历前的门禁；明确纯等待和 HR 跟进话术交给 job-search-plan-review。
+
+2026-07-29 / job-search-plan-review v0.2.3
+- 明确纯面试等待、HR 进度确认和跟进话术保留在本模块，并增加短回复形状。
+
+2026-07-29 / interview-review-miner v0.2.1
+- 新增面试反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历或投递方向。
+
+2026-07-29 / career-materials-builder v0.3.8
+- 新增面试反馈可信度检查，低可信反馈只记录或准备回答卡。
+
+2026-07-29 / jd-resume-patch v0.2.4
+- 新增面试反馈来源类型、可信度和动作等级映射，再决定是否生成简历补丁。
+
+2026-07-29 / career-hard-skill-kb v0.1.2
+- 新增硬技能反馈可信度和动作等级字段。
+
+2026-07-29 / job-search-plan-review v0.2.2
+- 新增模糊反馈或转述反馈的可信度检查转交规则。
+
+2026-07-29 / interview-review-miner v0.2.0
+- 新增面试反馈来源岗位和重复反馈计数，避免单次反馈污染所有简历版本。
+- 新增回答失败原因分类、下次面试回答卡和面试体验评估。
+
+2026-07-29 / career-materials-builder v0.3.7
+- 新增面试后材料修改等级：answer_prep_only、small_resume_patch、reposition_scope。
+
+2026-07-29 / jd-resume-patch v0.2.3
+- 新增面试反馈来源隔离和重复反馈状态，决定反馈只影响某个 JD 版本还是进入中性主简历。
+
+2026-07-29 / career-hard-skill-kb v0.1.1
+- 新增反馈来源岗位/JD 和重复反馈状态，避免根据一次面试把技能直接标弱。
+
+2026-07-29 / job-search-plan-review v0.2.1
+- 新增面试体验信号，用于等待期岗位评估。
+
+2026-07-29 / interview-review-miner v0.1.0
+- 新增面试复盘独立模块：支持面试关键词还原、可能题型、考察能力和回答思路。
+- 新增面试官反馈挖掘：例如“xx 方面经验不足”，用于后续简历、面试回答、JD/方向选择和硬技能知识库更新。
+
+2026-07-29 / career-materials-builder v0.3.6
+- 新增面试官反馈门禁：根据“xx 经验不足”等反馈改材料前，先用 interview-review-miner 拆解反馈原话、推断、简历影响和面试影响。
+
+2026-07-29 / jd-resume-patch v0.2.2
+- 新增面试官反馈处理：将“xx 经验不足”“项目不够深入”“业务理解不够”等反馈转成证据顺序、缺口标记、面试风险或 JD 范围调整。
+
+2026-07-29 / job-search-plan-review v0.2.0
+- 明确面试等待和 HR 询问话术仍归本模块；面试关键词、题目回忆和面试官反馈转交 interview-review-miner。
+
+2026-07-29 / career-hard-skill-kb v0.1.0
+- 新增面试官反馈作为知识库来源，记录反馈原话、反馈类型、当前证据、缺口、下次面试回答和 7-14 天补强动作。
+
 2026-07-28 / career-project-experience-miner v0.1.2
 - 新增项目与普通任务的判断边界。
 - 新增全景盘点停止条件，避免无限枚举项目。

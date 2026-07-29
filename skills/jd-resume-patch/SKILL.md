@@ -1,7 +1,7 @@
 ---
 name: jd-resume-patch
 description: >-
-  JD-driven resume adaptation patch workflow. Use when the user has a job description, target role, company role page, recruiter message, interview invitation, or resume-review feedback and wants to adapt an existing resume without regenerating the whole resume every time. Use especially when feedback says the resume has too many modules, weak role fit, broad personal summary, unclear core strengths, or previous JD bias. Produce JD analysis, core-capability focus check, matching matrix, reusable resume-module guidance, and concise resume update patches for only the sections that should change. Do not fabricate experience or rewrite fixed resume fields by default.
+  JD-driven resume adaptation patch workflow. Use when the user has a job description, target role, company role page, recruiter message, interview invitation, resume-review feedback, or interviewer feedback and wants to adapt an existing resume without regenerating the whole resume every time. Use especially when feedback says the resume has too many modules, weak role fit, broad personal summary, unclear core strengths, previous JD bias, or insufficient experience in a role/domain/skill area. Produce JD analysis, core-capability focus check, matching matrix, reusable resume-module guidance, and concise resume update patches for only the sections that should change. Do not fabricate experience or rewrite fixed resume fields by default.
 ---
 
 # JD Resume Patch
@@ -17,6 +17,7 @@ When the user explicitly asks to adapt, optimize, rewrite, or check a resume for
 - If the user already provided a JD and resume excerpt, produce the patch.
 - If only one side is provided, ask for the missing side and offer what can be done now.
 - If the user provides resume-review feedback, convert the feedback into patch rules before rewriting.
+- If the user provides interviewer feedback, separate the feedback原话 from your inference. Record source type, source role/JD, repeated count, feedback reliability, and action level. Use it to adjust evidence order, examples, keywords, and interview risk notes only when justified; do not overfit the whole resume or neutral master resume to one interviewer's comment.
 - Ask for desensitized content only.
 - Keep the first response short, especially in chat or WeChat contexts.
 
@@ -198,7 +199,7 @@ Keep the module library compact. Do not turn it into a huge portfolio or a full 
 
 ## Capability Focus Rules
 
-Use resume-review feedback as constraints. Common feedback and the required response:
+Use resume-review and interviewer feedback as constraints. Common feedback and the required response:
 
 ```text
 涉及模块太多
@@ -215,6 +216,12 @@ Use resume-review feedback as constraints. Common feedback and the required resp
 
 用人部门阅读时间短
 → 默认按 1-2 分钟扫读优化，把最重要的匹配点放在标题、profile、核心技能和第一段经历前半部分。
+
+面试官反馈“xx 经验不足”
+→ 先判断是简历没有展示、面试回答没有讲出案例，还是目标 JD 确实跨度较大。不要编造 xx 经验；如果证据存在，前移并写清；如果证据弱，标成缺口，准备保守解释或调整投递范围。
+
+面试官反馈“项目不够深入 / 业务理解不够”
+→ 不直接包装项目 bullet。先补项目事实、个人贡献、关键决策和结果边界，再决定简历是否需要前移项目或增加面试风险提示。
 ```
 
 Before writing any profile or bullets:
@@ -223,6 +230,34 @@ Before writing any profile or bullets:
 2. Pick the user's strongest 2-3 matching abilities.
 3. Use those abilities to decide which experiences and projects deserve space.
 4. Cut, weaken, or move down anything that is impressive but not relevant to this JD.
+
+For interviewer feedback, run source isolation:
+
+```text
+面试反馈来源检查
+├─ 来源类型: interviewer_direct / recruiter_summary / rejection_email / user_self_review / unknown
+├─ 来源岗位 / JD:
+├─ 反馈主题:
+├─ 反馈可信度: high / medium / low / unknown
+├─ 重复状态: first_signal / repeated_signal / pattern
+├─ 只影响本 JD 版本:
+├─ 可进入中性主简历:
+├─ 不应继承到哪些方向:
+└─ 修改等级: no_change / answer_prep_only / small_resume_patch / reposition_scope
+```
+
+Mapping:
+
+```text
+low / unknown
+└─ no_change 或 answer_prep_only。不要改中性主简历。
+
+medium
+└─ 只在证据存在时做 small_resume_patch，并限制在对应 JD 版本。
+
+high + repeated_signal / pattern
+└─ 可以考虑 small_resume_patch 或 reposition_scope，但仍需说明事实依据和不应继承的方向。
+```
 
 If the target role is specific, such as IMC, do not assume adjacent media or operations experience is enough. Decide whether the resume evidence supports IMC directly. If not, say that media or operations roles may be a higher-probability path unless the user can add stronger IMC evidence.
 
@@ -266,6 +301,17 @@ The profile / personal summary must pass these checks:
 ## Version Record
 
 ```text
+v0.2.4 / 2026-07-29
+- Added feedback source type, reliability, and action-level mapping before applying interview feedback to resume patches.
+
+v0.2.3 / 2026-07-29
+- Added source-role isolation and repeated feedback states before applying interview feedback to resume versions.
+- Added modification levels: answer_prep_only, small_resume_patch, or reposition_scope.
+
+v0.2.2 / 2026-07-29
+- Added interviewer feedback handling for "X experience is insufficient", project depth, and business understanding signals.
+- Convert interview feedback into evidence order, gap labels, interview risk notes, or target JD scope adjustments without inventing experience.
+
 v0.2.1 / 2026-07-28
 - Added project fact-card check before writing JD-specific project bullets.
 - Route vague project names, unclear contribution, missing outputs, or missing evidence to career-project-experience-miner before resume patching.

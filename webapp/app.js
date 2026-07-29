@@ -79,6 +79,14 @@ const modeOutputs = {
     "面试关键词还原",
     "可能题型",
     "答题证据",
+    "面试官反馈卡",
+    "反馈可信度判断",
+    "重复反馈统计",
+    "回答卡点分类",
+    "简历 / 面试方向调整",
+    "JD / 方向选择调整",
+    "下次面试回答卡",
+    "面试体验评估",
     "知识库更新项",
     "下次面试准备动作",
   ],
@@ -120,6 +128,7 @@ function detectSignals(text) {
   const privacy = [];
   const positioning = [];
   const project = [];
+  const review = [];
 
   if (has("gap", "空窗", "一年没工作", "长期没工作")) signals.push("Gap / 空窗");
   if (has("转行", "转岗", "换方向", "行业下行")) signals.push("转行 / 转岗");
@@ -127,6 +136,21 @@ function detectSignals(text) {
   if (has("简历", "resume", "cv", "优化简历", "改简历")) signals.push("简历需求");
   if (has("jd", "岗位职责", "任职要求", "职位描述")) signals.push("JD 分析");
   if (has("面试", "复盘", "hr", "反馈", "继续等")) signals.push("面试 / 跟进");
+  if (has("刚面试", "面试完", "面试复盘", "只记得", "不记得完整问题", "面试官", "hr反馈", "hr 反馈", "recruiter反馈", "反馈说", "经验不足", "没通过原因")) {
+    review.push("需要面试复盘 / 反馈挖掘");
+  }
+  if (has("项目不够深入", "业务理解不够", "技术深度不足", "经验不足", "不够匹配")) {
+    review.push("面试官反馈可能影响简历 / 面试方向");
+  }
+  if (has("hr说", "hr 说", "hr反馈", "hr 反馈", "recruiter", "拒信", "面试官说", "自己感觉", "我感觉")) {
+    review.push("需要区分反馈来源类型和可信度");
+  }
+  if (has("几次面试", "连续", "每次都", "又被说", "重复", "多次", "三次", "两次")) {
+    review.push("需要判断 first_signal / repeated_signal / pattern");
+  }
+  if (has("答得不好", "没答好", "卡住", "没说出来", "不知道怎么答", "紧张")) {
+    review.push("需要回答卡点分类和下次面试回答卡");
+  }
   if (has("兼职", "临时工作", "过渡")) signals.push("兼职 / 过渡");
   if (has("英文简历", "linkedin", "海外", "open to work")) signals.push("海外 / 英文材料");
   if (has("项目", "作品集", "portfolio", "独立站", "shopify", "网站", "小程序", "agent", "skill")) {
@@ -168,11 +192,12 @@ function detectSignals(text) {
     privacy.push("可能包含敏感材料");
   }
 
-  return { signals, privacy, positioning, project };
+  return { signals, privacy, positioning, project, review };
 }
 
 function inferMode(state, signals) {
   if (state.mode !== "auto") return state.mode;
+  if (signals.review.length >= 1) return "review";
   if (signals.project.length >= 1) return "project";
   if (signals.positioning.length >= 2) return "positioning";
   if (signals.signals.includes("JD 分析")) return "jd";
@@ -197,6 +222,9 @@ function buildDiagnosis(state, signals, inferredMode) {
   const projectText = signals.project.length
     ? signals.project.map((item) => `- ${item}`).join("\n")
     : "- 暂未看到明显项目深挖信号";
+  const reviewText = signals.review.length
+    ? signals.review.map((item) => `- ${item}`).join("\n")
+    : "- 暂未看到明显面试复盘信号";
   const projectState = signals.project.length >= 2
     ? "DISCOVERED / PARTIALLY_MAPPED"
     : signals.project.length === 1
@@ -216,6 +244,9 @@ ${positioningText}
 是否可能需要项目经历盘点 / 深挖
 ${projectText}
 
+是否可能需要面试复盘 / 面试官反馈挖掘
+${reviewText}
+
 项目事实初步状态
 - ${projectState}
 
@@ -225,6 +256,7 @@ ${projectText}
 下一步
 - 如果信息很乱：先复制“任务包”给 LLM / Agent。
 - 如果项目事实不清：先让模型做项目总表、完整度检查和单项目事实卡，不要直接写简历 bullet、作品集案例或岗位匹配结论。
+- 如果刚面试完或收到反馈：先让模型做面试关键词复盘、面试官反馈卡、反馈可信度判断、重复反馈统计、知识库更新和简历/面试/JD 方向调整。
 - 如果定位信号较多：先让模型给 2-3 个定位卡，不要直接改简历。
 - 如果只是快速处理材料：让模型只输出 1-3 个修改点或可替换段落。`;
 }
@@ -234,8 +266,8 @@ function buildPrompt(state, signals, inferredMode) {
   const positioningHint = signals.positioning.length >= 2
     ? "我可能需要先做职业定位 / 候选人叙事重建。请先判断这是不是定位问题，再决定是否改材料。"
     : "如果你发现我的经历叙事很散、目标岗位和过往身份不匹配，请提醒我先做职业定位，而不是直接改材料。";
-  const platformHint = state.platform === "WorkBuddy"
-    ? "我会把这段内容发给 WorkBuddy 智能体。请控制回复长度，优先给清晰分段；如果内容较多，请分轮输出并提示我回复“继续”。"
+  const platformHint = ["WorkBuddy", "Coze / Bot", "公众号短输入"].includes(state.platform)
+    ? "我会把这段内容发给容易超时或适合短回复的平台。请默认短回复：1 个当前判断、1 个下一步小动作、最多 2 个追问；如果内容较多，请分轮输出并提示我回复“继续”。"
     : "";
 
   return `请你作为 CCC（Career Cognition Compass），一个求职澄清与辅导助手。
@@ -259,7 +291,11 @@ ${platformHint ? `平台提醒：${platformHint}` : ""}
 6. 如果涉及项目经历，请先做项目总表和项目事实完整度检查，按单个项目标记 DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY；EVIDENCE_READY 不等于必须有量化数据。
 7. 只有 EVIDENCE_READY 项目才能进入正式简历 bullet、英文 bullet、LinkedIn、作品集案例、JD 定制表达或能力迁移。
 8. 如果我明确要求临时版本，可以用 PARTIALLY_MAPPED 项目写保守临时草稿，但必须列出事实依据、未知字段、不能使用的强表述和后续需要补充的内容。
-9. 如果涉及简历，请先提醒脱敏；如果材料足够，只给 1-3 个最重要的修改建议。
+9. 如果涉及面试复盘，请区分 confirmed / inference / needs_confirmation / action；记录反馈来源类型、来源岗位 / JD / 面试轮次。单次反馈是 first_signal，第二次类似反馈是 repeated_signal，多次跨相似 JD 出现才视为 pattern。
+10. 面试反馈需要判断可信度：directness、specificity、evidence_match，以及 action_level。模糊、转述或泛化拒信默认只记录或准备回答卡，不直接修改主简历或投递方向。
+11. 如果我说答得不好，请先判断卡点类型：没听懂题、没有结构、没有案例、有案例但没说成岗位语言、项目事实不清、技术/工具不会、紧张表达断裂，或题目和 JD 不匹配。
+12. 面试复盘后最多生成 1-3 张下次面试回答卡，并评估面试体验；不要把所有问题都归因到我身上。
+13. 如果涉及简历，请先提醒脱敏；如果材料足够，只给 1-3 个最重要的修改建议。
 
 请优先输出：
 ${outputs.map((item, index) => `${index + 1}. ${item}`).join("\n")}
@@ -274,7 +310,10 @@ ${signals.signals.length ? signals.signals.join("、") : "暂无明显信号"}
 ${signals.positioning.length ? signals.positioning.join("、") : "暂无明显信号"}
 
 可能的项目深挖信号：
-${signals.project.length ? signals.project.join("、") : "暂无明显信号"}`;
+${signals.project.length ? signals.project.join("、") : "暂无明显信号"}
+
+可能的面试复盘信号：
+${signals.review.length ? signals.review.join("、") : "暂无明显信号"}`;
 }
 
 function buildSummary(state, signals, inferredMode) {
@@ -295,14 +334,18 @@ ${signals.positioning.length ? signals.positioning.map((item) => `- ${item}`).jo
 项目深挖判断：
 ${signals.project.length ? signals.project.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
 
+面试复盘判断：
+${signals.review.length ? signals.review.map((item) => `- ${item}`).join("\n") : "- 暂不明显"}
+
 项目事实状态：
 ${signals.project.length ? "- 先按 DISCOVERED / PARTIALLY_MAPPED 处理，补齐后再判断是否 EVIDENCE_READY" : "- 未判断"}
 
 下一步最小动作：
 1. 先确认当前最重要任务：方向 / 简历 / JD / 面试 / 行动计划。
 2. 如果项目事实不清，先做项目总表，再选 1 个项目补成事实卡。
-3. 如果赶着投递，只做临时草稿并标出未知字段。
-4. 如果要复制给 LLM，使用“任务包”标签页。`;
+3. 如果有面试官反馈，先记录来源类型、来源岗位、可信度和重复次数，再转成简历 / 面试 / JD 方向 / 知识库更新项。
+4. 如果赶着投递，只做临时草稿并标出未知字段。
+5. 如果要复制给 LLM，使用“任务包”标签页。`;
 }
 
 function render() {

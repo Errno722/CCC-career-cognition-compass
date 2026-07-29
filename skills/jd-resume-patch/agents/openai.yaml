@@ -2,3 +2,5 @@ interface:
   display_name: "JD Resume Patch"
   short_description: "Create focused JD-driven resume patches"
   default_prompt: "Use $jd-resume-patch when I have a JD or resume feedback and want to adapt my resume by focusing on the 2-3 most relevant abilities instead of regenerating the whole resume."
+policy:
+  allow_implicit_invocation: true

@@ -42,6 +42,7 @@ prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
 skills/career-project-experience-miner/SKILL.md
 skills/career-materials-builder/SKILL.md
+skills/interview-review-miner/SKILL.md
 skills/jd-resume-patch/SKILL.md
 skills/job-search-plan-review/SKILL.md
 skills/career-stability-bridge/SKILL.md
@@ -114,6 +115,11 @@ project_evidence_gaps
 project_state_records
 temporary_draft_mode
 hard_skill_kb
+interview_question_bank
+interviewer_feedback_signals
+repeated_feedback_tracker
+interview_answer_cards
+interview_experience_signals
 acronym_glossary
 positioning_cards
 current_action_plan
@@ -131,6 +137,12 @@ current_action_plan
 - `project_state_records`：按单个项目记录 DISCOVERED、PARTIALLY_MAPPED 或 EVIDENCE_READY，避免只给用户一个整体项目状态；
 - `temporary_draft_mode`：用户赶投递时是否允许保守临时表达；
 - `hard_skill_kb`：技能、工具、证据、缺口；
+- `interview_question_bank`：面试关键词、可能题型、考察能力、回答状态和下次准备动作；
+- `interviewer_feedback_signals`：面试官/HR 反馈原话、反馈类型、可能影响和后续简历/面试/JD 调整；
+- `feedback_reliability_records`：反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历；
+- `repeated_feedback_tracker`：同类反馈出现次数、来源岗位/JD、是否升级为 pattern；
+- `interview_answer_cards`：下次面试回答卡，最多保留 1-3 个高影响问题；
+- `interview_experience_signals`：面试问题是否匹配 JD、职责是否清楚、是否有模糊职责或过度要求；
 - `positioning_cards`：职业定位 / 候选人叙事；
 - `current_action_plan`：不超过 14 天的小计划。
 
@@ -160,6 +172,9 @@ current_action_plan
 - 是否能在用户明确要求时输出保守临时草稿，并标出未知字段；
 - 是否会主动保护隐私；
 - 是否能处理 JD、面试复盘、在职疲惫和 Gap；
+- 是否能把“xx 方面经验不足”等面试官反馈转成简历、面试回答、JD 方向和知识库更新；
+- 是否能把 HR 转述、泛化拒信或用户自我感觉先降级为低/未知可信度，不直接改主简历；
+- 是否在 WorkBuddy / 公众号场景下保持短回复，不一次输出过长内容；
 - 是否不会编造经历、证书、数据或陌生身份。
 
 ## 边界

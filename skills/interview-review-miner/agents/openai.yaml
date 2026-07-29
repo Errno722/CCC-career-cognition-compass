@@ -1,0 +1,6 @@
+interface:
+  display_name: "Interview Review Miner"
+  short_description: "Turn interview keywords and feedback into scoped prep updates"
+  default_prompt: "Use $interview-review-miner to review my interview keywords, interviewer feedback, feedback reliability, repeated signals, skill gaps, and post-interview changes for my resume and interview preparation."
+policy:
+  allow_implicit_invocation: true
