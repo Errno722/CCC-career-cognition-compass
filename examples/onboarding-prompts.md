@@ -163,7 +163,7 @@ Use $career-cognition-compass.
 ```text
 Use $career-cognition-compass.
 
-我想把这个求职流程放到不同 AI 工具里用：国内大模型、海外大模型、普通 LLM 对话、Coze Bot、还有 Codex 这种文件代理。请帮我严格区分每种环境适合做什么、不适合做什么、需要用户提供什么，以及隐私边界。
+我想把这个求职流程放到不同 AI 工具里用：国内大模型、海外大模型、普通 LLM 对话、WorkBuddy、还有 Codex 这种文件代理。请帮我严格区分每种环境适合做什么、不适合做什么、需要用户提供什么，以及隐私边界。
 ```
 
 ## 面试复盘

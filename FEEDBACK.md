@@ -22,7 +22,7 @@
 如果你只想快速反馈，请回答这 5 个问题：
 
 ```text
-使用入口：GitHub prompt / Codex Skill / Claude Code / Coze / 公众号 / WorkBuddy / 其他 / 不确定
+使用入口：GitHub prompt / Codex Skill / Claude Code / WorkBuddy / 普通 LLM / 其他 / 不确定
 使用日期或仓库版本：例如 2026-07-28 / commit hash / 不确定
 使用场景：长期 Gap / 转行转岗 / 校招 / 在职换工作 / 海外求职 / 快速就业 / 面试复盘 / 其他
 

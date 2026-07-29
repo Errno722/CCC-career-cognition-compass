@@ -50,7 +50,7 @@ Rules:
 - If the user sends one sentence at a time, merge each new sentence into the same temporary picture instead of restarting the intake.
 - Remind users to remove phone, email, ID, salary, offer, contract, and company-internal information before sending transcripts.
 - If the user asks how to start, suggest a concrete flow: record 5-10 minutes on a phone, speak freely about current state, past work, reasons for looking, roles seen, constraints, available time, and biggest blockers; transcribe with a phone/input-method/meeting-note tool; replace sensitive details with placeholders; then send the transcript.
-- For WeChat public-account style channels, prefer one sentence, a few keywords, or short chunks. For LLM/Coze/Codex/Claude Code style environments, long transcripts are acceptable when desensitized.
+- For WorkBuddy or other mobile-first channels, prefer one sentence, a few keywords, or short chunks. For ordinary LLM/Codex/Claude Code style environments, long transcripts are acceptable when desensitized.
 
 ## Output Shape
 

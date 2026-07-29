@@ -68,8 +68,8 @@ CCC 适合这些阶段的人：
 
 不同入口适合不同输入方式：
 
-- 公众号：适合很小的一句话、几个词、一段短材料。比如“我现在很乱”“gap 一年，不知道还能投什么”“看到一个 JD，不知道怎么准备”。订阅号功能受限，没有自定义菜单入口，使用者直接在聊天框发送内容即可。公众号不建议一次发送很长的录音转文字，因为平台可能把回复拆开。
-- 普通 LLM / Coze 对话页：适合粘贴一大段混乱文字、录音转文字、长 JD、面试回忆或多段背景信息。
+- 普通 LLM：适合粘贴一大段混乱文字、录音转文字、长 JD、面试回忆或多段背景信息。
+- WorkBuddy：适合做国内可访问的对话型求职智能体，用户可以在手机或网页端发送短句、JD、简历片段、面试回忆或语音转文字。
 - Codex / Claude Code：适合把 CCC 当成项目化工作流，用来维护 skill、prompt、模板、demo 和文档。不建议放入未脱敏的真实求职材料。
 
 如果你不知道怎么说，可以先录音。打开手机里的录音工具，对着手机说 5-10 分钟，把现在的状态、过去做过的事情、想换方向的原因、看过的岗位、最卡住的地方、每天能用多少时间都说出来。内容可以很乱，可以重复，也可以想到哪里说到哪里。
@@ -227,8 +227,8 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - 项目说明：你正在看的这个 README
 - Skills：[skills/](skills/)
 - Skill 使用说明：[SKILLS.md](SKILLS.md)
-- Coze 商店 / 公众号使用说明：[coze/README.md](coze/README.md)
 - WorkBuddy 部署说明：[workbuddy/](workbuddy/)
+- WorkBuddy 大陆用户部署说明：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 本地 Web 应用：[webapp/](webapp/)
 - 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](prompts/career-cognition-compass-prompt.md)
@@ -241,9 +241,9 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 
 其中 `career-project-experience-miner` 是项目经历盘点与深挖模块。它负责在简历、JD 和职业定位之前，先把用户做过的项目还原成可复用的事实资产，包括项目总表、项目事实完整度检查、单项目事实卡、个人贡献边界和证据缺口。只有达到 `EVIDENCE_READY` 的项目，才适合进入后续正式材料表达。`EVIDENCE_READY` 不等于必须有量化数据；没有销售额、用户量或转化率的项目，也可以通过仓库、截图、文档、运行结果、流程和暂停原因形成可用事实。
 
-Coze 公开说明用于介绍使用者如何在 Coze 商店和公众号入口使用 CCC。Prompt 目录提供普通大模型可复制使用的版本。
+Prompt 目录提供普通大模型可复制使用的版本。
 
-`workbuddy/` 提供 WorkBuddy 这类低代码智能体平台的部署材料，包括系统提示词、部署说明和测试用例。它不包含私有接口或真实求职材料。
+`workbuddy/` 提供 WorkBuddy 这类低代码智能体平台的部署材料，包括系统提示词、部署说明、面向大陆用户的发布说明和测试用例。它不包含私有接口或真实求职材料。
 
 `webapp/` 是一个本地静态 Web 应用，不接入 API，不上传数据。它适合把混乱输入、语音转文字、JD、面试回忆或简历片段整理成可复制给 LLM / Agent 的任务包。本地诊断只能做轻量提醒，不能替代人工脱敏检查。
 
@@ -260,7 +260,7 @@ cd webapp
 python3 -m http.server 5173
 ```
 
-这个公开仓库只保留适合复用和展示的内容，不包含 Coze 智能体搭建过程、公众号后台配置、服务器配置或未脱敏测试材料。
+这个公开仓库只保留适合复用和展示的内容，不包含私有后台配置、服务器配置或未脱敏测试材料。
 
 这个仓库不公开真实求职材料、未脱敏案例或用户隐私信息。
 
