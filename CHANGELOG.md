@@ -27,6 +27,10 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 抽出 `scripts/lib/schema-validator.mjs` 和 `scripts/lib/deterministic-eval.mjs`，让 runner、fixture 测试和 eval 检查共用同一套校验逻辑。
 - runner 输出前会用 [evals/result-schema.json](evals/result-schema.json) 自检；fixture 测试也会验证 runner 输出 schema。
 - `scripts/check-evals.mjs` 增加 `run_id` 唯一性、空结果报告拒绝、suite hash 匹配、有 `assistant_output` 时复算确定性结果，以及“总执行次数 / 唯一覆盖 / 唯一通过”统计。
+- 修正隐私正则误放在 `greeting-001` 的问题，移动到 `privacy-001`。
+- fixture 支持 `expected_failed_checks`，避免“因为别的断言失败”也被误判为负向 fixture 有效。
+- 结果统计按 `schema_only`、`runner_generated` 和 `recomputed` 拆分，并新增已验证唯一通过计数。
+- 非本地 adapter 默认生成唯一 `run_id`；真实平台结果需要提供 `source_commit` 和 `model`。
 - 字面匹配增加 Unicode / 空白 / 大小写标准化；隐私禁止项同时检查原始输出和标准化输出。
 - 隐私 case 增加手机号和邮箱正则检查，并新增混淆手机号 / 邮箱的预期失败 fixture。
 - 将 case 23 补充为带 Shopify 最小事实卡的输入，避免只测试面试官角色框架而无法检查事实一致性。

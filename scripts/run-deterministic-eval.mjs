@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { randomUUID } from "node:crypto";
 import {
   hashText,
   runCase,
@@ -23,6 +24,22 @@ function readStdin() {
 
 function sourceCommit(input) {
   return input.source_commit ?? process.env.SOURCE_COMMIT ?? null;
+}
+
+function isValidSourceCommit(value) {
+  return typeof value === "string" && /^[a-f0-9]{7,40}$/.test(value);
+}
+
+function isLocalAdapter(adapter) {
+  return adapter === "fixture" || adapter === "local";
+}
+
+function defaultRunId(adapter) {
+  if (isLocalAdapter(adapter)) {
+    return "local-deterministic-eval";
+  }
+
+  return `${adapter}-${new Date().toISOString()}-${randomUUID()}`;
 }
 
 function getCase(caseMap, caseId) {
@@ -57,20 +74,38 @@ function runReportInput(suite, suiteSha256, caseMap, input) {
   }
 
   const includeAssistantOutput = input.include_assistant_output === true;
+  const adapter = input.adapter ?? input.platform ?? "fixture";
+  const sourceCommitValue = sourceCommit(input);
+  const model = input.model ?? null;
+  const createdAt = input.created_at ?? new Date().toISOString();
+
+  if (!Number.isFinite(Date.parse(createdAt))) {
+    throw new Error("created_at must be parseable as an ISO-like date");
+  }
+
+  if (!isLocalAdapter(adapter)) {
+    if (!isValidSourceCommit(sourceCommitValue)) {
+      throw new Error("non-local adapter reports require source_commit as a 7-40 character git SHA");
+    }
+
+    if (typeof model !== "string" || model.trim().length === 0) {
+      throw new Error("non-local adapter reports require model");
+    }
+  }
 
   return {
     result_schema_version: "0.1.0",
     suite_id: suite.suite_id,
     suite_schema_version: suite.schema_version,
     suite_sha256: suiteSha256,
-    source_commit: sourceCommit(input),
+    source_commit: sourceCommitValue,
     evaluation_target: suite.evaluation_target,
-    run_id: input.run_id ?? "local-deterministic-eval",
+    run_id: input.run_id ?? defaultRunId(adapter),
     runner_version: runnerVersion,
     verification_level: includeAssistantOutput ? "recomputed" : "runner_generated",
-    adapter: input.adapter ?? input.platform ?? "fixture",
-    model: input.model ?? null,
-    created_at: input.created_at ?? new Date().toISOString(),
+    adapter,
+    model,
+    created_at: createdAt,
     cases: input.cases.map((item) => runSingleInput(caseMap, item, { includeAssistantOutput }))
   };
 }

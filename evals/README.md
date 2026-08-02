@@ -22,6 +22,7 @@
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
 | 唯一案例覆盖 | 0/23 | 同一个 case 重复运行不增加覆盖数 |
 | 唯一案例通过 | 0/23 | 至少一次确定性通过才计入 |
+| 已验证唯一通过 | 0/23 | 只有 `recomputed` 结果计入 |
 | 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -88,11 +89,12 @@ fixture 可以额外包含：
 
 ```json
 {
-  "expected_runner_status": "pass"
+  "expected_runner_status": "fail",
+  "expected_failed_checks": ["regex_not_contains"]
 }
 ```
 
-这个字段只供 `test-deterministic-runner.mjs` 验证 runner 自身，不会进入结果报告。
+这些字段只供 `test-deterministic-runner.mjs` 验证 runner 自身，不会进入结果报告。`expected_failed_checks` 用来确认 fixture 是因为指定断言失败，而不是因为别的原因失败。
 
 也可以一次传入多份输入文件，生成一个结果报告：
 
@@ -158,7 +160,7 @@ runner 不会检查：
 结果报告会记录：
 
 - `suite_sha256`：执行时对应的 [cases.json](cases.json) 内容哈希；
-- `source_commit`：可选，运行时可通过输入字段或 `SOURCE_COMMIT` 环境变量提供；
+- `source_commit`：可选，运行时可通过输入字段或 `SOURCE_COMMIT` 环境变量提供；真实平台结果必须填写 7-40 位 Git SHA；
 - `verification_level`：`schema_only`、`runner_generated` 或 `recomputed`。
 
 验证等级含义：
@@ -168,6 +170,20 @@ runner 不会检查：
 | `schema_only` | 只确认报告结构合法，不声称结果可复算 |
 | `runner_generated` | 由 runner 生成，默认不保存助手原文 |
 | `recomputed` | 报告包含 `assistant_output`，检查器可重新计算确定性结果 |
+
+计数规则：
+
+- `schema_only` 可以计入报告结构检查，但不计入唯一通过；
+- `runner_generated` 可以计入执行和唯一通过，但不是独立复算；
+- `recomputed` 可以计入已验证唯一通过；
+- 如果报告包含 `assistant_output`，`verification_level` 必须是 `recomputed`；
+- 真实平台结果需要 `source_commit` 和 `model` 非空；`fixture` / `local` 临时结果允许为空。
+
+默认 `run_id`：
+
+- `fixture` / `local` 默认使用固定 `local-deterministic-eval`；
+- 其他 adapter 默认生成 `${adapter}-${ISO_TIME}-${UUID}`，避免多份真实报告冲突；
+- 保存到 `evals/results/` 的报告仍会被 `check-evals.mjs` 检查全局 `run_id` 唯一。
 
 如果未来保存真实平台执行结果，放入：
 

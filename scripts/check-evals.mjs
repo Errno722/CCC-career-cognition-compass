@@ -18,6 +18,7 @@ const allowedSeverities = new Set(["critical", "high", "medium", "low"]);
 const allowedRubricTypes = new Set(["must", "must_not", "mixed"]);
 const allowedRubricStatuses = new Set(["draft"]);
 const ignoredResultDirs = new Set(["fixtures"]);
+const localResultAdapters = new Set(["fixture", "local"]);
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -103,8 +104,12 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
   const totalCaseExecutions = [];
   const deterministicPassedExecutions = [];
   const semanticReviewedExecutions = [];
+  const schemaOnlyExecutions = [];
+  const runnerGeneratedExecutions = [];
+  const recomputedExecutions = [];
   const uniqueCasesCovered = new Set();
   const uniqueCasesPassed = new Set();
+  const verifiedUniqueCasesPassed = new Set();
   const adapterModelGroups = new Set();
 
   for (const filePath of files) {
@@ -131,6 +136,20 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
 
     if (report.evaluation_target !== suite.evaluation_target) {
       throw new Error(`${filePath} evaluation_target must match ${casesPath}`);
+    }
+
+    if (!Number.isFinite(Date.parse(report.created_at))) {
+      throw new Error(`${filePath} created_at must be parseable as an ISO-like date`);
+    }
+
+    if (!localResultAdapters.has(report.adapter)) {
+      if (typeof report.source_commit !== "string" || report.source_commit.trim().length === 0) {
+        throw new Error(`${filePath} non-local adapter reports must include source_commit`);
+      }
+
+      if (typeof report.model !== "string" || report.model.trim().length === 0) {
+        throw new Error(`${filePath} non-local adapter reports must include model`);
+      }
     }
 
     if (runIds.has(report.run_id)) {
@@ -171,6 +190,10 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
         throw new Error(`${filePath} ${resultCase.case_id} verification_level recomputed requires assistant_output`);
       }
 
+      if (typeof resultCase.assistant_output === "string" && report.verification_level !== "recomputed") {
+        throw new Error(`${filePath} ${resultCase.case_id} assistant_output requires verification_level recomputed`);
+      }
+
       if (typeof resultCase.assistant_output === "string") {
         const recomputed = runCase(caseItem, resultCase.assistant_output, {
           includeAssistantOutput: true
@@ -188,9 +211,21 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
 
       totalCaseExecutions.push(resultCase.case_id);
       uniqueCasesCovered.add(resultCase.case_id);
-      if (resultCase.deterministic_pass) {
+      if (report.verification_level === "schema_only") {
+        schemaOnlyExecutions.push(resultCase.case_id);
+      } else if (report.verification_level === "runner_generated") {
+        runnerGeneratedExecutions.push(resultCase.case_id);
+      } else if (report.verification_level === "recomputed") {
+        recomputedExecutions.push(resultCase.case_id);
+      }
+
+      if (resultCase.deterministic_pass && report.verification_level !== "schema_only") {
         deterministicPassedExecutions.push(resultCase.case_id);
         uniqueCasesPassed.add(resultCase.case_id);
+      }
+
+      if (resultCase.deterministic_pass && report.verification_level === "recomputed") {
+        verifiedUniqueCasesPassed.add(resultCase.case_id);
       }
 
       if (resultCase.semantic_status !== "pending") {
@@ -204,8 +239,12 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
     totalCaseExecutions: totalCaseExecutions.length,
     deterministicPassedExecutions: deterministicPassedExecutions.length,
     semanticReviewedExecutions: semanticReviewedExecutions.length,
+    schemaOnlyExecutions: schemaOnlyExecutions.length,
+    runnerGeneratedExecutions: runnerGeneratedExecutions.length,
+    recomputedExecutions: recomputedExecutions.length,
     uniqueCasesCovered: uniqueCasesCovered.size,
     uniqueCasesPassed: uniqueCasesPassed.size,
+    verifiedUniqueCasesPassed: verifiedUniqueCasesPassed.size,
     adapterModelGroups: adapterModelGroups.size
   };
 }
@@ -484,8 +523,12 @@ console.log(`core refined rubrics: ${rubrics.core_refined_rubrics.length}/${sema
 console.log(`orphan rubrics: ${orphanRubrics.length}`);
 console.log(`result reports: ${resultSummary.reportCount}`);
 console.log(`total case executions: ${resultSummary.totalCaseExecutions}`);
+console.log(`schema-only executions: ${resultSummary.schemaOnlyExecutions}`);
+console.log(`runner-generated executions: ${resultSummary.runnerGeneratedExecutions}`);
+console.log(`recomputed executions: ${resultSummary.recomputedExecutions}`);
 console.log(`unique cases covered: ${resultSummary.uniqueCasesCovered}/${suite.manual_case_count}`);
 console.log(`unique cases passed: ${resultSummary.uniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`verified unique cases passed: ${resultSummary.verifiedUniqueCasesPassed}/${suite.manual_case_count}`);
 console.log(`deterministic passed executions: ${resultSummary.deterministicPassedExecutions}`);
 console.log(`semantic reviewed executions: ${resultSummary.semanticReviewedExecutions}`);
 console.log(`adapter/model groups: ${resultSummary.adapterModelGroups}`);

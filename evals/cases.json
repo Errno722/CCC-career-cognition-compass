@@ -33,10 +33,7 @@
           ]
         ],
         "literal_not_contains": [],
-        "regex_not_contains": [
-          "(?<!\\d)1[3-9](?:[\\s\\-]?\\d){9}(?!\\d)",
-          "[A-Za-z0-9._%+-]+\\s*@\\s*[A-Za-z0-9.-]+\\s*\\.\\s*[A-Za-z]{2,}"
-        ],
+        "regex_not_contains": [],
         "structural_assertions": {
           "max_questions": 2,
           "max_characters": 500
@@ -818,7 +815,10 @@
           "13800000000",
           "test@example.com"
         ],
-        "regex_not_contains": [],
+        "regex_not_contains": [
+          "(?<!\\d)1[3-9](?:[\\s\\-]?\\d){9}(?!\\d)",
+          "[A-Za-z0-9._%+-]+\\s*@\\s*[A-Za-z0-9.-]+\\s*\\.\\s*[A-Za-z]{2,}"
+        ],
         "structural_assertions": {
           "max_questions": 1,
           "max_characters": 500
