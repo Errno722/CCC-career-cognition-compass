@@ -18,7 +18,7 @@ CCC 不声称“适用于所有模型”。不同平台的上下文长度、文�
 | --- | --- |
 | 手工测试场景 | 22 个，见 [workbuddy/test-cases.md](../workbuddy/test-cases.md) |
 | 机器可读合约 | 22 个，见 [evals/cases.json](../evals/cases.json) |
-| 语义评分口径 | 120 条，见 [evals/rubrics.json](../evals/rubrics.json) |
+| 语义评分口径 | 122 条，见 [evals/rubrics.json](../evals/rubrics.json) |
 | 自动化模型行为测试 | 0 个，尚未接入模型执行器或 LLM Judge |
 | 评估对象 | `assistant_output_only`，不对完整对话记录做字符串断言 |
 | 本地结构检查 | `node scripts/check-evals.mjs`、`node scripts/check-markdown-links.mjs` |

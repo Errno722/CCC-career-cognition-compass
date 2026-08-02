@@ -19,6 +19,7 @@ Turn a JD or target company into a concise preparation card. Use current source 
 5. **Identify gaps.** Mark gaps as `must_fix`, `can_explain`, `not_required_now`, or `needs_confirmation`.
 6. **Plan practice.** Suggest 7-14 day practice actions based on available time.
 7. **Prepare questions.** Generate business interview questions and technical/tool questions separately.
+8. **Adjust by interviewer role.** If the user knows the interviewer type, tailor answer focus by role; if not, provide a compact role-focus map.
 
 ## Project Evidence Gate
 
@@ -67,6 +68,56 @@ If the user is already interviewing or waiting after an interview, also evaluate
 └─ 是否继续投入:
 ```
 
+## Interviewer Role Prep
+
+When preparing for interviews, separate the question topic from the interviewer role. The same answer should keep the same facts but change what is emphasized.
+
+Use this role map:
+
+```text
+HR / Recruiter
+├─ 重点: 动机、稳定性、薪资/入职时间、沟通风险、基础匹配
+└─ 准备: 30 秒自我介绍、为什么换/转、当前状态、期望与边界
+
+用人经理 / 直属 leader
+├─ 重点: 能否上手、项目证据、协作方式、短期交付
+└─ 准备: 1-2 个 EVIDENCE_READY 项目、个人贡献、关键判断、30 天入职计划
+
+业务负责人 / 业务面试官
+├─ 重点: 业务理解、用户/客户、指标、优先级和商业判断
+└─ 准备: 业务场景拆解、指标理解、取舍逻辑、竞品或行业观察
+
+技术面试官 / 工具面试官
+├─ 重点: 工具、方法、实现细节、边界、排错和学习能力
+└─ 准备: 工具清单、实际做过的步骤、限制条件、不会的部分如何补
+
+高管 / Founder
+├─ 重点: 方向判断、长期动机、抗压、公司阶段理解
+└─ 准备: 为什么是这个方向、为什么是这家公司、你能带来的确定性
+
+跨部门协作方 / 同级成员
+├─ 重点: 配合成本、沟通方式、冲突处理、日常交付习惯
+└─ 准备: 协作案例、对齐机制、需求变更和反馈处理方式
+```
+
+Output when relevant:
+
+```text
+面试官角色准备卡
+├─ 角色:
+├─ 对方最关心:
+├─ 应该前置的证据:
+├─ 少说或后置:
+├─ 可能追问:
+└─ 练习动作:
+```
+
+Rules:
+
+- Do not invent different facts for different interviewer roles.
+- If the user's projects are not `EVIDENCE_READY`, keep project examples provisional or route to `career-project-experience-miner`.
+- If interviewer roles are unknown, prioritize HR, hiring manager, business, and technical lenses for role preparation.
+
 ## Output Shape
 
 ```text
@@ -80,7 +131,8 @@ JD / 公司准备卡
 ├─ 最大缺口:
 ├─ 7-14 天补强动作:
 ├─ 业务面试可能问题:
-└─ 技术/工具面试可能问题:
+├─ 技术/工具面试可能问题:
+└─ 面试官角色准备卡:
 ```
 
 ## Boundaries
@@ -94,6 +146,9 @@ JD / 公司准备卡
 ## Version Record
 
 ```text
+v0.1.1 / 2026-08-02
+- Added interviewer-role prep cards so HR, hiring manager, business, technical, founder, cross-functional, and peer interviewers get different answer emphasis.
+
 v0.1.0 / 2026-07-28
 - Added project evidence gate for fit evaluation, project-case selection, interview answers, and resume angles.
 - Pure JD/company requirement analysis can still proceed without project mining.

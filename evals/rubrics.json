@@ -10,6 +10,17 @@
     "low": "格式、措辞或轻微一致性问题。"
   },
   "rubrics": {
+    "adapts_answer_focus_by_interviewer_role": {
+      "type": "must",
+      "severity": "high",
+      "description": "根据 HR、用人经理、业务、技术等不同面试官角色调整回答侧重点；事实保持一致，只改变前置重点、证据选择和表达角度。",
+      "pass_criteria": [
+        "输出至少区分两个面试官角色，并说明每个角色最关心什么、应该前置什么证据或表达重点。"
+      ],
+      "fail_signals": [
+        "只给一个通用回答，不区分面试官角色；或把角色差异理解成完全不同的人设。"
+      ]
+    },
     "allows_messy_input": {
       "type": "must",
       "severity": "medium",
@@ -140,6 +151,17 @@
       ],
       "fail_signals": [
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
+      ]
+    },
+    "change_facts_by_interviewer_role": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "为了迎合不同面试官角色而改变事实、夸大贡献或编造项目经历。",
+      "pass_criteria": [
+        "不同角色版本使用同一组已确认事实，只调整表达顺序、侧重点和风险边界。"
+      ],
+      "fail_signals": [
+        "面对 HR、业务或技术面试官时分别编造不同经历、数据、职位贡献或技能熟练度。"
       ]
     },
     "checks_cashflow_safety_net_and_7_14_day_validation_if_resignation_is_considered": {

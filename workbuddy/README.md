@@ -119,6 +119,7 @@ temporary_draft_mode
 hard_skill_kb
 interview_question_bank
 interviewer_feedback_signals
+interviewer_role_focus_cards
 repeated_feedback_tracker
 interview_answer_cards
 interview_experience_signals
@@ -142,6 +143,7 @@ post_application_idle_plan
 - `hard_skill_kb`：技能、工具、证据、缺口；
 - `interview_question_bank`：面试关键词、可能题型、考察能力、回答状态和下次准备动作；
 - `interviewer_feedback_signals`：面试官/HR 反馈原话、反馈类型、可能影响和后续简历/面试/JD 调整；
+- `interviewer_role_focus_cards`：按 HR、用人经理、业务、技术、高管、跨部门或同级面试官区分回答侧重点；
 - `feedback_reliability_records`：反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历；
 - `repeated_feedback_tracker`：同类反馈出现次数、来源岗位/JD、是否升级为 pattern；
 - `interview_answer_cards`：下次面试回答卡，最多保留 1-3 个高影响问题；
@@ -178,6 +180,7 @@ post_application_idle_plan
 - 是否能处理 JD、面试复盘、在职疲惫和 Gap；
 - 是否能处理投完简历后的空档期，不把等待变成反复刷新、无目的刷社媒或无限改简历；
 - 是否能把“xx 方面经验不足”等面试官反馈转成简历、面试回答、JD 方向和知识库更新；
+- 是否能根据 HR、用人经理、业务、技术等不同面试官角色调整回答侧重点，同时保持事实不变；
 - 是否能把 HR 转述、泛化拒信或用户自我感觉先降级为低/未知可信度，不直接改主简历；
 - 是否在 WorkBuddy / 手机端短回复场景下保持短回复，不一次输出过长内容；
 - 是否不会编造经历、证书、数据或陌生身份。

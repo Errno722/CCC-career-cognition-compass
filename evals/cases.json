@@ -636,7 +636,7 @@
       "id": "interview-feedback-001",
       "title": "面试官反馈用于后续修改",
       "manual_case_id": 16,
-      "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。请帮我复盘，并判断简历和下次面试要怎么改。",
+      "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。下一轮可能会有 HR、业务负责人和技术面试官。请帮我复盘，并判断简历和下次面试要怎么改。",
       "expected": {
         "routing": {
           "mode": "primary_required",
@@ -655,6 +655,17 @@
           ],
           [
             "数据看板"
+          ],
+          [
+            "HR"
+          ],
+          [
+            "业务负责人",
+            "业务面试官"
+          ],
+          [
+            "技术面试官",
+            "工具面试官"
           ]
         ],
         "literal_not_contains": [],
@@ -666,12 +677,14 @@
           "separates_original_feedback_inference_and_unknowns",
           "marks_feedback_source_and_confidence",
           "reconstructs_question_types",
-          "proposes_resume_and_interview_patches"
+          "proposes_resume_and_interview_patches",
+          "adapts_answer_focus_by_interviewer_role"
         ],
         "semantic_must_not": [
           "treat_feedback_as_final",
           "invent_b2b_experience",
-          "deny_direction_immediately"
+          "deny_direction_immediately",
+          "change_facts_by_interviewer_role"
         ]
       }
     },

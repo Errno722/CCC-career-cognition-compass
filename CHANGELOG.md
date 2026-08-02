@@ -17,6 +17,12 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
 - 暂不启用 GitHub Actions；当前推送凭证需要额外 `workflow` 权限才能创建 workflow 文件。
 
+### 面试准备
+
+- 新增面试官角色回答侧重点：同一个事实可以按 HR、用人经理、业务、技术、高管、跨部门或同级面试官调整前置重点，但不能改变事实或编造经历。
+- `interview-review-miner` 增加面试官角色回答卡，用于面试复盘和下一轮准备。
+- `jd-company-prep` 增加面试官角色准备卡，用于 JD / 公司面试前准备。
+
 ## 2026-07-29
 
 ### 传播与开源包装

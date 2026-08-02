@@ -21,7 +21,7 @@ career-hard-skill-kb          硬技能知识库和术语表
 jd-company-prep               JD / 目标公司准备
 jd-resume-patch               JD 简历修改补丁
 career-materials-builder      中英文简历、作品集、平台材料
-interview-review-miner        面试关键词、面试官反馈和后续修改
+interview-review-miner        面试关键词、面试官反馈、角色化回答侧重点和后续修改
 job-search-plan-review        14 天计划、复盘、投递记录
 career-stability-bridge       Gap、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
@@ -62,6 +62,12 @@ Use $jd-resume-patch.
 Use $interview-review-miner.
 
 我刚面试完，只记得关键词：留存、SQL join、用户分层。面试官反馈说我 B 端经验不足。请帮我复盘可能题型，并判断简历和下次面试要怎么调整。
+```
+
+```text
+Use $interview-review-miner.
+
+下一轮可能有 HR、业务负责人和技术面试官。请根据不同面试官角色，帮我调整同一个项目案例的回答侧重点。
 ```
 
 ## 在 Claude Code 中使用
@@ -111,7 +117,7 @@ jd-resume-patch
 用户要英文简历模板、英文 bullet 改写、海外求职材料或 LinkedIn 简历表达
 → career-materials-builder；如果涉及项目表达且项目事实未达到 EVIDENCE_READY，先用 career-project-experience-miner
 
-用户刚面试完、只记得面试关键词、不完整问题、面试官反馈，或想把“xx 经验不足”等反馈用于后续简历/面试方向调整
+用户刚面试完、只记得面试关键词、不完整问题、面试官反馈，想把“xx 经验不足”等反馈用于后续简历/面试方向调整，或想根据 HR、用人经理、业务、技术等面试官角色调整回答侧重点
 → interview-review-miner
 
 用户要行动计划、投递记录、投递后空档期计划、纯面试等待、询问 HR 进度/反馈话术和求职节奏复盘
@@ -137,6 +143,12 @@ jd-resume-patch
 ## 更新记录
 
 ```text
+2026-08-02 / interview-review-miner v0.2.3
+- 新增面试官角色回答卡：按 HR、用人经理、业务、技术、高管、跨部门和同级面试官区分回答侧重点，同时保持事实不变。
+
+2026-08-02 / jd-company-prep v0.1.1
+- 新增面试官角色准备卡：面试前可按不同面试官角色准备关心点、前置证据和练习动作。
+
 2026-07-29 / job-search-plan-review v0.2.4
 - 新增投递后空档期计划：投完简历但还没反馈时，复盘投递质量、整理 JD 共性、补可复用资产和安排 5-20 分钟动作。
 

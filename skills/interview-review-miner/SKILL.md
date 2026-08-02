@@ -296,6 +296,83 @@ Routing:
 └─ hand off to job-search-plan-review
 ```
 
+## Interviewer Role Answer Focus
+
+When the user asks how to answer in the next interview, or when the user mentions the interviewer type, adjust the answer focus by interviewer role. Do not give one generic answer for every interviewer.
+
+First identify the role if possible:
+
+```text
+HR / Recruiter
+用人经理 / 直属 leader
+业务负责人 / 业务面试官
+技术面试官 / 工具面试官
+高管 / Founder
+跨部门协作方
+同级成员
+unknown
+```
+
+If the role is unknown, ask one small question or provide a role-neutral answer plus a short role-focus table.
+
+Use this mapping:
+
+```text
+HR / Recruiter
+├─ 关心: 动机、稳定性、沟通风险、薪资/入职时间、基础匹配
+├─ 强调: 当前状态、求职动机、岗位兴趣、真实边界、可入职节奏
+└─ 少说: 过深技术细节、未经证实的项目结果
+
+用人经理 / 直属 leader
+├─ 关心: 能否上手、过去证据、协作方式、风险点
+├─ 强调: 相关项目、个人贡献、关键判断、复盘能力、入职后 30 天能做什么
+└─ 少说: 泛泛热情、过多求职背景故事
+
+业务负责人 / 业务面试官
+├─ 关心: 业务理解、用户/客户场景、指标、商业判断、优先级
+├─ 强调: 你如何理解问题、取舍逻辑、业务指标、用户或客户证据
+└─ 少说: 纯工具清单、脱离业务的技能堆叠
+
+技术面试官 / 工具面试官
+├─ 关心: 方法、工具熟练度、实现过程、边界、排错能力
+├─ 强调: 使用过的工具、技术过程、限制条件、如何验证、不会的部分如何补
+└─ 少说: 把了解说成熟练、把参与说成主导
+
+高管 / Founder
+├─ 关心: 判断力、长期动机、抗压、业务敏感度、是否能承担不确定性
+├─ 强调: 为什么选这个方向、关键选择、学习速度、对公司阶段的理解
+└─ 少说: 细碎执行流水账
+
+跨部门协作方
+├─ 关心: 沟通成本、推进方式、冲突处理、是否能对齐目标
+├─ 强调: 对齐机制、信息同步、需求变更处理、协作案例
+└─ 少说: 只强调个人成果而忽略协作边界
+
+同级成员
+├─ 关心: 是否好合作、工作方式、交付习惯、压力下沟通
+├─ 强调: 日常协作方式、反馈习惯、如何处理卡点
+└─ 少说: 过度上位叙事
+```
+
+Output:
+
+```text
+面试官角色回答卡
+├─ 面试官角色:
+├─ 这个角色最可能关心:
+├─ 回答时要前置:
+├─ 可以使用的证据:
+├─ 需要少说或后置:
+├─ 风险点:
+└─ 30-60 秒回答结构:
+```
+
+Rules:
+
+- Keep role-specific emphasis separate from facts. The same project can be explained differently, but the facts cannot change.
+- If a question may be asked by multiple roles, provide 2-3 role variants instead of one long script.
+- If the user lacks evidence for a role's concern, mark it as a gap and give a conservative explanation or practice action.
+
 ## Knowledge Base Update
 
 Update the user's interview knowledge base in compact form:
@@ -304,6 +381,7 @@ Update the user's interview knowledge base in compact form:
 interview_question_bank
 ├─ question_or_keywords:
 ├─ likely_question_type:
+├─ interviewer_role:
 ├─ tested_skill:
 ├─ my_answer_status: answered_well / partial / weak / not_answered / unknown
 ├─ evidence_to_use_next_time:
@@ -332,6 +410,7 @@ Create at most 1-3 answer cards after each review:
 ```text
 下次面试回答卡
 ├─ 高频问题 / 可能题型:
+├─ 面试官角色:
 ├─ 考察能力:
 ├─ 我的可用案例:
 ├─ 回答结构:
@@ -369,7 +448,8 @@ For keyword-only review:
 2. 可能被考察的能力
 3. 可能题型与回答思路
 4. 知识库更新
-5. 下次面试前 1-3 个动作
+5. 如果知道面试官角色，给角色化回答侧重点
+6. 下次面试前 1-3 个动作
 ```
 
 For interviewer feedback:
@@ -382,7 +462,8 @@ For interviewer feedback:
 3. 反馈可能指向的缺口
 4. 简历需要怎么调
 5. 面试回答需要怎么调
-6. 之后投 JD / 方向要注意什么
+6. 不同面试官角色下应该怎么调整侧重点
+7. 之后投 JD / 方向要注意什么
 ```
 
 For repeated feedback:
@@ -394,7 +475,7 @@ For repeated feedback:
 2. 来源岗位是否相似
 3. 是否需要改简历
 4. 是否需要改投递范围
-5. 下次面试回答卡
+5. 下次面试回答卡，包括面试官角色侧重点
 ```
 
 ## Boundaries
@@ -412,6 +493,10 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.3 / 2026-08-02
+- Added interviewer-role answer focus cards for HR, hiring manager, business, technical, founder, cross-functional, and peer interviewers.
+- Added role-specific emphasis to interview answer cards without changing the underlying facts.
+
 v0.2.2 / 2026-07-29
 - Added feedback source type, reliability, repeated state, and action level to the resume-change gate.
 - Clarified that pure interview waiting and HR follow-up wording should route to job-search-plan-review.
