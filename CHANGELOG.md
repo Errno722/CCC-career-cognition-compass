@@ -23,7 +23,12 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 新增 `scripts/test-deterministic-runner.mjs` 和 `evals/fixtures/`，提供通过与预期失败示例，用于验证确定性 runner 本身。
 - 明确确定性 runner 退出码：全部通过为 `0`，确定性断言失败为 `1`，输入或 schema 错误为 `2`。
 - 确定性结果报告新增 `runner_version`、`adapter`、`model`、`created_at`、`assistant_output_sha256` 和 metrics；默认不保存完整助手输出，避免把敏感内容写入公开结果。
+- 确定性结果报告新增 `suite_sha256`、`source_commit` 和 `verification_level`，用于绑定执行时的合约来源和结果可信度。
+- 抽出 `scripts/lib/schema-validator.mjs` 和 `scripts/lib/deterministic-eval.mjs`，让 runner、fixture 测试和 eval 检查共用同一套校验逻辑。
+- runner 输出前会用 [evals/result-schema.json](evals/result-schema.json) 自检；fixture 测试也会验证 runner 输出 schema。
+- `scripts/check-evals.mjs` 增加 `run_id` 唯一性、空结果报告拒绝、suite hash 匹配、有 `assistant_output` 时复算确定性结果，以及“总执行次数 / 唯一覆盖 / 唯一通过”统计。
 - 字面匹配增加 Unicode / 空白 / 大小写标准化；隐私禁止项同时检查原始输出和标准化输出。
+- 隐私 case 增加手机号和邮箱正则检查，并新增混淆手机号 / 邮箱的预期失败 fixture。
 - 将 case 23 补充为带 Shopify 最小事实卡的输入，避免只测试面试官角色框架而无法检查事实一致性。
 - 将 suite schema 升级为 `0.3.0`，从 suite 中移除手填的自动化结果数量，改为从 `evals/results/` 的报告动态计算。
 - 强化 `scripts/check-evals.mjs`：检查 schema 未支持关键字、全量 rubric 基础结构、被引用 draft rubric、结果报告结构和确定性通过状态一致性。

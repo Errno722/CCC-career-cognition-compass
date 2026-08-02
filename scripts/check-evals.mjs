@@ -1,4 +1,13 @@
 import fs from "node:fs";
+import {
+  assertSchemaUsesSupportedKeywords,
+  validateWithSchema
+} from "./lib/schema-validator.mjs";
+import {
+  deterministicChecksMatch,
+  hashText,
+  runCase
+} from "./lib/deterministic-eval.mjs";
 
 const casesPath = "evals/cases.json";
 const schemaPath = "evals/schema.json";
@@ -9,25 +18,6 @@ const allowedSeverities = new Set(["critical", "high", "medium", "low"]);
 const allowedRubricTypes = new Set(["must", "must_not", "mixed"]);
 const allowedRubricStatuses = new Set(["draft"]);
 const ignoredResultDirs = new Set(["fixtures"]);
-const supportedSchemaKeywords = new Set([
-  "$schema",
-  "$id",
-  "$defs",
-  "$ref",
-  "title",
-  "description",
-  "type",
-  "additionalProperties",
-  "required",
-  "properties",
-  "const",
-  "enum",
-  "pattern",
-  "minLength",
-  "minimum",
-  "maximum",
-  "items"
-]);
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -71,136 +61,6 @@ function getSkillIds() {
   );
 }
 
-function resolveSchemaRef(rootSchema, ref) {
-  if (!ref.startsWith("#/")) {
-    throw new Error(`unsupported schema ref: ${ref}`);
-  }
-
-  return ref
-    .slice(2)
-    .split("/")
-    .reduce((node, segment) => {
-      const key = segment.replace(/~1/g, "/").replace(/~0/g, "~");
-      if (!node || !(key in node)) {
-        throw new Error(`schema ref cannot be resolved: ${ref}`);
-      }
-      return node[key];
-    }, rootSchema);
-}
-
-function assertSchemaUsesSupportedKeywords(schemaNode, label) {
-  if (!schemaNode || typeof schemaNode !== "object" || Array.isArray(schemaNode)) {
-    return;
-  }
-
-  for (const key of Object.keys(schemaNode)) {
-    if (!supportedSchemaKeywords.has(key)) {
-      throw new Error(`${label} uses unsupported JSON Schema keyword: ${key}`);
-    }
-  }
-
-  for (const [field, childSchema] of Object.entries(schemaNode.properties ?? {})) {
-    assertSchemaUsesSupportedKeywords(childSchema, `${label}.properties.${field}`);
-  }
-
-  for (const [field, childSchema] of Object.entries(schemaNode.$defs ?? {})) {
-    assertSchemaUsesSupportedKeywords(childSchema, `${label}.$defs.${field}`);
-  }
-
-  if (schemaNode.items) {
-    assertSchemaUsesSupportedKeywords(schemaNode.items, `${label}.items`);
-  }
-
-  if (schemaNode.additionalProperties && typeof schemaNode.additionalProperties === "object") {
-    assertSchemaUsesSupportedKeywords(schemaNode.additionalProperties, `${label}.additionalProperties`);
-  }
-}
-
-function validateWithSchema(value, schemaNode, label, rootSchema, failures) {
-  if (schemaNode.$ref) {
-    validateWithSchema(value, resolveSchemaRef(rootSchema, schemaNode.$ref), label, rootSchema, failures);
-    return;
-  }
-
-  if (schemaNode.const !== undefined && value !== schemaNode.const) {
-    failures.push(`${label} must equal ${JSON.stringify(schemaNode.const)}`);
-    return;
-  }
-
-  if (schemaNode.enum && !schemaNode.enum.includes(value)) {
-    failures.push(`${label} must be one of: ${schemaNode.enum.join(", ")}`);
-    return;
-  }
-
-  if (schemaNode.type) {
-    const types = Array.isArray(schemaNode.type) ? schemaNode.type : [schemaNode.type];
-    const ok = types.some((type) =>
-      (type === "object" && value && typeof value === "object" && !Array.isArray(value)) ||
-      (type === "array" && Array.isArray(value)) ||
-      (type === "string" && typeof value === "string") ||
-      (type === "integer" && Number.isInteger(value)) ||
-      (type === "boolean" && typeof value === "boolean") ||
-      (type === "null" && value === null)
-    );
-
-    if (!ok) {
-      failures.push(`${label} must be ${types.join(" or ")}`);
-      return;
-    }
-  }
-
-  if (typeof value === "string") {
-    if (schemaNode.minLength !== undefined && value.length < schemaNode.minLength) {
-      failures.push(`${label} must have length >= ${schemaNode.minLength}`);
-    }
-
-    if (schemaNode.pattern && !new RegExp(schemaNode.pattern).test(value)) {
-      failures.push(`${label} must match pattern ${schemaNode.pattern}`);
-    }
-  }
-
-  if (Number.isInteger(value)) {
-    if (schemaNode.minimum !== undefined && value < schemaNode.minimum) {
-      failures.push(`${label} must be >= ${schemaNode.minimum}`);
-    }
-
-    if (schemaNode.maximum !== undefined && value > schemaNode.maximum) {
-      failures.push(`${label} must be <= ${schemaNode.maximum}`);
-    }
-  }
-
-  if (Array.isArray(value) && schemaNode.items) {
-    for (const [index, item] of value.entries()) {
-      validateWithSchema(item, schemaNode.items, `${label}[${index}]`, rootSchema, failures);
-    }
-  }
-
-  if (value && typeof value === "object" && !Array.isArray(value)) {
-    const properties = schemaNode.properties ?? {};
-    for (const requiredField of schemaNode.required ?? []) {
-      if (!(requiredField in value)) {
-        failures.push(`${label}.${requiredField} is required`);
-      }
-    }
-
-    for (const [field, fieldValue] of Object.entries(value)) {
-      if (field in properties) {
-        validateWithSchema(fieldValue, properties[field], `${label}.${field}`, rootSchema, failures);
-        continue;
-      }
-
-      if (schemaNode.additionalProperties === false) {
-        failures.push(`${label}.${field} is not allowed by schema`);
-        continue;
-      }
-
-      if (schemaNode.additionalProperties && typeof schemaNode.additionalProperties === "object") {
-        validateWithSchema(fieldValue, schemaNode.additionalProperties, `${label}.${field}`, rootSchema, failures);
-      }
-    }
-  }
-}
-
 function requireNoDuplicateStrings(value, label) {
   const seen = new Set();
   for (const item of value) {
@@ -236,12 +96,16 @@ function collectJsonFiles(rootDir) {
   return files.sort();
 }
 
-function readEvalResultReports(resultSchema, suite, caseIds) {
+function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
   const resultsDir = "evals/results";
   const files = collectJsonFiles(resultsDir);
-  let executedCaseCount = 0;
-  let deterministicPassed = 0;
-  let semanticReviewed = 0;
+  const runIds = new Set();
+  const totalCaseExecutions = [];
+  const deterministicPassedExecutions = [];
+  const semanticReviewedExecutions = [];
+  const uniqueCasesCovered = new Set();
+  const uniqueCasesPassed = new Set();
+  const adapterModelGroups = new Set();
 
   for (const filePath of files) {
     const report = readJson(filePath);
@@ -261,13 +125,28 @@ function readEvalResultReports(resultSchema, suite, caseIds) {
       throw new Error(`${filePath} suite_schema_version must match ${casesPath}`);
     }
 
+    if (report.suite_sha256 !== suiteSha256) {
+      throw new Error(`${filePath} suite_sha256 must match current ${casesPath}`);
+    }
+
     if (report.evaluation_target !== suite.evaluation_target) {
       throw new Error(`${filePath} evaluation_target must match ${casesPath}`);
     }
 
+    if (runIds.has(report.run_id)) {
+      throw new Error(`${filePath} duplicate run_id across result reports: ${report.run_id}`);
+    }
+    runIds.add(report.run_id);
+
+    if (!Array.isArray(report.cases) || report.cases.length === 0) {
+      throw new Error(`${filePath} must contain at least one case result`);
+    }
+
+    adapterModelGroups.add(`${report.adapter}/${report.model ?? "unknown-model"}`);
     const reportCaseIds = new Set();
     for (const resultCase of report.cases) {
-      if (!caseIds.has(resultCase.case_id)) {
+      const caseItem = caseMap.get(resultCase.case_id);
+      if (!caseItem) {
         throw new Error(`${filePath} contains unknown case_id: ${resultCase.case_id}`);
       }
 
@@ -288,32 +167,52 @@ function readEvalResultReports(resultSchema, suite, caseIds) {
         throw new Error(`${filePath} ${resultCase.case_id} deterministic_status does not match check statuses`);
       }
 
+      if (report.verification_level === "recomputed" && typeof resultCase.assistant_output !== "string") {
+        throw new Error(`${filePath} ${resultCase.case_id} verification_level recomputed requires assistant_output`);
+      }
+
+      if (typeof resultCase.assistant_output === "string") {
+        const recomputed = runCase(caseItem, resultCase.assistant_output, {
+          includeAssistantOutput: true
+        });
+        if (!deterministicChecksMatch(resultCase, recomputed)) {
+          throw new Error(`${filePath} ${resultCase.case_id} does not match recomputed deterministic checks`);
+        }
+      }
+
       for (const [checkName, status] of Object.entries(resultCase.checks)) {
         if (resultCase.check_details[checkName].status !== status) {
           throw new Error(`${filePath} ${resultCase.case_id} ${checkName} status does not match check_details`);
         }
       }
 
-      executedCaseCount += 1;
+      totalCaseExecutions.push(resultCase.case_id);
+      uniqueCasesCovered.add(resultCase.case_id);
       if (resultCase.deterministic_pass) {
-        deterministicPassed += 1;
+        deterministicPassedExecutions.push(resultCase.case_id);
+        uniqueCasesPassed.add(resultCase.case_id);
       }
 
       if (resultCase.semantic_status !== "pending") {
-        semanticReviewed += 1;
+        semanticReviewedExecutions.push(resultCase.case_id);
       }
     }
   }
 
   return {
     reportCount: files.length,
-    executedCaseCount,
-    deterministicPassed,
-    semanticReviewed
+    totalCaseExecutions: totalCaseExecutions.length,
+    deterministicPassedExecutions: deterministicPassedExecutions.length,
+    semanticReviewedExecutions: semanticReviewedExecutions.length,
+    uniqueCasesCovered: uniqueCasesCovered.size,
+    uniqueCasesPassed: uniqueCasesPassed.size,
+    adapterModelGroups: adapterModelGroups.size
   };
 }
 
-const suite = readJson(casesPath);
+const suiteRaw = fs.readFileSync(casesPath, "utf8");
+const suite = JSON.parse(suiteRaw);
+const suiteSha256 = hashText(suiteRaw);
 const schema = readJson(schemaPath);
 const resultSchema = readJson(resultSchemaPath);
 const rubrics = readJson(rubricsPath);
@@ -574,7 +473,8 @@ for (const semanticId of rubrics.core_refined_rubrics) {
   }
 }
 
-const resultSummary = readEvalResultReports(resultSchema, suite, ids);
+const caseMap = new Map(suite.cases.map((item) => [item.id, item]));
+const resultSummary = readEvalResultReports(resultSchema, suite, suiteSha256, caseMap);
 
 console.log(`eval suite ok: ${suite.suite_id} schema ${suite.schema_version}`);
 console.log(`eval contracts ok: ${suite.cases.length} cases`);
@@ -583,8 +483,11 @@ console.log(`semantic rubrics covered: ${coveredRubrics}/${semanticIds.size}`);
 console.log(`core refined rubrics: ${rubrics.core_refined_rubrics.length}/${semanticIds.size}`);
 console.log(`orphan rubrics: ${orphanRubrics.length}`);
 console.log(`result reports: ${resultSummary.reportCount}`);
-console.log(`executed cases: ${resultSummary.executedCaseCount}`);
-console.log(`deterministic passed: ${resultSummary.deterministicPassed}`);
-console.log(`semantic reviewed: ${resultSummary.semanticReviewed}`);
+console.log(`total case executions: ${resultSummary.totalCaseExecutions}`);
+console.log(`unique cases covered: ${resultSummary.uniqueCasesCovered}/${suite.manual_case_count}`);
+console.log(`unique cases passed: ${resultSummary.uniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`deterministic passed executions: ${resultSummary.deterministicPassedExecutions}`);
+console.log(`semantic reviewed executions: ${resultSummary.semanticReviewedExecutions}`);
+console.log(`adapter/model groups: ${resultSummary.adapterModelGroups}`);
 console.log(`evaluation target: ${suite.evaluation_target}`);
 console.log(`routing skills checked: ${skillIds.size} local skills`);

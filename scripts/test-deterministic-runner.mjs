@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import { spawnSync } from "node:child_process";
+import { validateJsonOrThrow } from "./lib/schema-validator.mjs";
 
 const fixturesDir = "evals/fixtures";
 const runnerPath = "scripts/run-deterministic-eval.mjs";
+const resultSchemaPath = "evals/result-schema.json";
 const allowedExpectedStatuses = new Set(["pass", "fail"]);
 
 function readJson(filePath) {
@@ -26,6 +28,7 @@ function assertFixtureExpectation(filePath, fixture) {
 function runFixture(filePath) {
   const fixture = readJson(filePath);
   assertFixtureExpectation(filePath, fixture);
+  const resultSchema = readJson(resultSchemaPath);
 
   const result = spawnSync(process.execPath, [runnerPath, filePath], {
     encoding: "utf8"
@@ -41,6 +44,7 @@ function runFixture(filePath) {
   } catch (error) {
     throw new Error(`${filePath} did not produce JSON stdout:\n${result.stdout}\n${result.stderr}`);
   }
+  validateJsonOrThrow(report, resultSchema, `${filePath} runner output`);
 
   const deterministicPass = report.cases.every((item) => item.deterministic_pass);
   const expectedExitCode = fixture.expected_runner_status === "pass" ? 0 : 1;

@@ -8,9 +8,12 @@
     "result_schema_version",
     "suite_id",
     "suite_schema_version",
+    "suite_sha256",
+    "source_commit",
     "evaluation_target",
     "run_id",
     "runner_version",
+    "verification_level",
     "adapter",
     "model",
     "created_at",
@@ -29,6 +32,17 @@
       "type": "string",
       "pattern": "^0\\.3\\.0$"
     },
+    "suite_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source_commit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
     "evaluation_target": {
       "const": "assistant_output_only"
     },
@@ -39,6 +53,9 @@
     "runner_version": {
       "type": "string",
       "minLength": 1
+    },
+    "verification_level": {
+      "$ref": "#/$defs/verificationLevel"
     },
     "adapter": {
       "type": "string",
@@ -57,6 +74,7 @@
     },
     "cases": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "$ref": "#/$defs/caseResult"
       }
@@ -82,6 +100,13 @@
       "enum": [
         "pass",
         "fail"
+      ]
+    },
+    "verificationLevel": {
+      "enum": [
+        "schema_only",
+        "runner_generated",
+        "recomputed"
       ]
     },
     "metrics": {

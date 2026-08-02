@@ -19,9 +19,10 @@
 | 已登记语义断言 | 122 | 当前文件：[rubrics.json](rubrics.json) |
 | 已人工细化核心 Rubric | 15 | 当前文件：[rubrics.json](rubrics.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
-| 已执行案例 | 0 | 由 `evals/results/` 中的报告动态计算 |
-| 确定性通过 | 0 | 由已保存报告动态计算 |
-| 语义已审 | 0 | 暂未调用模型，也没有 LLM Judge |
+| 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
+| 唯一案例覆盖 | 0/23 | 同一个 case 重复运行不增加覆盖数 |
+| 唯一案例通过 | 0/23 | 至少一次确定性通过才计入 |
+| 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
 
@@ -40,7 +41,7 @@ node scripts/check-evals.mjs
 当前检查会验证：
 
 - JSON 可解析；
-- 按 [schema.json](schema.json) 校验 suite 结构，包括 `required`、`type`（含 `boolean`）、`const`、`enum`、`pattern` 和 `additionalProperties: false`；
+- 按 [schema.json](schema.json) 校验 suite 结构，包括 `required`、`type`（含 `boolean`）、`const`、`enum`、`pattern`、`minItems` 和 `additionalProperties: false`；
 - 按 [result-schema.json](result-schema.json) 校验已保存结果报告；
 - suite schema 为 `0.3.0`；
 - `evaluation_target` 为 `assistant_output_only`；
@@ -60,7 +61,9 @@ node scripts/check-evals.mjs
 - 未被 case 引用的 rubric 必须显式标为 `draft`；
 - 被 case 引用的 rubric 不能标为 `draft`；
 - `core_refined_rubrics` 中的 ID 必须存在、被引用且不重复；
-- `evals/results/` 中的结果报告必须匹配 suite、引用真实 case，并保持 `deterministic_pass` 与各项确定性检查状态一致。
+- `evals/results/` 中的结果报告必须匹配 suite、引用真实 case，`cases` 不能为空，`run_id` 不能重复，并保持 `deterministic_pass`、`deterministic_status`、`checks` 和 `check_details` 一致；
+- 结果报告中的 `suite_sha256` 必须等于当前 [cases.json](cases.json) 的 SHA-256；
+- 当结果报告包含 `assistant_output` 时，`check-evals.mjs` 会重新计算 Hash、metrics 和全部确定性断言。
 
 `check-evals.mjs` 只实现了 [schema.json](schema.json) 与 [result-schema.json](result-schema.json) 当前使用到的 JSON Schema 子集。不要在 schema 中新增 `oneOf`、`anyOf`、`allOf`、`if/then/else`、`format`、`unevaluatedProperties` 等关键字，除非同步扩展检查脚本。
 
@@ -152,13 +155,27 @@ runner 不会检查：
 
 结果报告默认不保存完整 `assistant_output`，只保存 `assistant_output_sha256`、计数字段和检查结果，避免把敏感内容写入公开文件。只有在本地调试且确认脱敏时，才使用 `include_assistant_output: true`。
 
+结果报告会记录：
+
+- `suite_sha256`：执行时对应的 [cases.json](cases.json) 内容哈希；
+- `source_commit`：可选，运行时可通过输入字段或 `SOURCE_COMMIT` 环境变量提供；
+- `verification_level`：`schema_only`、`runner_generated` 或 `recomputed`。
+
+验证等级含义：
+
+| 等级 | 含义 |
+| --- | --- |
+| `schema_only` | 只确认报告结构合法，不声称结果可复算 |
+| `runner_generated` | 由 runner 生成，默认不保存助手原文 |
+| `recomputed` | 报告包含 `assistant_output`，检查器可重新计算确定性结果 |
+
 如果未来保存真实平台执行结果，放入：
 
 ```text
 evals/results/<adapter>/
 ```
 
-不要把 fixture 自测结果混入真实平台结果。若需要临时保存 fixture 输出，放在 `evals/results/fixtures/`；兼容性矩阵只统计真实平台目录，例如 `evals/results/workbuddy/`、`evals/results/chatgpt/`。结果报告需要符合 [result-schema.json](result-schema.json)。`check-evals.mjs` 会按报告中的 `cases` 数组动态统计已执行案例，而不是按 JSON 文件数量计数。
+不要把 fixture 自测结果混入真实平台结果。若需要临时保存 fixture 输出，放在 `evals/results/fixtures/`；兼容性矩阵只统计真实平台目录，例如 `evals/results/workbuddy/`、`evals/results/chatgpt/`。结果报告需要符合 [result-schema.json](result-schema.json)。`check-evals.mjs` 会按报告中的 `cases` 数组动态统计总执行次数、唯一案例覆盖和唯一案例通过，而不是按 JSON 文件数量计数。
 
 ## 断言类型
 
