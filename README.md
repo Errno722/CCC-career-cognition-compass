@@ -118,14 +118,15 @@ node scripts/check-markdown-links.mjs
 git diff --check
 ```
 
-这些校验不会调用模型，只检查公开文档链接、eval 合约结构、真实 skill ID、手工案例映射和语义 rubric 覆盖。模型行为仍需要在对应平台中人工抽检。
+这些校验不会调用模型，只检查公开文档链接、eval schema、真实 skill ID、手工案例映射、语义断言登记和核心 rubric 标记。模型行为仍需要在对应平台中人工抽检。
 
 当前测试状态：
 
 ```text
-手工测试场景：22
-机器可读合约：22
-语义评分口径：122
+手工测试场景：23
+机器可读合约：23
+已登记语义断言：122
+已人工细化核心 Rubric：15
 自动化模型行为测试：0
 评估对象：assistant_output_only
 ```

@@ -4,7 +4,7 @@
 
 目前包含：
 
-- `cases.json`：从 WorkBuddy 22 个手工测试用例整理出的机器可读合约。
+- `cases.json`：从 WorkBuddy 23 个手工测试用例整理出的机器可读合约。
 - `schema.json`：Eval suite 的结构说明。
 - `rubrics.json`：语义断言的评分口径。
 
@@ -12,8 +12,10 @@
 
 | 类型 | 数量 | 说明 |
 | --- | ---: | --- |
-| 手工测试场景 | 22 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
-| 机器可读合约 | 22 | 当前文件：[cases.json](cases.json) |
+| 手工测试场景 | 23 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
+| 机器可读合约 | 23 | 当前文件：[cases.json](cases.json) |
+| 已登记语义断言 | 122 | 当前文件：[rubrics.json](rubrics.json) |
+| 已人工细化核心 Rubric | 15 | 当前文件：[rubrics.json](rubrics.json) |
 | 自动化模型行为测试 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -33,11 +35,12 @@ node scripts/check-evals.mjs
 当前检查会验证：
 
 - JSON 可解析；
+- 按 [schema.json](schema.json) 校验 suite 结构，包括 `required`、`type`、`const`、`enum`、`pattern` 和 `additionalProperties: false`；
 - suite schema 为 `0.2.0`；
 - `evaluation_target` 为 `assistant_output_only`；
 - case 数量与 `manual_case_count` 一致；
 - case id 唯一；
-- `manual_case_id` 必填、不重复，并且覆盖 `1...22`；
+- `manual_case_id` 必填、不重复，并且覆盖 `1...manual_case_count`；
 - 必填字段存在；
 - `routing.primary` 和 `routing.allowed_secondary` 都是本地真实存在的 skill；
 - `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`semantic_assertions`、`semantic_must_not` 类型正确；
@@ -46,6 +49,9 @@ node scripts/check-evals.mjs
 - `structural_assertions.max_questions` 在 0-3；
 - 可选的 `max_characters` 为正整数；
 - 每个 semantic id 都能在 [rubrics.json](rubrics.json) 找到评分说明。
+- Rubric 正反向类型与 `semantic_assertions` / `semantic_must_not` 一致；
+- 未被 case 引用的 rubric 必须显式标为 `draft`；
+- `core_refined_rubrics` 中的 ID 必须存在、被引用且不重复。
 
 ## 断言类型
 

@@ -72,7 +72,7 @@ If the user is already interviewing or waiting after an interview, also evaluate
 
 When preparing for interviews, separate the question topic from the interviewer role. The same answer should keep the same facts but change what is emphasized.
 
-Use this role map:
+Use this role map as a preparation heuristic, not a fact about the exact interviewer. If the interview invitation, interviewer title, JD, previous feedback, or company stage gives stronger signals, use those signals first.
 
 ```text
 HR / Recruiter
@@ -91,8 +91,12 @@ HR / Recruiter
 ├─ 重点: 工具、方法、实现细节、边界、排错和学习能力
 └─ 准备: 工具清单、实际做过的步骤、限制条件、不会的部分如何补
 
-高管 / Founder
-├─ 重点: 方向判断、长期动机、抗压、公司阶段理解
+高管 / Executive
+├─ 重点: 方向判断、业务敏感度、跨团队影响、公司阶段理解
+└─ 准备: 关键选择、业务判断、学习速度、对团队目标的理解
+
+Founder
+├─ 重点: 长期动机、抗压、业务敏感度、是否能承担不确定性
 └─ 准备: 为什么是这个方向、为什么是这家公司、你能带来的确定性
 
 跨部门协作方 / 同级成员
@@ -117,6 +121,7 @@ Rules:
 - Do not invent different facts for different interviewer roles.
 - If the user's projects are not `EVIDENCE_READY`, keep project examples provisional or route to `career-project-experience-miner`.
 - If interviewer roles are unknown, prioritize HR, hiring manager, business, and technical lenses for role preparation.
+- Do not claim an interviewer will definitely care about a topic based only on role title.
 
 ## Output Shape
 
@@ -147,7 +152,8 @@ JD / 公司准备卡
 
 ```text
 v0.1.1 / 2026-08-02
-- Added interviewer-role prep cards so HR, hiring manager, business, technical, founder, cross-functional, and peer interviewers get different answer emphasis.
+- Added interviewer-role prep cards so HR, hiring manager, business, technical, executive, founder, cross-functional, and peer interviewers get different answer emphasis.
+- Clarified role mappings are preparation heuristics, not facts about the exact interviewer.
 
 v0.1.0 / 2026-07-28
 - Added project evidence gate for fit evaluation, project-case selection, interview answers, and resume angles.

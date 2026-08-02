@@ -307,7 +307,8 @@ HR / Recruiter
 用人经理 / 直属 leader
 业务负责人 / 业务面试官
 技术面试官 / 工具面试官
-高管 / Founder
+高管 / Executive
+Founder
 跨部门协作方
 同级成员
 unknown
@@ -315,7 +316,7 @@ unknown
 
 If the role is unknown, ask one small question or provide a role-neutral answer plus a short role-focus table.
 
-Use this mapping:
+Use these common focus heuristics. They are not facts about a specific interviewer. If the invitation, interviewer title, previous-round feedback, JD, or company stage gives stronger signals, prioritize those signals.
 
 ```text
 HR / Recruiter
@@ -338,9 +339,14 @@ HR / Recruiter
 ├─ 强调: 使用过的工具、技术过程、限制条件、如何验证、不会的部分如何补
 └─ 少说: 把了解说成熟练、把参与说成主导
 
-高管 / Founder
+高管 / Executive
+├─ 关心: 判断力、业务敏感度、跨团队影响、长期潜力、是否能理解公司阶段
+├─ 强调: 关键选择、业务判断、学习速度、对团队目标的理解
+└─ 少说: 细碎执行流水账
+
+Founder
 ├─ 关心: 判断力、长期动机、抗压、业务敏感度、是否能承担不确定性
-├─ 强调: 为什么选这个方向、关键选择、学习速度、对公司阶段的理解
+├─ 强调: 为什么选这个方向、为什么是这家公司、你能带来的确定性
 └─ 少说: 细碎执行流水账
 
 跨部门协作方
@@ -372,6 +378,7 @@ Rules:
 - Keep role-specific emphasis separate from facts. The same project can be explained differently, but the facts cannot change.
 - If a question may be asked by multiple roles, provide 2-3 role variants instead of one long script.
 - If the user lacks evidence for a role's concern, mark it as a gap and give a conservative explanation or practice action.
+- Do not claim an interviewer will definitely care about a topic based only on role title.
 
 ## Knowledge Base Update
 
@@ -494,8 +501,9 @@ For repeated feedback:
 
 ```text
 v0.2.3 / 2026-08-02
-- Added interviewer-role answer focus cards for HR, hiring manager, business, technical, founder, cross-functional, and peer interviewers.
+- Added interviewer-role answer focus cards for HR, hiring manager, business, technical, executive, founder, cross-functional, and peer interviewers.
 - Added role-specific emphasis to interview answer cards without changing the underlying facts.
+- Clarified role mappings are preparation heuristics, not facts about the exact interviewer.
 
 v0.2.2 / 2026-07-29
 - Added feedback source type, reliability, repeated state, and action level to the resume-change gate.

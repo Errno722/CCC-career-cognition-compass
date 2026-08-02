@@ -2,7 +2,7 @@
   "schema_version": "0.2.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 22,
+  "manual_case_count": 23,
   "automated_model_behavior_tests": 0,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
@@ -636,7 +636,7 @@
       "id": "interview-feedback-001",
       "title": "面试官反馈用于后续修改",
       "manual_case_id": 16,
-      "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。下一轮可能会有 HR、业务负责人和技术面试官。请帮我复盘，并判断简历和下次面试要怎么改。",
+      "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。请帮我复盘，并判断简历和下次面试要怎么改。",
       "expected": {
         "routing": {
           "mode": "primary_required",
@@ -655,17 +655,6 @@
           ],
           [
             "数据看板"
-          ],
-          [
-            "HR"
-          ],
-          [
-            "业务负责人",
-            "业务面试官"
-          ],
-          [
-            "技术面试官",
-            "工具面试官"
           ]
         ],
         "literal_not_contains": [],
@@ -677,14 +666,12 @@
           "separates_original_feedback_inference_and_unknowns",
           "marks_feedback_source_and_confidence",
           "reconstructs_question_types",
-          "proposes_resume_and_interview_patches",
-          "adapts_answer_focus_by_interviewer_role"
+          "proposes_resume_and_interview_patches"
         ],
         "semantic_must_not": [
           "treat_feedback_as_final",
           "invent_b2b_experience",
-          "deny_direction_immediately",
-          "change_facts_by_interviewer_role"
+          "deny_direction_immediately"
         ]
       }
     },
@@ -921,6 +908,52 @@
         "semantic_must_not": [
           "assume_pm_product_manager",
           "assume_pm_project_manager"
+        ]
+      }
+    },
+    {
+      "id": "interviewer-role-focus-001",
+      "title": "同一项目按不同面试官调整回答重点",
+      "manual_case_id": 23,
+      "input": "我有一个已经整理完整的 Shopify 项目。下一轮会分别见 HR、业务负责人和技术面试官。请保持事实不变，分别告诉我回答时该前置什么。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "Shopify",
+          "HR"
+        ],
+        "literal_any_of": [
+          [
+            "业务负责人",
+            "业务面试官"
+          ],
+          [
+            "技术面试官",
+            "工具面试官"
+          ],
+          [
+            "事实不变",
+            "事实不能变",
+            "不改变事实"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 900
+        },
+        "semantic_assertions": [
+          "adapts_answer_focus_by_interviewer_role"
+        ],
+        "semantic_must_not": [
+          "change_facts_by_interviewer_role",
+          "invent_sales_data",
+          "overstate_ownership"
         ]
       }
     }

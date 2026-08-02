@@ -1352,5 +1352,22 @@
         "输出出现该风险行为，或把不确定内容写成确定事实。"
       ]
     }
-  }
+  },
+  "core_refined_rubrics": [
+    "adapts_answer_focus_by_interviewer_role",
+    "change_facts_by_interviewer_role",
+    "decide_resignation_for_user",
+    "does_not_select_project_from_name_only",
+    "explains_evidence_ready_does_not_require_metrics",
+    "extracts_core_tasks",
+    "identifies_tool_requirements",
+    "invent_experience",
+    "process_offer_screenshot",
+    "provides_small_next_action",
+    "repeat_email",
+    "repeat_phone",
+    "request_sensitive_data",
+    "suggests_short_term_improvement",
+    "write_final_english_bullet_without_facts"
+  ]
 }

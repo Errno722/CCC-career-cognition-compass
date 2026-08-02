@@ -143,7 +143,7 @@ post_application_idle_plan
 - `hard_skill_kb`：技能、工具、证据、缺口；
 - `interview_question_bank`：面试关键词、可能题型、考察能力、回答状态和下次准备动作；
 - `interviewer_feedback_signals`：面试官/HR 反馈原话、反馈类型、可能影响和后续简历/面试/JD 调整；
-- `interviewer_role_focus_cards`：按 HR、用人经理、业务、技术、高管、跨部门或同级面试官区分回答侧重点；
+- `interviewer_role_focus_cards`：按 HR、用人经理、业务、技术、高管、Founder、跨部门或同级面试官区分回答侧重点；
 - `feedback_reliability_records`：反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历；
 - `repeated_feedback_tracker`：同类反馈出现次数、来源岗位/JD、是否升级为 pattern；
 - `interview_answer_cards`：下次面试回答卡，最多保留 1-3 个高影响问题；

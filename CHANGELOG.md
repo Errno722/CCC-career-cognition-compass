@@ -9,17 +9,20 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 将 README 改成更短的产品落地页，保留价值主张、快速开始、Before / After、核心能力和文档导航。
 - 将原长版说明迁移到 [docs/full-guide.md](docs/full-guide.md)，避免 README 首屏过载。
 - 新增 [docs/compatibility.md](docs/compatibility.md)，按 Maintainer-used / Contract-ready / Community testing needed / Experimental 记录平台适配状态。
-- 新增 [evals/cases.json](evals/cases.json)，把 22 个核心手工测试整理成机器可读行为合约，并升级为 `schema_version: 0.2.0` 的 suite 结构。
+- 新增 [evals/cases.json](evals/cases.json)，把核心手工测试整理成机器可读行为合约，并升级为 `schema_version: 0.2.0` 的 suite 结构。
 - 新增 [evals/schema.json](evals/schema.json) 和 [evals/rubrics.json](evals/rubrics.json)，明确合约结构、评估对象和语义断言评分口径。
 - 将 Eval 断言拆成 `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`structural_assertions`、`semantic_assertions` 和 `semantic_must_not`，避免把语义行为误写成脆弱字符串检查。
 - 明确 Eval 的 `evaluation_target` 为 `assistant_output_only`，避免隐私测试误判完整对话记录。
 - 将 JD 分析案例中的占位符替换成完整虚构 JD，避免模型因缺少 JD 内容而被错误判定失败。
 - 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
+- `scripts/check-evals.mjs` 开始真正按 [evals/schema.json](evals/schema.json) 校验 suite 结构，并检查重复断言、正负向 rubric 类型、orphan rubric 和自动行为结果计数。
+- 将面试反馈复盘与面试官角色回答侧重点拆成两个独立测试场景，当前手工测试和机器可读合约均为 23 个。
+- 将公开测试口径调整为“已登记语义断言 122 / 已人工细化核心 Rubric 15”，避免把模板 rubric 夸大为全部精修评分标准。
 - 暂不启用 GitHub Actions；当前推送凭证需要额外 `workflow` 权限才能创建 workflow 文件。
 
 ### 面试准备
 
-- 新增面试官角色回答侧重点：同一个事实可以按 HR、用人经理、业务、技术、高管、跨部门或同级面试官调整前置重点，但不能改变事实或编造经历。
+- 新增面试官角色回答侧重点：同一个事实可以按 HR、用人经理、业务、技术、高管、Founder、跨部门或同级面试官调整前置重点，但不能改变事实或编造经历。
 - `interview-review-miner` 增加面试官角色回答卡，用于面试复盘和下一轮准备。
 - `jd-company-prep` 增加面试官角色准备卡，用于 JD / 公司面试前准备。
 
