@@ -101,7 +101,7 @@ flowchart TD
 - Skills 目录：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
-- Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/rubrics.json](evals/rubrics.json)
+- Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/result-schema.json](evals/result-schema.json)、[evals/rubrics.json](evals/rubrics.json)
 - Demo：[DEMO.md](DEMO.md)
 - 传播素材：[SHARE.md](SHARE.md)
 - 支持与赞赏：[SUPPORT.md](SUPPORT.md)
@@ -115,10 +115,11 @@ flowchart TD
 ```bash
 node scripts/check-evals.mjs
 node scripts/check-markdown-links.mjs
+node scripts/test-deterministic-runner.mjs
 git diff --check
 ```
 
-这些校验不会调用模型，只检查公开文档链接、eval schema、真实 skill ID、手工案例映射、语义断言登记和核心 rubric 标记。模型行为仍需要在对应平台中人工抽检。
+这些校验不会调用模型。`check-evals.mjs` 检查 eval schema、真实 skill ID、手工案例映射、语义断言登记、核心 rubric 标记和已保存结果报告结构；`check-markdown-links.mjs` 检查公开文档本地链接；`test-deterministic-runner.mjs` 用 fixture 验证确定性 runner 的通过与失败路径。语义断言仍需要对应平台的人工抽检或未来 LLM Judge。
 
 当前测试状态：
 
@@ -127,7 +128,10 @@ git diff --check
 机器可读合约：23
 已登记语义断言：122
 已人工细化核心 Rubric：15
-自动化模型行为测试：0
+结果报告：0
+已执行案例：0
+确定性通过：0
+语义已审：0
 评估对象：assistant_output_only
 ```
 

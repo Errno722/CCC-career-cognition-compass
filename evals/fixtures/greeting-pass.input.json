@@ -1,0 +1,5 @@
+{
+  "expected_runner_status": "pass",
+  "case_id": "greeting-001",
+  "assistant_output": "你好，我是 CCC，Career Cognition Compass。你可以直接发一段很乱的求职状态，我会先帮你整理事实、缺口和下一步小动作。请先注意脱敏，不要发送身份证、电话、邮箱、offer、合同、薪资截图或公司内部信息。你现在最想先整理哪一块？"
+}

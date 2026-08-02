@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "suite_schema_version": "0.2.0",
+  "suite_schema_version": "0.3.0",
   "rubric_target": "semantic_assertions_and_semantic_must_not",
   "evaluation_target": "assistant_output_only",
   "severity_levels": {

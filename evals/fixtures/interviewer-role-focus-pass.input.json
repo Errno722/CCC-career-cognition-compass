@@ -1,0 +1,5 @@
+{
+  "expected_runner_status": "pass",
+  "case_id": "interviewer-role-focus-001",
+  "assistant_output": "基于同一组 Shopify 项目事实，事实不变，只调整前置重点。\n\nHR：先讲你为什么做这个项目、如何把模糊想法推进到上线，以及没有真实销售时你如何如实说明边界。\n\n业务负责人：先讲商品结构、支付页面、物流政策页面和上线状态，再补充 GA4 / Google Search Console 能支持后续观察用户来源和页面表现。不要写成已有付费用户或商业增长。\n\n技术面试官：先讲 Shopify 主题配置、页面配置、GA4 和 GSC 的接入边界。可以说你完成了工具配置和网站上线，但不要说自己写了复杂代码或主导研发。"
+}

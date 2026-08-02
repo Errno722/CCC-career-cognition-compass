@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Errno722/CCC-career-cognition-compass/evals/result-schema.json",
+  "title": "CCC Eval Result Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "result_schema_version",
+    "suite_id",
+    "suite_schema_version",
+    "evaluation_target",
+    "run_id",
+    "runner_version",
+    "adapter",
+    "model",
+    "created_at",
+    "cases"
+  ],
+  "properties": {
+    "result_schema_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.0$"
+    },
+    "suite_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_schema_version": {
+      "type": "string",
+      "pattern": "^0\\.3\\.0$"
+    },
+    "evaluation_target": {
+      "const": "assistant_output_only"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runner_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adapter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/caseResult"
+      }
+    }
+  },
+  "$defs": {
+    "checkStatus": {
+      "enum": [
+        "pass",
+        "fail",
+        "not_applicable"
+      ]
+    },
+    "semanticStatus": {
+      "enum": [
+        "pending",
+        "pass",
+        "fail",
+        "manual_review"
+      ]
+    },
+    "deterministicStatus": {
+      "enum": [
+        "pass",
+        "fail"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "character_count",
+        "question_mark_count",
+        "estimated_follow_up_question_count"
+      ],
+      "properties": {
+        "character_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "question_mark_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_follow_up_question_count": {
+          "enum": [
+            "semantic_pending"
+          ]
+        }
+      }
+    },
+    "checkStatusMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "literal_all_of",
+        "literal_any_of",
+        "literal_not_contains",
+        "regex_not_contains",
+        "max_questions",
+        "max_characters"
+      ],
+      "properties": {
+        "literal_all_of": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "literal_any_of": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "literal_not_contains": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "regex_not_contains": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "max_questions": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "max_characters": {
+          "$ref": "#/$defs/checkStatus"
+        }
+      }
+    },
+    "checkDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "detail"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/checkStatus"
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "checkDetailMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "literal_all_of",
+        "literal_any_of",
+        "literal_not_contains",
+        "regex_not_contains",
+        "max_questions",
+        "max_characters"
+      ],
+      "properties": {
+        "literal_all_of": {
+          "$ref": "#/$defs/checkDetail"
+        },
+        "literal_any_of": {
+          "$ref": "#/$defs/checkDetail"
+        },
+        "literal_not_contains": {
+          "$ref": "#/$defs/checkDetail"
+        },
+        "regex_not_contains": {
+          "$ref": "#/$defs/checkDetail"
+        },
+        "max_questions": {
+          "$ref": "#/$defs/checkDetail"
+        },
+        "max_characters": {
+          "$ref": "#/$defs/checkDetail"
+        }
+      }
+    },
+    "caseResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "assistant_output_sha256",
+        "deterministic_status",
+        "deterministic_pass",
+        "metrics",
+        "checks",
+        "check_details",
+        "semantic_status"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assistant_output_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "assistant_output": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deterministic_status": {
+          "$ref": "#/$defs/deterministicStatus"
+        },
+        "deterministic_pass": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "$ref": "#/$defs/metrics"
+        },
+        "checks": {
+          "$ref": "#/$defs/checkStatusMap"
+        },
+        "check_details": {
+          "$ref": "#/$defs/checkDetailMap"
+        },
+        "semantic_status": {
+          "$ref": "#/$defs/semanticStatus"
+        }
+      }
+    }
+  }
+}

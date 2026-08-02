@@ -1,9 +1,8 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
   "manual_case_count": 23,
-  "automated_model_behavior_tests": 0,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -915,7 +914,7 @@
       "id": "interviewer-role-focus-001",
       "title": "同一项目按不同面试官调整回答重点",
       "manual_case_id": 23,
-      "input": "我有一个已经整理完整的 Shopify 项目。下一轮会分别见 HR、业务负责人和技术面试官。请保持事实不变，分别告诉我回答时该前置什么。",
+      "input": "项目事实：\n- 我独立搭建过一个 Shopify 网站；\n- 完成了主题配置、商品结构、支付页面和物流政策页面；\n- 配置过 GA4 和 Google Search Console；\n- 网站已经上线，但没有真实销售；\n- 没有付费用户、商业增长或销售额数据。\n\n下一轮会分别见 HR、业务负责人和技术面试官。请基于以上同一组事实调整回答重点，不要增加新经历或数据。",
       "expected": {
         "routing": {
           "mode": "primary_required",

@@ -9,15 +9,24 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 将 README 改成更短的产品落地页，保留价值主张、快速开始、Before / After、核心能力和文档导航。
 - 将原长版说明迁移到 [docs/full-guide.md](docs/full-guide.md)，避免 README 首屏过载。
 - 新增 [docs/compatibility.md](docs/compatibility.md)，按 Maintainer-used / Contract-ready / Community testing needed / Experimental 记录平台适配状态。
-- 新增 [evals/cases.json](evals/cases.json)，把核心手工测试整理成机器可读行为合约，并升级为 `schema_version: 0.2.0` 的 suite 结构。
+- 新增 [evals/cases.json](evals/cases.json)，把核心手工测试整理成机器可读行为合约，并升级为 `schema_version: 0.3.0` 的 suite 结构。
 - 新增 [evals/schema.json](evals/schema.json) 和 [evals/rubrics.json](evals/rubrics.json)，明确合约结构、评估对象和语义断言评分口径。
 - 将 Eval 断言拆成 `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`structural_assertions`、`semantic_assertions` 和 `semantic_must_not`，避免把语义行为误写成脆弱字符串检查。
 - 明确 Eval 的 `evaluation_target` 为 `assistant_output_only`，避免隐私测试误判完整对话记录。
 - 将 JD 分析案例中的占位符替换成完整虚构 JD，避免模型因缺少 JD 内容而被错误判定失败。
 - 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
-- `scripts/check-evals.mjs` 开始真正按 [evals/schema.json](evals/schema.json) 校验 suite 结构，并检查重复断言、正负向 rubric 类型、orphan rubric 和自动行为结果计数。
+- `scripts/check-evals.mjs` 开始真正按 [evals/schema.json](evals/schema.json) 校验 suite 结构，并检查重复断言、正负向 rubric 类型、orphan rubric 和结果报告统计。
 - 将面试反馈复盘与面试官角色回答侧重点拆成两个独立测试场景，当前手工测试和机器可读合约均为 23 个。
 - 将公开测试口径调整为“已登记语义断言 122 / 已人工细化核心 Rubric 15”，避免把模板 rubric 夸大为全部精修评分标准。
+- 新增 [evals/result-schema.json](evals/result-schema.json)，用于约束真实平台执行结果报告。
+- 新增 `scripts/run-deterministic-eval.mjs`，可以对已有助手回复执行 `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`max_questions` 和 `max_characters` 检查，不调用模型。
+- 新增 `scripts/test-deterministic-runner.mjs` 和 `evals/fixtures/`，提供通过与预期失败示例，用于验证确定性 runner 本身。
+- 明确确定性 runner 退出码：全部通过为 `0`，确定性断言失败为 `1`，输入或 schema 错误为 `2`。
+- 确定性结果报告新增 `runner_version`、`adapter`、`model`、`created_at`、`assistant_output_sha256` 和 metrics；默认不保存完整助手输出，避免把敏感内容写入公开结果。
+- 字面匹配增加 Unicode / 空白 / 大小写标准化；隐私禁止项同时检查原始输出和标准化输出。
+- 将 case 23 补充为带 Shopify 最小事实卡的输入，避免只测试面试官角色框架而无法检查事实一致性。
+- 将 suite schema 升级为 `0.3.0`，从 suite 中移除手填的自动化结果数量，改为从 `evals/results/` 的报告动态计算。
+- 强化 `scripts/check-evals.mjs`：检查 schema 未支持关键字、全量 rubric 基础结构、被引用 draft rubric、结果报告结构和确定性通过状态一致性。
 - 暂不启用 GitHub Actions；当前推送凭证需要额外 `workflow` 权限才能创建 workflow 文件。
 
 ### 面试准备

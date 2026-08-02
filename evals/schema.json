@@ -9,14 +9,13 @@
     "suite_id",
     "evaluation_target",
     "manual_case_count",
-    "automated_model_behavior_tests",
     "routing_semantics",
     "cases"
   ],
   "properties": {
     "schema_version": {
       "type": "string",
-      "pattern": "^0\\.2\\.0$"
+      "pattern": "^0\\.3\\.0$"
     },
     "suite_id": {
       "type": "string",
@@ -28,10 +27,6 @@
     "manual_case_count": {
       "type": "integer",
       "minimum": 1
-    },
-    "automated_model_behavior_tests": {
-      "type": "integer",
-      "minimum": 0
     },
     "routing_semantics": {
       "type": "object",

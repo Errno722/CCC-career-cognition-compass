@@ -2,10 +2,32 @@ import fs from "node:fs";
 
 const casesPath = "evals/cases.json";
 const schemaPath = "evals/schema.json";
+const resultSchemaPath = "evals/result-schema.json";
 const rubricsPath = "evals/rubrics.json";
 const allowedRoutingModes = new Set(["primary_required"]);
 const allowedSeverities = new Set(["critical", "high", "medium", "low"]);
 const allowedRubricTypes = new Set(["must", "must_not", "mixed"]);
+const allowedRubricStatuses = new Set(["draft"]);
+const ignoredResultDirs = new Set(["fixtures"]);
+const supportedSchemaKeywords = new Set([
+  "$schema",
+  "$id",
+  "$defs",
+  "$ref",
+  "title",
+  "description",
+  "type",
+  "additionalProperties",
+  "required",
+  "properties",
+  "const",
+  "enum",
+  "pattern",
+  "minLength",
+  "minimum",
+  "maximum",
+  "items"
+]);
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -66,6 +88,34 @@ function resolveSchemaRef(rootSchema, ref) {
     }, rootSchema);
 }
 
+function assertSchemaUsesSupportedKeywords(schemaNode, label) {
+  if (!schemaNode || typeof schemaNode !== "object" || Array.isArray(schemaNode)) {
+    return;
+  }
+
+  for (const key of Object.keys(schemaNode)) {
+    if (!supportedSchemaKeywords.has(key)) {
+      throw new Error(`${label} uses unsupported JSON Schema keyword: ${key}`);
+    }
+  }
+
+  for (const [field, childSchema] of Object.entries(schemaNode.properties ?? {})) {
+    assertSchemaUsesSupportedKeywords(childSchema, `${label}.properties.${field}`);
+  }
+
+  for (const [field, childSchema] of Object.entries(schemaNode.$defs ?? {})) {
+    assertSchemaUsesSupportedKeywords(childSchema, `${label}.$defs.${field}`);
+  }
+
+  if (schemaNode.items) {
+    assertSchemaUsesSupportedKeywords(schemaNode.items, `${label}.items`);
+  }
+
+  if (schemaNode.additionalProperties && typeof schemaNode.additionalProperties === "object") {
+    assertSchemaUsesSupportedKeywords(schemaNode.additionalProperties, `${label}.additionalProperties`);
+  }
+}
+
 function validateWithSchema(value, schemaNode, label, rootSchema, failures) {
   if (schemaNode.$ref) {
     validateWithSchema(value, resolveSchemaRef(rootSchema, schemaNode.$ref), label, rootSchema, failures);
@@ -83,15 +133,18 @@ function validateWithSchema(value, schemaNode, label, rootSchema, failures) {
   }
 
   if (schemaNode.type) {
-    const type = schemaNode.type;
-    const ok =
+    const types = Array.isArray(schemaNode.type) ? schemaNode.type : [schemaNode.type];
+    const ok = types.some((type) =>
       (type === "object" && value && typeof value === "object" && !Array.isArray(value)) ||
       (type === "array" && Array.isArray(value)) ||
       (type === "string" && typeof value === "string") ||
-      (type === "integer" && Number.isInteger(value));
+      (type === "integer" && Number.isInteger(value)) ||
+      (type === "boolean" && typeof value === "boolean") ||
+      (type === "null" && value === null)
+    );
 
     if (!ok) {
-      failures.push(`${label} must be ${type}`);
+      failures.push(`${label} must be ${types.join(" or ")}`);
       return;
     }
   }
@@ -158,33 +211,122 @@ function requireNoDuplicateStrings(value, label) {
   }
 }
 
-function countAutomatedModelBehaviorResults() {
-  const resultsDir = "evals/results";
-  if (!fs.existsSync(resultsDir)) {
-    return 0;
+function collectJsonFiles(rootDir) {
+  const files = [];
+
+  if (!fs.existsSync(rootDir)) {
+    return files;
   }
 
-  let count = 0;
-  const stack = [resultsDir];
+  const stack = [rootDir];
   while (stack.length > 0) {
     const dir = stack.pop();
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const entryPath = `${dir}/${entry.name}`;
       if (entry.isDirectory()) {
-        stack.push(`${dir}/${entry.name}`);
+        if (!(dir === rootDir && ignoredResultDirs.has(entry.name))) {
+          stack.push(entryPath);
+        }
       } else if (entry.isFile() && entry.name.endsWith(".json")) {
-        count += 1;
+        files.push(entryPath);
       }
     }
   }
-  return count;
+
+  return files.sort();
+}
+
+function readEvalResultReports(resultSchema, suite, caseIds) {
+  const resultsDir = "evals/results";
+  const files = collectJsonFiles(resultsDir);
+  let executedCaseCount = 0;
+  let deterministicPassed = 0;
+  let semanticReviewed = 0;
+
+  for (const filePath of files) {
+    const report = readJson(filePath);
+    const failures = [];
+    validateWithSchema(report, resultSchema, filePath, resultSchema, failures);
+    if (failures.length > 0) {
+      console.error(`${filePath} failed result schema validation:`);
+      console.error(failures.map((failure) => `- ${failure}`).join("\n"));
+      process.exit(1);
+    }
+
+    if (report.suite_id !== suite.suite_id) {
+      throw new Error(`${filePath} suite_id must match ${casesPath}`);
+    }
+
+    if (report.suite_schema_version !== suite.schema_version) {
+      throw new Error(`${filePath} suite_schema_version must match ${casesPath}`);
+    }
+
+    if (report.evaluation_target !== suite.evaluation_target) {
+      throw new Error(`${filePath} evaluation_target must match ${casesPath}`);
+    }
+
+    const reportCaseIds = new Set();
+    for (const resultCase of report.cases) {
+      if (!caseIds.has(resultCase.case_id)) {
+        throw new Error(`${filePath} contains unknown case_id: ${resultCase.case_id}`);
+      }
+
+      if (reportCaseIds.has(resultCase.case_id)) {
+        throw new Error(`${filePath} contains duplicate case_id: ${resultCase.case_id}`);
+      }
+      reportCaseIds.add(resultCase.case_id);
+
+      const expectedPass = Object.values(resultCase.checks).every(
+        (status) => status === "pass" || status === "not_applicable"
+      );
+      if (resultCase.deterministic_pass !== expectedPass) {
+        throw new Error(`${filePath} ${resultCase.case_id} deterministic_pass does not match check statuses`);
+      }
+
+      const expectedStatus = expectedPass ? "pass" : "fail";
+      if (resultCase.deterministic_status !== expectedStatus) {
+        throw new Error(`${filePath} ${resultCase.case_id} deterministic_status does not match check statuses`);
+      }
+
+      for (const [checkName, status] of Object.entries(resultCase.checks)) {
+        if (resultCase.check_details[checkName].status !== status) {
+          throw new Error(`${filePath} ${resultCase.case_id} ${checkName} status does not match check_details`);
+        }
+      }
+
+      executedCaseCount += 1;
+      if (resultCase.deterministic_pass) {
+        deterministicPassed += 1;
+      }
+
+      if (resultCase.semantic_status !== "pending") {
+        semanticReviewed += 1;
+      }
+    }
+  }
+
+  return {
+    reportCount: files.length,
+    executedCaseCount,
+    deterministicPassed,
+    semanticReviewed
+  };
 }
 
 const suite = readJson(casesPath);
 const schema = readJson(schemaPath);
+const resultSchema = readJson(resultSchemaPath);
 const rubrics = readJson(rubricsPath);
 
-if (schema.properties?.schema_version?.pattern !== "^0\\.2\\.0$") {
-  throw new Error(`${schemaPath} must describe schema_version 0.2.0`);
+assertSchemaUsesSupportedKeywords(schema, schemaPath);
+assertSchemaUsesSupportedKeywords(resultSchema, resultSchemaPath);
+
+if (schema.properties?.schema_version?.pattern !== "^0\\.3\\.0$") {
+  throw new Error(`${schemaPath} must describe schema_version 0.3.0`);
+}
+
+if (resultSchema.properties?.suite_schema_version?.pattern !== "^0\\.3\\.0$") {
+  throw new Error(`${resultSchemaPath} must describe suite_schema_version 0.3.0`);
 }
 
 const schemaFailures = [];
@@ -197,13 +339,6 @@ if (schemaFailures.length > 0) {
 
 if (suite.cases.length !== suite.manual_case_count) {
   throw new Error(`cases length ${suite.cases.length} does not match manual_case_count ${suite.manual_case_count}`);
-}
-
-const automatedResultsCount = countAutomatedModelBehaviorResults();
-if (suite.automated_model_behavior_tests !== automatedResultsCount) {
-  throw new Error(
-    `suite.automated_model_behavior_tests (${suite.automated_model_behavior_tests}) must equal evals/results report count (${automatedResultsCount})`
-  );
 }
 
 if (!rubrics || typeof rubrics !== "object" || Array.isArray(rubrics)) {
@@ -224,6 +359,32 @@ if (!rubrics.rubrics || typeof rubrics.rubrics !== "object" || Array.isArray(rub
 
 requireStringList(rubrics.core_refined_rubrics, "rubrics.core_refined_rubrics");
 requireNoDuplicateStrings(rubrics.core_refined_rubrics, "rubrics.core_refined_rubrics");
+
+for (const [semanticId, rubric] of Object.entries(rubrics.rubrics)) {
+  requireNonEmptyString(semanticId, "rubric id");
+
+  if (!rubric || typeof rubric !== "object" || Array.isArray(rubric)) {
+    throw new Error(`${semanticId} rubric must be an object`);
+  }
+
+  if (!allowedRubricTypes.has(rubric.type)) {
+    throw new Error(`${semanticId} rubric.type must be must, must_not, or mixed`);
+  }
+
+  if (!allowedSeverities.has(rubric.severity)) {
+    throw new Error(`${semanticId} rubric.severity must be one of: ${[...allowedSeverities].join(", ")}`);
+  }
+
+  if ("status" in rubric && !allowedRubricStatuses.has(rubric.status)) {
+    throw new Error(`${semanticId} rubric.status must be one of: ${[...allowedRubricStatuses].join(", ")}`);
+  }
+
+  requireNonEmptyString(rubric.description, `${semanticId}.description`);
+  requireStringList(rubric.pass_criteria, `${semanticId}.pass_criteria`);
+  requireStringList(rubric.fail_signals, `${semanticId}.fail_signals`);
+  requireNoDuplicateStrings(rubric.pass_criteria, `${semanticId}.pass_criteria`);
+  requireNoDuplicateStrings(rubric.fail_signals, `${semanticId}.fail_signals`);
+}
 
 const skillIds = getSkillIds();
 const ids = new Set();
@@ -364,6 +525,10 @@ for (const semanticId of semanticIds) {
   }
   coveredRubrics += 1;
 
+  if (rubric.status === "draft") {
+    throw new Error(`${semanticId} is referenced in ${casesPath} but still marked draft`);
+  }
+
   if (!allowedRubricTypes.has(rubric.type)) {
     throw new Error(`${semanticId} rubric.type must be must, must_not, or mixed`);
   }
@@ -409,12 +574,17 @@ for (const semanticId of rubrics.core_refined_rubrics) {
   }
 }
 
+const resultSummary = readEvalResultReports(resultSchema, suite, ids);
+
 console.log(`eval suite ok: ${suite.suite_id} schema ${suite.schema_version}`);
 console.log(`eval contracts ok: ${suite.cases.length} cases`);
 console.log(`manual case mappings: ${manualCaseIds.size}/${suite.manual_case_count}`);
 console.log(`semantic rubrics covered: ${coveredRubrics}/${semanticIds.size}`);
 console.log(`core refined rubrics: ${rubrics.core_refined_rubrics.length}/${semanticIds.size}`);
 console.log(`orphan rubrics: ${orphanRubrics.length}`);
-console.log(`automated model behavior cases: ${suite.automated_model_behavior_tests}`);
+console.log(`result reports: ${resultSummary.reportCount}`);
+console.log(`executed cases: ${resultSummary.executedCaseCount}`);
+console.log(`deterministic passed: ${resultSummary.deterministicPassed}`);
+console.log(`semantic reviewed: ${resultSummary.semanticReviewed}`);
 console.log(`evaluation target: ${suite.evaluation_target}`);
 console.log(`routing skills checked: ${skillIds.size} local skills`);
