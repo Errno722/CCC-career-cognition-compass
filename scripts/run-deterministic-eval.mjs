@@ -137,7 +137,7 @@ try {
   const result = Array.isArray(input.cases)
     ? runReportInput(suite, suiteSha256, caseMap, input)
     : runReportInput(suite, suiteSha256, caseMap, {
-        run_id: input.run_id ?? "local-deterministic-eval",
+        run_id: input.run_id,
         adapter: input.adapter ?? input.platform ?? "fixture",
         model: input.model ?? null,
         source_commit: input.source_commit,

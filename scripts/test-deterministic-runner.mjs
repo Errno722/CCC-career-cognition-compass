@@ -32,15 +32,27 @@ function assertFixtureExpectation(filePath, fixture) {
     throw new Error(`${filePath} expected_runner_status must be pass or fail`);
   }
 
+  if (fixture.expected_runner_status === "fail") {
+    if (!Array.isArray(fixture.expected_failed_checks) || fixture.expected_failed_checks.length === 0) {
+      throw new Error(`${filePath} expected_runner_status fail requires non-empty expected_failed_checks`);
+    }
+  }
+
   if ("expected_failed_checks" in fixture) {
     if (!Array.isArray(fixture.expected_failed_checks)) {
       throw new Error(`${filePath} expected_failed_checks must be an array when present`);
     }
 
+    const seen = new Set();
     for (const checkName of fixture.expected_failed_checks) {
       if (!allowedCheckNames.has(checkName)) {
         throw new Error(`${filePath} expected_failed_checks contains unknown check: ${checkName}`);
       }
+
+      if (seen.has(checkName)) {
+        throw new Error(`${filePath} expected_failed_checks contains duplicate check: ${checkName}`);
+      }
+      seen.add(checkName);
     }
   }
 }

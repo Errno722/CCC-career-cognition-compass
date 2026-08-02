@@ -6,7 +6,8 @@ import {
 import {
   deterministicChecksMatch,
   hashText,
-  runCase
+  runCase,
+  runnerVersion
 } from "./lib/deterministic-eval.mjs";
 
 const casesPath = "evals/cases.json";
@@ -19,6 +20,21 @@ const allowedRubricTypes = new Set(["must", "must_not", "mixed"]);
 const allowedRubricStatuses = new Set(["draft"]);
 const ignoredResultDirs = new Set(["fixtures"]);
 const localResultAdapters = new Set(["fixture", "local"]);
+
+function resultAdapterFromPath(filePath, resultsDir) {
+  const prefix = `${resultsDir}/`;
+  if (!filePath.startsWith(prefix)) {
+    throw new Error(`${filePath} must be under ${resultsDir}`);
+  }
+
+  const relativePath = filePath.slice(prefix.length);
+  const parts = relativePath.split("/");
+  if (parts.length < 2 || parts[0].length === 0) {
+    throw new Error(`${filePath} must be saved under ${resultsDir}/<adapter>/`);
+  }
+
+  return parts[0];
+}
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -107,12 +123,17 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
   const schemaOnlyExecutions = [];
   const runnerGeneratedExecutions = [];
   const recomputedExecutions = [];
-  const uniqueCasesCovered = new Set();
+  const declaredUniqueCasesCovered = new Set();
+  const runnerExecutedUniqueCasesCovered = new Set();
+  const publicUniqueCasesCovered = new Set();
   const uniqueCasesPassed = new Set();
+  const publicUniqueCasesPassed = new Set();
   const verifiedUniqueCasesPassed = new Set();
+  const publicVerifiedUniqueCasesPassed = new Set();
   const adapterModelGroups = new Set();
 
   for (const filePath of files) {
+    const directoryAdapter = resultAdapterFromPath(filePath, resultsDir);
     const report = readJson(filePath);
     const failures = [];
     validateWithSchema(report, resultSchema, filePath, resultSchema, failures);
@@ -142,7 +163,20 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
       throw new Error(`${filePath} created_at must be parseable as an ISO-like date`);
     }
 
-    if (!localResultAdapters.has(report.adapter)) {
+    if (directoryAdapter !== report.adapter) {
+      throw new Error(`${filePath} directory adapter ${directoryAdapter} must match report.adapter ${report.adapter}`);
+    }
+
+    const isLocalReport = localResultAdapters.has(report.adapter);
+    const isSchemaOnlyReport = report.verification_level === "schema_only";
+    const isRunnerBackedReport = report.verification_level === "runner_generated" ||
+      report.verification_level === "recomputed";
+
+    if (isRunnerBackedReport && report.runner_version !== runnerVersion) {
+      throw new Error(`${filePath} ${report.verification_level} requires runner_version ${runnerVersion}`);
+    }
+
+    if (!isLocalReport) {
       if (typeof report.source_commit !== "string" || report.source_commit.trim().length === 0) {
         throw new Error(`${filePath} non-local adapter reports must include source_commit`);
       }
@@ -210,8 +244,8 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
       }
 
       totalCaseExecutions.push(resultCase.case_id);
-      uniqueCasesCovered.add(resultCase.case_id);
-      if (report.verification_level === "schema_only") {
+      declaredUniqueCasesCovered.add(resultCase.case_id);
+      if (isSchemaOnlyReport) {
         schemaOnlyExecutions.push(resultCase.case_id);
       } else if (report.verification_level === "runner_generated") {
         runnerGeneratedExecutions.push(resultCase.case_id);
@@ -219,13 +253,26 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
         recomputedExecutions.push(resultCase.case_id);
       }
 
-      if (resultCase.deterministic_pass && report.verification_level !== "schema_only") {
+      if (!isSchemaOnlyReport) {
+        runnerExecutedUniqueCasesCovered.add(resultCase.case_id);
+        if (!isLocalReport) {
+          publicUniqueCasesCovered.add(resultCase.case_id);
+        }
+      }
+
+      if (resultCase.deterministic_pass && !isSchemaOnlyReport) {
         deterministicPassedExecutions.push(resultCase.case_id);
         uniqueCasesPassed.add(resultCase.case_id);
+        if (!isLocalReport) {
+          publicUniqueCasesPassed.add(resultCase.case_id);
+        }
       }
 
       if (resultCase.deterministic_pass && report.verification_level === "recomputed") {
         verifiedUniqueCasesPassed.add(resultCase.case_id);
+        if (!isLocalReport) {
+          publicVerifiedUniqueCasesPassed.add(resultCase.case_id);
+        }
       }
 
       if (resultCase.semantic_status !== "pending") {
@@ -242,9 +289,13 @@ function readEvalResultReports(resultSchema, suite, suiteSha256, caseMap) {
     schemaOnlyExecutions: schemaOnlyExecutions.length,
     runnerGeneratedExecutions: runnerGeneratedExecutions.length,
     recomputedExecutions: recomputedExecutions.length,
-    uniqueCasesCovered: uniqueCasesCovered.size,
+    declaredUniqueCasesCovered: declaredUniqueCasesCovered.size,
+    runnerExecutedUniqueCasesCovered: runnerExecutedUniqueCasesCovered.size,
+    publicUniqueCasesCovered: publicUniqueCasesCovered.size,
     uniqueCasesPassed: uniqueCasesPassed.size,
+    publicUniqueCasesPassed: publicUniqueCasesPassed.size,
     verifiedUniqueCasesPassed: verifiedUniqueCasesPassed.size,
+    publicVerifiedUniqueCasesPassed: publicVerifiedUniqueCasesPassed.size,
     adapterModelGroups: adapterModelGroups.size
   };
 }
@@ -526,9 +577,13 @@ console.log(`total case executions: ${resultSummary.totalCaseExecutions}`);
 console.log(`schema-only executions: ${resultSummary.schemaOnlyExecutions}`);
 console.log(`runner-generated executions: ${resultSummary.runnerGeneratedExecutions}`);
 console.log(`recomputed executions: ${resultSummary.recomputedExecutions}`);
-console.log(`unique cases covered: ${resultSummary.uniqueCasesCovered}/${suite.manual_case_count}`);
-console.log(`unique cases passed: ${resultSummary.uniqueCasesPassed}/${suite.manual_case_count}`);
-console.log(`verified unique cases passed: ${resultSummary.verifiedUniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`declared unique cases covered: ${resultSummary.declaredUniqueCasesCovered}/${suite.manual_case_count}`);
+console.log(`runner-executed unique cases covered: ${resultSummary.runnerExecutedUniqueCasesCovered}/${suite.manual_case_count}`);
+console.log(`public unique cases covered: ${resultSummary.publicUniqueCasesCovered}/${suite.manual_case_count}`);
+console.log(`runner unique cases passed: ${resultSummary.uniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`public unique cases passed: ${resultSummary.publicUniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`verified runner unique cases passed: ${resultSummary.verifiedUniqueCasesPassed}/${suite.manual_case_count}`);
+console.log(`public verified unique cases passed: ${resultSummary.publicVerifiedUniqueCasesPassed}/${suite.manual_case_count}`);
 console.log(`deterministic passed executions: ${resultSummary.deterministicPassedExecutions}`);
 console.log(`semantic reviewed executions: ${resultSummary.semanticReviewedExecutions}`);
 console.log(`adapter/model groups: ${resultSummary.adapterModelGroups}`);

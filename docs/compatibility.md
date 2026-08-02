@@ -23,9 +23,11 @@ CCC 不声称“适用于所有模型”。不同平台的上下文长度、文�
 | 确定性输出 Runner | 已有，可对已有助手回复执行字面、正则和结构检查 |
 | 结果报告 | 0 份，尚未保存真实平台执行报告 |
 | 总执行次数 | 0 次，由 `evals/results/` 中的报告动态计算 |
-| 唯一案例覆盖 | 0/23，同一个 case 重复运行不增加覆盖数 |
-| 唯一案例通过 | 0/23，至少一次确定性通过才计入 |
-| 已验证唯一通过 | 0/23，只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/23，包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/23，只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/23，只统计非本地 adapter 的 Runner 执行结果 |
+| 公开唯一通过 | 0/23，公开平台中至少一次确定性通过才计入 |
+| 公开已验证通过 | 0/23，公开平台中只有 `recomputed` 结果计入 |
 | 语义评审 | 0 次，尚未接入 LLM Judge |
 | 评估对象 | `assistant_output_only`，不对完整对话记录做字符串断言 |
 | 本地检查 | `node scripts/check-evals.mjs`、`node scripts/check-markdown-links.mjs`、`node scripts/test-deterministic-runner.mjs` |
@@ -33,7 +35,7 @@ CCC 不声称“适用于所有模型”。不同平台的上下文长度、文�
 
 ## 兼容性矩阵
 
-| 平台 / 环境 | 状态 | 测试计划 | 唯一覆盖 | 唯一通过 | 已验证通过 | 模型 / 版本 | 证据 | 推荐入口 |
+| 平台 / 环境 | 状态 | 测试计划 | 公开覆盖 | 公开通过 | 公开验证 | 模型 / 版本 | 证据 | 推荐入口 |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 | Codex | Maintainer-used | 23 | 0 | - | - | 未记录 | 本地结构检查通过，尚无真实平台结果报告 | `skills/` |
 | WorkBuddy | Maintainer-used | 23 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 23 例正式执行记录 | `workbuddy/system-prompt.md` |

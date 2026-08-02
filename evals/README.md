@@ -20,9 +20,13 @@
 | 已人工细化核心 Rubric | 15 | 当前文件：[rubrics.json](rubrics.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
-| 唯一案例覆盖 | 0/23 | 同一个 case 重复运行不增加覆盖数 |
-| 唯一案例通过 | 0/23 | 至少一次确定性通过才计入 |
-| 已验证唯一通过 | 0/23 | 只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/23 | 包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/23 | 只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/23 | 只统计非本地 adapter 的 Runner 执行结果 |
+| Runner 唯一通过 | 0/23 | Runner 执行结果中至少一次确定性通过才计入 |
+| 公开唯一通过 | 0/23 | 公开平台中至少一次确定性通过才计入 |
+| 已验证 Runner 通过 | 0/23 | 只有 `recomputed` 结果计入 |
+| 公开已验证通过 | 0/23 | 公开平台中只有 `recomputed` 结果计入 |
 | 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -63,6 +67,9 @@ node scripts/check-evals.mjs
 - 被 case 引用的 rubric 不能标为 `draft`；
 - `core_refined_rubrics` 中的 ID 必须存在、被引用且不重复；
 - `evals/results/` 中的结果报告必须匹配 suite、引用真实 case，`cases` 不能为空，`run_id` 不能重复，并保持 `deterministic_pass`、`deterministic_status`、`checks` 和 `check_details` 一致；
+- 结果报告必须保存到 `evals/results/<adapter>/`，且目录名必须等于报告内的 `adapter`；
+- `evals/results/fixtures/` 会被忽略；`evals/results/local/` 可用于本地调试，但不进入公开平台覆盖；
+- `runner_generated` 和 `recomputed` 报告必须使用当前支持的 `runner_version`；
 - 结果报告中的 `suite_sha256` 必须等于当前 [cases.json](cases.json) 的 SHA-256；
 - 当结果报告包含 `assistant_output` 时，`check-evals.mjs` 会重新计算 Hash、metrics 和全部确定性断言。
 
@@ -94,7 +101,7 @@ fixture 可以额外包含：
 }
 ```
 
-这些字段只供 `test-deterministic-runner.mjs` 验证 runner 自身，不会进入结果报告。`expected_failed_checks` 用来确认 fixture 是因为指定断言失败，而不是因为别的原因失败。
+这些字段只供 `test-deterministic-runner.mjs` 验证 runner 自身，不会进入结果报告。`expected_failed_checks` 用来确认 fixture 是因为指定断言失败，而不是因为别的原因失败。失败 fixture 必须提供非空且不重复的 `expected_failed_checks`。
 
 也可以一次传入多份输入文件，生成一个结果报告：
 
@@ -173,9 +180,11 @@ runner 不会检查：
 
 计数规则：
 
-- `schema_only` 可以计入报告结构检查，但不计入唯一通过；
-- `runner_generated` 可以计入执行和唯一通过，但不是独立复算；
-- `recomputed` 可以计入已验证唯一通过；
+- `schema_only` 可以计入声明覆盖，但不计入 Runner 执行覆盖、唯一通过或公开平台覆盖；
+- `runner_generated` 可以计入 Runner 执行覆盖和唯一通过，但不是独立复算；
+- `recomputed` 可以计入已验证 Runner 通过；
+- `local` 结果可以用于本地调试和普通执行统计，但不计入公开平台覆盖；
+- 公开平台覆盖只统计非本地 adapter 中的 `runner_generated` 和 `recomputed` 结果；
 - 如果报告包含 `assistant_output`，`verification_level` 必须是 `recomputed`；
 - 真实平台结果需要 `source_commit` 和 `model` 非空；`fixture` / `local` 临时结果允许为空。
 
@@ -191,7 +200,7 @@ runner 不会检查：
 evals/results/<adapter>/
 ```
 
-不要把 fixture 自测结果混入真实平台结果。若需要临时保存 fixture 输出，放在 `evals/results/fixtures/`；兼容性矩阵只统计真实平台目录，例如 `evals/results/workbuddy/`、`evals/results/chatgpt/`。结果报告需要符合 [result-schema.json](result-schema.json)。`check-evals.mjs` 会按报告中的 `cases` 数组动态统计总执行次数、唯一案例覆盖和唯一案例通过，而不是按 JSON 文件数量计数。
+不要把 fixture 自测结果混入真实平台结果。若需要临时保存 fixture 输出，放在 `evals/results/fixtures/`；兼容性矩阵只统计真实平台目录，例如 `evals/results/workbuddy/`、`evals/results/chatgpt/`。结果报告需要符合 [result-schema.json](result-schema.json)。`check-evals.mjs` 会按报告中的 `cases` 数组动态统计总执行次数、声明唯一覆盖、Runner 执行覆盖、公开平台覆盖和通过情况，而不是按 JSON 文件数量计数。
 
 ## 断言类型
 
