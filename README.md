@@ -110,10 +110,6 @@ flowchart TD
 
 - [latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
 
-如果新仓库名暂时无法访问，请使用旧链接：
-
-- [latex-resume-template-Chinese](https://github.com/Errno722/latex-resume-template-Chinese)
-
 ## 本地校验
 
 ```bash
@@ -124,6 +120,14 @@ git diff --check
 
 这些校验不会调用模型，只检查公开文档链接和 eval 合约结构。模型行为仍需要在对应平台中人工抽检。
 
+当前测试状态：
+
+```text
+手工测试场景：22
+机器可读合约：22
+自动化模型行为测试：0
+```
+
 ## 边界
 
 CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
@@ -132,4 +136,10 @@ CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
 
 ## 开源
 
-CCC 使用 MIT License。欢迎 star、反馈、分享或自愿赞赏。贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。
+CCC 使用 MIT License。
+
+下一步可以这样做：
+
+- 第一次使用：复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
+- 发现问题：提交脱敏反馈，参考 [FEEDBACK.md](FEEDBACK.md)。
+- 想参与改进：先看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。

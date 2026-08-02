@@ -10,7 +10,14 @@ if (!Array.isArray(cases)) {
 
 const ids = new Set();
 const requiredCaseFields = ["id", "title", "input", "expected"];
-const requiredExpectedFields = ["route", "max_questions", "must_include", "must_not"];
+const requiredExpectedFields = [
+  "route",
+  "literal_contains",
+  "literal_not_contains",
+  "structural_assertions",
+  "semantic_assertions",
+  "semantic_must_not"
+];
 
 for (const item of cases) {
   for (const field of requiredCaseFields) {
@@ -34,15 +41,32 @@ for (const item of cases) {
     throw new Error(`${item.id} expected.route must be a non-empty array`);
   }
 
-  if (!Number.isInteger(item.expected.max_questions) || item.expected.max_questions < 0 || item.expected.max_questions > 3) {
-    throw new Error(`${item.id} expected.max_questions must be an integer from 0 to 3`);
-  }
-
-  for (const listField of ["must_include", "must_not"]) {
+  for (const listField of ["literal_contains", "literal_not_contains", "semantic_assertions", "semantic_must_not"]) {
     if (!Array.isArray(item.expected[listField])) {
       throw new Error(`${item.id} expected.${listField} must be an array`);
     }
   }
+
+  const structural = item.expected.structural_assertions;
+  if (!structural || typeof structural !== "object" || Array.isArray(structural)) {
+    throw new Error(`${item.id} expected.structural_assertions must be an object`);
+  }
+
+  if (!Number.isInteger(structural.max_questions) || structural.max_questions < 0 || structural.max_questions > 3) {
+    throw new Error(`${item.id} expected.structural_assertions.max_questions must be an integer from 0 to 3`);
+  }
+
+  if ("max_characters" in structural && (!Number.isInteger(structural.max_characters) || structural.max_characters <= 0)) {
+    throw new Error(`${item.id} expected.structural_assertions.max_characters must be a positive integer when present`);
+  }
+
+  if ("manual_case_id" in item && (!Number.isInteger(item.manual_case_id) || item.manual_case_id <= 0)) {
+    throw new Error(`${item.id} manual_case_id must be a positive integer when present`);
+  }
 }
 
+const manualCases = cases.filter((item) => Number.isInteger(item.manual_case_id)).length;
+
 console.log(`eval contracts ok: ${cases.length} cases`);
+console.log(`manual case mappings: ${manualCases}/${cases.length}`);
+console.log("automated model behavior cases: 0");
