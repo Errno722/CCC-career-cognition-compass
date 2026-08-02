@@ -101,7 +101,7 @@ flowchart TD
 - Skills 目录：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
-- 行为测试用例：[evals/cases.json](evals/cases.json)
+- Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/rubrics.json](evals/rubrics.json)
 - Demo：[DEMO.md](DEMO.md)
 - 传播素材：[SHARE.md](SHARE.md)
 - 支持与赞赏：[SUPPORT.md](SUPPORT.md)
@@ -118,14 +118,16 @@ node scripts/check-markdown-links.mjs
 git diff --check
 ```
 
-这些校验不会调用模型，只检查公开文档链接和 eval 合约结构。模型行为仍需要在对应平台中人工抽检。
+这些校验不会调用模型，只检查公开文档链接、eval 合约结构、真实 skill ID、手工案例映射和语义 rubric 覆盖。模型行为仍需要在对应平台中人工抽检。
 
 当前测试状态：
 
 ```text
 手工测试场景：22
 机器可读合约：22
+语义评分口径：120
 自动化模型行为测试：0
+评估对象：assistant_output_only
 ```
 
 ## 边界

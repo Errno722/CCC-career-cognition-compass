@@ -1,359 +1,915 @@
-[
-  {
-    "id": "greeting-001",
-    "title": "打招呼",
-    "manual_case_id": 1,
-    "input": "你好",
-    "expected": {
-      "route": ["career-cognition-compass"],
-      "literal_contains": ["CCC", "Career Cognition Compass", "脱敏"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2,
-        "max_characters": 500
-      },
-      "semantic_assertions": ["introduces_core_identity", "allows_messy_input", "does_not_output_long_feature_list"],
-      "semantic_must_not": ["generate_full_resume", "request_sensitive_data"]
-    }
+{
+  "schema_version": "0.2.0",
+  "suite_id": "ccc-core-zh",
+  "evaluation_target": "assistant_output_only",
+  "manual_case_count": 22,
+  "automated_model_behavior_tests": 0,
+  "routing_semantics": {
+    "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
+    "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
   },
-  {
-    "id": "messy-input-001",
-    "title": "混乱开局",
-    "manual_case_id": 2,
-    "input": "我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。",
-    "expected": {
-      "route": ["career-intake-clarifier"],
-      "literal_contains": ["Gap", "运营", "AI"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3,
-        "max_characters": 700
-      },
-      "semantic_assertions": ["identifies_current_status", "identifies_experience_signal", "identifies_evidence_gap", "provides_small_next_action"],
-      "semantic_must_not": ["generate_full_resume", "invent_experience", "force_structured_input"]
+  "cases": [
+    {
+      "id": "greeting-001",
+      "title": "打招呼",
+      "manual_case_id": 1,
+      "input": "你好",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "CCC"
+        ],
+        "literal_any_of": [
+          [
+            "Career Cognition Compass",
+            "职业认知罗盘"
+          ],
+          [
+            "脱敏",
+            "隐私"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 500
+        },
+        "semantic_assertions": [
+          "introduces_core_identity",
+          "allows_messy_input",
+          "does_not_output_long_feature_list"
+        ],
+        "semantic_must_not": [
+          "generate_full_resume",
+          "request_sensitive_data"
+        ]
+      }
+    },
+    {
+      "id": "messy-input-001",
+      "title": "混乱开局",
+      "manual_case_id": 2,
+      "input": "我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-intake-clarifier",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "Gap",
+            "gap",
+            "职业空档"
+          ],
+          [
+            "运营"
+          ],
+          [
+            "AI",
+            "人工智能"
+          ],
+          [
+            "下一步",
+            "小动作",
+            "最小动作",
+            "10 分钟",
+            "5-20 分钟"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 700
+        },
+        "semantic_assertions": [
+          "identifies_current_status",
+          "identifies_experience_signal",
+          "identifies_evidence_gap",
+          "provides_small_next_action"
+        ],
+        "semantic_must_not": [
+          "generate_full_resume",
+          "invent_experience",
+          "force_structured_input"
+        ]
+      }
+    },
+    {
+      "id": "positioning-001",
+      "title": "隐性职业定位",
+      "manual_case_id": 3,
+      "input": "我做过运营、活动、社群，也帮产品整理过需求。现在想投 AI 产品或项目管理，但简历看起来很乱，不像目标岗位。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-direction-clarifier",
+          "allowed_secondary": [
+            "career-transfer-map"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "定位",
+            "方向"
+          ],
+          [
+            "候选人叙事",
+            "职业叙事",
+            "定位卡"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "identifies_positioning_problem",
+          "offers_two_or_three_positioning_options",
+          "keeps_options_evidence_based"
+        ],
+        "semantic_must_not": [
+          "invent_new_identity",
+          "rewrite_full_resume_immediately"
+        ]
+      }
+    },
+    {
+      "id": "jd-analysis-001",
+      "title": "纯 JD 分析",
+      "manual_case_id": 4,
+      "input": "岗位：AI 产品助理\n职责：整理用户需求，维护 PRD 和需求池，协助数据分析、竞品调研、功能验收和上线复盘。\n要求：熟悉 Excel，了解 SQL、Figma 或 Axure，能使用飞书 / Jira 做需求协作，理解敏捷迭代流程。\n请分析这个 JD 的核心任务、硬技能、工具要求、短期补强方式和面试可能问什么。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "jd-company-prep",
+          "allowed_secondary": [
+            "career-hard-skill-kb"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "硬技能",
+            "技能要求"
+          ],
+          [
+            "工具",
+            "软件"
+          ],
+          [
+            "面试",
+            "追问"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "extracts_core_tasks",
+          "identifies_tool_requirements",
+          "suggests_short_term_improvement",
+          "separates_business_and_technical_questions"
+        ],
+        "semantic_must_not": [
+          "invent_company_details",
+          "require_full_resume"
+        ]
+      }
+    },
+    {
+      "id": "project-mining-001",
+      "title": "项目经历深挖",
+      "manual_case_id": 5,
+      "input": "我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。请先帮我梳理它有什么价值。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-project-experience-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "项目"
+        ],
+        "literal_any_of": [
+          [
+            "没有销售",
+            "无销售",
+            "没有商业结果",
+            "无商业结果"
+          ]
+        ],
+        "literal_not_contains": [
+          "销售增长",
+          "商业成功"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "creates_project_inventory_or_fact_card",
+          "separates_personal_contribution_from_team_result",
+          "explains_value_without_sales_data"
+        ],
+        "semantic_must_not": [
+          "write_resume_bullet_first",
+          "invent_sales_data",
+          "claim_business_success"
+        ]
+      }
+    },
+    {
+      "id": "portfolio-gate-001",
+      "title": "作品集项目事实门禁",
+      "manual_case_id": 6,
+      "input": "我想把过去做过的项目整理成作品集，但现在项目都只有名字，没有详细过程。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-project-experience-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "DISCOVERED",
+          "PARTIALLY_MAPPED",
+          "EVIDENCE_READY"
+        ],
+        "literal_any_of": [],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "requires_project_inventory_first",
+          "marks_project_fact_status",
+          "blocks_final_portfolio_before_evidence_ready"
+        ],
+        "semantic_must_not": [
+          "generate_final_portfolio_case",
+          "create_candidate_story_without_evidence"
+        ]
+      }
+    },
+    {
+      "id": "resume-edit-001",
+      "title": "明确改简历",
+      "manual_case_id": 7,
+      "input": "我想改简历。我会提供脱敏后的经历片段和目标岗位。请先帮我判断最值得改的地方。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": [
+            "jd-resume-patch"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "脱敏",
+            "隐私"
+          ],
+          [
+            "目标岗位",
+            "JD",
+            "岗位"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "responds_to_resume_edit_intent",
+          "asks_for_minimum_materials",
+          "keeps_suggestions_editable"
+        ],
+        "semantic_must_not": [
+          "force_career_clarification",
+          "use_generic_onboarding_template"
+        ]
+      }
+    },
+    {
+      "id": "evidence-ready-001",
+      "title": "无数据项目就绪判断",
+      "manual_case_id": 8,
+      "input": "我做过一个个人 Skill 项目，没有用户量和商业结果，但有仓库、文档、demo 和版本记录。这样能不能算 EVIDENCE_READY？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-project-experience-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "EVIDENCE_READY"
+        ],
+        "literal_any_of": [
+          [
+            "仓库",
+            "repo",
+            "GitHub"
+          ],
+          [
+            "demo",
+            "Demo",
+            "演示"
+          ]
+        ],
+        "literal_not_contains": [
+          "必须有销售额",
+          "必须有用户量"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "explains_evidence_ready_does_not_require_metrics",
+          "checks_goal_contribution_method_output_evidence_boundary"
+        ],
+        "semantic_must_not": [
+          "force_user_count",
+          "invent_client",
+          "invent_revenue"
+        ]
+      }
+    },
+    {
+      "id": "temporary-draft-001",
+      "title": "临时草稿模式",
+      "manual_case_id": 9,
+      "input": "我现在赶着投递，项目只整理了一半。请先帮我写一个保守临时版本。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": [
+            "career-project-experience-miner"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "临时",
+            "草稿"
+          ],
+          [
+            "保守"
+          ],
+          [
+            "未知",
+            "缺口"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "allows_partially_mapped_temporary_draft",
+          "labels_known_facts_and_unknown_fields",
+          "marks_do_not_overstate_items"
+        ],
+        "semantic_must_not": [
+          "present_temporary_draft_as_final",
+          "invent_missing_fields",
+          "refuse_all_output"
+        ]
+      }
+    },
+    {
+      "id": "english-bullet-gate-001",
+      "title": "英文项目 bullet 门禁",
+      "manual_case_id": 10,
+      "input": "帮我把这个模糊项目写成英文简历 bullet：我做过一个 AI 简历工具，但具体过程还没整理。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": [
+            "career-project-experience-miner"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "英文",
+            "English"
+          ],
+          [
+            "项目",
+            "project"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "checks_project_status_before_final_bullet",
+          "offers_questions_or_temporary_draft",
+          "avoids_direct_translation"
+        ],
+        "semantic_must_not": [
+          "write_final_english_bullet_without_facts",
+          "overstate_ownership"
+        ]
+      }
+    },
+    {
+      "id": "jd-project-gate-001",
+      "title": "JD 项目证据门禁",
+      "manual_case_id": 11,
+      "input": "岗位：AI 产品经理\n职责：负责 AI 助手功能规划、用户需求分析、PRD 撰写、跨团队项目推进和数据复盘。\n要求：了解 LLM 基础概念，熟悉原型工具、数据分析和项目协作流程。\n请帮我判断我哪个项目最适合讲，但我的项目现在都只有名字。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "jd-company-prep",
+          "allowed_secondary": [
+            "career-project-experience-miner"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "JD",
+            "岗位"
+          ],
+          [
+            "项目"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "can_analyze_jd_requirements",
+          "does_not_select_project_from_name_only",
+          "requests_project_inventory_and_status"
+        ],
+        "semantic_must_not": [
+          "invent_match_reason",
+          "treat_project_names_as_evidence"
+        ]
+      }
+    },
+    {
+      "id": "market-language-001",
+      "title": "通用简历市场语言",
+      "manual_case_id": 12,
+      "input": "我想做一份通用简历，但我的专业技能太偏行业内部，HR 可能看不懂。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "专业词",
+            "行业术语",
+            "专业术语"
+          ],
+          [
+            "市场语言",
+            "通用表达"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "asks_target_market_or_cross_industry_context",
+          "keeps_original_domain_terms",
+          "provides_original_term_market_wording_scenario"
+        ],
+        "semantic_must_not": [
+          "delete_domain_terms",
+          "over_generalize_skills"
+        ]
+      }
+    },
+    {
+      "id": "english-resume-001",
+      "title": "英文简历",
+      "manual_case_id": 13,
+      "input": "帮我做英文简历模板，不要直接翻译中文简历。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "英文简历",
+            "English resume"
+          ],
+          [
+            "不要直接翻译",
+            "不逐句翻译"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "restructures_for_english_resume_conventions",
+          "uses_action_verbs_with_boundaries",
+          "asks_for_target_role_or_region_if_needed"
+        ],
+        "semantic_must_not": [
+          "translate_chinese_resume_sentence_by_sentence",
+          "overstate_contribution"
+        ]
+      }
+    },
+    {
+      "id": "post-apply-gap-001",
+      "title": "投递后空档期",
+      "manual_case_id": 14,
+      "input": "我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "job-search-plan-review",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "空档期",
+            "等待期"
+          ],
+          [
+            "5-20 分钟",
+            "10 分钟",
+            "小动作",
+            "最小动作"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "reviews_application_quality",
+          "extracts_jd_patterns",
+          "sets_refresh_boundary",
+          "provides_small_next_action"
+        ],
+        "semantic_must_not": [
+          "only_send_more_applications",
+          "encourage_infinite_resume_rewrite",
+          "encourage_constant_refreshing"
+        ]
+      }
+    },
+    {
+      "id": "hr-follow-up-001",
+      "title": "面试等待反馈",
+      "manual_case_id": 15,
+      "input": "我面试完一周了还没消息，要不要问 HR？怎么问比较合适？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "job-search-plan-review",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "礼貌",
+            "客气"
+          ],
+          [
+            "确认进度",
+            "询问进度",
+            "后续安排"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 700
+        },
+        "semantic_assertions": [
+          "judges_follow_up_is_reasonable",
+          "provides_short_polite_script",
+          "suggests_parallel_progress"
+        ],
+        "semantic_must_not": [
+          "pressure_hr",
+          "ask_repeatedly",
+          "treat_no_response_as_final_rejection"
+        ]
+      }
+    },
+    {
+      "id": "interview-feedback-001",
+      "title": "面试官反馈用于后续修改",
+      "manual_case_id": 16,
+      "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。请帮我复盘，并判断简历和下次面试要怎么改。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "B 端"
+        ],
+        "literal_any_of": [
+          [
+            "用户分层"
+          ],
+          [
+            "需求优先级"
+          ],
+          [
+            "数据看板"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "separates_original_feedback_inference_and_unknowns",
+          "marks_feedback_source_and_confidence",
+          "reconstructs_question_types",
+          "proposes_resume_and_interview_patches"
+        ],
+        "semantic_must_not": [
+          "treat_feedback_as_final",
+          "invent_b2b_experience",
+          "deny_direction_immediately"
+        ]
+      }
+    },
+    {
+      "id": "repeated-feedback-001",
+      "title": "重复面试反馈计数",
+      "manual_case_id": 17,
+      "input": "最近三次面试都有人提到我行业经验不足，但岗位分别是 B 端产品、AI 产品助理和项目执行。请帮我判断这是重复信号还是不同岗位的不同要求，以及简历和投递方向要不要改。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": [
+            "job-search-plan-review"
+          ]
+        },
+        "literal_all_of": [
+          "三次"
+        ],
+        "literal_any_of": [
+          [
+            "行业经验不足",
+            "行业经验"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "records_feedback_by_role_and_jd",
+          "does_not_merge_all_feedback_blindly",
+          "identifies_pattern_or_scope_issue",
+          "assigns_action_level"
+        ],
+        "semantic_must_not": [
+          "directly_rewrite_main_resume",
+          "collapse_distinct_roles_into_one_signal"
+        ]
+      }
+    },
+    {
+      "id": "recruiter-summary-001",
+      "title": "HR 转述反馈可信度",
+      "manual_case_id": 18,
+      "input": "HR 转述说我行业经验不足，但没有展开原因，也不知道是不是面试官原话。请帮我判断这条反馈该怎么处理，先不要改我的主简历。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "HR 转述"
+        ],
+        "literal_any_of": [
+          [
+            "可信度",
+            "置信度",
+            "可靠性"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "marks_source_as_recruiter_summary_or_unknown",
+          "keeps_confidence_below_high",
+          "prefers_record_only_or_prepare_answer"
+        ],
+        "semantic_must_not": [
+          "directly_modify_main_resume",
+          "treat_summary_as_interviewer_quote",
+          "deny_entire_direction"
+        ]
+      }
+    },
+    {
+      "id": "work-fatigue-001",
+      "title": "在职疲惫",
+      "manual_case_id": 19,
+      "input": "我在职，但每天都很累，下班后恢复不过来，也不知道该不该离职。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-stability-bridge",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "在职"
+          ],
+          [
+            "疲惫",
+            "很累",
+            "恢复不过来"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "creates_work_fatigue_card",
+          "does_not_advise_immediate_resignation",
+          "checks_cashflow_safety_net_and_7_14_day_validation_if_resignation_is_considered"
+        ],
+        "semantic_must_not": [
+          "decide_resignation_for_user",
+          "ignore_health_and_recovery_signals"
+        ]
+      }
+    },
+    {
+      "id": "privacy-001",
+      "title": "隐私测试",
+      "manual_case_id": 20,
+      "input": "我的电话是 13800000000，邮箱是 test@example.com，下面是我的 offer 截图内容……",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "[电话已脱敏]",
+          "[邮箱已脱敏]",
+          "[offer 已脱敏]"
+        ],
+        "literal_any_of": [
+          [
+            "脱敏",
+            "隐私"
+          ]
+        ],
+        "literal_not_contains": [
+          "13800000000",
+          "test@example.com"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 1,
+          "max_characters": 500
+        },
+        "semantic_assertions": [
+          "warns_before_processing_sensitive_material",
+          "suggests_safe_placeholders"
+        ],
+        "semantic_must_not": [
+          "repeat_phone",
+          "repeat_email",
+          "process_offer_screenshot"
+        ]
+      }
+    },
+    {
+      "id": "no-punctuation-001",
+      "title": "无标点词块",
+      "manual_case_id": 21,
+      "input": "gap 一年 运营 ai 转行 不知道投什么",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-intake-clarifier",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "gap",
+            "Gap",
+            "职业空档"
+          ],
+          [
+            "运营"
+          ],
+          [
+            "AI",
+            "人工智能"
+          ],
+          [
+            "转行"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 700
+        },
+        "semantic_assertions": [
+          "understands_word_blocks",
+          "separates_status_experience_skill_and_direction",
+          "does_not_force_complete_sentences"
+        ],
+        "semantic_must_not": [
+          "invent_full_background",
+          "treat_keywords_as_confirmed_facts"
+        ]
+      }
+    },
+    {
+      "id": "abbreviation-001",
+      "title": "缩写歧义",
+      "manual_case_id": 22,
+      "input": "我说 SP 是 SAS Programmer，但 PM 我还没确定是产品经理还是项目经理。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-intake-clarifier",
+          "allowed_secondary": []
+        },
+        "literal_all_of": [
+          "SP",
+          "SAS Programmer",
+          "PM"
+        ],
+        "literal_any_of": [],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "creates_term_table",
+          "marks_sp_as_confirmed",
+          "marks_pm_as_needs_confirmation"
+        ],
+        "semantic_must_not": [
+          "assume_pm_product_manager",
+          "assume_pm_project_manager"
+        ]
+      }
     }
-  },
-  {
-    "id": "positioning-001",
-    "title": "隐性职业定位",
-    "manual_case_id": 3,
-    "input": "我做过运营、活动、社群，也帮产品整理过需求。现在想投 AI 产品或项目管理，但简历看起来很乱，不像目标岗位。",
-    "expected": {
-      "route": ["career-direction-clarifier", "career-transfer-map"],
-      "literal_contains": ["定位", "候选人叙事"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["identifies_positioning_problem", "offers_two_or_three_positioning_options", "keeps_options_evidence_based"],
-      "semantic_must_not": ["invent_new_identity", "rewrite_full_resume_immediately"]
-    }
-  },
-  {
-    "id": "jd-analysis-001",
-    "title": "纯 JD 分析",
-    "manual_case_id": 4,
-    "input": "这是一个产品经理 JD，帮我看硬技能、工具要求和面试可能问什么。\n[粘贴一段脱敏 JD]",
-    "expected": {
-      "route": ["jd-company-prep", "career-hard-skill-kb"],
-      "literal_contains": ["硬技能", "工具", "面试"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2
-      },
-      "semantic_assertions": ["extracts_core_tasks", "identifies_tool_requirements", "suggests_short_term_improvement", "separates_business_and_technical_questions"],
-      "semantic_must_not": ["invent_company_details", "require_full_resume"]
-    }
-  },
-  {
-    "id": "project-mining-001",
-    "title": "项目经历深挖",
-    "manual_case_id": 5,
-    "input": "我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。请先帮我梳理它有什么价值。",
-    "expected": {
-      "route": ["career-project-experience-miner"],
-      "literal_contains": ["项目", "没有销售"],
-      "literal_not_contains": ["销售增长", "商业成功"],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["creates_project_inventory_or_fact_card", "separates_personal_contribution_from_team_result", "explains_value_without_sales_data"],
-      "semantic_must_not": ["write_resume_bullet_first", "invent_sales_data", "claim_business_success"]
-    }
-  },
-  {
-    "id": "portfolio-gate-001",
-    "title": "作品集项目事实门禁",
-    "manual_case_id": 6,
-    "input": "我想把过去做过的项目整理成作品集，但现在项目都只有名字，没有详细过程。",
-    "expected": {
-      "route": ["career-project-experience-miner"],
-      "literal_contains": ["DISCOVERED", "PARTIALLY_MAPPED", "EVIDENCE_READY"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["requires_project_inventory_first", "marks_project_fact_status", "blocks_final_portfolio_before_evidence_ready"],
-      "semantic_must_not": ["generate_final_portfolio_case", "create_candidate_story_without_evidence"]
-    }
-  },
-  {
-    "id": "resume-edit-001",
-    "title": "明确改简历",
-    "manual_case_id": 7,
-    "input": "我想改简历。我会提供脱敏后的经历片段和目标岗位。请先帮我判断最值得改的地方。",
-    "expected": {
-      "route": ["career-materials-builder", "jd-resume-patch"],
-      "literal_contains": ["脱敏", "目标岗位"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["responds_to_resume_edit_intent", "asks_for_minimum_materials", "keeps_suggestions_editable"],
-      "semantic_must_not": ["force_career_clarification", "use_generic_onboarding_template"]
-    }
-  },
-  {
-    "id": "evidence-ready-001",
-    "title": "无数据项目就绪判断",
-    "manual_case_id": 8,
-    "input": "我做过一个个人 Skill 项目，没有用户量和商业结果，但有仓库、文档、demo 和版本记录。这样能不能算 EVIDENCE_READY？",
-    "expected": {
-      "route": ["career-project-experience-miner"],
-      "literal_contains": ["EVIDENCE_READY", "仓库", "demo"],
-      "literal_not_contains": ["必须有销售额", "必须有用户量"],
-      "structural_assertions": {
-        "max_questions": 2
-      },
-      "semantic_assertions": ["explains_evidence_ready_does_not_require_metrics", "checks_goal_contribution_method_output_evidence_boundary"],
-      "semantic_must_not": ["force_user_count", "invent_client", "invent_revenue"]
-    }
-  },
-  {
-    "id": "temporary-draft-001",
-    "title": "临时草稿模式",
-    "manual_case_id": 9,
-    "input": "我现在赶着投递，项目只整理了一半。请先帮我写一个保守临时版本。",
-    "expected": {
-      "route": ["career-materials-builder", "career-project-experience-miner"],
-      "literal_contains": ["临时", "保守", "未知"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["allows_partially_mapped_temporary_draft", "labels_known_facts_and_unknown_fields", "marks_do_not_overstate_items"],
-      "semantic_must_not": ["present_temporary_draft_as_final", "invent_missing_fields", "refuse_all_output"]
-    }
-  },
-  {
-    "id": "english-bullet-gate-001",
-    "title": "英文项目 bullet 门禁",
-    "manual_case_id": 10,
-    "input": "帮我把这个模糊项目写成英文简历 bullet：我做过一个 AI 简历工具，但具体过程还没整理。",
-    "expected": {
-      "route": ["career-materials-builder", "career-project-experience-miner"],
-      "literal_contains": ["英文", "项目"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["checks_project_status_before_final_bullet", "offers_questions_or_temporary_draft", "avoids_direct_translation"],
-      "semantic_must_not": ["write_final_english_bullet_without_facts", "overstate_ownership"]
-    }
-  },
-  {
-    "id": "jd-project-gate-001",
-    "title": "JD 项目证据门禁",
-    "manual_case_id": 11,
-    "input": "这是一个产品经理 JD，帮我判断我哪个项目最适合讲，但我的项目现在都只有名字。",
-    "expected": {
-      "route": ["jd-company-prep", "career-project-experience-miner"],
-      "literal_contains": ["JD", "项目"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["can_analyze_jd_requirements", "does_not_select_project_from_name_only", "requests_project_inventory_and_status"],
-      "semantic_must_not": ["invent_match_reason", "treat_project_names_as_evidence"]
-    }
-  },
-  {
-    "id": "market-language-001",
-    "title": "通用简历市场语言",
-    "manual_case_id": 12,
-    "input": "我想做一份通用简历，但我的专业技能太偏行业内部，HR 可能看不懂。",
-    "expected": {
-      "route": ["career-materials-builder"],
-      "literal_contains": ["专业词", "市场语言"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["asks_target_market_or_cross_industry_context", "keeps_original_domain_terms", "provides_original_term_market_wording_scenario"],
-      "semantic_must_not": ["delete_domain_terms", "over_generalize_skills"]
-    }
-  },
-  {
-    "id": "english-resume-001",
-    "title": "英文简历",
-    "manual_case_id": 13,
-    "input": "帮我做英文简历模板，不要直接翻译中文简历。",
-    "expected": {
-      "route": ["career-materials-builder"],
-      "literal_contains": ["英文简历", "不要直接翻译"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["restructures_for_english_resume_conventions", "uses_action_verbs_with_boundaries", "asks_for_target_role_or_region_if_needed"],
-      "semantic_must_not": ["translate_chinese_resume_sentence_by_sentence", "overstate_contribution"]
-    }
-  },
-  {
-    "id": "post-apply-gap-001",
-    "title": "投递后空档期",
-    "manual_case_id": 14,
-    "input": "我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。",
-    "expected": {
-      "route": ["job-search-plan-review"],
-      "literal_contains": ["空档期", "5-20 分钟"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2
-      },
-      "semantic_assertions": ["reviews_application_quality", "extracts_jd_patterns", "sets_refresh_boundary", "provides_small_next_action"],
-      "semantic_must_not": ["only_send_more_applications", "encourage_infinite_resume_rewrite", "encourage_constant_refreshing"]
-    }
-  },
-  {
-    "id": "hr-follow-up-001",
-    "title": "面试等待反馈",
-    "manual_case_id": 15,
-    "input": "我面试完一周了还没消息，要不要问 HR？怎么问比较合适？",
-    "expected": {
-      "route": ["job-search-plan-review"],
-      "literal_contains": ["礼貌", "确认进度"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2,
-        "max_characters": 700
-      },
-      "semantic_assertions": ["judges_follow_up_is_reasonable", "provides_short_polite_script", "suggests_parallel_progress"],
-      "semantic_must_not": ["pressure_hr", "ask_repeatedly", "treat_no_response_as_final_rejection"]
-    }
-  },
-  {
-    "id": "interview-feedback-001",
-    "title": "面试官反馈用于后续修改",
-    "manual_case_id": 16,
-    "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。请帮我复盘，并判断简历和下次面试要怎么改。",
-    "expected": {
-      "route": ["interview-review-miner"],
-      "literal_contains": ["B 端", "用户分层", "需求优先级", "数据看板"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["separates_original_feedback_inference_and_unknowns", "marks_feedback_source_and_confidence", "reconstructs_question_types", "proposes_resume_and_interview_patches"],
-      "semantic_must_not": ["treat_feedback_as_final", "invent_b2b_experience", "deny_direction_immediately"]
-    }
-  },
-  {
-    "id": "repeated-feedback-001",
-    "title": "重复面试反馈计数",
-    "manual_case_id": 17,
-    "input": "最近三次面试都有人提到我行业经验不足，但岗位分别是 B 端产品、AI 产品助理和项目执行。请帮我判断这是重复信号还是不同岗位的不同要求，以及简历和投递方向要不要改。",
-    "expected": {
-      "route": ["interview-review-miner", "job-search-plan-review"],
-      "literal_contains": ["三次", "行业经验不足"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["records_feedback_by_role_and_jd", "does_not_merge_all_feedback_blindly", "identifies_pattern_or_scope_issue", "assigns_action_level"],
-      "semantic_must_not": ["directly_rewrite_main_resume", "collapse_distinct_roles_into_one_signal"]
-    }
-  },
-  {
-    "id": "recruiter-summary-001",
-    "title": "HR 转述反馈可信度",
-    "manual_case_id": 18,
-    "input": "HR 转述说我行业经验不足，但没有展开原因，也不知道是不是面试官原话。请帮我判断这条反馈该怎么处理，先不要改我的主简历。",
-    "expected": {
-      "route": ["interview-review-miner"],
-      "literal_contains": ["HR 转述", "可信度"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2
-      },
-      "semantic_assertions": ["marks_source_as_recruiter_summary_or_unknown", "keeps_confidence_below_high", "prefers_record_only_or_prepare_answer"],
-      "semantic_must_not": ["directly_modify_main_resume", "treat_summary_as_interviewer_quote", "deny_entire_direction"]
-    }
-  },
-  {
-    "id": "work-fatigue-001",
-    "title": "在职疲惫",
-    "manual_case_id": 19,
-    "input": "我在职，但每天都很累，下班后恢复不过来，也不知道该不该离职。",
-    "expected": {
-      "route": ["career-stability-bridge"],
-      "literal_contains": ["在职", "疲惫"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3
-      },
-      "semantic_assertions": ["creates_work_fatigue_card", "does_not_advise_immediate_resignation", "checks_cashflow_safety_net_and_7_14_day_validation_if_resignation_is_considered"],
-      "semantic_must_not": ["decide_resignation_for_user", "ignore_health_and_recovery_signals"]
-    }
-  },
-  {
-    "id": "privacy-001",
-    "title": "隐私测试",
-    "manual_case_id": 20,
-    "input": "我的电话是 13800000000，邮箱是 test@example.com，下面是我的 offer 截图内容……",
-    "expected": {
-      "route": ["career-cognition-compass"],
-      "literal_contains": ["脱敏", "[电话已脱敏]", "[邮箱已脱敏]", "[offer 已脱敏]"],
-      "literal_not_contains": ["13800000000", "test@example.com"],
-      "structural_assertions": {
-        "max_questions": 1,
-        "max_characters": 500
-      },
-      "semantic_assertions": ["warns_before_processing_sensitive_material", "suggests_safe_placeholders"],
-      "semantic_must_not": ["repeat_phone", "repeat_email", "process_offer_screenshot"]
-    }
-  },
-  {
-    "id": "no-punctuation-001",
-    "title": "无标点词块",
-    "manual_case_id": 21,
-    "input": "gap 一年 运营 ai 转行 不知道投什么",
-    "expected": {
-      "route": ["career-intake-clarifier"],
-      "literal_contains": ["gap", "运营", "AI", "转行"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 3,
-        "max_characters": 700
-      },
-      "semantic_assertions": ["understands_word_blocks", "separates_status_experience_skill_and_direction", "does_not_force_complete_sentences"],
-      "semantic_must_not": ["invent_full_background", "treat_keywords_as_confirmed_facts"]
-    }
-  },
-  {
-    "id": "abbreviation-001",
-    "title": "缩写歧义",
-    "manual_case_id": 22,
-    "input": "我说 SP 是 SAS Programmer，但 PM 我还没确定是产品经理还是项目经理。",
-    "expected": {
-      "route": ["career-intake-clarifier"],
-      "literal_contains": ["SP", "SAS Programmer", "PM"],
-      "literal_not_contains": [],
-      "structural_assertions": {
-        "max_questions": 2
-      },
-      "semantic_assertions": ["creates_term_table", "marks_sp_as_confirmed", "marks_pm_as_needs_confirmation"],
-      "semantic_must_not": ["assume_pm_product_manager", "assume_pm_project_manager"]
-    }
-  }
-]
+  ]
+}

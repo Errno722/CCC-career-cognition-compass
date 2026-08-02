@@ -8,9 +8,12 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 
 - 将 README 改成更短的产品落地页，保留价值主张、快速开始、Before / After、核心能力和文档导航。
 - 将原长版说明迁移到 [docs/full-guide.md](docs/full-guide.md)，避免 README 首屏过载。
-- 新增 [docs/compatibility.md](docs/compatibility.md)，按 Maintainer-tested / Contract-ready / Community testing needed / Experimental 记录平台适配状态。
-- 新增 [evals/cases.json](evals/cases.json)，把 22 个核心手工测试整理成机器可读行为合约。
-- 将 Eval 断言拆成 `literal_contains`、`literal_not_contains`、`structural_assertions`、`semantic_assertions` 和 `semantic_must_not`，避免把语义行为误写成字符串检查。
+- 新增 [docs/compatibility.md](docs/compatibility.md)，按 Maintainer-used / Contract-ready / Community testing needed / Experimental 记录平台适配状态。
+- 新增 [evals/cases.json](evals/cases.json)，把 22 个核心手工测试整理成机器可读行为合约，并升级为 `schema_version: 0.2.0` 的 suite 结构。
+- 新增 [evals/schema.json](evals/schema.json) 和 [evals/rubrics.json](evals/rubrics.json)，明确合约结构、评估对象和语义断言评分口径。
+- 将 Eval 断言拆成 `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`structural_assertions`、`semantic_assertions` 和 `semantic_must_not`，避免把语义行为误写成脆弱字符串检查。
+- 明确 Eval 的 `evaluation_target` 为 `assistant_output_only`，避免隐私测试误判完整对话记录。
+- 将 JD 分析案例中的占位符替换成完整虚构 JD，避免模型因缺少 JD 内容而被错误判定失败。
 - 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
 - 暂不启用 GitHub Actions；当前推送凭证需要额外 `workflow` 权限才能创建 workflow 文件。
 

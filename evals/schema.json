@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Errno722/CCC-career-cognition-compass/evals/schema.json",
+  "title": "CCC Eval Contract Suite",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "suite_id",
+    "evaluation_target",
+    "manual_case_count",
+    "automated_model_behavior_tests",
+    "routing_semantics",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^0\\.2\\.0$"
+    },
+    "suite_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluation_target": {
+      "const": "assistant_output_only"
+    },
+    "manual_case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "automated_model_behavior_tests": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "routing_semantics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "literalAnyOf": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stringList"
+      }
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "primary",
+        "allowed_secondary"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "primary_required"
+          ]
+        },
+        "primary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allowed_secondary": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "structuralAssertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_questions"
+      ],
+      "properties": {
+        "max_questions": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "max_characters": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "routing",
+        "literal_all_of",
+        "literal_any_of",
+        "literal_not_contains",
+        "regex_not_contains",
+        "structural_assertions",
+        "semantic_assertions",
+        "semantic_must_not"
+      ],
+      "properties": {
+        "routing": {
+          "$ref": "#/$defs/routing"
+        },
+        "literal_all_of": {
+          "$ref": "#/$defs/stringList"
+        },
+        "literal_any_of": {
+          "$ref": "#/$defs/literalAnyOf"
+        },
+        "literal_not_contains": {
+          "$ref": "#/$defs/stringList"
+        },
+        "regex_not_contains": {
+          "$ref": "#/$defs/stringList"
+        },
+        "structural_assertions": {
+          "$ref": "#/$defs/structuralAssertions"
+        },
+        "semantic_assertions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "semantic_must_not": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "manual_case_id",
+        "input",
+        "expected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manual_case_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected": {
+          "$ref": "#/$defs/expected"
+        }
+      }
+    }
+  }
+}
