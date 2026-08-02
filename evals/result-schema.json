@@ -22,7 +22,7 @@
   "properties": {
     "result_schema_version": {
       "type": "string",
-      "pattern": "^0\\.1\\.0$"
+      "pattern": "^0\\.2\\.0$"
     },
     "suite_id": {
       "type": "string",

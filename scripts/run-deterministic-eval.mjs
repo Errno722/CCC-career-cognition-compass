@@ -94,7 +94,7 @@ function runReportInput(suite, suiteSha256, caseMap, input) {
   }
 
   return {
-    result_schema_version: "0.1.0",
+    result_schema_version: "0.2.0",
     suite_id: suite.suite_id,
     suite_schema_version: suite.schema_version,
     suite_sha256: suiteSha256,

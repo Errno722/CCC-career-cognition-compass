@@ -35,6 +35,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - `scripts/check-evals.mjs` 会校验结果报告目录 adapter 与报告内 adapter 一致，并要求 `runner_generated` / `recomputed` 使用当前 runner 版本。
 - 统计口径新增声明覆盖、Runner 执行覆盖和公开平台覆盖；`schema_only` 与 `local` 不再抬高公开平台兼容性数据。
 - 失败 fixture 必须声明非空且不重复的 `expected_failed_checks`。
+- 将确定性 runner 和结果报告 schema 升级到 `0.2.0`，避免新版报告结构继续沿用旧版 `0.1.0` 标识。
 - 字面匹配增加 Unicode / 空白 / 大小写标准化；隐私禁止项同时检查原始输出和标准化输出。
 - 隐私 case 增加手机号和邮箱正则检查，并新增混淆手机号 / 邮箱的预期失败 fixture。
 - 将 case 23 补充为带 Shopify 最小事实卡的输入，避免只测试面试官角色框架而无法检查事实一致性。

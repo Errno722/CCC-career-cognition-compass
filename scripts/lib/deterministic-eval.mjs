@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-export const runnerVersion = "0.1.0";
+export const runnerVersion = "0.2.0";
 export const checkNames = [
   "literal_all_of",
   "literal_any_of",

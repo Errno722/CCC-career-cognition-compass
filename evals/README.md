@@ -18,6 +18,8 @@
 | 机器可读合约 | 23 | 当前文件：[cases.json](cases.json) |
 | 已登记语义断言 | 122 | 当前文件：[rubrics.json](rubrics.json) |
 | 已人工细化核心 Rubric | 15 | 当前文件：[rubrics.json](rubrics.json) |
+| 确定性 Runner | 0.2.0 | 当前文件：[scripts/lib/deterministic-eval.mjs](../scripts/lib/deterministic-eval.mjs) |
+| 结果报告 Schema | 0.2.0 | 当前文件：[result-schema.json](result-schema.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
 | 声明唯一覆盖 | 0/23 | 包含结构合法但不可复算的 `schema_only` 报告 |
