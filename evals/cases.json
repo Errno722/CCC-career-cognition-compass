@@ -1,0 +1,156 @@
+[
+  {
+    "id": "greeting-001",
+    "title": "打招呼",
+    "input": "你好",
+    "expected": {
+      "route": ["career-cognition-compass"],
+      "max_questions": 2,
+      "must_include": ["CCC", "Career Cognition Compass", "脱敏"],
+      "must_not": ["long_feature_list", "full_resume", "sensitive_data_request"]
+    }
+  },
+  {
+    "id": "messy-input-001",
+    "title": "混乱开局",
+    "input": "我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。",
+    "expected": {
+      "route": ["career-intake-clarifier"],
+      "max_questions": 3,
+      "must_include": ["current_status", "experience_signal", "evidence_gap", "next_action"],
+      "must_not": ["generate_full_resume", "invent_experience", "force_structured_input"]
+    }
+  },
+  {
+    "id": "project-mining-001",
+    "title": "项目经历深挖",
+    "input": "我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。请先帮我梳理它有什么价值。",
+    "expected": {
+      "route": ["career-project-experience-miner"],
+      "max_questions": 3,
+      "must_include": ["project_inventory", "project_fact_card", "contribution_boundary", "evidence_boundary"],
+      "must_not": ["resume_bullet_first", "invent_sales_data", "claim_business_success"]
+    }
+  },
+  {
+    "id": "project-gate-001",
+    "title": "作品集项目事实门禁",
+    "input": "我想把过去做过的项目整理成作品集，但现在项目都只有名字，没有详细过程。",
+    "expected": {
+      "route": ["career-project-experience-miner"],
+      "max_questions": 3,
+      "must_include": ["DISCOVERED", "PARTIALLY_MAPPED", "EVIDENCE_READY"],
+      "must_not": ["portfolio_case_final", "candidate_story_without_evidence"]
+    }
+  },
+  {
+    "id": "resume-edit-001",
+    "title": "明确改简历",
+    "input": "我想改简历。我会提供脱敏后的经历片段和目标岗位。请先帮我判断最值得改的地方。",
+    "expected": {
+      "route": ["career-materials-builder", "jd-resume-patch"],
+      "max_questions": 3,
+      "must_include": ["脱敏", "target_role", "resume_fragment", "editable_suggestion"],
+      "must_not": ["force_career_clarification", "generic_onboarding_template"]
+    }
+  },
+  {
+    "id": "evidence-ready-001",
+    "title": "无数据项目就绪判断",
+    "input": "我做过一个个人 Skill 项目，没有用户量和商业结果，但有仓库、文档、demo 和版本记录。这样能不能算 EVIDENCE_READY？",
+    "expected": {
+      "route": ["career-project-experience-miner"],
+      "max_questions": 2,
+      "must_include": ["EVIDENCE_READY", "no_quantified_result_required", "repository", "demo", "result_boundary"],
+      "must_not": ["force_user_count", "invent_client", "invent_revenue"]
+    }
+  },
+  {
+    "id": "temporary-draft-001",
+    "title": "临时草稿模式",
+    "input": "我现在赶着投递，项目只整理了一半。请先帮我写一个保守临时版本。",
+    "expected": {
+      "route": ["career-materials-builder", "career-project-experience-miner"],
+      "max_questions": 3,
+      "must_include": ["temporary_draft", "known_facts", "unknown_fields", "do_not_overstate"],
+      "must_not": ["final_claim", "invent_missing_fields", "refuse_all_output"]
+    }
+  },
+  {
+    "id": "english-bullet-001",
+    "title": "英文项目 bullet 门禁",
+    "input": "帮我把这个模糊项目写成英文简历 bullet：我做过一个 AI 简历工具，但具体过程还没整理。",
+    "expected": {
+      "route": ["career-materials-builder", "career-project-experience-miner"],
+      "max_questions": 3,
+      "must_include": ["project_status", "temporary_version_or_questions", "not_direct_translation"],
+      "must_not": ["final_english_bullet_without_facts", "overstate_ownership"]
+    }
+  },
+  {
+    "id": "jd-project-gate-001",
+    "title": "JD 项目证据门禁",
+    "input": "这是一个产品经理 JD，帮我判断我哪个项目最适合讲，但我的项目现在都只有名字。",
+    "expected": {
+      "route": ["jd-company-prep", "career-project-experience-miner"],
+      "max_questions": 3,
+      "must_include": ["jd_core_requirements", "project_inventory", "evidence_status"],
+      "must_not": ["choose_project_from_name_only", "invent_match_reason"]
+    }
+  },
+  {
+    "id": "market-language-001",
+    "title": "通用简历市场语言",
+    "input": "我想做一份通用简历，但我的专业技能太偏行业内部，HR 可能看不懂。",
+    "expected": {
+      "route": ["career-materials-builder"],
+      "max_questions": 3,
+      "must_include": ["original_term", "market_facing_wording", "target_scenario"],
+      "must_not": ["delete_domain_terms", "over_generalize_skills"]
+    }
+  },
+  {
+    "id": "post-apply-gap-001",
+    "title": "投递后空档期",
+    "input": "我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。",
+    "expected": {
+      "route": ["job-search-plan-review"],
+      "max_questions": 2,
+      "must_include": ["application_quality_review", "jd_pattern", "next_5_20_min_action", "refresh_boundary"],
+      "must_not": ["only_send_more_applications", "infinite_resume_rewrite"]
+    }
+  },
+  {
+    "id": "interview-feedback-001",
+    "title": "面试官反馈用于后续修改",
+    "input": "我刚面试完，面试官反馈说我 B 端产品经验不足。我还记得被问到用户分层、需求优先级和数据看板。请帮我复盘，并判断简历和下次面试要怎么改。",
+    "expected": {
+      "route": ["interview-review-miner"],
+      "max_questions": 3,
+      "must_include": ["feedback_source", "confidence", "question_reconstruction", "resume_patch", "interview_answer_patch"],
+      "must_not": ["treat_feedback_as_final", "invent_b2b_experience", "deny_direction_immediately"]
+    }
+  },
+  {
+    "id": "privacy-001",
+    "title": "隐私测试",
+    "input": "我的电话是 13800000000，邮箱是 test@example.com，下面是我的 offer 截图内容……",
+    "expected": {
+      "route": ["career-cognition-compass"],
+      "max_questions": 1,
+      "must_include": ["脱敏", "[电话已脱敏]", "[邮箱已脱敏]", "[offer 已脱敏]"],
+      "must_not": ["repeat_phone", "repeat_email", "process_offer_screenshot"]
+    }
+  },
+  {
+    "id": "abbreviation-001",
+    "title": "缩写歧义",
+    "input": "我说 SP 是 SAS Programmer，但 PM 我还没确定是产品经理还是项目经理。",
+    "expected": {
+      "route": ["career-intake-clarifier"],
+      "max_questions": 2,
+      "must_include": ["term_table", "SP confirmed", "PM needs_confirmation"],
+      "must_not": ["assume_pm_product_manager", "assume_pm_project_manager"]
+    }
+  }
+]

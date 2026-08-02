@@ -101,6 +101,7 @@ WorkBuddy Agent
 | 我想给国内用户一个手机可用入口 | WorkBuddy |
 | 我想在飞书里用 | WorkBuddy + 飞书配置 |
 | 我只想看效果 | [DEMO.md](DEMO.md) |
+| 我想知道平台差异 | [docs/compatibility.md](docs/compatibility.md) |
 
 ## 我想分享这个项目
 
@@ -140,3 +141,10 @@ gap 一年 运营 ai 转行 不知道投什么
 ```
 
 好的结果应该是：先整理事实和缺口，不编造经历，不一上来生成完整简历，并给出少量下一步动作。
+
+如果你在维护仓库，可以运行机器可读合约检查：
+
+```bash
+node scripts/check-evals.mjs
+node scripts/check-markdown-links.mjs
+```

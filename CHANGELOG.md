@@ -2,6 +2,17 @@
 
 CCC 使用日期型版本记录。这里记录面向使用者能感知到的主要变化；更细的 skill 内部变化见 [SKILLS.md](SKILLS.md)。
 
+## 2026-08-02
+
+### 产品化与可验证性
+
+- 将 README 改成更短的产品落地页，保留价值主张、快速开始、Before / After、核心能力和文档导航。
+- 将原长版说明迁移到 [docs/full-guide.md](docs/full-guide.md)，避免 README 首屏过载。
+- 新增 [docs/compatibility.md](docs/compatibility.md)，按 Tested / Partial / Experimental 记录平台适配状态。
+- 新增 [evals/cases.json](evals/cases.json)，把核心手工测试整理成机器可读行为合约。
+- 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
+- 暂不启用 GitHub Actions；当前推送凭证需要额外 `workflow` 权限才能创建 workflow 文件。
+
 ## 2026-07-29
 
 ### 传播与开源包装
