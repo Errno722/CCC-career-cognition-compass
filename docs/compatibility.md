@@ -18,7 +18,7 @@ CCC 不声称“适用于所有模型”。不同平台的上下文长度、文�
 | --- | --- |
 | 手工测试场景 | 23 个，见 [workbuddy/test-cases.md](../workbuddy/test-cases.md) |
 | 机器可读合约 | 23 个，见 [evals/cases.json](../evals/cases.json) |
-| 已登记语义断言 | 122 条，见 [evals/rubrics.json](../evals/rubrics.json) |
+| 已登记语义断言 | 123 条，见 [evals/rubrics.json](../evals/rubrics.json) |
 | 已人工细化核心 Rubric | 15 条，见 [evals/rubrics.json](../evals/rubrics.json) |
 | 确定性输出 Runner | `0.2.0`，可对已有助手回复执行字面、正则和结构检查 |
 | 结果报告 Schema | `0.2.0` |

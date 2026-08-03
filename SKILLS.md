@@ -21,7 +21,7 @@ career-hard-skill-kb          硬技能知识库和术语表
 jd-company-prep               JD / 目标公司准备
 jd-resume-patch               JD 简历修改补丁
 career-materials-builder      中英文简历、作品集、平台材料
-interview-review-miner        面试关键词、面试官反馈、角色化回答侧重点和后续修改
+interview-review-miner        面试关键词、面试官反馈、候选人面试背景卡、角色化回答侧重点和后续修改
 job-search-plan-review        14 天计划、复盘、投递记录
 career-stability-bridge       Gap、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
@@ -143,6 +143,9 @@ jd-resume-patch
 ## 更新记录
 
 ```text
+2026-08-04 / interview-review-miner v0.2.4
+- 新增候选人面试背景卡：每次面试复盘后沉淀已验证优势、高频被质疑点、最近反馈、已做改进和下一轮面试重点，方便二面/三面继承前一次不足。
+
 2026-08-02 / interview-review-miner v0.2.3
 - 新增面试官角色回答卡：按 HR、用人经理、业务、技术、高管、Founder、跨部门和同级面试官区分回答侧重点，同时保持事实不变。
 

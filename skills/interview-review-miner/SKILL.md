@@ -1,7 +1,7 @@
 ---
 name: interview-review-miner
 description: >-
-  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers interview keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, adjust resume/JD positioning after interview feedback, evaluate interview/company signals, or decide what to improve before the next interview. For pure waiting, HR follow-up timing, or follow-up wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact interview questions, and do not promise interview outcomes.
+  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers interview keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, build or update a candidate interview profile for second/third interviews, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, adjust resume/JD positioning after interview feedback, evaluate interview/company signals, or decide what to improve before the next interview. For pure waiting, HR follow-up timing, or follow-up wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact interview questions, and do not promise interview outcomes.
 ---
 
 # Interview Review Miner
@@ -38,6 +38,8 @@ related_resume_version:
 ```
 
 Do not let feedback from one JD automatically rewrite the neutral resume or contaminate another role family. Reuse facts; reset role-specific emphasis for each new JD.
+
+After each interview review, update a compact `candidate_interview_profile`. This is the reusable background card for second/third interviews and later interview prep. It must summarize stable evidence, recurring concerns, previous improvement actions, and next-round priorities without turning one interviewer's comment into the user's fixed identity.
 
 Also judge source reliability before deciding the action level:
 
@@ -177,6 +179,31 @@ current_decision: record_only / prepare_answer / patch_material / reconsider_sco
 
 Only treat repeated feedback as a pattern when it appears across comparable roles or JDs. If one feedback is from Product Manager and another from R&D, keep the source contexts separate.
 
+## Candidate Interview Profile
+
+Create or update this compact card after interview feedback, repeated feedback, or next-round preparation:
+
+```text
+候选人面试背景卡 / candidate_interview_profile
+├─ 目标岗位族群:
+├─ 背景摘要:
+├─ 已验证优势:
+├─ 高频被质疑点 / 最近反馈:
+├─ 已做改进 / 下一轮重点:
+├─ 可复用证据:
+├─ 仍缺证据:
+├─ 不应继承的偏向:
+└─ last_updated / source:
+```
+
+Rules:
+
+- It is a working memory asset, not a long report or fixed identity.
+- Trace each concern to feedback, JD signals, or self-review; label source and reliability.
+- Carry forward evidence and repeated patterns, not wording bias from one JD or one interview.
+- For second/third interviews, compare the new round with this card and output: `本轮继承 / 本轮不继承 / 需要重置的侧重点 / 面试前最小补强动作`.
+- If missing, create a first draft from known facts and mark unknowns. Do not ask for a long form.
+
 ## Feedback Reliability
 
 Before changing materials or direction, decide how much weight the feedback deserves:
@@ -259,6 +286,7 @@ Output:
 │  ├─ 更适合继续投:
 │  ├─ 需要谨慎投:
 │  └─ 需要验证:
+├─ 候选人面试背景卡更新:
 └─ 知识库更新:
 ```
 
@@ -382,7 +410,7 @@ Rules:
 
 ## Knowledge Base Update
 
-Update the user's interview knowledge base in compact form:
+Update the user's interview knowledge base and candidate interview profile in compact form:
 
 ```text
 interview_question_bank
@@ -409,6 +437,8 @@ If feedback points to a missing skill, add it to the hard-skill KB with:
 7-14 天可补动作
 下次面试回答思路
 ```
+
+If the feedback changes what the user should remember before the next round, update `candidate_interview_profile`: new facts, new feedback, repeated-signal changes, next priority, and materials/directions it should not affect.
 
 ## Next Interview Answer Cards
 
@@ -470,7 +500,8 @@ For interviewer feedback:
 4. 简历需要怎么调
 5. 面试回答需要怎么调
 6. 不同面试官角色下应该怎么调整侧重点
-7. 之后投 JD / 方向要注意什么
+7. 候选人面试背景卡更新
+8. 之后投 JD / 方向要注意什么
 ```
 
 For repeated feedback:
@@ -482,7 +513,8 @@ For repeated feedback:
 2. 来源岗位是否相似
 3. 是否需要改简历
 4. 是否需要改投递范围
-5. 下次面试回答卡，包括面试官角色侧重点
+5. 候选人面试背景卡更新
+6. 下次面试回答卡，包括面试官角色侧重点
 ```
 
 ## Boundaries
@@ -500,6 +532,10 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.4 / 2026-08-04
+- Added `candidate_interview_profile` as a reusable background card for second/third interviews and later interview prep.
+- Clarified that interview feedback updates stable background, recurring concerns, next-round priorities, and non-inherited biases separately.
+
 v0.2.3 / 2026-08-02
 - Added interviewer-role answer focus cards for HR, hiring manager, business, technical, executive, founder, cross-functional, and peer interviewers.
 - Added role-specific emphasis to interview answer cards without changing the underlying facts.

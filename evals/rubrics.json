@@ -1319,6 +1319,17 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "updates_candidate_interview_profile": {
+      "type": "must",
+      "severity": "high",
+      "description": "面试复盘后更新候选人面试背景卡，用于二面、三面或后续面试继承已验证优势、重复反馈、改进动作和下一轮重点。",
+      "pass_criteria": [
+        "输出包含候选人面试背景卡或等价结构，至少记录已验证优势、高频被质疑点/反馈主题、下一轮面试重点，并保留来源或可信度边界。"
+      ],
+      "fail_signals": [
+        "只给一次性面试建议，没有形成可复用背景；或把单次反馈写成固定人设、永久弱点或所有岗位都应继承的结论。"
+      ]
+    },
     "warns_before_processing_sensitive_material": {
       "type": "must",
       "severity": "medium",

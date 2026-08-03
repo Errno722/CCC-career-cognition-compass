@@ -665,6 +665,7 @@
           "separates_original_feedback_inference_and_unknowns",
           "marks_feedback_source_and_confidence",
           "reconstructs_question_types",
+          "updates_candidate_interview_profile",
           "proposes_resume_and_interview_patches"
         ],
         "semantic_must_not": [
@@ -705,6 +706,7 @@
           "records_feedback_by_role_and_jd",
           "does_not_merge_all_feedback_blindly",
           "identifies_pattern_or_scope_issue",
+          "updates_candidate_interview_profile",
           "assigns_action_level"
         ],
         "semantic_must_not": [

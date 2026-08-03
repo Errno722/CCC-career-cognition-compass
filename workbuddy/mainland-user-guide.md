@@ -165,6 +165,7 @@ project_state_records
 hard_skill_kb
 interview_question_bank
 interviewer_feedback_signals
+candidate_interview_profile
 repeated_feedback_tracker
 acronym_glossary
 positioning_cards
@@ -200,7 +201,7 @@ post_application_idle_plan
 我刚面试完，面试官反馈说我 B 端产品经验不足。
 ```
 
-期望：把反馈当成信号，不当成最终评价；整理对简历、面试回答、JD 方向和知识库的影响；如果用户提到 HR、业务、技术等面试官角色，要分别调整回答侧重点。
+期望：把反馈当成信号，不当成最终评价；整理对简历、面试回答、JD 方向和知识库的影响；更新候选人面试背景卡，方便二面/三面继承改进；如果用户提到 HR、业务、技术等面试官角色，要分别调整回答侧重点。
 
 ```text
 我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。
