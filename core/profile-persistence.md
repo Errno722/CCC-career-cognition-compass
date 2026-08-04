@@ -5,6 +5,8 @@ version: v1
 
 CCC may create reusable profile cards, but it must not pretend to store long-term memory unless the runtime actually supports storage.
 
+Use technical keys for configuration, knowledge-base variables, and developer docs. In ordinary user replies, prefer the Chinese card name `候选人面试资料卡补丁`; show raw keys such as `candidate_interview_profile_patch` only when the user asks for a template, WorkBuddy variable, or copyable state card.
+
 ## Persistence Modes
 
 ```text

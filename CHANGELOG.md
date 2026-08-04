@@ -9,6 +9,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 新增 `core/focus-control.md`、`core/certainty-calibration.md` 和 `core/profile-persistence.md`，把发散收束、确定性表达校准和资料卡持久化边界作为共享规则维护。
 - 新增 `scripts/check-shared-rules.mjs`，检查核心 skills、通用 prompt 和 WorkBuddy prompt 是否声明同一组共享规则版本。
 - `career-cognition-compass`、`career-direction-clarifier`、`career-materials-builder`、`jd-company-prep`、`interview-review-miner`、通用 prompt 和 WorkBuddy prompt 对齐输出优先级：用户请求的交付物、必要门禁、一个主卡片、最多一个辅助补丁/提醒、一个下一步，其余暂存。
+- 纵向体验小修：普通用户回复优先使用“本轮主线 / 暂存 / 下一步 / 如果要继续”等自然标签，不直接暴露 `focus_control`、`candidate_interview_profile_patch` 等内部字段名；暂存分支增加可继续的短标签。
 
 ### 真实平台测试流程
 
