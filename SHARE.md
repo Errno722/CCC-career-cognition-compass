@@ -1,23 +1,13 @@
 # CCC 传播素材
 
-这份文件用于介绍和传播 CCC。你可以直接复制其中的文字，用在 GitHub About、社交平台、公众号、群聊或项目介绍里。
+CCC 是 **Career Cognition Compass** 的缩写。这份文件用于项目主页、社交平台、群聊、Demo 和英文介绍。
 
-CCC 是 Career Cognition Compass 的缩写。它不是简历生成器，而是一个开源的求职澄清与行动辅导项目：帮助使用者从混乱语言、Gap、转行、在职疲惫、JD 焦虑和信息爆炸里，整理出事实、选择和下一步小动作。
+## GitHub About
 
-## 一句话介绍
-
-CCC 帮你把混乱的求职状态整理成事实、方向和下一步小动作，而不是一上来生成一大包简历材料。
-
-## 更适合转发的一句话
-
-CCC 是一个开源求职认知工具，用来帮你在找工作前先看清自己有什么、想要什么、卡在哪里，以及今天能做的最小一步。
-
-## GitHub About 建议
-
-Description：
+Description，不超过 120 个中文字符：
 
 ```text
-CCC (Career Cognition Compass) 是一个开源 AI 求职澄清与行动辅导项目，帮助用户从混乱求职状态中整理经历、方向、JD、简历、面试复盘和下一步行动。
+CCC 是开源求职认知罗盘，帮助使用者从混乱状态中整理经历、方向、JD、面试复盘和下一步行动。
 ```
 
 Topics：
@@ -36,50 +26,81 @@ workbuddy
 zh-cn
 ```
 
-Website：
+## 小红书介绍
+
+### 标题候选
+
+1. 我用 Codex 和 WorkBuddy 梳理了一下混乱的自己
+2. 找工作信息太多时，我做了一个求职认知罗盘
+3. Gap 期间，我把自己的求职焦虑整理成了一个开源项目
+
+### 开头候选
 
 ```text
-如果有 WorkBuddy、个人主页或项目介绍页，可以填对应链接；没有就先留空。
+这段时间我一直想结束 Gap，也在等面试消息、投简历、补项目。越看求职软件和社交媒体，越容易觉得自己什么都该做，但不知道先做什么。
 ```
 
-## 推荐标题
-
-- 我做了一个帮自己结束 Gap 的开源求职工具
-- 我用 Codex 和 WorkBuddy 梳理了一下混乱的自己
-- 找工作时，我真的是在找工作吗？
-- 不想再收藏求职教程了，我想先知道下一步做什么
-- 给 Gap、转行、在职疲惫的人做了一个求职澄清工具
-
-## GitHub 简短介绍
-
 ```text
-CCC 是 Career Cognition Compass 的缩写。
-
-它不是一键生成简历的工具，而是一个开源的求职澄清与行动辅导项目。
-
-它适合正在 Gap、转行、在职想换工作、校招迷茫、投递后焦虑、面试后想复盘，或被社交媒体求职信息轰炸到更混乱的人。
-
-你可以把一段很乱的文字、语音转文字、JD、简历片段或面试回忆发给它，它会先整理事实、缺口和下一步小动作，再在需要时进入 JD 分析、项目经历深挖、简历修改、面试复盘或 14 天行动计划。
+我不是一个很擅长改简历、投简历、推销自己的人，也还没有找到工作。所以我做 CCC，不是为了教别人怎么上岸，而是为了把混乱、焦虑和零散行动先整理清楚。
 ```
 
-## 小红书 / 公众号短文案
+### 正文框架
 
 ```text
-我做了一个开源求职工具：CCC，Career Cognition Compass。
+我做了一个开源项目：CCC，Career Cognition Compass。
 
-它不是帮你一键生成简历的工具，而是帮你先把混乱的自己整理清楚。
+它不是一键简历生成器。
+它更像一个求职认知罗盘：
 
-比如：
-- Gap 很久，不知道还能投什么；
-- 想转行，但不知道经历能迁移到哪里；
-- 在职很累，不知道该不该离职；
-- 看了很多求职内容，反而更焦虑；
-- 投完简历后一直等消息，不知道空档期该做什么；
-- 面试后只记得几个关键词，想复盘但不知道怎么整理。
+- 你可以发一段很乱的话；
+- 它先帮你整理事实、缺口和本轮主线；
+- 如果你想转行，它会帮你看经历能迁移到哪里；
+- 如果你有项目但说不清楚，它会先深挖事实，不急着包装；
+- 如果你看到 JD，它会先判断岗位类型和核心能力；
+- 如果你面试后收到反馈，它会帮你整理成下一次能改进的资料卡；
+- 如果你在等消息，它会把空档期拆成 5-20 分钟能做的小动作。
 
-CCC 会把一段混乱语言拆成事实、缺口、方向和下一步小动作。
+我希望它解决的不是“怎么收藏更多教程”，而是：
+信息很多，但我今天到底先做什么？
 
-它更像一个求职前的认知罗盘：不替你做决定，但帮你少一点被信息推着走。
+目前它可以配合：
+- Codex / Claude Code：适合使用本地 skill；
+- WorkBuddy：适合国内用户配置 Agent；
+- 普通 LLM：复制 prompt 也能开始。
+
+这个项目仍在测试和迭代中，不承诺 offer，也不鼓励包装不存在的经历。
+但如果你也处在 Gap、转行、在职疲惫、投递焦虑或不知道怎么介绍自己的阶段，可以先从一句很乱的话开始。
+```
+
+### 结尾
+
+```text
+项目开源在 GitHub：把仓库链接放这里。
+
+不需要看太多教程，也不需要一开始就准备很多材料。
+先说出现在最乱的一句话，再做今天能做的最小一步。
+```
+
+## 公众号 / 长文引子
+
+```text
+我做 CCC 的初衷，是想把自己在 Gap、求职、项目推进和情绪焦虑里的混乱感整理出来。
+
+我不是一个擅长修改简历、投递简历、推销自己的人，目前也还没找到工作。所以 CCC 不是一个“我教你如何找到工作”的项目，而是我把自己的经验、困惑和行动方法整理成一个可以复用的开源工具。
+
+它希望帮助处在类似困境里的人，少一点被社交媒体、求职软件和简历生成工具推着走，多一点知道自己真正需要什么、今天能做什么的感觉。
+```
+
+## LinkedIn / English Intro
+
+```text
+CCC (Career Cognition Compass) is an open-source career reflection and job-search workflow. It is designed for people who feel unclear about their direction, especially during a career gap, career transition, early-career search, or a period of interview anxiety. Instead of generating a full resume immediately, CCC helps users organize scattered input into facts, gaps, transferable skills, JD focus, interview review notes, and small next actions. It can be used with general LLMs, local coding agents, or WorkBuddy-style agent setups. The project is still being tested and iterated, and it does not promise job-search outcomes.
+```
+
+## Demo Caption
+
+```text
+From a messy job-search paragraph to one clear thread, one project fact card, and one next action.
 ```
 
 ## 群聊转发版
@@ -135,19 +156,6 @@ From career chaos to clarity and next actions
 - “Gap 也能轻松上岸”
 - “不会包装也能骗过 HR”
 - “自动生成完美人设”
+- “适用于所有大模型”
 
 CCC 不承诺结果，也不鼓励编造经历。它更适合被介绍为一个帮助使用者整理求职认知、项目事实和行动节奏的开源工具。
-
-## 推荐行动
-
-如果你只想试一下：
-
-1. 打开 [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
-2. 复制全文到常用大模型。
-3. 发送一段混乱但已脱敏的求职状态。
-
-如果你想部署给国内用户：
-
-1. 打开 [workbuddy/system-prompt.md](workbuddy/system-prompt.md)。
-2. 复制到 WorkBuddy 对话型 Agent。
-3. 按 [workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md) 测试。
