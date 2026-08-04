@@ -10,6 +10,14 @@ description: >-
 
 Turn a JD or target company into a concise preparation card. Use current source material when possible; do not rely on vague role stereotypes.
 
+## Shared Rule Versions
+
+- SHARED_RULE focus-control v1
+- SHARED_RULE certainty-calibration v1
+- SHARED_RULE profile-persistence v1
+
+Use `core/focus-control.md` to answer the requested JD/company deliverable first, `core/certainty-calibration.md` to avoid overstating fit, and `core/profile-persistence.md` when next-round interview profile context is supplied.
+
 ## Workflow
 
 1. **Confirm source.** Prefer the user's JD, company page, recruiter message, or recent role page. If current requirements matter and no material is provided, browse or ask for the latest source.
@@ -24,6 +32,7 @@ Turn a JD or target company into a concise preparation card. Use current source 
 10. **Calibrate tone and English wording.** If the output includes resume angles, interview prep notes, English answers, English self-introduction, LinkedIn wording, or an English-required role, check for over-certain claims and stiff translated English.
 11. **Prepare candidate reverse questions.** Give practical, role-level questions the user can ask the interviewer without sounding grandiose.
 12. **Adjust by interviewer role.** If the user knows the interviewer type, tailor answer focus by role; if not, provide a compact role-focus map.
+13. **Keep output focused.** Use one main card based on the user's requested deliverable. Do not output every JD, resume, interview, reverse-question, and profile section unless the user asks to expand.
 
 ## Role Type Classification
 
@@ -258,6 +267,7 @@ Recommended question directions:
 Rules:
 
 - Give 2-4 questions, not a long list.
+- Choose 2-4 from the recommended directions; do not force all four directions into every answer.
 - Do not make reverse questions too big, such as company strategy, market vision, organization politics, or abstract industry judgment, unless the role level and interview context justify it.
 - Prefer questions that help the user understand expectations, process, growth, and capability priorities.
 - If the interviewer is HR, prioritize process, team expectations, and role basics. If the interviewer is the hiring manager, prioritize 3-month expectations and key capability. If the interviewer is business/technical, prioritize capability and work context.
@@ -265,6 +275,8 @@ Rules:
 - Salary, benefits, overtime, and offer details can be asked at the appropriate HR stage, but do not make them the default reverse questions.
 
 ## Output Shape
+
+Default to only the sections needed for the requested deliverable. Use the full structure below only when the user asks for complete JD/company prep:
 
 ```text
 JD / 公司准备卡
@@ -297,6 +309,10 @@ JD / 公司准备卡
 ## Version Record
 
 ```text
+v0.1.6 / 2026-08-04
+- Added shared rule markers and focus-control output priority.
+- Clarified reverse questions should choose 2-4 useful role-level questions from the four recommended directions, not force every direction each time.
+
 v0.1.5 / 2026-08-04
 - Added confidence and English tone prep so JD-based resume angles and interview materials avoid over-certain claims.
 - Added natural, speakable English guidance for English interviews and English-required roles.

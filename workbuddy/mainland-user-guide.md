@@ -165,7 +165,9 @@ project_state_records
 hard_skill_kb
 interview_question_bank
 interviewer_feedback_signals
-candidate_interview_profile
+candidate_interview_profile_base
+candidate_interview_profile_by_role_family
+candidate_interview_profile_patch
 repeated_feedback_tracker
 acronym_glossary
 positioning_cards
@@ -205,7 +207,7 @@ focus_control_cards
 我刚面试完，面试官反馈说我 B 端产品经验不足。
 ```
 
-期望：把反馈当成信号，不当成最终评价；整理对简历、面试回答、JD 方向和知识库的影响；更新候选人面试背景卡，方便二面/三面继承改进；如果用户提到 HR、业务、技术等面试官角色，要分别调整回答侧重点；结尾提醒用户不要停留在已发生的面试太久，转向下一次机会或一个查缺补漏动作。
+期望：把反馈当成信号，不当成最终评价；整理对简历、面试回答、JD 方向和知识库的影响；更新候选人面试资料卡补丁，方便二面/三面继承可复用证据、排除不该继承的不足；如果用户提到 HR、业务、技术等面试官角色，要分别调整回答侧重点；结尾提醒用户不要停留在已发生的面试太久，转向下一次机会或一个查缺补漏动作。
 
 ```text
 我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。
@@ -244,10 +246,10 @@ focus_control_cards
 期望：输出语气校准卡和英文面试表达卡；不把 working communication 写成 native / fluent；英文表达自然、简洁、可说出口，不逐句硬翻译中文。
 
 ```text
-我最近两周投了 40 个岗位，收到 5 个面试邀请：3 个是用户运营，1 个产品助理，1 个项目执行。没回复的大多是高级产品经理和 AI Agent 工程师。请帮我判断下一批投什么更容易有回复。
+我最近两周投了 40 个岗位。A 简历投了 20 个用户运营，收到 3 个邀约；B 简历投了 10 个产品助理，收到 1 个邀约；C 简历投了 10 个 AI Agent 工程师和高级产品经理，收到 0 个邀约。另有 1 个项目执行邀约来自朋友内推，不在这 40 个冷投里。请帮我做面试邀约信号画像。
 ```
 
-期望：输出面试邀约信号画像，总结邀约 JD 共性、相对高/低回复信号、样本边界和下一批小规模投递验证，不承诺精确概率。
+期望：输出面试邀约信号画像，展示分子/分母、本批次观察回复率、邀约 JD 共性、混杂因素、相对高/低回复信号和下一批小规模投递验证，不承诺未来精确概率。
 
 ```text
 我担心 token 太多，之后我会贴 JD 和候选人背景卡。请用最省 token 的方式帮我改简历和准备面试，不要每次重写所有内容。

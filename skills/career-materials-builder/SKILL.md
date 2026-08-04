@@ -10,6 +10,14 @@ description: >-
 
 Produce small, editable job-search materials after enough intake exists. Materials are outcomes of clarification, not the default starting point.
 
+## Focus Rule
+
+- SHARED_RULE focus-control v1
+- SHARED_RULE certainty-calibration v1
+- SHARED_RULE profile-persistence v1
+
+Use the user's requested material as the active deliverable. Output one material patch or one template first, then at most one support reminder or next action. Park resume, portfolio, LinkedIn, greeting, interview, and persona branches that the user did not ask to expand.
+
 ## Explicit Resume Requests
 
 If the user starts with "改简历", "优化简历", "生成简历", "帮我看简历", or similar wording, respond to that request immediately. Do not route them back to broad career clarification first.
@@ -473,6 +481,9 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.10 / 2026-08-04
+- Added shared focus rule so materials generation starts from the user's requested deliverable and parks unrelated resume, portfolio, LinkedIn, greeting, interview, or persona branches.
+
 v0.3.9 / 2026-08-04
 - Added certainty tone calibration for resumes, profiles, platform materials, and interview prep documents.
 - Added natural English interview and English-required-role wording rules so English output is speakable, calibrated, and not a direct translation of Chinese materials.

@@ -143,24 +143,30 @@ Output:
 
 ```text
 面试邀约信号画像
-├─ 样本边界: 投递数量 / 时间窗口 / 渠道 / 简历版本 / 数据缺口
-├─ 已收到邀约的岗位族群:
-├─ JD 工作重心: 执行 / 运营 / 产品 / 项目协调 / 数据 / 技术 / 混合 / 不明确
-├─ 共同关键词与交付物:
-├─ 市场正在识别到的用户信号:
-├─ 相对高回复信号:
-├─ 相对低回复或暂未验证信号:
-├─ 下一批优先投递:
-├─ 小规模验证组合:
-└─ 今天 5-20 分钟动作:
+├─ 时间窗口:
+├─ 渠道:
+├─ 简历版本:
+├─ 岗位族群:
+├─ 投递数:
+├─ 邀约数:
+├─ 本批次观察回复率:
+├─ 样本量等级:
+├─ 相对信号:
+├─ 可能混杂因素:
+├─ 不足以判断:
+└─ 下一批验证组合:
 ```
 
 Rules:
 
 - Treat invitation data as a market signal, not a final career decision.
-- Do not promise exact reply probability such as "80%". Use relative levels like higher / medium / lower confidence, and explain sample size.
+- Separate three things: invitation mix, observed reply rate, and future reply hypothesis.
+- Always show numerator and denominator, for example `3/20` or `5 invitations / 40 applications`. Percentages are optional and must be labeled as observed in this batch, not future probability.
+- Do not promise exact future reply probability such as "80%". Use relative levels like higher / medium / lower confidence, and explain sample size.
 - Do not overfit one or two invitations. Mark them as `early_signal`; only repeated invitations from similar JDs become a stronger pattern.
 - Compare invitations against no-response applications when available. If the user only provides invitations, state that the profile is biased toward positive signals.
+- If channel, resume version, seniority, city, company type, or timing are mixed, mark them as confounders instead of merging everything into one signal.
+- Do not merge different resume versions into one conclusion. Analyze them separately or mark the denominator as not comparable.
 - Classify JD role type by responsibilities and deliverables, not only title. If needed, use `jd-company-prep` as helper.
 - Separate "more likely to get replies" from "better long-term fit". Include the user's own preference, energy, cashflow deadline, and skill evidence before suggesting priority.
 - Recommend small-batch experiments, for example 5-10 applications per role family or resume version, rather than unlimited mass application.
@@ -236,6 +242,10 @@ For weekly review:
 ## Version Record
 
 ```text
+v0.2.7 / 2026-08-04
+- Revised interview invitation signal profiling to separate invitation mix, observed batch reply rate, and future hypothesis.
+- Added numerator/denominator, sample-size level, confounders, resume-version isolation, and 5-10 application validation batches.
+
 v0.2.6 / 2026-08-04
 - Added anxiety noise-reduction cards for waiting, repeated refreshing, social-media overwhelm, and job-search comparison spirals.
 - Clarified that anxious users should receive controllable/uncontrollable sorting, information-intake boundaries, and one 5-20 minute action instead of motivational slogans.

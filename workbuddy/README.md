@@ -121,7 +121,9 @@ temporary_draft_mode
 hard_skill_kb
 interview_question_bank
 interviewer_feedback_signals
-candidate_interview_profile
+candidate_interview_profile_base
+candidate_interview_profile_by_role_family
+candidate_interview_profile_patch
 interviewer_role_focus_cards
 repeated_feedback_tracker
 interview_answer_cards
@@ -151,7 +153,9 @@ interview_invitation_signal_profile
 - `hard_skill_kb`：技能、工具、证据、缺口；
 - `interview_question_bank`：面试关键词、可能题型、考察能力、回答状态和下次准备动作；
 - `interviewer_feedback_signals`：面试官/HR 反馈原话、反馈类型、可能影响和后续简历/面试/JD 调整；
-- `candidate_interview_profile`：候选人面试背景卡，沉淀已验证优势、高频被质疑点、上一轮反馈、已做改进、下一轮重点和不应继承的偏向；
+- `candidate_interview_profile_base`：候选人稳定背景层，沉淀跨岗位可复用的背景、优势、证据和通用表达风险；
+- `candidate_interview_profile_by_role_family`：岗位族群层，记录该岗位族群的优势、担忧、最近反馈、下一轮重点、缺失证据和不应继承的反馈；
+- `candidate_interview_profile_patch`：每次面试复盘后的更新补丁，普通 WorkBuddy 对话默认 `persistence_mode: output_only`；
 - `forward_focus_reminder`：面试复盘收束提醒，把已发生的面试当作数据点，转向下一次机会或一个查缺补漏动作；
 - `interviewer_role_focus_cards`：按 HR、用人经理、业务、技术、高管、Founder、跨部门或同级面试官区分回答侧重点；
 - `feedback_reliability_records`：反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历；
@@ -169,7 +173,7 @@ interview_invitation_signal_profile
 - `post_application_idle_plan`：投完简历但未收到反馈时的空档期计划，包括投递质量复盘、JD 共性、可复用资产、信息摄入边界和当天 5-20 分钟动作。
 - `anxiety_noise_reduction_cards`：焦虑降噪卡，记录焦虑触发源、可控/不可控、暂停继续做的事、信息摄入边界和当天 5-20 分钟动作；
 - `token_saving_cards`：Token 节省卡，记录本轮只处理什么、复用哪些已有卡片、不重复输出什么、哪些是本轮新增/差异；
-- `interview_invitation_signal_profile`：面试邀约信号画像，记录已收到邀约的岗位族群、JD 工作重心、共同关键词、相对高/低回复信号、样本边界和下一批小规模投递验证。
+- `interview_invitation_signal_profile`：面试邀约信号画像，记录时间窗口、渠道、简历版本、岗位族群、投递数、邀约数、本批次观察回复率、样本量等级、混杂因素和下一批小规模验证。
 
 ## 更新流程
 

@@ -10,6 +10,14 @@ description: >-
 
 Clarify what the user is actually trying to solve before recommending jobs. Treat "finding a job" as a possible surface request, not the whole diagnosis.
 
+## Shared Rule Versions
+
+- SHARED_RULE focus-control v1
+- SHARED_RULE certainty-calibration v1
+- SHARED_RULE profile-persistence v1
+
+Use `core/focus-control.md` to keep one active thread, park extra branches, and avoid turning direction clarification into a full materials package.
+
 ## Workflow
 
 1. **Name the real problem.** Check whether the user is seeking income, safety, direction, identity, confidence recovery, escape from current work, visa/graduation timing, or fast employment.
@@ -19,6 +27,7 @@ Clarify what the user is actually trying to solve before recommending jobs. Trea
 5. **Contain over-divergence.** If the user brings too many roles, skills, materials, tools, or plans at once, group them and choose one main thread.
 6. **Reduce noise.** If the user is overloaded by social media or advice, separate useful signal from anxiety-generating content.
 7. **Avoid premature certainty.** Offer hypotheses and validation actions, not life conclusions.
+8. **Keep focus.** Output the requested clarification first, then one necessary support card and one next action. Park resume, skill, platform, or long-term plan branches unless the user asks to expand.
 
 ## Divergence Control
 
