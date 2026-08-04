@@ -1,50 +1,62 @@
-# CCC
+# CCC — Career Cognition Compass
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Quickstart](https://img.shields.io/badge/start-QUICKSTART-blue.svg)](QUICKSTART.md)
 
 CCC 是 **Career Cognition Compass** 的缩写。
 
-它不是一键生成简历的工具，而是一个开源的 AI 求职澄清与行动辅导项目：帮你把 Gap、转行、在职疲惫、JD 焦虑、面试复盘和信息爆炸里的混乱语言，整理成事实、选择和下一步小动作。
+它不是一键生成简历的工具，而是一个开源的 AI 求职澄清与行动辅导项目：帮你从信息爆炸、Gap、转行、在职疲惫、JD 焦虑和面试复盘里，整理出事实、选择和下一步小动作。
+
+## 你可以直接这样开始
+
+不需要先写结构化表格。你可以发一段很乱的话，也可以一句一句来：
 
 ```text
-输入：
-gap 一年 运营 ai 转行 不知道投什么
-
-输出：
-事实重点 / 信息缺口 / 可迁移能力 / 5-20 分钟下一步
+我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
 ```
 
-## 30 秒理解
+```text
+我在职，但每天很累，下班后恢复不过来，也不知道该不该离职。
+```
 
-CCC 适合你还没完全说清楚自己的时候使用。
+```text
+这是一个产品运营 JD，帮我看硬技能、岗位类型和我应该怎么准备。
+```
 
-它会先问：
+CCC 会先抓住本轮主线，暂存其他分支，再给你一个能继续推进的小动作。
 
-- 你现在处在什么状态？
-- 你做过什么，有哪些证据？
-- 哪些经历能迁移，哪些还只是想法？
-- 这个 JD 真正看重哪 2-3 个能力？
-- 今天最小能做的一步是什么？
+## 它会帮你做什么
 
-它不会默认：
+- 把混乱输入整理成事实、缺口、暂存分支和下一步。
+- 根据项目、工作任务和最近愿意继续做的事，形成可验证的定位假设。
+- 深挖项目经历，区分“亲自做过”“参与过”“只是了解”和“还没有证据”。
+- 拆解 JD 的岗位类型和核心能力，避免只按岗位标题改材料。
+- 做简历补丁、英文表达、面试准备和面试复盘，但不默认替你编造或夸大。
+- 在投递后、等待面试反馈、Gap 焦虑或信息过载时，帮你回到可控的小动作。
 
-- 一上来生成完整简历；
-- 编造经历、数据、证书或项目结果；
-- 把参与写成主导，把了解写成熟练；
-- 替你决定离职、裸辞、offer 或方向；
-- 用一堆材料制造新的焦虑。
-
-## 3 分钟开始
+## 最快使用方式
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| 普通大模型 | 想马上试用的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
+| ChatGPT / 普通 LLM | 想马上试用的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
 | Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](SKILLS.md) 和 [skills/](skills/) |
 | WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
-| 飞书入口 | 想把飞书作为聊天入口的人 | 查看 [飞书 × WorkBuddy 配置模板](workbuddy/feishu-config.md) |
 
 更详细的入口选择见：[QUICKSTART.md](QUICKSTART.md)。
+
+## 隐私提醒
+
+不要发送身份证、真实电话、私人邮箱、offer、合同、薪资截图、完整简历、完整面试记录或公司内部信息。可以先用“某平台”“某公司”“某岗位”“联系方式已脱敏”替代。
+
+CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
+
+## 它不会做什么
+
+- 不承诺帮你拿到 offer。
+- 不替你决定离职、裸辞、接受 offer 或职业方向。
+- 不鼓励编造经历、数据、证书、项目结果或“完美人设”。
+- 不把一次面试反馈直接当成你的长期缺陷。
+- 不用一堆看似有用的材料制造新的焦虑。
 
 ## Before / After
 
@@ -108,6 +120,7 @@ flowchart TD
 - Skills 目录：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
+- 纵向可用性测试：[usability/README.md](usability/README.md)
 - Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/result-schema.json](evals/result-schema.json)、[evals/rubrics.json](evals/rubrics.json)
 - 真实 Smoke Report 输入模板：[evals/inputs/README.md](evals/inputs/README.md)
 - Demo：[DEMO.md](DEMO.md)
@@ -118,7 +131,9 @@ flowchart TD
 
 - [latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
 
-## 本地校验
+## 开发者与测试
+
+CCC 的工程化测试信息放在这里，避免第一次打开仓库的人被 Eval、Schema 和 Runner 细节挡住。
 
 ```bash
 node scripts/check-evals.mjs
@@ -170,12 +185,6 @@ node scripts/generate-smoke-report.mjs \
 ```
 
 填写后的 `*.input.json` 默认不提交；只有确认回复为合成、脱敏测试数据时，才提交生成的 `evals/results/<adapter>/*.json`。在没有真实模型输出前，不要生成或提交 Smoke Report。
-
-## 边界
-
-CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
-
-不要在公开仓库、公开 issue 或公开对话中提交真实简历、电话、邮箱、身份证、offer、合同、薪资截图、完整面试记录或公司内部信息。
 
 ## 开源
 
