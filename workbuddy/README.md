@@ -99,6 +99,8 @@ offer / 合同 / 薪资截图
 
 复杂材料分轮输出，不要一次生成完整大报告。
 
+如果用户提到 token、额度、上下文太长、回复太长或手机端超时，进入 Token 节省模式：复用已有卡片，只输出本轮差异、替换段落和下一步。
+
 ## 工作流变量
 
 如果 WorkBuddy 支持变量，可以使用：
@@ -123,11 +125,15 @@ candidate_interview_profile
 interviewer_role_focus_cards
 repeated_feedback_tracker
 interview_answer_cards
+interview_expression_cards
 interview_experience_signals
 acronym_glossary
+recent_work_task_signals
+focus_control_cards
 positioning_cards
 current_action_plan
 post_application_idle_plan
+interview_invitation_signal_profile
 ```
 
 变量用途：
@@ -141,18 +147,29 @@ post_application_idle_plan
 - `project_evidence_gaps`：缺失数据、缺失证据和待确认信息；
 - `project_state_records`：按单个项目记录 DISCOVERED、PARTIALLY_MAPPED 或 EVIDENCE_READY，避免只给用户一个整体项目状态；
 - `temporary_draft_mode`：用户赶投递时是否允许保守临时表达；
+- `jd_role_type_cards`：JD 岗位类型判断卡，记录岗位族群、工作重心、判断依据、置信度、容易误判和准备重点；
 - `hard_skill_kb`：技能、工具、证据、缺口；
 - `interview_question_bank`：面试关键词、可能题型、考察能力、回答状态和下次准备动作；
 - `interviewer_feedback_signals`：面试官/HR 反馈原话、反馈类型、可能影响和后续简历/面试/JD 调整；
 - `candidate_interview_profile`：候选人面试背景卡，沉淀已验证优势、高频被质疑点、上一轮反馈、已做改进、下一轮重点和不应继承的偏向；
+- `forward_focus_reminder`：面试复盘收束提醒，把已发生的面试当作数据点，转向下一次机会或一个查缺补漏动作；
 - `interviewer_role_focus_cards`：按 HR、用人经理、业务、技术、高管、Founder、跨部门或同级面试官区分回答侧重点；
 - `feedback_reliability_records`：反馈来源类型、可信度和动作等级，避免模糊反馈直接改主简历；
 - `repeated_feedback_tracker`：同类反馈出现次数、来源岗位/JD、是否升级为 pattern；
 - `interview_answer_cards`：下次面试回答卡，最多保留 1-3 个高影响问题；
+- `interview_expression_cards`：面试表达结构卡，记录 JD 契合卖点、自我介绍框架、2 个岗位契合能力、3-4 条能力验证、先总后分结构、STAR 的 Situation、条件分支和第二语言表达练习；
+- `tone_calibration_cards`：语气校准卡，记录简历、profile、平台材料和面试准备中可以确定说、需要降级说、待确认和不建议使用的过度肯定表达；
+- `english_interview_expression_cards`：英文面试表达卡，记录 Plain English version、Natural phrases、English ability boundary 和可说出口的练习提示；
+- `interview_reverse_question_cards`：面试反问卡，记录 2-4 个岗位级反问问题，例如 3 个月期望、后续流程、成长路径和关键能力；
 - `interview_experience_signals`：面试问题是否匹配 JD、职责是否清楚、是否有模糊职责或过度要求；
+- `recent_work_task_signals`：近期工作行为定位卡，记录用户最近实际在做、愿意继续做、做完更有掌控感或消耗的工作任务，并转成定位假设；
+- `focus_control_cards`：发散收束卡，记录当前分支、本轮主线、暂存分支、本轮不处理事项和下一步动作；
 - `positioning_cards`：职业定位 / 候选人叙事；
 - `current_action_plan`：不超过 14 天的小计划。
 - `post_application_idle_plan`：投完简历但未收到反馈时的空档期计划，包括投递质量复盘、JD 共性、可复用资产、信息摄入边界和当天 5-20 分钟动作。
+- `anxiety_noise_reduction_cards`：焦虑降噪卡，记录焦虑触发源、可控/不可控、暂停继续做的事、信息摄入边界和当天 5-20 分钟动作；
+- `token_saving_cards`：Token 节省卡，记录本轮只处理什么、复用哪些已有卡片、不重复输出什么、哪些是本轮新增/差异；
+- `interview_invitation_signal_profile`：面试邀约信号画像，记录已收到邀约的岗位族群、JD 工作重心、共同关键词、相对高/低回复信号、样本边界和下一批小规模投递验证。
 
 ## 更新流程
 
@@ -174,6 +191,7 @@ post_application_idle_plan
 - 是否一上来就生成简历；
 - 是否能处理很乱的输入；
 - 是否会自动判断职业定位需求；
+- 是否能根据用户最近实际在做或愿意继续做的工作任务，输出近期工作行为定位卡，而不是把爱好直接当职业结论；
 - 是否能在项目事实不清晰时先做项目盘点和单项目深挖；
 - 是否会标记 DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY，并阻止未完成项目进入最终材料；
 - 是否知道 EVIDENCE_READY 不等于必须有量化成绩；
@@ -181,8 +199,15 @@ post_application_idle_plan
 - 是否会主动保护隐私；
 - 是否能处理 JD、面试复盘、在职疲惫和 Gap；
 - 是否能处理投完简历后的空档期，不把等待变成反复刷新、无目的刷社媒或无限改简历；
+- 是否能在用户焦虑、比较别人或刷社媒更慌时，输出焦虑降噪卡，而不是鸡汤式安慰；
+- 是否能在用户要求省 token 或手机端容易超时时，复用已有状态卡，只输出差异补丁和下一步；
+- 是否能在用户同时发散到多个岗位、技能、材料、平台或计划时，先收束到 1 个本轮主线，而不是展开所有分支；
+- 是否能根据已收到的面试邀约、JD 和无回复样本总结回复信号，并用相对高/中/低而不是精确概率判断下一批投递方向；
 - 是否能把“xx 方面经验不足”等面试官反馈转成简历、面试回答、JD 方向和知识库更新；
 - 是否能根据 HR、用人经理、业务、技术等不同面试官角色调整回答侧重点，同时保持事实不变；
+- 是否能在用户回答太散、细节太多、STAR 用不好或英文表达不自然时，输出面试表达结构卡；
+- 是否能在生成简历、profile 或面试准备时避免过度肯定，并在英文面试/英文能力岗位中给自然、不直译的英文表达；
+- 是否能在用户准备面试反问时，输出岗位级小问题，而不是宏大的公司战略问题；
 - 是否能把 HR 转述、泛化拒信或用户自我感觉先降级为低/未知可信度，不直接改主简历；
 - 是否在 WorkBuddy / 手机端短回复场景下保持短回复，不一次输出过长内容；
 - 是否不会编造经历、证书、数据或陌生身份。

@@ -4,31 +4,32 @@
 
 目前包含：
 
-- `cases.json`：从 WorkBuddy 23 个手工测试用例整理出的机器可读合约。
+- `cases.json`：从 WorkBuddy 32 个手工测试用例整理出的机器可读合约。
 - `schema.json`：Eval suite 的结构说明。
 - `result-schema.json`：已执行结果报告的结构说明。
 - `rubrics.json`：语义断言的评分口径。
+- `inputs/`：真实平台 Smoke Report 的输入模板，填写后的 `.input.json` 默认不提交。
 - `fixtures/`：用于验证确定性 runner 的示例助手输出，不代表真实平台测试结果。
 
 当前状态：
 
 | 类型 | 数量 | 说明 |
 | --- | ---: | --- |
-| 手工测试场景 | 23 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
-| 机器可读合约 | 23 | 当前文件：[cases.json](cases.json) |
-| 已登记语义断言 | 123 | 当前文件：[rubrics.json](rubrics.json) |
-| 已人工细化核心 Rubric | 15 | 当前文件：[rubrics.json](rubrics.json) |
+| 手工测试场景 | 32 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
+| 机器可读合约 | 32 | 当前文件：[cases.json](cases.json) |
+| 已登记语义断言 | 175 | 当前文件：[rubrics.json](rubrics.json) |
+| 已人工细化核心 Rubric | 67 | 当前文件：[rubrics.json](rubrics.json) |
 | 确定性 Runner | 0.2.0 | 当前文件：[scripts/lib/deterministic-eval.mjs](../scripts/lib/deterministic-eval.mjs) |
 | 结果报告 Schema | 0.2.0 | 当前文件：[result-schema.json](result-schema.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
-| 声明唯一覆盖 | 0/23 | 包含结构合法但不可复算的 `schema_only` 报告 |
-| Runner 执行覆盖 | 0/23 | 只统计 `runner_generated` 和 `recomputed` 报告 |
-| 公开平台覆盖 | 0/23 | 只统计非本地 adapter 的 Runner 执行结果 |
-| Runner 唯一通过 | 0/23 | Runner 执行结果中至少一次确定性通过才计入 |
-| 公开唯一通过 | 0/23 | 公开平台中至少一次确定性通过才计入 |
-| 已验证 Runner 通过 | 0/23 | 只有 `recomputed` 结果计入 |
-| 公开已验证通过 | 0/23 | 公开平台中只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/32 | 包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/32 | 只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/32 | 只统计非本地 adapter 的 Runner 执行结果 |
+| Runner 唯一通过 | 0/32 | Runner 执行结果中至少一次确定性通过才计入 |
+| 公开唯一通过 | 0/32 | 公开平台中至少一次确定性通过才计入 |
+| 已验证 Runner 通过 | 0/32 | 只有 `recomputed` 结果计入 |
+| 公开已验证通过 | 0/32 | 公开平台中只有 `recomputed` 结果计入 |
 | 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -76,6 +77,72 @@ node scripts/check-evals.mjs
 - 当结果报告包含 `assistant_output` 时，`check-evals.mjs` 会重新计算 Hash、metrics 和全部确定性断言。
 
 `check-evals.mjs` 只实现了 [schema.json](schema.json) 与 [result-schema.json](result-schema.json) 当前使用到的 JSON Schema 子集。不要在 schema 中新增 `oneOf`、`anyOf`、`allOf`、`if/then/else`、`format`、`unevaluatedProperties` 等关键字，除非同步扩展检查脚本。
+
+## 真实平台 Smoke Report
+
+Smoke Report 用来记录某个平台在 5 个核心 case 上的真实助手回复。当前仓库还没有正式真实报告：
+
+```text
+结果报告：0
+公开平台覆盖：0/32
+公开唯一通过：0/32
+公开已验证通过：0/32
+```
+
+生成流程：
+
+```bash
+cp evals/inputs/chatgpt-smoke.template.json \
+  evals/inputs/chatgpt-smoke.input.json
+
+# 手动填入真实平台模型名称和五个真实助手回复
+
+node scripts/generate-smoke-report.mjs \
+  evals/inputs/chatgpt-smoke.input.json
+```
+
+模板中的每个 case 都包含来自 [cases.json](cases.json) 的原始 `input`。测试时应逐条把这些 `input` 发送给正在运行 CCC 的平台，再把平台回复填回 `assistant_output`。
+
+`generate-smoke-report.mjs` 会检查：
+
+- 模板占位符已替换；
+- `adapter`、`model` 和 40 位 `source_commit` 已填写；
+- 5 个必测 case 全部存在且不重复；
+- 每个 case 的 `input` 与 [cases.json](cases.json) 完全一致；
+- 每个 `assistant_output` 都是非空字符串；
+- 报告不会静默覆盖已有文件。
+
+脚本会强制 `include_assistant_output: true`，因此生成的报告为 `verification_level: recomputed`。Runner 退出码为 `1` 时仍会保存报告，因为真实平台可能存在部分确定性失败；退出码为 `2` 时不会保存报告。
+
+默认输出：
+
+```text
+evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
+```
+
+如果当天同名报告已经存在，指定新文件名：
+
+```bash
+node scripts/generate-smoke-report.mjs \
+  evals/inputs/chatgpt-smoke.input.json \
+  --output evals/results/chatgpt/2026-08-04-smoke-2.json
+```
+
+安全边界：
+
+- `*.template.json` 可以提交；
+- 填写后的 `*.input.json` 默认被 `.gitignore` 忽略；
+- Result Report 可以提交，但必须只包含合成、脱敏测试数据；
+- 不允许使用真实求职材料、真实联系方式、真实 offer、合同、薪资截图或完整面试记录。
+
+生成后运行：
+
+```bash
+node scripts/check-evals.mjs
+node scripts/check-markdown-links.mjs
+node scripts/test-deterministic-runner.mjs
+git diff --check
+```
 
 ## 确定性 Runner
 

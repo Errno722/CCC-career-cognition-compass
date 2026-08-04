@@ -26,6 +26,11 @@ offers/
 contracts/
 screenshots/
 
+# Smoke report inputs can contain full assistant replies. Keep filled inputs local.
+evals/inputs/*.input.json
+!evals/inputs/*.template.json
+!evals/inputs/README.md
+
 # Avoid accidental upload of personal documents.
 *.pdf
 *.docx

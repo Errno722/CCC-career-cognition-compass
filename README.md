@@ -77,9 +77,15 @@ CCC 应该先整理，而不是直接写简历：
 - 项目经历深挖：先盘点项目，再确认个人贡献、证据和结果边界。
 - 项目事实门禁：`DISCOVERED → PARTIALLY_MAPPED → EVIDENCE_READY`。
 - 能力迁移判断：帮助不知道自己能投什么岗位的人找到可验证方向。
-- JD 与简历补丁：聚焦 JD 的 2-3 个核心能力，避免每次重写整份简历。
-- 面试复盘：整理关键词、不完整问题和面试官反馈，沉淀候选人面试背景卡，并按 HR、业务、技术等面试官角色调整回答侧重点。
+- 近期工作行为定位：根据最近实际在做、愿意继续做或做完更有掌控感的工作任务，形成定位假设；不把爱好直接当职业结论。
+- 发散收束：当用户同时想投很多方向、学很多技能、做很多材料时，先归类分支，只推进 1 个本轮主线。
+- JD 与简历补丁：先判断 JD 岗位类型和工作重心，再聚焦 2-3 个核心能力，避免每次重写整份简历。
+- 面试准备与复盘：整理关键词、不完整问题和面试官反馈，沉淀候选人面试背景卡；按 HR、业务、技术等面试官角色调整回答侧重点；用面试表达结构卡训练清晰回答；自我介绍和面试答案默认给可记忆框架；面试反问卡只给岗位级小问题。
+- 语气校准与英文面试：简历和面试准备避免过度肯定，英文表达不逐句硬翻译，优先给自然、可说出口、可验证的英文框架和短句。
 - 投递后空档期计划：把等待消息的焦虑转成 5-20 分钟小动作。
+- 焦虑降噪：刷社媒更慌、反复刷新、等待反馈或比较别人时，拆出触发源、可控/不可控、信息摄入边界和一个小动作，不灌鸡汤。
+- 面试邀约信号画像：根据已收到的面试邀请、JD 和无回复样本，总结哪些岗位族群更容易得到回复。
+- Token 节省模式：复用已有状态卡、项目卡、主简历和 JD 补丁，只输出差异、替换段落和下一步，减少跨模型或手机端反复消耗。
 - 隐私保护：默认提醒脱敏，不要求真实简历、offer、合同或完整面试记录。
 
 ## 工作流
@@ -90,7 +96,7 @@ flowchart TD
   B --> C["经历事实与项目经历深挖"]
   C --> D["可迁移能力与硬技能知识库"]
   D --> E["方向判断 / JD 分析 / 简历补丁 / 面试准备"]
-  E --> F["14 天内行动计划 / 投递后空档期 / 复盘更新"]
+  E --> F["14 天内行动计划 / 投递后空档期 / 邀约信号画像 / 复盘更新"]
 ```
 
 ## 配套资源
@@ -102,6 +108,7 @@ flowchart TD
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
 - Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/result-schema.json](evals/result-schema.json)、[evals/rubrics.json](evals/rubrics.json)
+- 真实 Smoke Report 输入模板：[evals/inputs/README.md](evals/inputs/README.md)
 - Demo：[DEMO.md](DEMO.md)
 - 传播素材：[SHARE.md](SHARE.md)
 - 支持与赞赏：[SUPPORT.md](SUPPORT.md)
@@ -124,24 +131,38 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：23
-机器可读合约：23
-已登记语义断言：123
-已人工细化核心 Rubric：15
+手工测试场景：32
+机器可读合约：32
+已登记语义断言：175
+已人工细化核心 Rubric：67
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/23
-Runner 执行覆盖：0/23
-公开平台覆盖：0/23
-Runner 唯一通过：0/23
-公开唯一通过：0/23
-已验证 Runner 通过：0/23
-公开已验证通过：0/23
+声明唯一覆盖：0/32
+Runner 执行覆盖：0/32
+公开平台覆盖：0/32
+Runner 唯一通过：0/32
+公开唯一通过：0/32
+已验证 Runner 通过：0/32
+公开已验证通过：0/32
 语义已审次数：0
 评估对象：assistant_output_only
 ```
+
+生成第一份真实平台 Smoke Report：
+
+```bash
+cp evals/inputs/chatgpt-smoke.template.json \
+  evals/inputs/chatgpt-smoke.input.json
+
+# 手动填入真实平台模型名称和五个真实助手回复
+
+node scripts/generate-smoke-report.mjs \
+  evals/inputs/chatgpt-smoke.input.json
+```
+
+填写后的 `*.input.json` 默认不提交；只有确认回复为合成、脱敏测试数据时，才提交生成的 `evals/results/<adapter>/*.json`。在没有真实模型输出前，不要生成或提交 Smoke Report。
 
 ## 边界
 

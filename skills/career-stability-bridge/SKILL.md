@@ -33,6 +33,28 @@ Identify what most needs stabilization:
 
 ## Common Cards
 
+### Anxiety Noise Reduction
+
+Use when the user says they are anxious, panicking, ashamed, stuck in comparison, doom-scrolling, or unable to start.
+
+```text
+焦虑降噪卡
+├─ 我听到的触发源:
+├─ 可控的 1-2 件事:
+├─ 暂时不可控:
+├─ 今天先停下:
+├─ 信息摄入边界:
+└─ 5-20 分钟动作:
+```
+
+Rules:
+
+- Do not soothe with slogans. Avoid "相信自己", "一切都会好", "你已经很棒了", "别焦虑" as the main response.
+- Name the state without labeling the person. Say "现在像是被等待/比较/信息推着走", not "你太焦虑了".
+- Keep the first output small enough to do while anxious.
+- If the user repeatedly returns to the same worry, gently loop back to the card: what is controllable, what is not, and what is the next small action.
+- If there are signs of crisis, inability to stay safe, severe loss of functioning, abuse, or medical/legal risk, stop career coaching and point to qualified local support.
+
 ### Low-Energy Start
 
 ```text
@@ -93,3 +115,14 @@ Do not tell the user to quit or stay.
 - Warn against deposits, training loans, unpaid trial work, vague pay, and excessive privacy requests.
 - Treat Gap as context, not as a flaw to overexplain in every material.
 - Provide decision support, not final decisions. Do not tell the user to resign, naked-resign, stay, accept an offer, reject an offer, or choose a bridge job as a definitive conclusion.
+
+## Version Record
+
+```text
+v0.1.1 / 2026-08-04
+- Added anxiety noise-reduction cards for anxious, comparison-driven, doom-scrolling, or unable-to-start states.
+- Clarified that support should reduce noise and restore one small controllable action without motivational slogans or therapy framing.
+
+v0.1.0 / 2026-07-29
+- Added low-energy, work anxiety/fatigue, resignation uncertainty, and bridge-work support cards.
+```

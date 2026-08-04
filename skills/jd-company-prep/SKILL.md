@@ -1,7 +1,7 @@
 ---
 name: jd-company-prep
 description: >-
-  JD and target-company preparation for job seekers. Use when the user provides a job description, target company, role page, recruiter message, interview invitation, or asks what hard skills, tools, business topics, technical questions, short-term improvements, resume angles, or company-specific preparation are needed. Browse or request current JD/company materials when requirements may have changed.
+  JD and target-company preparation for job seekers. Use when the user provides a job description, target company, role page, recruiter message, interview invitation, or asks what role type, hard skills, tools, business topics, technical questions, interview answer structure, candidate reverse questions, short-term improvements, resume angles, or company-specific preparation are needed. Browse or request current JD/company materials when requirements may have changed.
 ---
 
 # JD Company Prep
@@ -13,13 +13,65 @@ Turn a JD or target company into a concise preparation card. Use current source 
 ## Workflow
 
 1. **Confirm source.** Prefer the user's JD, company page, recruiter message, or recent role page. If current requirements matter and no material is provided, browse or ask for the latest source.
-2. **Extract requirements.** Separate hard skills, tools/software, domain knowledge, soft requirements, seniority signals, and hidden expectations.
-3. **Decide scope.** If the user only wants JD/company requirements, continue without project mining. If they want fit evaluation, project-case selection, project interview answers, or resume angles using their projects, run the project evidence gate first.
-4. **Match evidence.** Compare with the user's existing evidence without exaggeration.
-5. **Identify gaps.** Mark gaps as `must_fix`, `can_explain`, `not_required_now`, or `needs_confirmation`.
-6. **Plan practice.** Suggest 7-14 day practice actions based on available time.
-7. **Prepare questions.** Generate business interview questions and technical/tool questions separately.
-8. **Adjust by interviewer role.** If the user knows the interviewer type, tailor answer focus by role; if not, provide a compact role-focus map.
+2. **Classify role type.** Before extracting skills, decide what kind of role the JD is actually describing: execution-heavy, operations-heavy, product-heavy, project-coordination-heavy, data/analytics, technical/build, sales/BD, customer success, marketing/brand, functional support, hybrid, or unclear.
+3. **Extract requirements.** Separate hard skills, tools/software, domain knowledge, soft requirements, seniority signals, and hidden expectations.
+4. **Decide scope.** If the user only wants JD/company requirements, continue without project mining. If they want fit evaluation, project-case selection, project interview answers, or resume angles using their projects, run the project evidence gate first.
+5. **Match evidence.** Compare with the user's existing evidence without exaggeration.
+6. **Identify gaps.** Mark gaps as `must_fix`, `can_explain`, `not_required_now`, or `needs_confirmation`.
+7. **Plan practice.** Suggest 7-14 day practice actions based on available time.
+8. **Prepare questions.** Generate business interview questions and technical/tool questions separately.
+9. **Prepare answer structure.** Convert JD requirements into 1-3 selling points, concise bullet answers, STAR context setup, and conditional problem-solving frames.
+10. **Calibrate tone and English wording.** If the output includes resume angles, interview prep notes, English answers, English self-introduction, LinkedIn wording, or an English-required role, check for over-certain claims and stiff translated English.
+11. **Prepare candidate reverse questions.** Give practical, role-level questions the user can ask the interviewer without sounding grandiose.
+12. **Adjust by interviewer role.** If the user knows the interviewer type, tailor answer focus by role; if not, provide a compact role-focus map.
+
+## Role Type Classification
+
+Always classify the JD before telling the user what to prepare. Do not rely on the title alone; responsibilities and deliverables are stronger evidence than title wording.
+
+Use two axes:
+
+```text
+JD 岗位类型判断卡
+├─ 岗位族群: 产品 / 运营 / 项目 / 执行 / 数据 / 技术 / 销售BD / 客户成功 / 市场品牌 / 职能支持 / 混合 / 不明确
+├─ 工作重心: 执行交付 / 运营增长 / 产品需求 / 项目协调 / 数据分析 / 技术实现 / 商务拓展 / 客户服务 / 内容传播 / 流程支持
+├─ 判断依据: 从 JD 原文抽取 2-4 条职责或交付物
+├─ 置信度: high / medium / low
+├─ 容易误判:
+└─ 用户准备重点:
+```
+
+Preparation focus by role type:
+
+```text
+执行岗 / 执行交付
+└─ 准备: 任务拆解、流程细节、交付质量、跟进记录、工具熟练度、如何处理重复但重要的工作。
+
+运营岗 / 运营增长
+└─ 准备: 用户/内容/活动/社群/增长场景、指标意识、复盘方法、数据看板、运营工具和案例。
+
+产品岗 / 产品需求
+└─ 准备: 用户需求、PRD、需求池、优先级、原型工具、验收、上线复盘、跨部门协作。
+
+项目岗 / 项目协调
+└─ 准备: 时间线、风险、资源协调、stakeholder 管理、会议纪要、推进机制、变更处理。
+
+数据岗 / 数据分析
+└─ 准备: 指标口径、SQL/Excel、数据清洗、分析框架、结论表达、业务建议。
+
+技术岗 / 技术实现
+└─ 准备: 技术栈、实现过程、排错、边界、代码/系统证据、不会的部分如何补。
+```
+
+If the JD is hybrid, name the mix instead of forcing one label:
+
+```text
+判断: 产品助理 + 产品执行 + 需求协作
+不是: 纯策略型产品经理
+准备重点: PRD / 需求优先级 / 验收 / Excel 或 SQL / Figma 或 Axure / 飞书或 Jira 协作
+```
+
+If the JD is too vague, output `不明确` and ask for one clarifying item such as complete responsibilities, reporting line, team type, or interview focus.
 
 ## Project Evidence Gate
 
@@ -123,10 +175,100 @@ Rules:
 - If interviewer roles are unknown, prioritize HR, hiring manager, business, and technical lenses for role preparation.
 - Do not claim an interviewer will definitely care about a topic based only on role title.
 
+## Interview Answer Structure Prep
+
+Use this when the user asks how to answer likely interview questions, when the JD includes problem-solving responsibilities, or when the user says they tend to answer too much, too scattered, or too mechanically.
+
+Output:
+
+```text
+面试表达准备卡
+├─ JD 契合卖点: 1-3 个
+├─ 能力 + 简单验证: 3-4 条
+├─ 自我介绍框架: 2 个能力点 + 与目标岗位的契合逻辑
+├─ 可能被问的问题:
+├─ 一句话观点:
+├─ 3-4 条 bullet points: 展开逻辑，不是逐字稿
+├─ Situation 要讲清的背景:
+├─ 条件分支回答:
+├─ 不能夸大的地方:
+├─ 英文 / 第二语言表达提示:
+└─ 5-20 分钟练习:
+```
+
+Rules:
+
+- Prepare around JD-aligned selling points instead of memorizing long scripts.
+- If no JD is available, use only the target role or job family as provisional anchors, mark them as assumptions, and ask for the JD before finalizing answer frames.
+- Do not produce full verbatim scripts by default. Give first-level structure and second-level expansion logic so the user can remember and adapt in the interview.
+- For self-introduction, choose only 2 strongest role-fit abilities, then attach one simple evidence point to each. Do not turn it into a full resume summary.
+- Abstract the user's experience into 3-4 ability + evidence pairs before building answer frames.
+- Keep answers concise: one clear claim, then 3-4 bullets, normally no more than 5 supporting sentences.
+- In STAR answers, do not skip context. Clarify situation, stakes, constraints, and priority before action.
+- For "what if A happens" questions, avoid one-size-fits-all answers. Use a conditional frame: if the cause is B, do C; if the cause is D, do E.
+- For English or second-language interviews, prioritize clear, truthful, natural wording over native-like phrasing. Let the user keep their real personality and professional boundaries.
+- Do not turn this into a long question bank. Give 1-3 high-impact answer frames.
+
+## Confidence And English Tone Prep
+
+Use this whenever JD prep touches resume angles, interview prep documents, self-introduction, English interview, LinkedIn wording, or a JD that asks for English communication.
+
+```text
+语气校准卡
+├─ 可确定表达:
+├─ 需要降级表达:
+├─ 不能过度肯定的地方:
+├─ 英文能力边界:
+└─ 更自然的英文表达:
+```
+
+Rules:
+
+- Do not write the user as a `perfect fit`, `guaranteed match`, `expert`, `native-level`, or `fluent` candidate unless the evidence is explicit.
+- Avoid piling up absolute Chinese claims such as `完全匹配`, `一定能胜任`, `精通`, `显著提升`, or `主导全部`.
+- Keep role-fit claims evidence-calibrated: `有经验`, `接触过`, `参与过`, `负责其中一部分`, `可解释`, `needs evidence`, or `[待确认]`.
+- For English interviews, give speakable English frameworks and phrases. Do not translate Chinese interview answers line by line.
+- Prefer natural English such as `I have worked with...`, `I can explain...`, `I used ... in a project context`, `I am comfortable discussing ... in English`, and avoid stiff textbook sentences.
+
+## Candidate Reverse Questions
+
+Use this when preparing what the user can ask at the end of an interview. Keep questions small, practical, and tied to the role.
+
+Output:
+
+```text
+面试反问卡
+├─ 优先问 2-3 个:
+├─ 团队对这个岗位 3 个月的期望:
+├─ 后续面试流程:
+├─ 岗位未来成长路径:
+├─ 这个岗位最关键的能力:
+└─ 不建议问:
+```
+
+Recommended question directions:
+
+```text
+团队对这个岗位前 3 个月最希望看到什么结果？
+后续面试流程大概是怎样的？
+这个岗位未来可能的成长路径是什么？
+您觉得这个岗位最关键的能力是什么？
+```
+
+Rules:
+
+- Give 2-4 questions, not a long list.
+- Do not make reverse questions too big, such as company strategy, market vision, organization politics, or abstract industry judgment, unless the role level and interview context justify it.
+- Prefer questions that help the user understand expectations, process, growth, and capability priorities.
+- If the interviewer is HR, prioritize process, team expectations, and role basics. If the interviewer is the hiring manager, prioritize 3-month expectations and key capability. If the interviewer is business/technical, prioritize capability and work context.
+- Avoid questions that sound like testing the interviewer, challenging the company, or asking for confidential information.
+- Salary, benefits, overtime, and offer details can be asked at the appropriate HR stage, but do not make them the default reverse questions.
+
 ## Output Shape
 
 ```text
 JD / 公司准备卡
+├─ JD 岗位类型判断:
 ├─ 岗位核心任务:
 ├─ 硬技能:
 ├─ 必备工具/软件:
@@ -137,6 +279,10 @@ JD / 公司准备卡
 ├─ 7-14 天补强动作:
 ├─ 业务面试可能问题:
 ├─ 技术/工具面试可能问题:
+├─ 面试表达准备卡:
+├─ 语气校准卡:
+├─ 英文面试表达卡:
+├─ 面试反问卡:
 └─ 面试官角色准备卡:
 ```
 
@@ -151,6 +297,21 @@ JD / 公司准备卡
 ## Version Record
 
 ```text
+v0.1.5 / 2026-08-04
+- Added confidence and English tone prep so JD-based resume angles and interview materials avoid over-certain claims.
+- Added natural, speakable English guidance for English interviews and English-required roles.
+
+v0.1.4 / 2026-08-04
+- Added practical candidate reverse-question cards focused on 3-month expectations, next interview process, role growth path, and the role's most critical capability.
+- Clarified reverse questions should stay role-level and not become grandiose company-strategy questions.
+
+v0.1.3 / 2026-08-04
+- Added interview answer structure prep: JD-aligned selling points, concise bullet answers, stronger STAR situation setup, conditional problem-solving, and second-language interview expression.
+- Added self-introduction framework guidance: use 2 role-fit abilities and simple evidence instead of a verbatim script or compressed resume.
+
+v0.1.2 / 2026-08-04
+- Added JD role-type classification so users know whether a JD is execution-heavy, operations-heavy, product-heavy, project-coordination-heavy, or hybrid before preparing skills and interview answers.
+
 v0.1.1 / 2026-08-02
 - Added interviewer-role prep cards so HR, hiring manager, business, technical, executive, founder, cross-functional, and peer interviewers get different answer emphasis.
 - Clarified role mappings are preparation heuristics, not facts about the exact interviewer.

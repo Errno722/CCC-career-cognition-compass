@@ -1,6 +1,6 @@
 interface:
   display_name: "Interview Review Miner"
-  short_description: "Turn interview keywords, feedback, interviewer roles, and candidate profile updates into prep actions"
-  default_prompt: "Use $interview-review-miner to review my interview keywords, interviewer feedback, interviewer-role answer focus, candidate interview profile, feedback reliability, repeated signals, skill gaps, and post-interview changes for my resume and interview preparation."
+  short_description: "Turn interview feedback into calibrated answer/profile updates"
+  default_prompt: "Use $interview-review-miner to review my interview keywords, interviewer feedback, answer structure, certainty tone calibration, natural English expression for English interviews, interviewer-role answer focus, candidate interview profile, feedback reliability, repeated signals, skill gaps, post-interview resume/interview changes, and a forward-focus reminder for the next opportunity."
 policy:
   allow_implicit_invocation: true

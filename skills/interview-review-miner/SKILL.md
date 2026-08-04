@@ -1,7 +1,7 @@
 ---
 name: interview-review-miner
 description: >-
-  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers interview keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, build or update a candidate interview profile for second/third interviews, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, adjust resume/JD positioning after interview feedback, evaluate interview/company signals, or decide what to improve before the next interview. For pure waiting, HR follow-up timing, or follow-up wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact interview questions, and do not promise interview outcomes.
+  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, build/update a candidate interview profile for later rounds, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, improve interview answer structure, adjust resume/JD positioning after feedback, evaluate interview/company signals, or decide what to improve before the next interview. Always close reviews by helping the user stop over-focusing on the past interview and shift to the next opportunity or a small gap-closing action. For pure waiting, HR follow-up timing, or wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact questions, and do not promise outcomes.
 ---
 
 # Interview Review Miner
@@ -40,6 +40,8 @@ related_resume_version:
 Do not let feedback from one JD automatically rewrite the neutral resume or contaminate another role family. Reuse facts; reset role-specific emphasis for each new JD.
 
 After each interview review, update a compact `candidate_interview_profile`. This is the reusable background card for second/third interviews and later interview prep. It must summarize stable evidence, recurring concerns, previous improvement actions, and next-round priorities without turning one interviewer's comment into the user's fixed identity.
+
+After each interview review, also close with a compact `forward_focus_reminder`. The reminder should be practical, not sentimental: acknowledge that the review is enough for now, warn the user not to stay too long inside what already happened, and point attention to the next possible opportunity or one gap-closing action.
 
 Also judge source reliability before deciding the action level:
 
@@ -204,6 +206,27 @@ Rules:
 - For second/third interviews, compare the new round with this card and output: `本轮继承 / 本轮不继承 / 需要重置的侧重点 / 面试前最小补强动作`.
 - If missing, create a first draft from known facts and mark unknowns. Do not ask for a long form.
 
+## Forward Focus Reminder
+
+Use this after every interview feedback review, repeated feedback review, or answer-failure review:
+
+```text
+复盘收束提醒 / forward_focus_reminder
+├─ 已经足够复盘的部分:
+├─ 不建议继续反复纠结:
+├─ 下一次机会要带走:
+├─ 需要查缺补漏:
+└─ 今天 5-20 分钟动作:
+```
+
+Rules:
+
+- Do not scold the user for thinking about the interview; simply mark the review boundary.
+- Do not say "move on" in a dismissive way. Say that the interview is now a data point, not a verdict.
+- If the user has a next interview, point the action toward that round.
+- If the user has no next interview, point the action toward one reusable asset, such as a project fact card, one answer card, one hard-skill drill, or one better-targeted JD search.
+- Keep the reminder short. It should help the user exit the loop, not become another long reflection task.
+
 ## Feedback Reliability
 
 Before changing materials or direction, decide how much weight the feedback deserves:
@@ -265,6 +288,43 @@ Output:
 └─ 下次改法:
 ```
 
+## Interview Expression Structure
+
+Use this when feedback or self-review suggests the user answered with too many details, lacked a clear point, used STAR mechanically, became nervous and filled space, or needs to answer in English / a second language without sounding memorized.
+
+Output:
+
+```text
+面试表达结构卡
+├─ JD 契合卖点: 1-3 个，与岗位核心能力对应
+├─ 能力 + 简单验证: 3-4 条，每条只放一个事实证据
+├─ 一句话观点: 先总后分
+├─ 证据 bullet points: 3-4 条，最多 5 句，不写成逐字稿
+├─ Situation 放大: 背景 / 目标 / 限制 / 轻重缓急
+├─ Action 精简: 只讲关键判断和动作，不讲流水账
+├─ 条件分支: 如果 A 因为 B，用 C；如果 A 因为 D，用 E
+├─ Result / Learning: 结果、边界或学到的判断
+├─ 自我介绍框架: 2 个能力点 + 与目标岗位的契合逻辑
+├─ 第二语言表达: 用自己的关键词和短句，不追求母语者腔调
+└─ 练习动作: 5-20 分钟
+```
+
+Rules:
+
+- Start from JD-aligned selling points. Do not let the user answer every question with all details they remember.
+- If no JD is available, do not invent exact JD selling points. Use the target role or job family as provisional anchors, label them as provisional, and ask the user to add the JD when they have it.
+- Do not output full verbatim scripts for self-introduction or interview answers by default. Give a one/two-level framework and expansion logic that the user can remember.
+- For self-introduction, focus on 2 abilities that match the target role. Do not over-expand education, timeline, tools, or all past experiences unless the user asks.
+- Abstract the user's experience into 3-4 ability claims with simple verification: one concrete task, project, tool, audience, result boundary, or repeated behavior per ability.
+- Use "claim first, evidence second": one clear conclusion, then 3-4 supporting bullets. Keep the supporting part under 5 sentences unless the user asks for a long answer.
+- STAR is not a template to recite. Make `Situation` useful by clarifying context, goal, constraint, urgency, or trade-off before `Action`.
+- For problem-solving questions, use conditional thinking instead of one fixed answer: diagnose possible causes, then map each cause to a different action.
+- Do not overcorrect into fake confidence. If the user lacks evidence, say what can be framed conservatively and what should be marked as a gap.
+- For English or second-language interviews, help the user internalize meaning first, then express it in simple natural wording. Do not require native-like expression or a memorized script.
+- If the English answer sounds like a direct translation, too formal, or too certain, output a compact English expression card with `Plain English version`, `Natural phrases`, `Avoid stiff literal translation`, `English ability boundary`, and one 5-20 minute speaking practice.
+- Apply certainty calibration to any resume patch, interview answer frame, self-introduction, or English interview note. Do not turn one feedback signal or one project into claims such as `完全匹配`, `一定能胜任`, `精通`, `native-level`, `fluent`, `guaranteed`, or `perfect fit` unless the user has evidence.
+- If the user is nervous, reduce the answer to a short anchor structure: `观点 -> 3 bullets -> 1 closing sentence`.
+
 ## Resume And Interview Direction Updates
 
 Feedback must become small, reviewable changes. Do not rewrite the whole resume unless the user asks.
@@ -287,6 +347,8 @@ Output:
 │  ├─ 需要谨慎投:
 │  └─ 需要验证:
 ├─ 候选人面试背景卡更新:
+├─ 语气校准:
+├─ 英文面试表达调整:
 └─ 知识库更新:
 ```
 
@@ -449,8 +511,10 @@ Create at most 1-3 answer cards after each review:
 ├─ 高频问题 / 可能题型:
 ├─ 面试官角色:
 ├─ 考察能力:
+├─ JD 契合卖点:
 ├─ 我的可用案例:
 ├─ 回答结构:
+├─ 条件分支:
 ├─ 不能夸大的地方:
 ├─ 还要补的证据:
 └─ 练习动作:
@@ -499,9 +563,11 @@ For interviewer feedback:
 3. 反馈可能指向的缺口
 4. 简历需要怎么调
 5. 面试回答需要怎么调
-6. 不同面试官角色下应该怎么调整侧重点
-7. 候选人面试背景卡更新
-8. 之后投 JD / 方向要注意什么
+6. 面试表达结构卡：JD 卖点、先总后分、3-4 条 bullet、Situation 和条件分支
+7. 不同面试官角色下应该怎么调整侧重点
+8. 候选人面试背景卡更新
+9. 之后投 JD / 方向要注意什么
+10. 复盘收束提醒：不要停留在已发生的事太久，把注意力转向下一个机会或今天一个查缺补漏动作
 ```
 
 For repeated feedback:
@@ -515,6 +581,9 @@ For repeated feedback:
 4. 是否需要改投递范围
 5. 候选人面试背景卡更新
 6. 下次面试回答卡，包括面试官角色侧重点
+7. 面试表达结构卡：把高频卡点改成可练习的短回答结构
+8. 语气校准 / 英文表达调整：避免过度肯定和生硬直译
+9. 复盘收束提醒：这几次反馈是数据点，不是最终判决；下一步只做一个最小补强动作
 ```
 
 ## Boundaries
@@ -532,6 +601,17 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.7 / 2026-08-04
+- Added certainty tone calibration for post-interview resume patches, answer frames, self-introductions, and English interview notes.
+- Added natural English expression cards for English-required roles and second-language interview feedback.
+
+v0.2.6 / 2026-08-04
+- Added interview expression structure cards: JD-aligned selling points, concise bullet-point answers, stronger Situation setup in STAR, conditional problem-solving, and second-language expression practice.
+- Clarified that self-introductions and interview answers should default to memorable one/two-level frameworks, not verbatim scripts.
+
+v0.2.5 / 2026-08-04
+- Added `forward_focus_reminder` after every interview review so users do not stay too long inside the past interview and can shift to the next opportunity or one gap-closing action.
+
 v0.2.4 / 2026-08-04
 - Added `candidate_interview_profile` as a reusable background card for second/third interviews and later interview prep.
 - Clarified that interview feedback updates stable background, recurring concerns, next-round priorities, and non-inherited biases separately.

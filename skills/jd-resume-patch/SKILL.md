@@ -120,7 +120,7 @@ Bias reset output:
 2. **Desensitize.** Remind the user not to paste phone, email, ID, salary screenshots, offer, contracts, recruiter names, or internal company details.
 3. **Identify resume source.** Decide whether the input is a neutral master resume, a module library, or a previous JD-specific version. If unclear, ask before adapting.
 4. **Run version isolation.** Name the current JD bias and reset any previous role emphasis that should not carry over.
-5. **Analyze JD.** Extract core tasks, hard skills, tools/software, domain requirements, hidden expectations, seniority signals, and keywords.
+5. **Analyze JD.** First classify the JD role type, then extract core tasks, hard skills, tools/software, domain requirements, hidden expectations, seniority signals, and keywords.
 6. **Run capability focus check.** Identify the JD's 2-3 core capabilities, then select the user's 2-3 strongest matching abilities. Do not try to prove every possible ability.
 7. **Build matching matrix.** Compare JD requirements with confirmed resume evidence. Mark each item as `strong_match`, `partial_match`, `gap`, `do_not_claim`, or `needs_evidence`.
 8. **Check project facts.** If a project is only a vague name or role label, mark it as `DISCOVERED` or `PARTIALLY_MAPPED` and ask for a project fact card before writing project bullets. For complex project gaps, hand off to `career-project-experience-miner`. Only `EVIDENCE_READY` projects can become JD-specific project bullets.
@@ -141,6 +141,12 @@ Default output:
 └─ 本次重置的表达:
 
 JD 分析卡
+├─ JD 岗位类型判断:
+│  ├─ 岗位族群:
+│  ├─ 工作重心:
+│  ├─ 判断依据:
+│  ├─ 置信度:
+│  └─ 用户准备重点:
 ├─ 岗位核心任务:
 ├─ 硬技能:
 ├─ 工具/软件:
@@ -226,10 +232,11 @@ Use resume-review and interviewer feedback as constraints. Common feedback and t
 
 Before writing any profile or bullets:
 
-1. Name the JD's core capability requirements.
-2. Pick the user's strongest 2-3 matching abilities.
-3. Use those abilities to decide which experiences and projects deserve space.
-4. Cut, weaken, or move down anything that is impressive but not relevant to this JD.
+1. Classify the JD role type and work focus, such as execution-heavy, operations-heavy, product-heavy, project-coordination-heavy, or hybrid.
+2. Name the JD's core capability requirements.
+3. Pick the user's strongest 2-3 matching abilities.
+4. Use those abilities to decide which experiences and projects deserve space.
+5. Cut, weaken, or move down anything that is impressive but not relevant to this JD.
 
 For interviewer feedback, run source isolation:
 
@@ -301,6 +308,9 @@ The profile / personal summary must pass these checks:
 ## Version Record
 
 ```text
+v0.2.5 / 2026-08-04
+- Added JD role-type judgment to the JD analysis card so resume patches prepare for the actual role focus, not only the job title.
+
 v0.2.4 / 2026-07-29
 - Added feedback source type, reliability, and action-level mapping before applying interview feedback to resume patches.
 

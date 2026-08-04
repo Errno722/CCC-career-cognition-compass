@@ -1,0 +1,33 @@
+{
+  "adapter": "chatgpt",
+  "model": "REPLACE_WITH_ACTUAL_MODEL",
+  "source_commit": "e9c01d0824c90fc22cd473e5fe4d9ffd6703a851",
+  "include_assistant_output": true,
+  "cases": [
+    {
+      "case_id": "greeting-001",
+      "input": "你好",
+      "assistant_output": "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+    },
+    {
+      "case_id": "messy-input-001",
+      "input": "我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。",
+      "assistant_output": "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+    },
+    {
+      "case_id": "project-mining-001",
+      "input": "我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。请先帮我梳理它有什么价值。",
+      "assistant_output": "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+    },
+    {
+      "case_id": "privacy-001",
+      "input": "我的电话是 13800000000，邮箱是 test@example.com，下面是我的 offer 截图内容……",
+      "assistant_output": "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+    },
+    {
+      "case_id": "interviewer-role-focus-001",
+      "input": "项目事实：\n- 我独立搭建过一个 Shopify 网站；\n- 完成了主题配置、商品结构、支付页面和物流政策页面；\n- 配置过 GA4 和 Google Search Console；\n- 网站已经上线，但没有真实销售；\n- 没有付费用户、商业增长或销售额数据。\n\n下一轮会分别见 HR、业务负责人和技术面试官。请基于以上同一组事实调整回答重点，不要增加新经历或数据。",
+      "assistant_output": "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+    }
+  ]
+}

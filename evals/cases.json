@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 23,
+  "manual_case_count": 32,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -158,6 +158,11 @@
         "literal_all_of": [],
         "literal_any_of": [
           [
+            "岗位类型",
+            "岗位族群",
+            "工作重心"
+          ],
+          [
             "硬技能",
             "技能要求"
           ],
@@ -176,6 +181,7 @@
           "max_questions": 2
         },
         "semantic_assertions": [
+          "classifies_jd_role_type",
           "extracts_core_tasks",
           "identifies_tool_requirements",
           "suggests_short_term_improvement",
@@ -666,6 +672,7 @@
           "marks_feedback_source_and_confidence",
           "reconstructs_question_types",
           "updates_candidate_interview_profile",
+          "shifts_from_review_to_next_action",
           "proposes_resume_and_interview_patches"
         ],
         "semantic_must_not": [
@@ -707,6 +714,7 @@
           "does_not_merge_all_feedback_blindly",
           "identifies_pattern_or_scope_issue",
           "updates_candidate_interview_profile",
+          "shifts_from_review_to_next_action",
           "assigns_action_level"
         ],
         "semantic_must_not": [
@@ -744,6 +752,7 @@
         "semantic_assertions": [
           "marks_source_as_recruiter_summary_or_unknown",
           "keeps_confidence_below_high",
+          "shifts_from_review_to_next_action",
           "prefers_record_only_or_prepare_answer"
         ],
         "semantic_must_not": [
@@ -958,6 +967,507 @@
           "change_facts_by_interviewer_role",
           "invent_sales_data",
           "overstate_ownership"
+        ]
+      }
+    },
+    {
+      "id": "interview-invitation-signals-001",
+      "title": "面试邀约信号画像",
+      "manual_case_id": 24,
+      "input": "我最近两周投了 40 个岗位，收到 5 个面试邀请：3 个是用户运营 / 运营执行，1 个是产品助理，1 个是项目执行。没回复的大多是高级产品经理和 AI Agent 工程师。请帮我根据这些岗位和 JD 判断，下一批投什么岗位更容易有回复。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "job-search-plan-review",
+          "allowed_secondary": [
+            "jd-company-prep",
+            "career-transfer-map"
+          ]
+        },
+        "literal_all_of": [
+          "面试邀请"
+        ],
+        "literal_any_of": [
+          [
+            "用户运营",
+            "运营执行",
+            "运营"
+          ],
+          [
+            "产品助理",
+            "产品"
+          ],
+          [
+            "项目执行",
+            "项目"
+          ],
+          [
+            "回复",
+            "邀约"
+          ]
+        ],
+        "literal_not_contains": [
+          "一定能收到回复",
+          "必然会有面试"
+        ],
+        "regex_not_contains": [
+          "\\d{2,3}\\s*%"
+        ],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "summarizes_interview_invitation_patterns",
+          "classifies_jd_role_type",
+          "contrasts_invited_and_no_response_roles",
+          "estimates_reply_likelihood_with_uncertainty",
+          "provides_small_next_action"
+        ],
+        "semantic_must_not": [
+          "promise_exact_reply_probability",
+          "confuse_reply_signal_with_final_fit",
+          "only_send_more_applications"
+        ]
+      }
+    },
+    {
+      "id": "interview-expression-structure-001",
+      "title": "面试表达结构优化",
+      "manual_case_id": 25,
+      "input": "我面试的时候回答很细，越说越多，面试官好像抓不到重点。尤其是问“如果用户增长突然下降你怎么办”，我只会顺着一个原因讲。请帮我根据 JD 卖点改成更清晰的回答结构，最好也适合英文面试。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": [
+            "jd-company-prep"
+          ]
+        },
+        "literal_all_of": [
+          "面试"
+        ],
+        "literal_any_of": [
+          [
+            "卖点",
+            "JD 契合",
+            "岗位契合"
+          ],
+          [
+            "bullet",
+            "要点"
+          ],
+          [
+            "Situation",
+            "背景"
+          ],
+          [
+            "如果",
+            "条件分支"
+          ]
+        ],
+        "literal_not_contains": [
+          "背下来",
+          "照着念"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "builds_jd_aligned_selling_points",
+          "keeps_answer_concise_with_bullets",
+          "balances_star_situation_action_result",
+          "uses_conditional_problem_solving",
+          "supports_second_language_authentic_expression"
+        ],
+        "semantic_must_not": [
+          "produce_overlong_detail_dump",
+          "turn_answer_into_memorized_script",
+          "invent_experience"
+        ]
+      }
+    },
+    {
+      "id": "self-intro-framework-001",
+      "title": "自我介绍与面试答案框架",
+      "manual_case_id": 26,
+      "input": "我要准备产品运营岗面试的自我介绍和“为什么适合这个岗位”的回答。我不想要逐字稿，怕背不下来。我之前做过内容运营、用户调研和 AI 工具项目，请帮我抽象能力和回答框架。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "jd-company-prep",
+          "allowed_secondary": [
+            "career-materials-builder",
+            "interview-review-miner"
+          ]
+        },
+        "literal_all_of": [
+          "自我介绍"
+        ],
+        "literal_any_of": [
+          [
+            "框架",
+            "结构"
+          ],
+          [
+            "能力",
+            "验证"
+          ],
+          [
+            "2 个",
+            "两个"
+          ]
+        ],
+        "literal_not_contains": [
+          "以下是逐字稿",
+          "尊敬的面试官"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "outputs_two_level_framework_not_script",
+          "abstracts_abilities_with_simple_evidence",
+          "focuses_self_intro_on_two_role_fit_abilities",
+          "keeps_answer_concise_with_bullets"
+        ],
+        "semantic_must_not": [
+          "write_verbatim_self_intro_script",
+          "produce_overlong_detail_dump",
+          "invent_experience"
+        ]
+      }
+    },
+    {
+      "id": "interview-reverse-questions-001",
+      "title": "面试反问问题收束",
+      "manual_case_id": 27,
+      "input": "我明天面产品运营岗，最后如果面试官问我有什么想问的，我应该反问什么？我不想问太大的问题。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "jd-company-prep",
+          "allowed_secondary": [
+            "interview-review-miner"
+          ]
+        },
+        "literal_all_of": [
+          "反问"
+        ],
+        "literal_any_of": [
+          [
+            "3 个月",
+            "三个月"
+          ],
+          [
+            "面试流程",
+            "后续流程"
+          ],
+          [
+            "成长路径",
+            "发展路径"
+          ],
+          [
+            "关键能力",
+            "最关键的能力"
+          ]
+        ],
+        "literal_not_contains": [
+          "公司战略",
+          "行业格局",
+          "组织政治"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "suggests_practical_reverse_questions",
+          "covers_reverse_question_core_directions",
+          "keeps_reverse_questions_role_level"
+        ],
+        "semantic_must_not": [
+          "ask_grandiose_or_sensitive_reverse_questions"
+        ]
+      }
+    },
+    {
+      "id": "english-interview-tone-calibration-001",
+      "title": "英文面试语气校准",
+      "manual_case_id": 28,
+      "input": "这个岗位要求英文沟通，我想准备英文自我介绍和面试回答。我的英语能工作沟通但不是母语，之前做过运营和 AI 工具项目。请帮我准备，别写得太夸张，也别太生硬。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "jd-company-prep",
+          "allowed_secondary": [
+            "career-materials-builder",
+            "interview-review-miner"
+          ]
+        },
+        "literal_all_of": [
+          "英文"
+        ],
+        "literal_any_of": [
+          [
+            "自然",
+            "不生硬"
+          ],
+          [
+            "语气",
+            "保守",
+            "不过度肯定"
+          ],
+          [
+            "能力",
+            "验证"
+          ],
+          [
+            "working communication",
+            "Plain English",
+            "role-fit"
+          ]
+        ],
+        "literal_not_contains": [
+          "native speaker",
+          "guaranteed",
+          "perfect fit"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3
+        },
+        "semantic_assertions": [
+          "calibrates_resume_interview_claims",
+          "avoids_overly_certain_wording",
+          "supports_natural_non_stiff_english",
+          "avoids_literal_translation_for_english_interview",
+          "keeps_answer_concise_with_bullets"
+        ],
+        "semantic_must_not": [
+          "overstate_english_fluency_or_ability",
+          "use_stiff_literal_english",
+          "invent_experience"
+        ]
+      }
+    },
+    {
+      "id": "anxiety-noise-reduction-001",
+      "title": "焦虑降噪但不鸡汤",
+      "manual_case_id": 29,
+      "input": "我最近找工作很焦虑，刷小红书更慌，感觉别人都很厉害。我知道你不是心理咨询，但能不能帮我别那么乱，今天只做一点事？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-stability-bridge",
+          "allowed_secondary": [
+            "job-search-plan-review",
+            "career-direction-clarifier"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "焦虑降噪",
+            "降噪"
+          ],
+          [
+            "可控",
+            "不可控"
+          ],
+          [
+            "信息摄入",
+            "停止规则"
+          ],
+          [
+            "5-20 分钟",
+            "10 分钟",
+            "小动作"
+          ]
+        ],
+        "literal_not_contains": [
+          "相信自己",
+          "一切都会好",
+          "你已经很棒了"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2
+        },
+        "semantic_assertions": [
+          "acknowledges_anxiety_without_chicken_soup",
+          "separates_controllable_and_uncontrollable",
+          "sets_information_intake_boundary",
+          "provides_small_next_action"
+        ],
+        "semantic_must_not": [
+          "offer_generic_motivational_comfort",
+          "turn_anxiety_into_therapy_session"
+        ]
+      }
+    },
+    {
+      "id": "token-saving-mode-001",
+      "title": "Token 节省模式",
+      "manual_case_id": 30,
+      "input": "我担心 token 太多，之后我会贴 JD 和候选人背景卡。请用最省 token 的方式帮我改简历和准备面试，不要每次重写所有内容。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": [
+            "jd-resume-patch",
+            "career-materials-builder",
+            "jd-company-prep"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "Token 节省",
+            "省 token",
+            "省Token"
+          ],
+          [
+            "复用",
+            "已有"
+          ],
+          [
+            "补丁",
+            "差异",
+            "替换段落"
+          ],
+          [
+            "继续",
+            "展开"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 700
+        },
+        "semantic_assertions": [
+          "uses_token_saving_mode",
+          "reuses_existing_state_cards",
+          "outputs_patch_or_delta_instead_of_full_regeneration",
+          "offers_progressive_expansion"
+        ],
+        "semantic_must_not": [
+          "repeat_large_background_summary",
+          "regenerate_full_material_package"
+        ]
+      }
+    },
+    {
+      "id": "recent-work-task-positioning-001",
+      "title": "近期工作行为定位",
+      "manual_case_id": 31,
+      "input": "我最近一段时间最常做的是梳理流程、写 SOP、拆需求、把别人说不清的东西整理成清单。我发现自己挺愿意做这类工作，但不是兴趣爱好。我想知道这说明我应该怎么定位。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-direction-clarifier",
+          "allowed_secondary": [
+            "career-transfer-map",
+            "career-materials-builder"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "近期工作行为",
+            "工作行为",
+            "工作任务"
+          ],
+          [
+            "定位",
+            "定位假设"
+          ],
+          [
+            "不是兴趣爱好",
+            "不是爱好",
+            "工作内容"
+          ],
+          [
+            "验证",
+            "待确认",
+            "7 天"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 900
+        },
+        "semantic_assertions": [
+          "uses_recent_work_activity_for_positioning",
+          "separates_work_preference_from_hobby",
+          "links_work_preference_to_evidence_and_role_signals",
+          "keeps_positioning_hypothetical_with_validation"
+        ],
+        "semantic_must_not": [
+          "treat_hobby_as_job_positioning",
+          "choose_positioning_from_preference_only"
+        ]
+      }
+    },
+    {
+      "id": "over-divergence-focus-001",
+      "title": "发散收束",
+      "manual_case_id": 32,
+      "input": "我现在想投运营、产品助理、数据分析、AI Agent，也想学 SQL、Python、剪辑、作品集，还要改简历、准备面试、做小红书账号。我越想越多，不知道先做哪个。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-direction-clarifier",
+          "allowed_secondary": [
+            "career-intake-clarifier",
+            "career-cognition-compass",
+            "job-search-plan-review",
+            "career-transfer-map"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "发散收束",
+            "收束",
+            "主线"
+          ],
+          [
+            "暂存",
+            "先不处理",
+            "停车场"
+          ],
+          [
+            "下一步",
+            "小动作"
+          ],
+          [
+            "1 个",
+            "一个"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 900
+        },
+        "semantic_assertions": [
+          "detects_over_divergence",
+          "groups_branches_before_action",
+          "selects_one_active_main_thread",
+          "parks_secondary_branches",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "expand_all_branches",
+          "create_overwhelming_multi_track_plan"
         ]
       }
     }

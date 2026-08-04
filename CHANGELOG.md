@@ -4,10 +4,45 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 
 ## 2026-08-04
 
+### 真实平台测试流程
+
+- 新增 `evals/inputs/`，提供真实平台 Smoke Report 输入模板和安全说明。
+- 新增 `scripts/generate-smoke-report.mjs`，用于把手动收集的真实平台助手回复转换为 `verification_level: recomputed` 的结果报告。
+- Smoke 生成流程会检查占位符、5 个必测 case、原始输入一致性、非空助手回复、40 位 `source_commit` 和输出路径，避免把模板或错误输入当作真实报告。
+- `.gitignore` 默认忽略 `evals/inputs/*.input.json`，防止完整助手回复被误提交。
+- 当前尚未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/32。
+
+### 投递复盘
+
+- `job-search-plan-review` 增加面试邀约信号画像：根据用户已收到的面试邀请、邀约 JD、无回复岗位、投递基数、渠道和简历版本，总结哪些岗位族群和 JD 特征更容易得到回复。
+- 面试邀约信号画像只输出相对高/中/低回复信号、样本边界和下一批小规模投递验证，不承诺精确回复概率，也不把高回复方向等同于最终职业方向。
+- 机器可读 Eval 增加 `interview-invitation-signals-001` 用例和 5 个相关语义断言。
+
+### 面试表达
+
+- 新增发散收束模式：用户同时发散到多个岗位、技能、材料、平台、教程或计划时，先归类分支，只推进 1 个本轮主线，其他暂存，避免输出巨大清单。
+- 新增近期工作行为定位：当用户提到最近实际在做、愿意继续做或做完更有掌控感的工作任务时，输出定位假设；明确这看的是工作任务，不是兴趣爱好，也不是最终职业结论。
+- `interview-review-miner` 增加面试表达结构卡：从 JD 契合卖点出发，训练一句话观点、3-4 条 bullet、清楚的 Situation、条件分支式问题解决和第二语言自然表达。
+- `jd-company-prep` 增加面试表达准备卡：拆 JD 后不仅给面试问题，也给对应卖点和短回答结构，避免候选人面试时越说越散。
+- `career-materials-builder`、`jd-company-prep` 和 `interview-review-miner` 增加自我介绍 / 面试答案框架规则：默认给一二级框架和展开逻辑，不给逐字稿；自我介绍聚焦 2 个岗位契合能力，并先抽象 3-4 条“能力 + 简单验证”。
+- `jd-company-prep` 增加面试反问卡：默认给 2-4 个岗位级小问题，围绕岗位前 3 个月期望、后续流程、成长路径和关键能力，不默认问公司战略或行业大问题。
+- `career-materials-builder`、`jd-company-prep`、`interview-review-miner`、WorkBuddy 和通用 Prompt 增加语气校准：简历、profile、面试准备和英文材料避免过度肯定，只把有证据的能力写成确定表达。
+- 英文面试和英文能力岗位准备新增自然表达规则：不逐句硬翻译中文，不把 working communication 包装成 native / fluent，优先给 Plain English、Natural phrases 和可说出口的短框架。
+- 新增焦虑降噪规则：用户焦虑、刷社媒更慌、反复刷新或比较别人时，输出触发源、可控/不可控、信息摄入边界和一个 5-20 分钟动作，不用鸡汤式安慰替代行动。
+- 新增 Token 节省模式：用户提到 token、上下文太长、手机端超时、跨模型复制或回复太长时，复用已有卡片，只输出差异补丁、替换段落和下一步。
+- 机器可读 Eval 增加 `interview-expression-structure-001`、`self-intro-framework-001`、`interview-reverse-questions-001`、`english-interview-tone-calibration-001`、`anxiety-noise-reduction-001`、`token-saving-mode-001`、`recent-work-task-positioning-001` 和 `over-divergence-focus-001` 用例，当前手工测试和机器可读合约为 32 个，已登记语义断言为 175 条，核心细化 Rubric 为 67 条。
+
 ### 面试复盘
 
 - `interview-review-miner` 增加候选人面试背景卡，用于把每次面试反馈沉淀为二面、三面或下一轮面试可继承的背景资料。
-- 机器可读 Eval 增加 `updates_candidate_interview_profile` 语义断言，当前已登记语义断言为 123 条。
+- `interview-review-miner` 增加复盘收束提醒：每次面试反馈复盘后，提醒用户不要停留在已发生的事太久，而是转向下一次机会或一个查缺补漏动作。
+- 机器可读 Eval 增加 `updates_candidate_interview_profile` 和 `shifts_from_review_to_next_action` 语义断言。
+
+### JD 拆解
+
+- `jd-company-prep` 增加 JD 岗位类型判断卡，先判断 JD 是偏执行、运营、产品、项目协调、数据、技术还是混合岗，再给准备重点。
+- `jd-resume-patch` 的 JD 分析卡同步增加岗位类型判断，避免只按岗位标题改简历或准备面试。
+- 机器可读 Eval 增加 `classifies_jd_role_type` 语义断言。
 
 ## 2026-08-02
 
@@ -23,7 +58,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 将 JD 分析案例中的占位符替换成完整虚构 JD，避免模型因缺少 JD 内容而被错误判定失败。
 - 新增 `scripts/check-evals.mjs` 和 `scripts/check-markdown-links.mjs`，用于本地验证 eval 合约和 Markdown 本地链接。
 - `scripts/check-evals.mjs` 开始真正按 [evals/schema.json](evals/schema.json) 校验 suite 结构，并检查重复断言、正负向 rubric 类型、orphan rubric 和结果报告统计。
-- 将面试反馈复盘与面试官角色回答侧重点拆成两个独立测试场景，当前手工测试和机器可读合约均为 23 个。
+- 将面试反馈复盘与面试官角色回答侧重点拆成两个独立测试场景，该轮手工测试和机器可读合约均为 23 个。
 - 将公开测试口径调整为“已登记语义断言 122 / 已人工细化核心 Rubric 15”，避免把模板 rubric 夸大为全部精修评分标准。
 - 新增 [evals/result-schema.json](evals/result-schema.json)，用于约束真实平台执行结果报告。
 - 新增 `scripts/run-deterministic-eval.mjs`，可以对已有助手回复执行 `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`max_questions` 和 `max_characters` 检查，不调用模型。

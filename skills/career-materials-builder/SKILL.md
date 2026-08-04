@@ -1,7 +1,7 @@
 ---
 name: career-materials-builder
 description: >-
-  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
+  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, self-introduction frameworks, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
 ---
 
 # Career Materials Builder
@@ -168,6 +168,7 @@ Trigger a positioning diagnosis when several signals appear:
 用户说“不知道怎么介绍自己 / 不知道我算什么 / 简历不像目标岗位”
 用户同时想投多个方向，但材料会互相污染
 用户的专业背景很强，但目标岗位需要更市场化的表达
+用户最近反复做、愿意继续做或做完更有掌控感的工作任务，与简历当前定位不一致
 ```
 
 When signals are present, do not immediately rewrite materials. First say that the current issue may be positioning rather than wording, then offer a small positioning diagnosis.
@@ -177,6 +178,7 @@ First separate:
 ```text
 真实事实
 可迁移证据
+近期工作行为信号
 目标岗位语言
 需要弱化或暂不主动强调的内容
 面试中必须能解释清楚的风险点
@@ -189,6 +191,7 @@ Then offer 2-3 positioning cards:
 适合岗位 / 行业
 一句话叙事
 支撑证据
+近期工作行为依据
 可强调的技能
 需要弱化的内容
 风险与面试解释点
@@ -201,6 +204,8 @@ Rules:
 - Do not fabricate education, company, title, project, data, client, tool, certificate, award, or personality traits.
 - Do not turn a support role into a lead role unless the user can prove ownership.
 - If the user wants a more aggressive positioning, treat it as `平衡策略`: strengthen evidence and order, but mark weak claims as `[待确认]`.
+- Do not build positioning from hobbies. If the user says they like something, ask what recent work task shows it: audience, deliverable, tool, context, result, or feedback.
+- Treat recent work-task preference as `positioning_hypothesis` until it is supported by project facts, JD needs, interview invitations, or repeated work evidence.
 - Ask the user to choose or reject a positioning before rewriting resume/profile/greeting text.
 - If the user only needs a quick resume patch, keep the diagnosis short and continue with the requested material.
 
@@ -257,6 +262,52 @@ Rules:
 - Do not keep long Chinese-style self-evaluation paragraphs. Convert them into a focused `Professional Summary` or remove them.
 - Keep uncertain outcomes editable with markers such as `[confirm metric]`, `[scope]`, or `[tool]`.
 
+## Certainty Tone Calibration
+
+Use this for Chinese or English resumes, profiles, recruiter messages, interview prep notes, self-introduction frames, LinkedIn wording, and platform materials.
+
+Output a short card when wording risk is visible:
+
+```text
+语气校准卡
+├─ 可以确定说:
+├─ 需要降级说:
+├─ 待确认:
+├─ 不建议使用的过度肯定词:
+└─ 更稳妥替代表达:
+```
+
+Rules:
+
+- Do not fill materials with absolute claims such as `完全匹配`, `一定能胜任`, `精通`, `显著提升`, `主导全部`, `guaranteed`, `perfect fit`, `expert`, `native-level`, or `fluent` unless the user has evidence.
+- Use strong ownership words only when ownership is proven. If the user participated, use `参与`, `协助`, `contributed`, `supported`, or `worked on`.
+- If evidence is weak, use calibrated language such as `有经验`, `接触过`, `参与过`, `负责其中一部分`, `可解释`, `[待确认]`, `[需要补证据]`, `experience with`, `working knowledge of`, or `used in project context`.
+- A resume or interview-prep document should sound confident enough to be readable, but not so certain that it becomes hard to defend in an interview.
+
+## English Interview And English-Required Role Wording
+
+Use this when the user asks for English interview preparation, English self-introduction, English answers, LinkedIn expression, overseas role wording, or a JD explicitly requires English communication.
+
+Output:
+
+```text
+英文面试表达卡
+├─ Role-fit message:
+├─ Plain English version:
+├─ Natural phrases:
+├─ Avoid stiff literal translation:
+├─ English ability boundary:
+└─ Practice cue:
+```
+
+Rules:
+
+- Do not translate Chinese wording sentence by sentence. Rebuild the meaning in simple, natural professional English.
+- Prefer short sentences and speakable phrases. The user should be able to say the answer aloud without sounding like a memorized article.
+- Do not claim `native speaker`, `native-level`, `fluent`, or `bilingual` unless the user explicitly says so and can support it.
+- For non-native but usable English, prefer calibrated phrases such as `I can use English for day-to-day work communication`, `I can discuss project context and next steps in English`, or `I am comfortable reading documentation and writing concise updates in English`.
+- When preparing answers, give a framework, keywords, and 2-4 replaceable phrases before any short example.
+
 ## Resume Version Hygiene
 
 When the user has multiple resume versions, keep these separate:
@@ -288,6 +339,7 @@ Choose one small material unless the user asks for a package:
 简历模板和写作思路
 职业定位 / 候选人叙事卡
 英文简历模板和英文 bullet 改写
+自我介绍框架
 作品集主题和大纲
 平台投递文字
 招聘软件打招呼语
@@ -296,6 +348,34 @@ LinkedIn / Open to Work 表达
 面试复盘卡
 表达策略建议
 ```
+
+## Self-Introduction And Answer Frameworks
+
+When the user asks for a self-introduction, interview answer, "tell me about yourself", "why are you suitable", or similar material, do not default to a full script.
+
+Output framework:
+
+```text
+自我介绍 / 面试答案框架卡
+├─ 目标岗位:
+├─ 能力抽象: 3-4 条能力 + 简单验证
+├─ 自我介绍主线:
+│  ├─ 能力 1: 与岗位契合 + 一个验证事实
+│  └─ 能力 2: 与岗位契合 + 一个验证事实
+├─ 面试答案一级框架: 观点 / 判断 / 选择
+├─ 二级展开逻辑: 3-4 条 bullet，不超过 5 句支撑内容
+├─ 可替换关键词:
+└─ 不要展开的内容:
+```
+
+Rules:
+
+- Give a first-level structure and second-level expansion logic, not a paragraph for the user to memorize.
+- Keep self-introduction focused on 2 role-fit abilities. Do not compress the full resume into the introduction.
+- Abstract experience into 3-4 ability claims with simple verification such as a task, project, tool, user group, process, output, result boundary, or repeated behavior.
+- If the user explicitly asks for a final script, give a short editable draft after the framework, and mark it as optional.
+- Do not over-expand education, full timeline, tool lists, personality claims, or unrelated projects.
+- Keep claims evidence-based and interview-defensible.
 
 ## Platform Greeting Rules
 
@@ -393,8 +473,13 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.9 / 2026-08-04
+- Added certainty tone calibration for resumes, profiles, platform materials, and interview prep documents.
+- Added natural English interview and English-required-role wording rules so English output is speakable, calibrated, and not a direct translation of Chinese materials.
+
 v0.3.8 / 2026-07-29
 - Added feedback reliability checks before turning interview feedback into material changes.
+- Added self-introduction and interview-answer framework guidance: 2 role-fit abilities, 3-4 ability/evidence pairs, and no default verbatim script.
 
 v0.3.7 / 2026-07-29
 - Added post-interview material change levels: answer_prep_only, small_resume_patch, reposition_scope.

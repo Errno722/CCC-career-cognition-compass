@@ -1,7 +1,7 @@
 ---
 name: career-intake-clarifier
 description: >-
-  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, long speech-to-text dumps, one-sentence-at-a-time updates, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, and up to three follow-up questions. If project details, project boundaries, personal contribution, or evidence are unclear, hand off to career-project-experience-miner. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
+  Messy job-search intake and state triage. Use when the user provides chaotic career notes, voice transcripts, long speech-to-text dumps, one-sentence-at-a-time updates, keyword-only or no-punctuation fragments, scattered resume/JD fragments, abbreviations, pain points, interview memories, too many simultaneous directions/skills/materials/plans, or asks to start from unclear job-search information; produce a concise recap, current status, evidence inventory, missing information, initial hard-skill knowledge base/glossary, over-divergence focus card when needed, and up to three follow-up questions. If project details, project boundaries, personal contribution, or evidence are unclear, hand off to career-project-experience-miner. Not for final resume polishing, full portfolio production, therapy, or crisis counseling.
 ---
 
 # Career Intake Clarifier
@@ -17,8 +17,9 @@ Turn unstructured job-search input into a first usable picture. Do not require t
 3. **Identify status.** Capture whether the user is a student, new graduate, employed, employed but exhausted, resigned, long Gap, career changer, overseas seeker, or unsure.
 4. **Inventory evidence.** Extract work, internship, coursework, project, volunteer, part-time, self-study, tool, language, and interview evidence.
 5. **Detect project-mining need.** If the user mentions projects, side projects, fragmented tasks, unclear contribution, no data, failed/paused projects, or "I don't know what counts as a project", mark `handoff: career-project-experience-miner` and assign a rough project state.
-6. **Start the knowledge base.** Build a small hard-skill list and user glossary from whatever is already present.
-7. **Ask lightly.** Ask at most 3 high-impact questions unless the user explicitly requests a full checklist.
+6. **Detect over-divergence.** If the user lists many roles, skills, materials, platforms, tutorials, emotions, or plans at once, group branches, choose one current thread, and park the rest. Do not turn the intake recap into a larger task list.
+7. **Start the knowledge base.** Build a small hard-skill list and user glossary from whatever is already present.
+8. **Ask lightly.** Ask at most 3 high-impact questions unless the user explicitly requests a full checklist.
 
 ## Keyword Fragment Handling
 
@@ -41,6 +42,29 @@ Rules:
 - Do not force fragments into a confident story; mark relationships as `inference` or `needs_confirmation`.
 - Ask at most 2 clarifying questions and give 1 small next action.
 - Example input: `gap 一年 运营 ai 转行 不知道投什么`.
+
+## Over-Divergence Handling
+
+Use this when the user starts with too many branches at once, such as several roles, skills to learn, resumes to edit, portfolios, platforms, tutorials, interviews, and emotional blockers in one message.
+
+```text
+发散收束卡
+├─ 我看到的分支:
+├─ 本轮主线:
+├─ 暂存分支:
+├─ 本轮先不处理:
+├─ 选择主线的理由:
+└─ 下一步 1 个动作:
+```
+
+Rules:
+
+- Treat scattered thinking as raw material, not as a problem to criticize.
+- Group before advising.
+- Keep only 1 current main thread unless the user explicitly asks for comparison.
+- Put secondary branches in parking, not in a full plan.
+- Choose the main thread by urgency, evidence strength, deadline, energy, and whether it unlocks later work.
+- Do not produce a full role list, skill list, resume package, platform plan, and interview plan in the same reply.
 
 ## Voice Transcript And Incremental Input
 
@@ -84,6 +108,12 @@ Use a compact response. Rename or merge sections when natural.
 ├─ 用户已定义:
 └─ 需要确认:
 
+发散收束卡（仅在需要时）
+├─ 我看到的分支:
+├─ 本轮主线:
+├─ 暂存分支:
+└─ 下一步 1 个动作:
+
 下一步最该补充的 1-3 件事
 ```
 
@@ -93,5 +123,6 @@ Use a compact response. Rename or merge sections when natural.
 - Do not treat a named project as usable evidence until project role, personal contribution, output, result/current status, and evidence gaps are clear.
 - Do not make resume writing the default next step when the user has not asked for it.
 - Do not force the user to fill every field.
+- Do not reward over-divergence by expanding every branch in one reply.
 - Do not store or repeat sensitive personal information; remind the user to desensitize phone numbers, email, IDs, contracts, offers, salary screenshots, and full interview transcripts.
 - If the user expresses severe crisis or self-harm risk, stop job-search coaching and encourage local emergency or trusted support.

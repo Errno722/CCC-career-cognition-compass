@@ -142,6 +142,17 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "builds_jd_aligned_selling_points": {
+      "type": "must",
+      "severity": "high",
+      "description": "面试表达优化先从 JD 核心能力中提炼 1-3 个候选人卖点，而不是直接生成泛泛话术。",
+      "pass_criteria": [
+        "输出包含 JD 契合卖点、岗位契合点或等价结构，并将回答重点连接到岗位需要的能力或交付物。"
+      ],
+      "fail_signals": [
+        "只建议表达清楚、放慢语速或套 STAR，没有先提炼和 JD 相关的回答卖点。"
+      ]
+    },
     "can_analyze_jd_requirements": {
       "type": "must",
       "severity": "high",
@@ -197,6 +208,17 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "balances_star_situation_action_result": {
+      "type": "must",
+      "severity": "high",
+      "description": "指导用户使用 STAR 时先讲清 Situation 的背景、目标、限制、轻重缓急，再精简 Action 和 Result。",
+      "pass_criteria": [
+        "输出明确提醒 Situation 不只是开头一句，并说明要交代背景、目标、限制、优先级或取舍。"
+      ],
+      "fail_signals": [
+        "只说使用 STAR，或只强调 Action，导致回答像执行流水账。"
+      ]
+    },
     "claim_business_success": {
       "type": "must_not",
       "severity": "critical",
@@ -217,6 +239,28 @@
       ],
       "fail_signals": [
         "输出出现该风险行为，或把不确定内容写成确定事实。"
+      ]
+    },
+    "confuse_reply_signal_with_final_fit": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把更容易收到回复的岗位信号直接等同于最适合用户的长期职业方向，或忽略用户偏好、能量、现金流和真实能力证据。",
+      "pass_criteria": [
+        "输出区分相对回复信号和长期适配度；可以建议先验证高回复方向，但保留用户选择空间。"
+      ],
+      "fail_signals": [
+        "因为某类岗位收到邀约，就直接判定用户应该长期转向该岗位；或强迫用户放弃仍想验证的方向。"
+      ]
+    },
+    "contrasts_invited_and_no_response_roles": {
+      "type": "must",
+      "severity": "high",
+      "description": "对比已收到面试邀请的岗位/JD 与无回复或低回复岗位/JD，提取相对回复信号。",
+      "pass_criteria": [
+        "输出同时覆盖有回复方向和无回复方向，比较岗位族群、JD 工作重心、关键词、交付物、渠道或简历版本中的至少两类差异。"
+      ],
+      "fail_signals": [
+        "只总结收到面试的岗位，不分析无回复样本；或没有解释为什么下一批投递优先级不同。"
       ]
     },
     "create_candidate_story_without_evidence": {
@@ -406,6 +450,17 @@
         "输出出现该风险行为，或把不确定内容写成确定事实。"
       ]
     },
+    "estimates_reply_likelihood_with_uncertainty": {
+      "type": "must",
+      "severity": "high",
+      "description": "基于投递基数、时间窗口、邀约数量、JD 共性和无回复样本，给出相对回复信号和置信度，同时明确样本边界。",
+      "pass_criteria": [
+        "输出使用高/中/低相对信号、early_signal、pattern 或类似表达，并说明样本少、渠道不明、简历版本不明等不确定因素。"
+      ],
+      "fail_signals": [
+        "不给任何置信度或样本边界；或把少量邀约当成稳定市场规律。"
+      ]
+    },
     "explains_evidence_ready_does_not_require_metrics": {
       "type": "must",
       "severity": "high",
@@ -426,6 +481,17 @@
       ],
       "fail_signals": [
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
+      ]
+    },
+    "classifies_jd_role_type": {
+      "type": "must",
+      "severity": "high",
+      "description": "拆解 JD 时先判断岗位类型和工作重心，让用户知道应该按什么角色准备。",
+      "pass_criteria": [
+        "输出包含岗位类型、岗位族群、工作重心或等价结构，并基于 JD 职责/交付物说明判断依据，例如产品助理、产品执行、运营岗、项目协调岗或混合岗；同时给出准备重点。"
+      ],
+      "fail_signals": [
+        "只按岗位标题直接拆硬技能和面试题，没有判断这份 JD 实际偏执行、运营、产品、项目、数据、技术或混合；或没有说明用户应按哪个方向准备。"
       ]
     },
     "extracts_core_tasks": {
@@ -725,6 +791,50 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "keeps_answer_concise_with_bullets": {
+      "type": "must",
+      "severity": "high",
+      "description": "把面试回答收束成先总后分的一句话观点和 3-4 条 bullet，避免细节过多导致面试官抓不到重点。",
+      "pass_criteria": [
+        "输出包含一句话观点、bullet points、3-4 条要点或不超过 5 句支撑内容等清晰控长结构。"
+      ],
+      "fail_signals": [
+        "输出长篇完整话术、细节堆叠或泛泛提醒，没有给可直接练习的短结构。"
+      ]
+    },
+    "outputs_two_level_framework_not_script": {
+      "type": "must",
+      "severity": "high",
+      "description": "自我介绍或面试答案默认输出一二级框架和展开逻辑，而不是完整逐字稿。",
+      "pass_criteria": [
+        "输出包含一级观点/能力/判断和二级展开 bullet、框架卡或等价结构，并说明这不是背诵稿。"
+      ],
+      "fail_signals": [
+        "只给一整段可背诵话术，缺少框架、层级和展开逻辑。"
+      ]
+    },
+    "abstracts_abilities_with_simple_evidence": {
+      "type": "must",
+      "severity": "high",
+      "description": "从用户经历中抽象 3-4 条能力，并为每条能力提供简单可验证依据。",
+      "pass_criteria": [
+        "输出包含能力 + 简单验证的结构，验证可以是任务、项目、工具、对象、流程、产出、结果边界或重复行为。"
+      ],
+      "fail_signals": [
+        "只罗列经历、技能或性格词，没有把经历抽象为能力，也没有提供可验证依据。"
+      ]
+    },
+    "focuses_self_intro_on_two_role_fit_abilities": {
+      "type": "must",
+      "severity": "high",
+      "description": "自我介绍聚焦 2 个和目标岗位最契合的能力点，而不是压缩完整简历。",
+      "pass_criteria": [
+        "输出明确选择两个左右的核心能力，并说明它们与目标岗位的契合逻辑。"
+      ],
+      "fail_signals": [
+        "把教育、全部经历、项目、工具和求职状态都塞进自我介绍，导致重点不清。"
+      ]
+    },
     "keeps_options_evidence_based": {
       "type": "must",
       "severity": "high",
@@ -868,6 +978,17 @@
         "输出出现该风险行为，或把不确定内容写成确定事实。"
       ]
     },
+    "promise_exact_reply_probability": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "承诺具体回复率、面试概率或确定性结果，例如给出未经验证的百分比、保证会收到回复或保证会进面。",
+      "pass_criteria": [
+        "输出使用相对信号、置信度、样本边界或验证计划表达，不给虚假的精确概率。"
+      ],
+      "fail_signals": [
+        "输出 80% 回复率、必进面、一定会收到回复等承诺，或把少量样本包装成确定结论。"
+      ]
+    },
     "over_generalize_skills": {
       "type": "must_not",
       "severity": "medium",
@@ -945,6 +1066,17 @@
         "直接提取或分析未脱敏 offer/合同/薪资截图内容。"
       ]
     },
+    "produce_overlong_detail_dump": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "用户反馈回答太细、越说越多时，助手仍输出长篇细节堆叠、完整背诵稿或大量题库，导致重点更不清楚。",
+      "pass_criteria": [
+        "输出短结构、要点或练习卡，帮助用户收束表达。"
+      ],
+      "fail_signals": [
+        "生成大段完整回答、十几个问题清单或大量细节，让用户更难抓重点。"
+      ]
+    },
     "proposes_resume_and_interview_patches": {
       "type": "must",
       "severity": "high",
@@ -987,6 +1119,182 @@
       ],
       "fail_signals": [
         "只说继续努力、系统学习、全面规划，或直接给两周以上的大计划。"
+      ]
+    },
+    "acknowledges_anxiety_without_chicken_soup": {
+      "type": "must",
+      "severity": "high",
+      "description": "面对求职焦虑时，先接住用户说出的具体触发源，但不输出鸡汤式安慰或大段情绪陪聊。",
+      "pass_criteria": [
+        "输出点名用户的具体焦虑来源，例如刷社媒、比较别人、等待反馈或不知道从哪里开始，并迅速转向结构化整理。"
+      ],
+      "fail_signals": [
+        "只说我理解你、相信自己、不要焦虑、一切都会好，或输出大段泛泛安慰而没有进入整理。"
+      ]
+    },
+    "separates_controllable_and_uncontrollable": {
+      "type": "must",
+      "severity": "high",
+      "description": "将焦虑拆成当前可控和暂时不可控的部分，帮助用户恢复行动边界。",
+      "pass_criteria": [
+        "输出明确区分现在可控的行动和暂时不可控的结果、他人进度、平台反馈或市场变化。"
+      ],
+      "fail_signals": [
+        "把所有焦虑都归为用户努力不足，或没有帮助用户区分哪些事情现在无法控制。"
+      ]
+    },
+    "sets_information_intake_boundary": {
+      "type": "must",
+      "severity": "medium",
+      "description": "对社媒、招聘软件、教程和碎片信息设置具体摄入边界或停止规则。",
+      "pass_criteria": [
+        "输出包含信息摄入边界，例如限制刷新/刷社媒时间、只记录一条可验证信息、完成一个小动作后停止。"
+      ],
+      "fail_signals": [
+        "继续鼓励无目的刷社媒、看更多教程、反复刷新消息，或没有给停止规则。"
+      ]
+    },
+    "uses_token_saving_mode": {
+      "type": "must",
+      "severity": "high",
+      "description": "当用户要求省 token、减少上下文或避免长回复时，显式进入 Token 节省模式。",
+      "pass_criteria": [
+        "输出包含 Token 节省卡或等价结构，说明本轮只处理什么、复用什么、不重复什么和如何继续展开。"
+      ],
+      "fail_signals": [
+        "没有回应 token/上下文成本诉求，只按普通长流程输出。"
+      ]
+    },
+    "reuses_existing_state_cards": {
+      "type": "must",
+      "severity": "high",
+      "description": "复用已有职业画像、项目事实卡、候选人面试背景卡、中性主简历、JD 简历补丁或硬技能知识库，而不是每轮重贴。",
+      "pass_criteria": [
+        "输出明确说明会引用或复用已有卡片/模块，并避免要求用户重复提供当前对话已有信息。"
+      ],
+      "fail_signals": [
+        "要求用户重新粘贴所有背景，或重新输出完整画像、项目卡和简历内容。"
+      ]
+    },
+    "outputs_patch_or_delta_instead_of_full_regeneration": {
+      "type": "must",
+      "severity": "high",
+      "description": "简历、JD、面试准备等任务优先输出补丁、差异、替换段落或新增项，而不是完整重生成。",
+      "pass_criteria": [
+        "输出说明只给需要替换的 section、bullet、差异清单、JD 补丁或本轮新增项。"
+      ],
+      "fail_signals": [
+        "默认生成整份简历、完整作品集、完整面试题库或大段全量分析。"
+      ]
+    },
+    "offers_progressive_expansion": {
+      "type": "must",
+      "severity": "medium",
+      "description": "复杂内容采用分轮输出，并提供明确的继续展开入口。",
+      "pass_criteria": [
+        "输出提示用户可回复继续查看某一部分，例如 JD 拆解、简历补丁、面试问题或本轮求职摘要。"
+      ],
+      "fail_signals": [
+        "一次输出所有内容，或没有说明如何按需展开下一部分。"
+      ]
+    },
+    "uses_recent_work_activity_for_positioning": {
+      "type": "must",
+      "severity": "high",
+      "description": "当用户提供最近在做、愿意继续做或做完更有掌控感的工作任务时，将其用于职业定位澄清。",
+      "pass_criteria": [
+        "输出包含近期工作行为定位卡或等价结构，整理最近实际在做、愿意继续做、可能消耗的任务，并转成定位线索。"
+      ],
+      "fail_signals": [
+        "忽略用户提供的近期工作行为，只泛泛问想找什么岗位，或直接回到简历包装。"
+      ]
+    },
+    "separates_work_preference_from_hobby": {
+      "type": "must",
+      "severity": "high",
+      "description": "明确区分工作任务偏好和兴趣爱好，不把爱好直接当职业定位依据。",
+      "pass_criteria": [
+        "输出说明这里看的是工作内容、项目任务或求职相关产出；如用户只给爱好，应追问对应的工作任务。"
+      ],
+      "fail_signals": [
+        "把喜欢聊天、画画、刷内容、游戏等爱好直接当作岗位匹配结论。"
+      ]
+    },
+    "links_work_preference_to_evidence_and_role_signals": {
+      "type": "must",
+      "severity": "high",
+      "description": "把工作任务偏好连接到可验证能力、交付物、受众、工具或岗位信号，而不是只停留在喜欢/不喜欢。",
+      "pass_criteria": [
+        "输出把流程梳理、SOP、需求拆解、信息整理等任务转成结构化、文档化、需求理解、协作或信息整理等能力信号，并说明可能对应的岗位族群。"
+      ],
+      "fail_signals": [
+        "只说你喜欢整理所以适合某岗位，没有说明工作证据、交付物、场景或能力信号。"
+      ]
+    },
+    "keeps_positioning_hypothetical_with_validation": {
+      "type": "must",
+      "severity": "high",
+      "description": "将近期工作行为得出的定位保持为假设，并给出验证动作。",
+      "pass_criteria": [
+        "输出将定位标为假设、待确认或需要验证，并给 7 天内的小验证动作或需要补的事实。"
+      ],
+      "fail_signals": [
+        "直接宣布用户最适合某岗位或应该转向某方向，没有样本边界、待确认项或验证动作。"
+      ]
+    },
+    "detects_over_divergence": {
+      "type": "must",
+      "severity": "high",
+      "description": "识别用户同时发散到多个岗位、技能、材料、平台或计划，先做范围控制。",
+      "pass_criteria": [
+        "输出明确指出当前信息分支较多，或使用发散收束卡、收束、主线等结构来处理。"
+      ],
+      "fail_signals": [
+        "没有识别发散状态，直接逐项展开所有需求。"
+      ]
+    },
+    "groups_branches_before_action": {
+      "type": "must",
+      "severity": "high",
+      "description": "在给行动前，先把用户混在一起的需求归类成少量分支。",
+      "pass_criteria": [
+        "输出把岗位方向、技能学习、求职材料、平台/内容、面试准备等分支进行归类或合并。"
+      ],
+      "fail_signals": [
+        "不归类分支，直接列出一串彼此独立的任务或建议。"
+      ]
+    },
+    "selects_one_active_main_thread": {
+      "type": "must",
+      "severity": "high",
+      "description": "在用户过于发散时，只保留一个本轮主线，最多一个轻量副线。",
+      "pass_criteria": [
+        "输出明确标注本轮主线，或说明本轮只推进一个最关键方向。"
+      ],
+      "fail_signals": [
+        "同时推进多个岗位、多个技能和多份材料，没有主次。"
+      ]
+    },
+    "parks_secondary_branches": {
+      "type": "must",
+      "severity": "medium",
+      "description": "将次要分支放入暂存区，而不是展开或丢弃。",
+      "pass_criteria": [
+        "输出包含暂存分支、本轮先不处理、之后再看等结构，保留用户的其他想法。"
+      ],
+      "fail_signals": [
+        "要么展开所有分支，要么直接否定/丢弃用户提到的其他方向。"
+      ]
+    },
+    "provides_single_next_action": {
+      "type": "must",
+      "severity": "high",
+      "description": "发散收束后只给一个明确的下一步动作。",
+      "pass_criteria": [
+        "输出包含一个具体可执行的小动作，而不是多个并行任务。"
+      ],
+      "fail_signals": [
+        "给出多个学习、投递、修改材料和内容运营任务，导致任务继续膨胀。"
       ]
     },
     "reconstructs_question_types": {
@@ -1187,6 +1495,17 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "shifts_from_review_to_next_action": {
+      "type": "must",
+      "severity": "high",
+      "description": "面试反馈复盘后，助手应帮助用户把这次面试当作数据点，而不是长期停留在已发生的事里。",
+      "pass_criteria": [
+        "输出包含复盘收束提醒或等价内容，明确提醒不要反复纠结已发生面试，并把下一步转向下一次机会、面试前准备或一个具体查缺补漏动作。"
+      ],
+      "fail_signals": [
+        "输出只停留在分析过去面试、反馈和失败原因，没有给出向下一次机会或补强动作的转移；或把复盘写成新的长反思任务。"
+      ]
+    },
     "suggests_parallel_progress": {
       "type": "must",
       "severity": "medium",
@@ -1218,6 +1537,105 @@
       ],
       "fail_signals": [
         "建议报系统课程、长期考证，或没有说明如何练。"
+      ]
+    },
+    "summarizes_interview_invitation_patterns": {
+      "type": "must",
+      "severity": "high",
+      "description": "根据用户已经收到的面试邀请，总结岗位族群、JD 工作重心、共同关键词、交付物和市场正在识别到的候选人信号。",
+      "pass_criteria": [
+        "输出包含面试邀约信号画像或等价结构，至少说明邀约集中在哪些岗位/JD 特征、这些邀约共同识别到用户的哪些经历或能力。"
+      ],
+      "fail_signals": [
+        "只说继续投类似岗位，未总结邀约的 JD 共性、岗位族群或用户被市场识别到的信号。"
+      ]
+    },
+    "supports_second_language_authentic_expression": {
+      "type": "must",
+      "severity": "medium",
+      "description": "支持英语或第二语言面试中的自然表达，强调先内化意思和真实边界，再用简单清楚的语言表达，而不是追求母语者水平或背稿。",
+      "pass_criteria": [
+        "输出提到英文/第二语言表达时，鼓励使用自己的关键词、简单自然句子、真实证据和可解释边界。"
+      ],
+      "fail_signals": [
+        "要求用户背诵复杂英文稿、模仿母语者表达，或让语言包装覆盖真实情况。"
+      ]
+    },
+    "calibrates_resume_interview_claims": {
+      "type": "must",
+      "severity": "high",
+      "description": "生成简历、profile、自我介绍或面试准备时，应根据证据强弱校准表达确定性。",
+      "pass_criteria": [
+        "输出区分可确定表达、需要降级表达和待确认内容，或明确提醒强结论必须有证据支撑。"
+      ],
+      "fail_signals": [
+        "把用户只说过的学习、参与或接触包装成确定主导、精通、完全匹配或稳定胜任。"
+      ]
+    },
+    "avoids_overly_certain_wording": {
+      "type": "must",
+      "severity": "high",
+      "description": "避免在求职材料和面试准备中堆叠过度肯定、难以在面试中辩护的表述。",
+      "pass_criteria": [
+        "输出使用克制表达，例如有经验、接触过、参与、负责其中一部分、待确认、working knowledge 或 used in project context。"
+      ],
+      "fail_signals": [
+        "无证据地大量使用完全匹配、一定能胜任、精通、显著提升、主导全部、guaranteed、perfect fit、expert、native-level 或 fluent。"
+      ]
+    },
+    "supports_natural_non_stiff_english": {
+      "type": "must",
+      "severity": "medium",
+      "description": "英文面试、英文简历或英文能力岗位准备应使用自然、简洁、可说出口的职业英语。",
+      "pass_criteria": [
+        "输出包含 Plain English version、Natural phrases、可替换短句或朗读练习提示，并避免长篇背诵稿。"
+      ],
+      "fail_signals": [
+        "英文表达明显书面、生硬、复杂，或不像候选人可以自然说出口的回答。"
+      ]
+    },
+    "avoids_literal_translation_for_english_interview": {
+      "type": "must",
+      "severity": "medium",
+      "description": "英文面试或英文岗位表达不应逐句硬翻译中文材料，而应重组含义、证据和边界。",
+      "pass_criteria": [
+        "输出明确说明不逐句翻译，或将中文经历改写为符合英文面试/LinkedIn/英文简历习惯的短表达。"
+      ],
+      "fail_signals": [
+        "直接把中文简历、自我介绍或面试答案逐句翻译成英文，保留中文式长句和绝对化表达。"
+      ]
+    },
+    "suggests_practical_reverse_questions": {
+      "type": "must",
+      "severity": "high",
+      "description": "面试反问问题应小而实用，帮助用户理解岗位预期、流程、成长和关键能力。",
+      "pass_criteria": [
+        "输出 2-4 个可直接使用的反问问题，且问题和岗位、团队或后续准备相关。"
+      ],
+      "fail_signals": [
+        "只给泛泛的“你可以问公司情况”，或列出一大串没有优先级的问题。"
+      ]
+    },
+    "covers_reverse_question_core_directions": {
+      "type": "must",
+      "severity": "high",
+      "description": "反问问题覆盖岗位前 3 个月预期、后续面试流程、成长路径、岗位关键能力等核心方向。",
+      "pass_criteria": [
+        "输出至少覆盖 3 个月期望、后续流程、成长路径、关键能力中的两个方向；如果输出 4 个问题，优先覆盖四个方向。"
+      ],
+      "fail_signals": [
+        "问题只围绕公司介绍、福利待遇或抽象价值观，没有触及岗位预期、流程、成长或能力要求。"
+      ]
+    },
+    "keeps_reverse_questions_role_level": {
+      "type": "must",
+      "severity": "medium",
+      "description": "反问问题保持在岗位和团队层级，不默认升级到公司战略或行业宏观判断。",
+      "pass_criteria": [
+        "输出明确提醒反问方向不要太大，或将问题限定在团队、岗位、流程、成长和能力要求。"
+      ],
+      "fail_signals": [
+        "默认建议问公司战略、组织规划、行业格局、资本计划或其他与候选人岗位层级不匹配的问题。"
       ]
     },
     "translate_chinese_resume_sentence_by_sentence": {
@@ -1286,6 +1704,127 @@
         "输出出现该风险行为，或把不确定内容写成确定事实。"
       ]
     },
+    "turn_answer_into_memorized_script": {
+      "type": "must_not",
+      "severity": "medium",
+      "description": "把面试表达优化变成要求用户背诵固定稿、照着念或包装成不属于自己的表达。",
+      "pass_criteria": [
+        "输出强调关键词、结构、真实证据和自然表达，而不是背诵。"
+      ],
+      "fail_signals": [
+        "要求用户直接背下完整话术，或为了流利牺牲真实边界。"
+      ]
+    },
+    "overstate_english_fluency_or_ability": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把用户有限或工作沟通水平的英文能力包装成 native、fluent、bilingual 或无边界的高级能力。",
+      "pass_criteria": [
+        "输出没有夸大英文能力；如用户只说能工作沟通，应保持 working communication、comfortable with 或 project-context English 等边界。"
+      ],
+      "fail_signals": [
+        "无证据写成 native speaker、fluent English、near-native、bilingual，或承诺英文面试一定没有问题。"
+      ]
+    },
+    "use_stiff_literal_english": {
+      "type": "must_not",
+      "severity": "medium",
+      "description": "英文面试或英文材料输出使用生硬直译、复杂套话或不像真人会说的英文。",
+      "pass_criteria": [
+        "输出避免中式长句和模板套话，优先自然短句、关键词和可替换表达。"
+      ],
+      "fail_signals": [
+        "输出英文像逐字翻译中文，或使用大量僵硬、冗长、难以口头表达的句子。"
+      ]
+    },
+    "offer_generic_motivational_comfort": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "用空泛鸡汤、励志话术或大段情绪安慰替代求职焦虑的结构化处理。",
+      "pass_criteria": [
+        "输出没有把相信自己、一切都会好、你已经很棒了、不要焦虑等内容作为主要解决方案。"
+      ],
+      "fail_signals": [
+        "主要内容是鼓励和安慰，没有拆触发源、可控/不可控、信息边界或下一步动作。"
+      ]
+    },
+    "turn_anxiety_into_therapy_session": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把普通求职焦虑处理成心理诊断、治疗建议、情绪深挖会话或超出职业辅导边界的内容。",
+      "pass_criteria": [
+        "输出保持职业辅导边界；如出现危机或安全风险，提醒寻求当地专业支持，而不是自行诊断或治疗。"
+      ],
+      "fail_signals": [
+        "诊断用户心理状态、要求深挖创伤/童年/病症，或用治疗方案替代求职行动整理。"
+      ]
+    },
+    "repeat_large_background_summary": {
+      "type": "must_not",
+      "severity": "medium",
+      "description": "在用户要求省 token 时仍重复输出大段背景、完整画像、完整项目卡或当前对话已有信息。",
+      "pass_criteria": [
+        "输出没有重复大段背景，只引用已有卡片名、字段或本轮差异。"
+      ],
+      "fail_signals": [
+        "重新复述用户全部经历、项目、简历和 JD，或让用户再次复制全部已提供信息。"
+      ]
+    },
+    "regenerate_full_material_package": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "在用户要求省 token 或只需要补丁时，仍生成完整材料包、整份简历或全量面试题库。",
+      "pass_criteria": [
+        "输出保持在补丁、替换段落、差异清单或下一步范围内。"
+      ],
+      "fail_signals": [
+        "一次性生成完整简历、完整作品集、完整 JD 分析、完整面试题库或多个大包材料。"
+      ]
+    },
+    "treat_hobby_as_job_positioning": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把兴趣爱好、性格偏好或娱乐消费直接当作职业定位依据。",
+      "pass_criteria": [
+        "输出没有从爱好直接推岗位；如出现爱好，只要求补充对应工作任务或可验证产出。"
+      ],
+      "fail_signals": [
+        "直接根据喜欢画画、聊天、刷社媒、玩游戏等爱好推荐岗位或写职业定位。"
+      ]
+    },
+    "choose_positioning_from_preference_only": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "只凭用户说喜欢某类工作任务，就替用户确定职业定位或长期方向。",
+      "pass_criteria": [
+        "输出保留定位为假设，并要求用项目事实、JD、面试邀约信号或小规模行动验证。"
+      ],
+      "fail_signals": [
+        "把喜欢整理、喜欢沟通、喜欢拆需求等偏好直接等同于最终职业方向，且没有证据和验证边界。"
+      ]
+    },
+    "expand_all_branches": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "用户已经明显发散时，仍然展开所有岗位、技能、材料、平台和计划。",
+      "pass_criteria": [
+        "输出没有把所有分支都展开，只保留主线和暂存分支。"
+      ],
+      "fail_signals": [
+        "逐项分析运营、产品、数据、AI、SQL、Python、剪辑、作品集、简历、面试和账号运营等所有内容。"
+      ]
+    },
+    "create_overwhelming_multi_track_plan": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "为发散用户生成多线程、过长或同时推进太多任务的计划。",
+      "pass_criteria": [
+        "输出保持单主线和一个下一步动作，没有制造新的任务压力。"
+      ],
+      "fail_signals": [
+        "生成多岗位投递、多技能学习、多材料制作和内容平台运营并行的计划表。"
+      ]
+    },
     "understands_word_blocks": {
       "type": "must",
       "severity": "medium",
@@ -1319,6 +1858,17 @@
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
       ]
     },
+    "uses_conditional_problem_solving": {
+      "type": "must",
+      "severity": "high",
+      "description": "面对“如果发生 A 怎么办”这类问题，使用条件分支展示诊断和解决问题能力，而不是只顺着一个原因回答。",
+      "pass_criteria": [
+        "输出包含至少两个原因/情境分支，并说明不同原因对应不同处理动作，例如如果 A 因为 B 就做 C，如果 A 因为 D 就做 E。"
+      ],
+      "fail_signals": [
+        "只给一个固定做法，或只描述执行步骤，没有先判断可能原因。"
+      ]
+    },
     "updates_candidate_interview_profile": {
       "type": "must",
       "severity": "high",
@@ -1339,6 +1889,28 @@
       ],
       "fail_signals": [
         "输出缺失该行为，只有泛泛建议，或与输入事实不一致。"
+      ]
+    },
+    "write_verbatim_self_intro_script": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "用户没有明确要求逐字稿时，直接输出完整自我介绍或面试答案背诵稿。",
+      "pass_criteria": [
+        "默认先给框架、展开逻辑和可替换要点；如给示例，也应短、可编辑且标注为可选。"
+      ],
+      "fail_signals": [
+        "输出一大段以“尊敬的面试官”“大家好，我是...”等开头的定稿话术，并让用户照背。"
+      ]
+    },
+    "ask_grandiose_or_sensitive_reverse_questions": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "默认建议候选人反问过大的公司战略、组织政治、敏感信息或带有挑战意味的问题。",
+      "pass_criteria": [
+        "反问问题保持岗位级、团队级、流程级，不要求面试官透露敏感信息。"
+      ],
+      "fail_signals": [
+        "建议询问公司战略机密、组织权力结构、未公开规划、薪酬细节或带审问意味的问题，且未说明场景限制。"
       ]
     },
     "write_final_english_bullet_without_facts": {
@@ -1366,19 +1938,71 @@
   },
   "core_refined_rubrics": [
     "adapts_answer_focus_by_interviewer_role",
+    "acknowledges_anxiety_without_chicken_soup",
+    "balances_star_situation_action_result",
+    "builds_jd_aligned_selling_points",
     "change_facts_by_interviewer_role",
+    "classifies_jd_role_type",
+    "confuse_reply_signal_with_final_fit",
+    "contrasts_invited_and_no_response_roles",
     "decide_resignation_for_user",
     "does_not_select_project_from_name_only",
+    "estimates_reply_likelihood_with_uncertainty",
     "explains_evidence_ready_does_not_require_metrics",
     "extracts_core_tasks",
     "identifies_tool_requirements",
     "invent_experience",
+    "keeps_answer_concise_with_bullets",
+    "uses_token_saving_mode",
+    "uses_recent_work_activity_for_positioning",
+    "separates_work_preference_from_hobby",
+    "links_work_preference_to_evidence_and_role_signals",
+    "keeps_positioning_hypothetical_with_validation",
+    "detects_over_divergence",
+    "groups_branches_before_action",
+    "selects_one_active_main_thread",
+    "parks_secondary_branches",
+    "provides_single_next_action",
+    "outputs_two_level_framework_not_script",
+    "abstracts_abilities_with_simple_evidence",
+    "avoids_literal_translation_for_english_interview",
+    "avoids_overly_certain_wording",
+    "calibrates_resume_interview_claims",
+    "focuses_self_intro_on_two_role_fit_abilities",
     "process_offer_screenshot",
+    "promise_exact_reply_probability",
+    "produce_overlong_detail_dump",
+    "outputs_patch_or_delta_instead_of_full_regeneration",
     "provides_small_next_action",
+    "overstate_english_fluency_or_ability",
+    "offer_generic_motivational_comfort",
     "repeat_email",
     "repeat_phone",
+    "repeat_large_background_summary",
+    "regenerate_full_material_package",
+    "treat_hobby_as_job_positioning",
+    "choose_positioning_from_preference_only",
+    "expand_all_branches",
+    "create_overwhelming_multi_track_plan",
     "request_sensitive_data",
+    "separates_controllable_and_uncontrollable",
+    "sets_information_intake_boundary",
+    "shifts_from_review_to_next_action",
+    "reuses_existing_state_cards",
+    "summarizes_interview_invitation_patterns",
+    "supports_second_language_authentic_expression",
+    "supports_natural_non_stiff_english",
+    "suggests_practical_reverse_questions",
+    "covers_reverse_question_core_directions",
+    "keeps_reverse_questions_role_level",
     "suggests_short_term_improvement",
+    "offers_progressive_expansion",
+    "turn_answer_into_memorized_script",
+    "turn_anxiety_into_therapy_session",
+    "use_stiff_literal_english",
+    "uses_conditional_problem_solving",
+    "write_verbatim_self_intro_script",
+    "ask_grandiose_or_sensitive_reverse_questions",
     "write_final_english_bullet_without_facts"
   ]
 }

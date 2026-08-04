@@ -16,45 +16,82 @@ CCC 不声称“适用于所有模型”。不同平台的上下文长度、文�
 
 | 类型 | 当前状态 |
 | --- | --- |
-| 手工测试场景 | 23 个，见 [workbuddy/test-cases.md](../workbuddy/test-cases.md) |
-| 机器可读合约 | 23 个，见 [evals/cases.json](../evals/cases.json) |
-| 已登记语义断言 | 123 条，见 [evals/rubrics.json](../evals/rubrics.json) |
-| 已人工细化核心 Rubric | 15 条，见 [evals/rubrics.json](../evals/rubrics.json) |
+| 手工测试场景 | 32 个，见 [workbuddy/test-cases.md](../workbuddy/test-cases.md) |
+| 机器可读合约 | 32 个，见 [evals/cases.json](../evals/cases.json) |
+| 已登记语义断言 | 175 条，见 [evals/rubrics.json](../evals/rubrics.json) |
+| 已人工细化核心 Rubric | 67 条，见 [evals/rubrics.json](../evals/rubrics.json) |
 | 确定性输出 Runner | `0.2.0`，可对已有助手回复执行字面、正则和结构检查 |
 | 结果报告 Schema | `0.2.0` |
 | 结果报告 | 0 份，尚未保存真实平台执行报告 |
 | 总执行次数 | 0 次，由 `evals/results/` 中的报告动态计算 |
-| 声明唯一覆盖 | 0/23，包含结构合法但不可复算的 `schema_only` 报告 |
-| Runner 执行覆盖 | 0/23，只统计 `runner_generated` 和 `recomputed` 报告 |
-| 公开平台覆盖 | 0/23，只统计非本地 adapter 的 Runner 执行结果 |
-| 公开唯一通过 | 0/23，公开平台中至少一次确定性通过才计入 |
-| 公开已验证通过 | 0/23，公开平台中只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/32，包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/32，只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/32，只统计非本地 adapter 的 Runner 执行结果 |
+| 公开唯一通过 | 0/32，公开平台中至少一次确定性通过才计入 |
+| 公开已验证通过 | 0/32，公开平台中只有 `recomputed` 结果计入 |
 | 语义评审 | 0 次，尚未接入 LLM Judge |
 | 评估对象 | `assistant_output_only`，不对完整对话记录做字符串断言 |
 | 本地检查 | `node scripts/check-evals.mjs`、`node scripts/check-markdown-links.mjs`、`node scripts/test-deterministic-runner.mjs` |
 | GitHub Actions | 暂未启用；当前推送凭证缺少 `workflow` scope |
 
+## 真实 Smoke Report 流程
+
+兼容性矩阵只接受真实平台输出生成的报告，不把 fixture 或模板当作平台结果。
+
+当前已经提供 ChatGPT Smoke 输入模板：
+
+```bash
+cp evals/inputs/chatgpt-smoke.template.json \
+  evals/inputs/chatgpt-smoke.input.json
+
+# 手动填入真实平台模型名称和五个真实助手回复
+
+node scripts/generate-smoke-report.mjs \
+  evals/inputs/chatgpt-smoke.input.json
+```
+
+脚本会生成：
+
+```text
+evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
+```
+
+生成前会检查 5 个必测 case、原始输入、占位符、模型名称、40 位 `source_commit` 和助手回复完整性；生成后会自动运行 `node scripts/check-evals.mjs`。
+
+在没有真实模型输出前，公开统计继续保持：
+
+```text
+结果报告：0
+公开平台覆盖：0/32
+公开唯一通过：0/32
+公开已验证通过：0/32
+```
+
 ## 兼容性矩阵
 
 | 平台 / 环境 | 状态 | 测试计划 | 公开覆盖 | 公开通过 | 公开验证 | 模型 / 版本 | 证据 | 推荐入口 |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
-| Codex | Maintainer-used | 23 | 0 | - | - | 未记录 | 本地结构检查通过，尚无真实平台结果报告 | `skills/` |
-| WorkBuddy | Maintainer-used | 23 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 23 例正式执行记录 | `workbuddy/system-prompt.md` |
-| 飞书 + WorkBuddy | Community testing needed | 23 | 0 | - | - | 未记录 | 只有配置模板，尚未形成公开测试记录 | `workbuddy/feishu-config.md` |
-| ChatGPT / 普通 LLM | Contract-ready | 23 | 0 | - | - | 未记录 | 有 23 个机器可读合约和确定性输出 runner，尚无真实执行报告 | `prompts/copy-paste-prompt-cn.md` |
-| Claude Code | Community testing needed | 23 | 0 | - | - | 未记录 | 目录结构可迁移，需社区测试触发规则 | `skills/` |
-| DeepSeek | Community testing needed | 23 | 0 | - | - | 未记录 | 建议使用精简输入和分轮对话，尚无执行报告 | `prompts/copy-paste-prompt-cn.md` |
-| Kimi | Community testing needed | 23 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | `prompts/copy-paste-prompt-cn.md` |
-| 通义千问 | Experimental | 23 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | `prompts/copy-paste-prompt-cn.md` |
-| 豆包 | Experimental | 23 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | `prompts/copy-paste-prompt-cn.md` |
+| Codex | Maintainer-used | 32 | 0 | - | - | 未记录 | 本地结构检查通过，尚无真实平台结果报告 | `skills/` |
+| WorkBuddy | Maintainer-used | 32 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 32 例正式执行记录 | `workbuddy/system-prompt.md` |
+| 飞书 + WorkBuddy | Community testing needed | 32 | 0 | - | - | 未记录 | 只有配置模板，尚未形成公开测试记录 | `workbuddy/feishu-config.md` |
+| ChatGPT / 普通 LLM | Contract-ready | 32 | 0 | - | - | 未记录 | 有 32 个机器可读合约和确定性输出 runner，尚无真实执行报告 | `prompts/copy-paste-prompt-cn.md` |
+| Claude Code | Community testing needed | 32 | 0 | - | - | 未记录 | 目录结构可迁移，需社区测试触发规则 | `skills/` |
+| DeepSeek | Community testing needed | 32 | 0 | - | - | 未记录 | 建议使用精简输入和分轮对话，尚无执行报告 | `prompts/copy-paste-prompt-cn.md` |
+| Kimi | Community testing needed | 32 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | `prompts/copy-paste-prompt-cn.md` |
+| 通义千问 | Experimental | 32 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | `prompts/copy-paste-prompt-cn.md` |
+| 豆包 | Experimental | 32 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | `prompts/copy-paste-prompt-cn.md` |
 
 ## 迁移原则
 
 - 不要求用户先写结构化表格；允许混乱输入。
 - 首轮回复要短，最多问 1-3 个问题。
 - 不要一上来生成完整简历。
+- 用户同时发散到多个岗位、技能、材料、平台、教程或计划时，先归类分支，只保留 1 个本轮主线，其他暂存；不要把所有分支都展开成大清单。
 - 涉及项目表达时，先检查项目事实是否足够。
 - 涉及英文简历时，不要逐句翻译中文简历。
+- 涉及简历、profile 或面试准备时，避免过度肯定；涉及英文面试或英文能力岗位时，优先自然、可说出口的英文表达。
+- 涉及 token、上下文长度、手机端超时或跨模型复制时，复用已有卡片，优先输出差异补丁、替换段落和分轮展开。
+- 涉及最近在做或喜欢做的工作任务时，只把它作为定位假设；必须区分工作任务和爱好，并用项目事实、JD 或小验证确认。
 - 涉及隐私、offer、合同、薪资、签证、医疗、法律时，只做提醒和风险边界。
 
 ## 待补
