@@ -12,9 +12,9 @@ Produce small, editable job-search materials after enough intake exists. Materia
 
 ## Focus Rule
 
-- SHARED_RULE focus-control v1
+- SHARED_RULE focus-control v1.1
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1
+- SHARED_RULE profile-persistence v1.1
 
 Use the user's requested material as the active deliverable. Output one material patch or one template first, then at most one support reminder or next action. Park resume, portfolio, LinkedIn, greeting, interview, and persona branches that the user did not ask to expand.
 

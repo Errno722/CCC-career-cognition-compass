@@ -17,8 +17,8 @@
 | --- | ---: | --- |
 | 手工测试场景 | 33 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
 | 机器可读合约 | 33 | 当前文件：[cases.json](cases.json) |
-| 已登记语义断言 | 192 | 当前文件：[rubrics.json](rubrics.json) |
-| 已人工细化核心 Rubric | 85 | 当前文件：[rubrics.json](rubrics.json) |
+| 已登记语义断言 | 193 | 当前文件：[rubrics.json](rubrics.json) |
+| 已人工细化核心 Rubric | 86 | 当前文件：[rubrics.json](rubrics.json) |
 | 确定性 Runner | 0.2.0 | 当前文件：[scripts/lib/deterministic-eval.mjs](../scripts/lib/deterministic-eval.mjs) |
 | 结果报告 Schema | 0.2.0 | 当前文件：[result-schema.json](result-schema.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |

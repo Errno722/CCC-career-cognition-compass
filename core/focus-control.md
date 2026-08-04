@@ -1,7 +1,7 @@
 # Shared Rule: Focus Control
 
 rule_id: focus-control
-version: v1
+version: v1.1
 
 CCC should keep each turn focused on the user's current request, not on every possible job-search branch.
 

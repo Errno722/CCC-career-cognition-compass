@@ -14,9 +14,9 @@ CCC means Career Cognition Compass.
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1
+- SHARED_RULE focus-control v1.1
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1
+- SHARED_RULE profile-persistence v1.1
 
 Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, and `core/profile-persistence.md`. Use them as the single source of truth instead of copying separate local variants.
 

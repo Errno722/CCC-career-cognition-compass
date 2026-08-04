@@ -12,9 +12,9 @@ Turn a JD or target company into a concise preparation card. Use current source 
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1
+- SHARED_RULE focus-control v1.1
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1
+- SHARED_RULE profile-persistence v1.1
 
 Use `core/focus-control.md` to answer the requested JD/company deliverable first, `core/certainty-calibration.md` to avoid overstating fit, and `core/profile-persistence.md` when next-round interview profile context is supplied.
 

@@ -1503,19 +1503,24 @@
             "career-cognition-compass"
           ]
         },
-        "literal_all_of": [
-          "candidate_interview_profile_patch"
-        ],
+        "literal_all_of": [],
         "literal_any_of": [
+          [
+            "候选人面试资料卡补丁",
+            "面试资料卡补丁",
+            "资料卡更新"
+          ],
           [
             "业务负责人",
             "业务面试官",
             "业务增长"
           ],
           [
-            "output_only",
             "只在本轮输出",
-            "没有长期记忆"
+            "只存在于本轮回复",
+            "没有长期保存",
+            "下次需要重新带入",
+            "下次请带回"
           ],
           [
             "本轮继承",
@@ -1524,19 +1529,27 @@
           [
             "本轮不继承",
             "不继承",
-            "excluded_feedback"
+            "不适用本轮",
+            "只适用于技术岗"
           ],
           [
-            "source",
             "来源",
-            "reliability",
             "可信度"
           ]
         ],
         "literal_not_contains": [
           "已经保存",
           "我会记住",
-          "下次自动继承"
+          "下次自动继承",
+          "candidate_interview_profile_patch",
+          "candidate_interview_profile_base",
+          "candidate_interview_profile_by_role_family",
+          "focus_control",
+          "active_thread",
+          "parked_threads",
+          "required_gate",
+          "persistence_mode",
+          "output_only"
         ],
         "regex_not_contains": [],
         "structural_assertions": {
@@ -1558,7 +1571,8 @@
           "merge_all_role_family_feedback",
           "treat_single_feedback_as_fixed_identity",
           "carry_technical_bias_into_business_round",
-          "repeat_sensitive_profile_data"
+          "repeat_sensitive_profile_data",
+          "expose_internal_state_keys_to_end_user"
         ]
       }
     }

@@ -160,7 +160,7 @@ jd-resume-patch
 
 2026-08-04 / interview-review-miner v0.2.8
 - 候选人面试资料卡升级为 base / role_family / patch 三层结构。
-- 普通 LLM 或 WorkBuddy 对话默认标注 `persistence_mode: output_only`，不声称已保存。
+- 普通 LLM 或 WorkBuddy 对话默认用自然语言说明资料卡只存在于本轮回复，不声称已保存。
 - 二面、三面或新岗位族群准备时，区分本轮继承、不继承和需要重置的侧重点。
 
 2026-08-04 / job-search-plan-review v0.2.7

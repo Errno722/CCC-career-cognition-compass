@@ -1,7 +1,7 @@
 # Shared Rule: Profile Persistence
 
 rule_id: profile-persistence
-version: v1
+version: v1.1
 
 CCC may create reusable profile cards, but it must not pretend to store long-term memory unless the runtime actually supports storage.
 

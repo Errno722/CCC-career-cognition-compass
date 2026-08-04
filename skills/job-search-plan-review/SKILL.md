@@ -11,6 +11,12 @@ description: >-
 
 Create short, usable plans and reviews that help the user keep momentum without collecting unused materials.
 
+## Shared Rule Versions
+
+- SHARED_RULE focus-control v1.1
+- SHARED_RULE certainty-calibration v1
+- SHARED_RULE profile-persistence v1.1
+
 ## Planning Rules
 
 - Default to a maximum of 14 days.

@@ -10,6 +10,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 新增 `scripts/check-shared-rules.mjs`，检查核心 skills、通用 prompt 和 WorkBuddy prompt 是否声明同一组共享规则版本。
 - `career-cognition-compass`、`career-direction-clarifier`、`career-materials-builder`、`jd-company-prep`、`interview-review-miner`、通用 prompt 和 WorkBuddy prompt 对齐输出优先级：用户请求的交付物、必要门禁、一个主卡片、最多一个辅助补丁/提醒、一个下一步，其余暂存。
 - 纵向体验小修：普通用户回复优先使用“本轮主线 / 暂存 / 下一步 / 如果要继续”等自然标签，不直接暴露 `focus_control`、`candidate_interview_profile_patch` 等内部字段名；暂存分支增加可继续的短标签。
+- `focus-control` 和 `profile-persistence` 共享规则升级到 v1.1；Eval 新增内部字段泄露负向 Rubric，确保普通回复不因用户体验修正而被旧断言误判。
 
 ### 真实平台测试流程
 
@@ -38,12 +39,12 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 英文面试和英文能力岗位准备新增自然表达规则：不逐句硬翻译中文，不把 working communication 包装成 native / fluent，优先给 Plain English、Natural phrases 和可说出口的短框架。
 - 新增焦虑降噪规则：用户焦虑、刷社媒更慌、反复刷新或比较别人时，输出触发源、可控/不可控、信息摄入边界和一个 5-20 分钟动作，不用鸡汤式安慰替代行动。
 - 新增 Token 节省模式：用户提到 token、上下文太长、手机端超时、跨模型复制或回复太长时，复用已有卡片，只输出差异补丁、替换段落和下一步。
-- 机器可读 Eval 增加 `interview-expression-structure-001`、`self-intro-framework-001`、`interview-reverse-questions-001`、`english-interview-tone-calibration-001`、`anxiety-noise-reduction-001`、`token-saving-mode-001`、`recent-work-task-positioning-001` 和 `over-divergence-focus-001` 用例；当前手工测试和机器可读合约为 33 个，已登记语义断言为 192 条，核心细化 Rubric 为 85 条。
+- 机器可读 Eval 增加 `interview-expression-structure-001`、`self-intro-framework-001`、`interview-reverse-questions-001`、`english-interview-tone-calibration-001`、`anxiety-noise-reduction-001`、`token-saving-mode-001`、`recent-work-task-positioning-001` 和 `over-divergence-focus-001` 用例；当前手工测试和机器可读合约为 33 个，已登记语义断言为 193 条，核心细化 Rubric 为 86 条。
 
 ### 面试复盘
 
-- `interview-review-miner` 将候选人面试资料卡升级为 `candidate_interview_profile_base`、`candidate_interview_profile_by_role_family` 和默认输出的 `candidate_interview_profile_patch`。
-- 候选人面试资料卡新增 `persistence_mode`：普通 LLM / WorkBuddy 对话默认标注 `output_only`，不声称已保存；跨轮使用时由用户带回上一版资料卡。
+- `interview-review-miner` 将候选人面试资料卡升级为 base / role_family / patch 三层结构；普通用户回复默认展示“候选人面试资料卡补丁”。
+- 候选人面试资料卡新增持久化边界：普通 LLM / WorkBuddy 对话默认说明卡片只存在于本轮回复，不声称已保存；跨轮使用时由用户带回上一版资料卡。
 - 二面、三面或新岗位族群准备时，区分本轮继承、不继承、需要重置的侧重点，避免把上一轮岗位特有反馈带入新岗位。
 - `interview-review-miner` 增加复盘收束提醒：每次面试反馈复盘后，提醒用户不要停留在已发生的事太久，而是转向下一次机会或一个查缺补漏动作。
 - 机器可读 Eval 增加 `candidate-profile-inheritance-001`，验证资料卡继承、角色族群隔离、来源保留、`output_only` 标记和单次反馈边界。

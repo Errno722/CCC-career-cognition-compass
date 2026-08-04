@@ -469,8 +469,10 @@ gap 一年 运营 ai 转行 不知道投什么
 
 期望：
 
-- 输出 `candidate_interview_profile_patch`；
-- 标注 `persistence_mode: output_only`，不声称已经保存或下次自动记住；
+- 输出“候选人面试资料卡补丁”或自然语言等价结构；
+- 明确说明：该卡片只存在于本轮回复，系统没有确认长期保存；
+- 提示用户下次需要重新带入上一版资料卡；
+- 普通回复不展示 `candidate_interview_profile_patch`、`persistence_mode` 等内部变量名；
 - 继承可复用证据，例如运营经历、Shopify 上线证据、CCC 项目信息整理和 Agent/Skill 设计；
 - 不把上一轮 AI Agent 工程师的技术深度反馈直接继承为本轮业务负责人面试的主线；
 - 根据业务负责人 / 产品运营 / 业务增长重置准备重点，例如业务理解、用户/客户场景、指标、优先级和取舍；

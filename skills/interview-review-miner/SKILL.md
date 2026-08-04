@@ -14,9 +14,9 @@ This skill is not for emotional comfort or full interview coaching by default. I
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1
+- SHARED_RULE focus-control v1.1
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1
+- SHARED_RULE profile-persistence v1.1
 
 Use `core/focus-control.md` to keep the current review narrow, `core/certainty-calibration.md` to avoid turning feedback into fixed identity, and `core/profile-persistence.md` for profile scope and storage claims.
 
@@ -47,7 +47,7 @@ related_resume_version:
 
 Do not let feedback from one JD automatically rewrite the neutral resume or contaminate another role family. Reuse facts; reset role-specific emphasis for each new JD.
 
-After each interview review, update a compact `candidate_interview_profile_patch`. This is the reusable background card update for second/third interviews and later interview prep. It must separate stable cross-role evidence from role-family-specific concerns, keep source/reliability, and avoid turning one interviewer's comment into the user's fixed identity. In ordinary prompts, WorkBuddy, ChatGPT, Claude, or Codex conversations, mark it as `persistence_mode: output_only` unless the runtime actually writes to a file, database, knowledge base, or long-term memory.
+After each interview review, update a compact user-facing `候选人面试资料卡补丁`. Raw keys such as `candidate_interview_profile_patch` and persistence fields are for templates, configuration, or knowledge-base variables only. The card must separate stable cross-role evidence from role-family-specific concerns, keep source/reliability, and avoid turning one interviewer's comment into the user's fixed identity. In ordinary prompts, WorkBuddy, ChatGPT, Claude, or Codex conversations, explain in natural language that the card only exists in this reply unless the runtime actually writes to a file, database, knowledge base, or long-term memory.
 
 After each interview review, also close with a compact `forward_focus_reminder`. The reminder should be practical, not sentimental: acknowledge that the review is enough for now, warn the user not to stay too long inside what already happened, and point attention to the next possible opportunity or one gap-closing action.
 
@@ -241,7 +241,7 @@ last_seen:
 Default output after one review is a patch, not the full profile:
 
 ```text
-candidate_interview_profile_patch
+候选人面试资料卡补丁
 ├─ profile_id:
 ├─ previous_version:
 ├─ new_version:
@@ -263,7 +263,7 @@ Rules:
 - Carry forward reusable evidence and repeated comparable patterns, not wording bias from one JD or one interview.
 - Keep role-specific feedback inside that role family. Do not inherit technical-depth feedback into a business round, or product/operations feedback into a technical round, unless evidence shows it is cross-role.
 - For second/third interviews, compare the new round with this card and output: `本轮继承 / 本轮不继承 / 需要重置的侧重点 / 面试前最小补强动作`.
-- If the current platform cannot write persistent state, mark `persistence_mode: output_only` and tell the user to bring this card back next time. Do not say `已保存`, `我会记住`, or `下次自动继承`.
+- If the current platform cannot write persistent state, record output_only internally and tell the user in natural language: `这张卡目前只存在于本轮回复中；下次使用时请把上一版资料卡重新发给我`. Do not show raw persistence keys in ordinary replies, and do not say `已保存`, `我会记住`, or `下次自动继承`.
 - Full profile output is only needed for first creation, user request, entering second/third/new round, merging multiple updates, or scope migration.
 - If missing, create a first draft from known facts and mark unknowns. Do not ask for a long form.
 
@@ -407,7 +407,7 @@ Output:
 │  ├─ 更适合继续投:
 │  ├─ 需要谨慎投:
 │  └─ 需要验证:
-├─ candidate_interview_profile_patch:
+├─ 候选人面试资料卡补丁:
 ├─ 语气校准:
 ├─ 英文面试表达调整:
 └─ 知识库更新:
@@ -561,9 +561,9 @@ If feedback points to a missing skill, add it to the hard-skill KB with:
 下次面试回答思路
 ```
 
-If the feedback changes what the user should remember before the next round, output `candidate_interview_profile_patch`: new facts, new feedback, repeated-signal changes, next priority, and materials/directions it should not affect.
+If the feedback changes what the user should remember before the next round, output `候选人面试资料卡补丁`: new facts, new feedback, repeated-signal changes, next priority, and materials/directions it should not affect.
 
-If the platform has no explicit storage, output only `candidate_interview_profile_patch` with `persistence_mode: output_only`. The user can paste the previous card into the next session to continue versioning.
+If the platform has no explicit storage, output only a user-facing `候选人面试资料卡补丁`; keep raw keys and persistence fields internal unless the user asks for a template or configuration. Tell the user they can paste the previous card into the next session to continue versioning.
 
 ## Next Interview Answer Cards
 
@@ -628,7 +628,7 @@ For interviewer feedback:
 5. 面试回答需要怎么调
 6. 面试表达结构卡：JD 卖点、先总后分、3-4 条 bullet、Situation 和条件分支
 7. 不同面试官角色下应该怎么调整侧重点
-8. candidate_interview_profile_patch
+8. 候选人面试资料卡补丁
 9. 之后投 JD / 方向要注意什么
 10. 复盘收束提醒：不要停留在已发生的事太久，把注意力转向下一个机会或今天一个查缺补漏动作
 ```
@@ -642,7 +642,7 @@ For repeated feedback:
 2. 来源岗位是否相似
 3. 是否需要改简历
 4. 是否需要改投递范围
-5. candidate_interview_profile_patch
+5. 候选人面试资料卡补丁
 6. 下次面试回答卡，包括面试官角色侧重点
 7. 面试表达结构卡：把高频卡点改成可练习的短回答结构
 8. 语气校准 / 英文表达调整：避免过度肯定和生硬直译
@@ -666,7 +666,7 @@ For repeated feedback:
 ```text
 v0.2.8 / 2026-08-04
 - Split `candidate_interview_profile` into base and role-family layers.
-- Defaulted ordinary prompt/runtime profile updates to `candidate_interview_profile_patch` with `persistence_mode: output_only`.
+- Default ordinary prompt/runtime profile updates to user-facing `候选人面试资料卡补丁`; keep raw persistence fields internal unless the user asks for templates or configuration.
 - Added source item fields, role-specific inheritance rules, and resolved/retired feedback statuses.
 
 v0.2.7 / 2026-08-04
