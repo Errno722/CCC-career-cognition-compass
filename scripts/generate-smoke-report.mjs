@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { hashText } from "./lib/deterministic-eval.mjs";
 
 const casesPath = "evals/cases.json";
 const runnerPath = "scripts/run-deterministic-eval.mjs";
@@ -14,7 +15,8 @@ const requiredSmokeCaseIds = [
 ];
 const placeholders = [
   "REPLACE_WITH_ACTUAL_MODEL",
-  "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT"
+  "REPLACE_WITH_ACTUAL_ASSISTANT_OUTPUT",
+  "REPLACE_WITH_CURRENT_FULL_COMMIT"
 ];
 
 function usage() {
@@ -101,6 +103,42 @@ function assertSourceCommit(sourceCommit) {
   if (!/^[a-f0-9]{40}$/.test(sourceCommit)) {
     throw new Error("source_commit must be a full 40-character lowercase git SHA");
   }
+}
+
+function runGit(args, options = {}) {
+  const result = spawnSync("git", args, {
+    encoding: "utf8",
+    ...options
+  });
+
+  if (result.status !== 0) {
+    throw new Error(`git ${args.join(" ")} failed:\n${result.stdout}\n${result.stderr}`);
+  }
+
+  return result.stdout;
+}
+
+function assertCleanWorktree() {
+  const status = runGit(["status", "--porcelain"]);
+  if (status.trim().length > 0) {
+    throw new Error("worktree must be clean before generating a formal smoke report");
+  }
+}
+
+function currentHeadCommit() {
+  return runGit(["rev-parse", "HEAD"]).trim();
+}
+
+function assertSourceCommitIsHead(sourceCommit) {
+  const head = currentHeadCommit();
+  if (sourceCommit !== head) {
+    throw new Error(`source_commit must match current HEAD (${head}); historical commits are not supported`);
+  }
+}
+
+function suiteHashAtCommit(sourceCommit) {
+  const suiteContent = runGit(["show", `${sourceCommit}:${casesPath}`]);
+  return hashText(suiteContent);
 }
 
 function assertExactSmokeCases(inputCases, caseMap) {
@@ -254,6 +292,7 @@ function printSummary(report, reportPath) {
 
 try {
   const { inputPath, outputPath } = parseArgs(process.argv.slice(2));
+  assertCleanWorktree();
   const suite = readJson(casesPath);
   const caseMap = new Map(suite.cases.map((item) => [item.id, item]));
   const input = readJson(inputPath);
@@ -265,6 +304,8 @@ try {
   const model = nonEmptyString(input.model, "model");
   const sourceCommit = nonEmptyString(input.source_commit, "source_commit");
   assertSourceCommit(sourceCommit);
+  assertSourceCommitIsHead(sourceCommit);
+  const expectedSuiteSha256 = suiteHashAtCommit(sourceCommit);
   const cases = assertExactSmokeCases(input.cases, caseMap);
   const runId = typeof input.run_id === "string" && input.run_id.trim().length > 0 ? input.run_id.trim() : undefined;
   const { absolutePath, relativePosixPath } = resolveOutputPath(adapter, runId, outputPath);
@@ -293,6 +334,9 @@ try {
   const report = parseRunnerReport(runnerResult);
   if (report.verification_level !== "recomputed") {
     throw new Error("smoke reports must be verification_level: recomputed");
+  }
+  if (report.suite_sha256 !== expectedSuiteSha256) {
+    throw new Error("runner suite_sha256 does not match evals/cases.json at source_commit");
   }
 
   fs.mkdirSync(path.dirname(absolutePath), { recursive: true });

@@ -1,7 +1,7 @@
 {
   "adapter": "chatgpt",
   "model": "REPLACE_WITH_ACTUAL_MODEL",
-  "source_commit": "e9c01d0824c90fc22cd473e5fe4d9ffd6703a851",
+  "source_commit": "REPLACE_WITH_CURRENT_FULL_COMMIT",
   "include_assistant_output": true,
   "cases": [
     {

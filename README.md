@@ -80,13 +80,14 @@ CCC 应该先整理，而不是直接写简历：
 - 近期工作行为定位：根据最近实际在做、愿意继续做或做完更有掌控感的工作任务，形成定位假设；不把爱好直接当职业结论。
 - 发散收束：当用户同时想投很多方向、学很多技能、做很多材料时，先归类分支，只推进 1 个本轮主线。
 - JD 与简历补丁：先判断 JD 岗位类型和工作重心，再聚焦 2-3 个核心能力，避免每次重写整份简历。
-- 面试准备与复盘：整理关键词、不完整问题和面试官反馈，沉淀候选人面试背景卡；按 HR、业务、技术等面试官角色调整回答侧重点；用面试表达结构卡训练清晰回答；自我介绍和面试答案默认给可记忆框架；面试反问卡只给岗位级小问题。
+- 面试准备与复盘：整理关键词、不完整问题和面试官反馈，输出候选人面试资料卡补丁；按 HR、业务、技术等面试官角色调整回答侧重点；用面试表达结构卡训练清晰回答；自我介绍和面试答案默认给可记忆框架；面试反问卡只给岗位级小问题。
 - 语气校准与英文面试：简历和面试准备避免过度肯定，英文表达不逐句硬翻译，优先给自然、可说出口、可验证的英文框架和短句。
 - 投递后空档期计划：把等待消息的焦虑转成 5-20 分钟小动作。
 - 焦虑降噪：刷社媒更慌、反复刷新、等待反馈或比较别人时，拆出触发源、可控/不可控、信息摄入边界和一个小动作，不灌鸡汤。
-- 面试邀约信号画像：根据已收到的面试邀请、JD 和无回复样本，总结哪些岗位族群更容易得到回复。
+- 面试邀约信号画像：根据已收到的面试邀请、JD 和无回复样本，区分邀约构成、本批次观察回复率和下一批验证假设。
 - Token 节省模式：复用已有状态卡、项目卡、主简历和 JD 补丁，只输出差异、替换段落和下一步，减少跨模型或手机端反复消耗。
 - 隐私保护：默认提醒脱敏，不要求真实简历、offer、合同或完整面试记录。
+- 共享规则：`core/` 维护 focus control、确定性表达校准和 profile 持久化边界，避免不同入口规则漂移。
 
 ## 工作流
 
@@ -121,31 +122,33 @@ flowchart TD
 
 ```bash
 node scripts/check-evals.mjs
+node scripts/check-shared-rules.mjs
 node scripts/check-markdown-links.mjs
 node scripts/test-deterministic-runner.mjs
+node scripts/test-generate-smoke-report.mjs
 git diff --check
 ```
 
-这些校验不会调用模型。`check-evals.mjs` 检查 eval schema、真实 skill ID、手工案例映射、语义断言登记、核心 rubric 标记和已保存结果报告结构；`check-markdown-links.mjs` 检查公开文档本地链接；`test-deterministic-runner.mjs` 用 fixture 验证确定性 runner 的通过与失败路径。语义断言仍需要对应平台的人工抽检或未来 LLM Judge。
+这些校验不会调用模型。`check-evals.mjs` 检查 eval schema、真实 skill ID、手工案例映射、语义断言登记、核心 rubric 标记和已保存结果报告结构；`check-shared-rules.mjs` 检查共享规则版本标记；`check-markdown-links.mjs` 检查公开文档本地链接；`test-deterministic-runner.mjs` 用 fixture 验证确定性 runner；`test-generate-smoke-report.mjs` 在临时仓库验证 Smoke Report 生成流程。语义断言仍需要对应平台的人工抽检或未来 LLM Judge。
 
 当前测试状态：
 
 ```text
-手工测试场景：32
-机器可读合约：32
-已登记语义断言：175
-已人工细化核心 Rubric：67
+手工测试场景：33
+机器可读合约：33
+已登记语义断言：192
+已人工细化核心 Rubric：85
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/32
-Runner 执行覆盖：0/32
-公开平台覆盖：0/32
-Runner 唯一通过：0/32
-公开唯一通过：0/32
-已验证 Runner 通过：0/32
-公开已验证通过：0/32
+声明唯一覆盖：0/33
+Runner 执行覆盖：0/33
+公开平台覆盖：0/33
+Runner 唯一通过：0/33
+公开唯一通过：0/33
+已验证 Runner 通过：0/33
+公开已验证通过：0/33
 语义已审次数：0
 评估对象：assistant_output_only
 ```
@@ -156,7 +159,11 @@ Runner 唯一通过：0/32
 cp evals/inputs/chatgpt-smoke.template.json \
   evals/inputs/chatgpt-smoke.input.json
 
-# 手动填入真实平台模型名称和五个真实助手回复
+# 先提交当前合约，再用完整 HEAD 替换 source_commit
+git status --short
+git rev-parse HEAD
+
+# 手动填入真实平台模型名称、source_commit 和五个真实助手回复
 
 node scripts/generate-smoke-report.mjs \
   evals/inputs/chatgpt-smoke.input.json

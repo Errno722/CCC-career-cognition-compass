@@ -21,9 +21,17 @@ cp evals/inputs/chatgpt-smoke.template.json \
 然后打开 `evals/inputs/chatgpt-smoke.input.json`：
 
 1. 将 `model` 改成真实平台显示的模型名称。
-2. 逐个复制每个 case 的 `input` 字段，发送给正在运行 CCC 的平台。
-3. 将平台返回的完整回复填入对应 `assistant_output`。
-4. 确认所有内容都是合成测试数据，并且已经脱敏。
+2. 先确认当前合约已经提交，工作区是干净的：
+
+   ```bash
+   git status --short
+   git rev-parse HEAD
+   ```
+
+3. 将 `source_commit` 改成上一步得到的完整 40 位 HEAD。
+4. 逐个复制每个 case 的 `input` 字段，发送给正在运行 CCC 的平台。
+5. 将平台返回的完整回复填入对应 `assistant_output`。
+6. 确认所有内容都是合成测试数据，并且已经脱敏。
 
 生成报告：
 
@@ -33,6 +41,8 @@ node scripts/generate-smoke-report.mjs \
 ```
 
 脚本会强制保存 `assistant_output`，因此生成的报告是 `verification_level: recomputed`，可以被 `check-evals.mjs` 重新计算。
+
+生成脚本还会检查工作区是否干净、`source_commit` 是否等于当前 HEAD，以及该提交里的 `evals/cases.json` 是否与 runner 报告的 `suite_sha256` 匹配。历史 commit 暂不支持。
 
 如果当天同名报告已经存在，脚本不会覆盖文件。可以指定新文件名：
 
@@ -46,8 +56,10 @@ node scripts/generate-smoke-report.mjs \
 
 ```bash
 node scripts/check-evals.mjs
+node scripts/check-shared-rules.mjs
 node scripts/check-markdown-links.mjs
 node scripts/test-deterministic-runner.mjs
+node scripts/test-generate-smoke-report.mjs
 git diff --check
 ```
 

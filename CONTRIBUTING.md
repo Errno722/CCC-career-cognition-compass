@@ -66,6 +66,11 @@ workbuddy: add deployment test case
 提交前建议检查：
 
 ```text
+node scripts/check-evals.mjs
+node scripts/check-shared-rules.mjs
+node scripts/check-markdown-links.mjs
+node scripts/test-deterministic-runner.mjs
+node scripts/test-generate-smoke-report.mjs
 git diff --check
 ```
 

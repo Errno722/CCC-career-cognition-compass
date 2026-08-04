@@ -4,19 +4,26 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 
 ## 2026-08-04
 
+### 共享规则与输出收束
+
+- 新增 `core/focus-control.md`、`core/certainty-calibration.md` 和 `core/profile-persistence.md`，把发散收束、确定性表达校准和资料卡持久化边界作为共享规则维护。
+- 新增 `scripts/check-shared-rules.mjs`，检查核心 skills、通用 prompt 和 WorkBuddy prompt 是否声明同一组共享规则版本。
+- `career-cognition-compass`、`career-direction-clarifier`、`career-materials-builder`、`jd-company-prep`、`interview-review-miner`、通用 prompt 和 WorkBuddy prompt 对齐输出优先级：用户请求的交付物、必要门禁、一个主卡片、最多一个辅助补丁/提醒、一个下一步，其余暂存。
+
 ### 真实平台测试流程
 
 - 新增 `evals/inputs/`，提供真实平台 Smoke Report 输入模板和安全说明。
 - 新增 `scripts/generate-smoke-report.mjs`，用于把手动收集的真实平台助手回复转换为 `verification_level: recomputed` 的结果报告。
-- Smoke 生成流程会检查占位符、5 个必测 case、原始输入一致性、非空助手回复、40 位 `source_commit` 和输出路径，避免把模板或错误输入当作真实报告。
+- Smoke 生成流程会检查占位符、5 个必测 case、原始输入一致性、非空助手回复、40 位 `source_commit`、干净工作区、`source_commit === HEAD`、提交内 `evals/cases.json` 与结果 `suite_sha256` 匹配和输出路径，避免把模板或错误输入当作真实报告。
+- 新增 `scripts/test-generate-smoke-report.mjs`，在临时 Git 仓库中验证模板占位符、缺失/重复 case、输入不一致、空回复、非法 commit、脏工作区、路径错误、runner 失败和 check 失败删除等路径。
 - `.gitignore` 默认忽略 `evals/inputs/*.input.json`，防止完整助手回复被误提交。
-- 当前尚未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/32。
+- 当前尚未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/33。
 
 ### 投递复盘
 
 - `job-search-plan-review` 增加面试邀约信号画像：根据用户已收到的面试邀请、邀约 JD、无回复岗位、投递基数、渠道和简历版本，总结哪些岗位族群和 JD 特征更容易得到回复。
-- 面试邀约信号画像只输出相对高/中/低回复信号、样本边界和下一批小规模投递验证，不承诺精确回复概率，也不把高回复方向等同于最终职业方向。
-- 机器可读 Eval 增加 `interview-invitation-signals-001` 用例和 5 个相关语义断言。
+- 面试邀约信号画像现在区分邀约构成、本批次观察回复率和下一批未来假设；必须展示分子/分母、样本量等级、混杂因素和简历版本边界，不把观察回复率写成未来概率。
+- 机器可读 Eval 更新 `interview-invitation-signals-001`，增加分母、混杂因素、简历版本隔离和未来概率边界相关语义断言。
 
 ### 面试表达
 
@@ -30,13 +37,15 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 英文面试和英文能力岗位准备新增自然表达规则：不逐句硬翻译中文，不把 working communication 包装成 native / fluent，优先给 Plain English、Natural phrases 和可说出口的短框架。
 - 新增焦虑降噪规则：用户焦虑、刷社媒更慌、反复刷新或比较别人时，输出触发源、可控/不可控、信息摄入边界和一个 5-20 分钟动作，不用鸡汤式安慰替代行动。
 - 新增 Token 节省模式：用户提到 token、上下文太长、手机端超时、跨模型复制或回复太长时，复用已有卡片，只输出差异补丁、替换段落和下一步。
-- 机器可读 Eval 增加 `interview-expression-structure-001`、`self-intro-framework-001`、`interview-reverse-questions-001`、`english-interview-tone-calibration-001`、`anxiety-noise-reduction-001`、`token-saving-mode-001`、`recent-work-task-positioning-001` 和 `over-divergence-focus-001` 用例，当前手工测试和机器可读合约为 32 个，已登记语义断言为 175 条，核心细化 Rubric 为 67 条。
+- 机器可读 Eval 增加 `interview-expression-structure-001`、`self-intro-framework-001`、`interview-reverse-questions-001`、`english-interview-tone-calibration-001`、`anxiety-noise-reduction-001`、`token-saving-mode-001`、`recent-work-task-positioning-001` 和 `over-divergence-focus-001` 用例；当前手工测试和机器可读合约为 33 个，已登记语义断言为 192 条，核心细化 Rubric 为 85 条。
 
 ### 面试复盘
 
-- `interview-review-miner` 增加候选人面试背景卡，用于把每次面试反馈沉淀为二面、三面或下一轮面试可继承的背景资料。
+- `interview-review-miner` 将候选人面试资料卡升级为 `candidate_interview_profile_base`、`candidate_interview_profile_by_role_family` 和默认输出的 `candidate_interview_profile_patch`。
+- 候选人面试资料卡新增 `persistence_mode`：普通 LLM / WorkBuddy 对话默认标注 `output_only`，不声称已保存；跨轮使用时由用户带回上一版资料卡。
+- 二面、三面或新岗位族群准备时，区分本轮继承、不继承、需要重置的侧重点，避免把上一轮岗位特有反馈带入新岗位。
 - `interview-review-miner` 增加复盘收束提醒：每次面试反馈复盘后，提醒用户不要停留在已发生的事太久，而是转向下一次机会或一个查缺补漏动作。
-- 机器可读 Eval 增加 `updates_candidate_interview_profile` 和 `shifts_from_review_to_next_action` 语义断言。
+- 机器可读 Eval 增加 `candidate-profile-inheritance-001`，验证资料卡继承、角色族群隔离、来源保留、`output_only` 标记和单次反馈边界。
 
 ### JD 拆解
 
