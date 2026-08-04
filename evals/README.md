@@ -4,7 +4,7 @@
 
 目前包含：
 
-- `cases.json`：从 WorkBuddy 32 个手工测试用例整理出的机器可读合约。
+- `cases.json`：从 WorkBuddy 33 个手工测试用例整理出的机器可读合约。
 - `schema.json`：Eval suite 的结构说明。
 - `result-schema.json`：已执行结果报告的结构说明。
 - `rubrics.json`：语义断言的评分口径。
@@ -15,21 +15,21 @@
 
 | 类型 | 数量 | 说明 |
 | --- | ---: | --- |
-| 手工测试场景 | 32 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
-| 机器可读合约 | 32 | 当前文件：[cases.json](cases.json) |
-| 已登记语义断言 | 175 | 当前文件：[rubrics.json](rubrics.json) |
-| 已人工细化核心 Rubric | 67 | 当前文件：[rubrics.json](rubrics.json) |
+| 手工测试场景 | 33 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
+| 机器可读合约 | 33 | 当前文件：[cases.json](cases.json) |
+| 已登记语义断言 | 192 | 当前文件：[rubrics.json](rubrics.json) |
+| 已人工细化核心 Rubric | 85 | 当前文件：[rubrics.json](rubrics.json) |
 | 确定性 Runner | 0.2.0 | 当前文件：[scripts/lib/deterministic-eval.mjs](../scripts/lib/deterministic-eval.mjs) |
 | 结果报告 Schema | 0.2.0 | 当前文件：[result-schema.json](result-schema.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
-| 声明唯一覆盖 | 0/32 | 包含结构合法但不可复算的 `schema_only` 报告 |
-| Runner 执行覆盖 | 0/32 | 只统计 `runner_generated` 和 `recomputed` 报告 |
-| 公开平台覆盖 | 0/32 | 只统计非本地 adapter 的 Runner 执行结果 |
-| Runner 唯一通过 | 0/32 | Runner 执行结果中至少一次确定性通过才计入 |
-| 公开唯一通过 | 0/32 | 公开平台中至少一次确定性通过才计入 |
-| 已验证 Runner 通过 | 0/32 | 只有 `recomputed` 结果计入 |
-| 公开已验证通过 | 0/32 | 公开平台中只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/33 | 包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/33 | 只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/33 | 只统计非本地 adapter 的 Runner 执行结果 |
+| Runner 唯一通过 | 0/33 | Runner 执行结果中至少一次确定性通过才计入 |
+| 公开唯一通过 | 0/33 | 公开平台中至少一次确定性通过才计入 |
+| 已验证 Runner 通过 | 0/33 | 只有 `recomputed` 结果计入 |
+| 公开已验证通过 | 0/33 | 公开平台中只有 `recomputed` 结果计入 |
 | 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -61,7 +61,7 @@ node scripts/check-evals.mjs
 - `literal_all_of`、`literal_any_of`、`literal_not_contains`、`regex_not_contains`、`semantic_assertions`、`semantic_must_not` 类型正确；
 - 所有数组元素都是非空字符串；
 - `regex_not_contains` 可以被编译为正则；
-- `structural_assertions.max_questions` 在 0-3；
+- `structural_assertions.max_questions` 在 0-4；
 - 可选的 `max_characters` 为正整数；
 - 每个 semantic id 都能在 [rubrics.json](rubrics.json) 找到评分说明；
 - 所有 rubric，包括暂未引用的 draft rubric，都必须具备合法 `type`、`severity`、`description`、`pass_criteria` 和 `fail_signals`；
@@ -84,9 +84,9 @@ Smoke Report 用来记录某个平台在 5 个核心 case 上的真实助手回�
 
 ```text
 结果报告：0
-公开平台覆盖：0/32
-公开唯一通过：0/32
-公开已验证通过：0/32
+公开平台覆盖：0/33
+公开唯一通过：0/33
+公开已验证通过：0/33
 ```
 
 生成流程：
@@ -95,7 +95,11 @@ Smoke Report 用来记录某个平台在 5 个核心 case 上的真实助手回�
 cp evals/inputs/chatgpt-smoke.template.json \
   evals/inputs/chatgpt-smoke.input.json
 
-# 手动填入真实平台模型名称和五个真实助手回复
+# 先提交当前合约，再用完整 HEAD 替换 source_commit
+git status --short
+git rev-parse HEAD
+
+# 手动填入真实平台模型名称、source_commit 和五个真实助手回复
 
 node scripts/generate-smoke-report.mjs \
   evals/inputs/chatgpt-smoke.input.json
@@ -107,6 +111,9 @@ node scripts/generate-smoke-report.mjs \
 
 - 模板占位符已替换；
 - `adapter`、`model` 和 40 位 `source_commit` 已填写；
+- 工作区必须干净；
+- `source_commit` 必须等于当前 `HEAD`；
+- `source_commit` 对应提交中的 `evals/cases.json` 必须和 runner 报告中的 `suite_sha256` 匹配；
 - 5 个必测 case 全部存在且不重复；
 - 每个 case 的 `input` 与 [cases.json](cases.json) 完全一致；
 - 每个 `assistant_output` 都是非空字符串；
@@ -139,8 +146,10 @@ node scripts/generate-smoke-report.mjs \
 
 ```bash
 node scripts/check-evals.mjs
+node scripts/check-shared-rules.mjs
 node scripts/check-markdown-links.mjs
 node scripts/test-deterministic-runner.mjs
+node scripts/test-generate-smoke-report.mjs
 git diff --check
 ```
 

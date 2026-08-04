@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 32,
+  "manual_case_count": 33,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -974,7 +974,7 @@
       "id": "interview-invitation-signals-001",
       "title": "面试邀约信号画像",
       "manual_case_id": 24,
-      "input": "我最近两周投了 40 个岗位，收到 5 个面试邀请：3 个是用户运营 / 运营执行，1 个是产品助理，1 个是项目执行。没回复的大多是高级产品经理和 AI Agent 工程师。请帮我根据这些岗位和 JD 判断，下一批投什么岗位更容易有回复。",
+      "input": "我最近两周投了 40 个岗位。A 简历投了 20 个用户运营 / 运营执行，收到 3 个邀约；B 简历投了 10 个产品助理，收到 1 个邀约；C 简历投了 10 个 AI Agent 工程师和高级产品经理，收到 0 个邀约。另有 1 个项目执行邀约来自朋友内推，不在这 40 个冷投里。请帮我根据岗位和 JD 做面试邀约信号画像，判断下一批投什么岗位更容易有回复。",
       "expected": {
         "routing": {
           "mode": "primary_required",
@@ -1004,15 +1004,28 @@
           [
             "回复",
             "邀约"
+          ],
+          [
+            "投递数",
+            "分母",
+            "20"
+          ],
+          [
+            "观察回复率",
+            "本批次",
+            "样本"
+          ],
+          [
+            "混杂因素",
+            "内推",
+            "简历版本"
           ]
         ],
         "literal_not_contains": [
           "一定能收到回复",
           "必然会有面试"
         ],
-        "regex_not_contains": [
-          "\\d{2,3}\\s*%"
-        ],
+        "regex_not_contains": [],
         "structural_assertions": {
           "max_questions": 3
         },
@@ -1021,10 +1034,15 @@
           "classifies_jd_role_type",
           "contrasts_invited_and_no_response_roles",
           "estimates_reply_likelihood_with_uncertainty",
+          "calculates_observed_reply_rate_with_denominator",
+          "separates_invitation_mix_observed_rate_and_future_hypothesis",
+          "marks_invitation_confounders",
           "provides_small_next_action"
         ],
         "semantic_must_not": [
           "promise_exact_reply_probability",
+          "state_future_reply_probability_as_observed_rate",
+          "merge_different_resume_versions_into_single_signal",
           "confuse_reply_signal_with_final_fit",
           "only_send_more_applications"
         ]
@@ -1158,19 +1176,18 @@
         "literal_any_of": [
           [
             "3 个月",
-            "三个月"
-          ],
-          [
+            "三个月",
             "面试流程",
-            "后续流程"
-          ],
-          [
+            "后续流程",
             "成长路径",
-            "发展路径"
-          ],
-          [
+            "发展路径",
             "关键能力",
             "最关键的能力"
+          ],
+          [
+            "2-4",
+            "2 到 4",
+            "两到四"
           ]
         ],
         "literal_not_contains": [
@@ -1180,7 +1197,7 @@
         ],
         "regex_not_contains": [],
         "structural_assertions": {
-          "max_questions": 3
+          "max_questions": 4
         },
         "semantic_assertions": [
           "suggests_practical_reverse_questions",
@@ -1468,6 +1485,80 @@
         "semantic_must_not": [
           "expand_all_branches",
           "create_overwhelming_multi_track_plan"
+        ]
+      }
+    },
+    {
+      "id": "candidate-profile-inheritance-001",
+      "title": "候选人面试资料卡继承与重置",
+      "manual_case_id": 33,
+      "input": "上一轮技术面试后的候选人面试资料卡（已脱敏）：candidate_interview_profile_base：profile_id cip-001，profile_version v1，stable_background：有运营经历，做过 Shopify 项目和 CCC 项目；cross_role_strengths：能把混乱需求整理成流程/SOP，能用 AI 工具做原型和文档；reusable_evidence：Shopify 项目可证明从 0 到上线系统搭建，CCC 可证明信息整理与 Agent/Skill 设计；general_expression_risks：回答容易讲太多细节；persistence_mode output_only。上一轮 role profile：role_family AI Agent 工程师；role_specific_concerns：Python 工程深度不足（仅技术岗）；recent_feedback：HR 转述“技术细节不够”，reliability low；missing_evidence：生产级代码经验。下一轮是业务负责人面试，岗位偏产品运营/业务增长。请基于上一版 Profile 准备本轮继承什么、不继承什么，并输出更新 Patch。当前只是普通 LLM 对话，没有明确长期记忆或文件写入能力。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "interview-review-miner",
+          "allowed_secondary": [
+            "jd-company-prep",
+            "career-materials-builder",
+            "career-cognition-compass"
+          ]
+        },
+        "literal_all_of": [
+          "candidate_interview_profile_patch"
+        ],
+        "literal_any_of": [
+          [
+            "业务负责人",
+            "业务面试官",
+            "业务增长"
+          ],
+          [
+            "output_only",
+            "只在本轮输出",
+            "没有长期记忆"
+          ],
+          [
+            "本轮继承",
+            "继承"
+          ],
+          [
+            "本轮不继承",
+            "不继承",
+            "excluded_feedback"
+          ],
+          [
+            "source",
+            "来源",
+            "reliability",
+            "可信度"
+          ]
+        ],
+        "literal_not_contains": [
+          "已经保存",
+          "我会记住",
+          "下次自动继承"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1200
+        },
+        "semantic_assertions": [
+          "inherits_reusable_profile_evidence",
+          "does_not_inherit_role_specific_profile_bias",
+          "resets_profile_focus_for_new_round",
+          "preserves_profile_item_sources",
+          "outputs_profile_patch",
+          "marks_profile_as_output_only_without_storage",
+          "retires_or_scopes_resolved_profile_items",
+          "updates_candidate_interview_profile"
+        ],
+        "semantic_must_not": [
+          "claim_profile_persisted_without_storage",
+          "merge_all_role_family_feedback",
+          "treat_single_feedback_as_fixed_identity",
+          "carry_technical_bias_into_business_round",
+          "repeat_sensitive_profile_data"
         ]
       }
     }

@@ -487,8 +487,8 @@ for (const item of suite.cases) {
     throw new Error(`${item.id} expected.structural_assertions must be an object`);
   }
 
-  if (!Number.isInteger(structural.max_questions) || structural.max_questions < 0 || structural.max_questions > 3) {
-    throw new Error(`${item.id} expected.structural_assertions.max_questions must be an integer from 0 to 3`);
+  if (!Number.isInteger(structural.max_questions) || structural.max_questions < 0 || structural.max_questions > 4) {
+    throw new Error(`${item.id} expected.structural_assertions.max_questions must be an integer from 0 to 4`);
   }
 
   if ("max_characters" in structural && (!Number.isInteger(structural.max_characters) || structural.max_characters <= 0)) {

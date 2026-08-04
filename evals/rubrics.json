@@ -453,12 +453,12 @@
     "estimates_reply_likelihood_with_uncertainty": {
       "type": "must",
       "severity": "high",
-      "description": "基于投递基数、时间窗口、邀约数量、JD 共性和无回复样本，给出相对回复信号和置信度，同时明确样本边界。",
+      "description": "基于投递基数、时间窗口、邀约数量、JD 共性和无回复样本，给出相对回复信号和置信度，同时明确样本边界；观察回复率不能被写成未来概率。",
       "pass_criteria": [
-        "输出使用高/中/低相对信号、early_signal、pattern 或类似表达，并说明样本少、渠道不明、简历版本不明等不确定因素。"
+        "输出使用高/中/低相对信号、early_signal、pattern 或类似表达，并说明样本少、渠道、简历版本、内推或时间窗口等不确定因素。"
       ],
       "fail_signals": [
-        "不给任何置信度或样本边界；或把少量邀约当成稳定市场规律。"
+        "不给任何置信度或样本边界；把少量邀约当成稳定市场规律；或把本批次观察回复率写成未来精确概率。"
       ]
     },
     "explains_evidence_ready_does_not_require_metrics": {
@@ -1168,7 +1168,7 @@
     "reuses_existing_state_cards": {
       "type": "must",
       "severity": "high",
-      "description": "复用已有职业画像、项目事实卡、候选人面试背景卡、中性主简历、JD 简历补丁或硬技能知识库，而不是每轮重贴。",
+      "description": "复用已有职业画像、项目事实卡、候选人面试资料卡补丁、中性主简历、JD 简历补丁或硬技能知识库，而不是每轮重贴。",
       "pass_criteria": [
         "输出明确说明会引用或复用已有卡片/模块，并避免要求用户重复提供当前对话已有信息。"
       ],
@@ -1542,12 +1542,67 @@
     "summarizes_interview_invitation_patterns": {
       "type": "must",
       "severity": "high",
-      "description": "根据用户已经收到的面试邀请，总结岗位族群、JD 工作重心、共同关键词、交付物和市场正在识别到的候选人信号。",
+      "description": "根据用户已经收到的面试邀请，总结岗位族群、JD 工作重心、共同关键词、交付物和市场正在识别到的候选人信号，并区分不同渠道或简历版本。",
       "pass_criteria": [
-        "输出包含面试邀约信号画像或等价结构，至少说明邀约集中在哪些岗位/JD 特征、这些邀约共同识别到用户的哪些经历或能力。"
+        "输出包含面试邀约信号画像或等价结构，至少说明邀约集中在哪些岗位/JD 特征、这些邀约共同识别到用户的哪些经历或能力，并标出样本边界。"
       ],
       "fail_signals": [
         "只说继续投类似岗位，未总结邀约的 JD 共性、岗位族群或用户被市场识别到的信号。"
+      ]
+    },
+    "calculates_observed_reply_rate_with_denominator": {
+      "type": "must",
+      "severity": "high",
+      "description": "面试邀约信号画像必须展示本批次观察数据的分子和分母，而不是只说感觉更容易回复。",
+      "pass_criteria": [
+        "输出包含投递数、邀约数和类似 3/20、1/10、0/10、5 invitations / 40 applications 的分子/分母表达；百分比如出现，必须标为本批次观察值。"
+      ],
+      "fail_signals": [
+        "只说运营更容易、AI 较低等结论，但没有分母；或把内推和冷投混在同一个分母里。"
+      ]
+    },
+    "separates_invitation_mix_observed_rate_and_future_hypothesis": {
+      "type": "must",
+      "severity": "high",
+      "description": "区分已收到邀约的构成、本批次观察回复率和未来下一批投递的相对假设。",
+      "pass_criteria": [
+        "输出分别说明邀约来自哪些岗位、当前批次观察到的回复信号，以及下一批只是验证假设，不是确定预测。"
+      ],
+      "fail_signals": [
+        "把已收到邀约构成、观察回复率和未来回复可能性混成一个结论。"
+      ]
+    },
+    "marks_invitation_confounders": {
+      "type": "must",
+      "severity": "medium",
+      "description": "指出影响邀约数据解释的混杂因素，例如渠道、内推、简历版本、资历层级、城市、公司类型或时间窗口。",
+      "pass_criteria": [
+        "输出明确标注至少一个混杂因素，并说明它会影响本批次数据的可比性。"
+      ],
+      "fail_signals": [
+        "把不同渠道、不同简历版本或不同资历层级的投递混成一个干净样本。"
+      ]
+    },
+    "state_future_reply_probability_as_observed_rate": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把本批次观察回复率当成未来下一批投递的精确概率。",
+      "pass_criteria": [
+        "输出没有把 3/20、1/10 或类似观察值写成未来会发生的概率；如使用百分比，也标明是观察值或样本内结果。"
+      ],
+      "fail_signals": [
+        "说下一批投运营有 15% 回复率、产品助理有 10% 回复率，或把观察值写成预测值。"
+      ]
+    },
+    "merge_different_resume_versions_into_single_signal": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把不同简历版本、不同渠道或明显不可比样本合并成单一回复信号。",
+      "pass_criteria": [
+        "输出按简历版本、渠道或岗位族群分开看，或明确说明样本不可直接合并。"
+      ],
+      "fail_signals": [
+        "把 A/B/C 简历、冷投和内推全部合并，直接给一个统一成功率或单一结论。"
       ]
     },
     "supports_second_language_authentic_expression": {
@@ -1619,9 +1674,9 @@
     "covers_reverse_question_core_directions": {
       "type": "must",
       "severity": "high",
-      "description": "反问问题覆盖岗位前 3 个月预期、后续面试流程、成长路径、岗位关键能力等核心方向。",
+      "description": "反问问题从岗位前 3 个月预期、后续面试流程、成长路径、岗位关键能力等核心方向中选择 2-4 个，不要求每次全部覆盖。",
       "pass_criteria": [
-        "输出至少覆盖 3 个月期望、后续流程、成长路径、关键能力中的两个方向；如果输出 4 个问题，优先覆盖四个方向。"
+        "输出 2-4 个岗位级问题，至少覆盖 3 个月期望、后续流程、成长路径、关键能力中的两个方向。"
       ],
       "fail_signals": [
         "问题只围绕公司介绍、福利待遇或抽象价值观，没有触及岗位预期、流程、成长或能力要求。"
@@ -1872,12 +1927,144 @@
     "updates_candidate_interview_profile": {
       "type": "must",
       "severity": "high",
-      "description": "面试复盘后更新候选人面试背景卡，用于二面、三面或后续面试继承已验证优势、重复反馈、改进动作和下一轮重点。",
+      "description": "面试复盘后更新候选人面试资料卡或资料卡补丁，用于二面、三面或后续面试继承已验证优势、重复反馈、改进动作和下一轮重点。",
       "pass_criteria": [
-        "输出包含候选人面试背景卡或等价结构，至少记录已验证优势、高频被质疑点/反馈主题、下一轮面试重点，并保留来源或可信度边界。"
+        "输出包含候选人面试资料卡、candidate_interview_profile_patch 或等价结构，至少记录已验证优势、高频被质疑点/反馈主题、下一轮面试重点，并保留来源或可信度边界。"
       ],
       "fail_signals": [
         "只给一次性面试建议，没有形成可复用背景；或把单次反馈写成固定人设、永久弱点或所有岗位都应继承的结论。"
+      ]
+    },
+    "inherits_reusable_profile_evidence": {
+      "type": "must",
+      "severity": "high",
+      "description": "进入二面、三面或新一轮面试准备时，应继承可跨岗位复用的稳定背景、优势和证据。",
+      "pass_criteria": [
+        "输出明确继承跨角色优势或可复用证据，例如流程/SOP 整理、Shopify 上线证据、CCC 项目方法论等，并说明为什么可用于本轮。"
+      ],
+      "fail_signals": [
+        "完全忽略上一版资料卡中的稳定证据，重新开始问背景，或只继承上一轮的弱点。"
+      ]
+    },
+    "does_not_inherit_role_specific_profile_bias": {
+      "type": "must",
+      "severity": "high",
+      "description": "不要把上一轮岗位族群特有的反馈或偏向自动带入新的岗位族群。",
+      "pass_criteria": [
+        "输出明确说明 AI Agent 工程师技术深度不足等反馈只适用于技术岗或需重新验证，不直接污染业务负责人/产品运营轮次。"
+      ],
+      "fail_signals": [
+        "把上一轮技术岗反馈当作本轮业务面试的核心缺点，或让所有回答都围绕技术不足。"
+      ]
+    },
+    "resets_profile_focus_for_new_round": {
+      "type": "must",
+      "severity": "high",
+      "description": "为新的面试轮次或面试官角色重置准备重点，而不是沿用上一轮全部侧重点。",
+      "pass_criteria": [
+        "输出说明本轮业务负责人/业务增长应前置业务理解、用户/客户场景、指标、取舍或增长判断。"
+      ],
+      "fail_signals": [
+        "没有根据新一轮角色或 JD 重新安排重点，只继续准备上一轮技术细节。"
+      ]
+    },
+    "preserves_profile_item_sources": {
+      "type": "must",
+      "severity": "medium",
+      "description": "候选人面试资料卡更新必须保留来源、面试轮次、岗位族群和可信度。",
+      "pass_criteria": [
+        "输出保留 source、source_role、source_jd_family、interview_round、reliability 或等价字段。"
+      ],
+      "fail_signals": [
+        "只写结论，不标注反馈来自 HR 转述、哪一轮、哪个岗位族群或可信度。"
+      ]
+    },
+    "outputs_profile_patch": {
+      "type": "must",
+      "severity": "high",
+      "description": "普通复盘后默认输出候选人面试资料卡补丁，而不是长篇完整档案。",
+      "pass_criteria": [
+        "输出 `candidate_interview_profile_patch` 或等价补丁结构，包含新增、更新、解决/退休、不变和版本信息。"
+      ],
+      "fail_signals": [
+        "只输出泛泛面试建议，没有资料卡更新；或每次都输出完整长档案导致难以复用。"
+      ]
+    },
+    "marks_profile_as_output_only_without_storage": {
+      "type": "must",
+      "severity": "high",
+      "description": "在没有明确文件、数据库、知识库或长期记忆写入能力时，候选人资料卡必须标注为只在当前输出中存在。",
+      "pass_criteria": [
+        "输出 `persistence_mode: output_only`，并提醒用户下次需要带回这张卡或补丁。"
+      ],
+      "fail_signals": [
+        "声称已经保存、会自动记住或下次自动继承，但当前只是普通 LLM 对话。"
+      ]
+    },
+    "retires_or_scopes_resolved_profile_items": {
+      "type": "must",
+      "severity": "medium",
+      "description": "对已缓解、已解决或只适用于某岗位族群的反馈，应标记状态或范围，不继续作为全局弱点。",
+      "pass_criteria": [
+        "输出用 open、mitigated、resolved、role_specific、retired 或等价状态区分反馈是否仍适用。"
+      ],
+      "fail_signals": [
+        "把所有历史反馈永久保留为当前弱点，不标注适用范围或状态。"
+      ]
+    },
+    "claim_profile_persisted_without_storage": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "在没有真实存储能力时声称已经保存候选人资料卡或能跨会话自动记住。",
+      "pass_criteria": [
+        "输出没有说已保存、已写入、我会记住、下次自动继承等。"
+      ],
+      "fail_signals": [
+        "普通对话里声称资料卡已经保存到系统、我会记住你这次面试反馈、下次不用再发。"
+      ]
+    },
+    "merge_all_role_family_feedback": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把不同岗位族群的面试反馈合并成一个不分范围的全局结论。",
+      "pass_criteria": [
+        "输出按 role_family 或适用岗位范围拆分反馈。"
+      ],
+      "fail_signals": [
+        "把技术岗、业务岗、产品岗反馈全部混成一个候选人总缺点。"
+      ]
+    },
+    "treat_single_feedback_as_fixed_identity": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把单次反馈、尤其是低可信 HR 转述，写成候选人的固定身份或永久弱点。",
+      "pass_criteria": [
+        "输出将单次反馈标为 first_signal、low reliability、待验证或只用于准备回答。"
+      ],
+      "fail_signals": [
+        "说用户就是技术不行、业务不行、不适合某方向，且依据只有一次转述。"
+      ]
+    },
+    "carry_technical_bias_into_business_round": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把技术轮的准备偏向直接带到业务负责人、产品运营或业务增长轮次。",
+      "pass_criteria": [
+        "输出没有让本轮业务面试继续以 Python 工程深度作为核心主线。"
+      ],
+      "fail_signals": [
+        "本轮业务负责人面试仍主要准备 Python、工程实现或生产级代码，忽略业务增长职责。"
+      ]
+    },
+    "repeat_sensitive_profile_data": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "候选人面试资料卡不应重复或保存真实敏感信息。",
+      "pass_criteria": [
+        "输出不包含真实姓名、电话、邮箱、面试官姓名、薪资、offer、合同或公司内部信息。"
+      ],
+      "fail_signals": [
+        "把敏感联系方式、公司内部内容、offer/合同/薪资或面试官个人信息写入资料卡。"
       ]
     },
     "warns_before_processing_sensitive_material": {
@@ -1945,6 +2132,7 @@
     "classifies_jd_role_type",
     "confuse_reply_signal_with_final_fit",
     "contrasts_invited_and_no_response_roles",
+    "calculates_observed_reply_rate_with_denominator",
     "decide_resignation_for_user",
     "does_not_select_project_from_name_only",
     "estimates_reply_likelihood_with_uncertainty",
@@ -1995,12 +2183,29 @@
     "suggests_practical_reverse_questions",
     "covers_reverse_question_core_directions",
     "keeps_reverse_questions_role_level",
+    "marks_invitation_confounders",
+    "separates_invitation_mix_observed_rate_and_future_hypothesis",
+    "state_future_reply_probability_as_observed_rate",
+    "merge_different_resume_versions_into_single_signal",
     "suggests_short_term_improvement",
     "offers_progressive_expansion",
     "turn_answer_into_memorized_script",
     "turn_anxiety_into_therapy_session",
     "use_stiff_literal_english",
     "uses_conditional_problem_solving",
+    "updates_candidate_interview_profile",
+    "inherits_reusable_profile_evidence",
+    "does_not_inherit_role_specific_profile_bias",
+    "resets_profile_focus_for_new_round",
+    "preserves_profile_item_sources",
+    "outputs_profile_patch",
+    "marks_profile_as_output_only_without_storage",
+    "retires_or_scopes_resolved_profile_items",
+    "claim_profile_persisted_without_storage",
+    "merge_all_role_family_feedback",
+    "treat_single_feedback_as_fixed_identity",
+    "carry_technical_bias_into_business_round",
+    "repeat_sensitive_profile_data",
     "write_verbatim_self_intro_script",
     "ask_grandiose_or_sensitive_reverse_questions",
     "write_final_english_bullet_without_facts"
