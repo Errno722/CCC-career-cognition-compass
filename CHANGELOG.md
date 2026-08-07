@@ -7,11 +7,12 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 ### Offer 决策支持
 
 - 新增 `offer-decision-support` skill，用于单 Offer vs 继续求职、多 Offer 对比、新 Offer vs 当前工作、Offer deadline、风险识别、谈薪 / 谈条件和接受 / 拒绝 / 继续求职后的闭环。
-- Offer 决策先检查信息完整度、红线、关键未知项和用户当前优先级，再进行比较；不使用机械总分，不替用户做最终选择。
+- Offer 决策先区分正式 Offer、口头 Offer、进行中机会和雇佣关系，再检查信息完整度、硬性限制、重大风险、关键未知项和用户当前优先级；不使用机械总分，不替用户做最终选择。
+- 新增 Offer 状态、雇佣关系、硬性限制 / 重大风险 / 可权衡项、Offer 条件更新补丁和接受后撤回流程前置确认规则，避免把口头机会、外包关系或临时偏好写成确定结论。
 - 薪酬分析要求区分固定收入、有条件收入、不确定收入、股权、补贴和口头承诺，不把不确定奖金或未写入书面的条件当固定收入。
 - 谈薪 / 谈条件流程只基于真实条件、职责范围、deadline 和用户偏好，不虚构竞品 offer 或市场薪资，不承诺谈判结果。
 - 接受、拒绝或继续求职后，输出当前求职周期的下一批 JD 筛选条件，避免下一轮继续被同类不合适机会消耗。
-- 机器可读 Eval 增加 `single-offer-decision-001`、`multi-offer-comparison-001` 和 `offer-negotiation-closure-001`；当前手工测试和机器可读合约为 36 个，已登记语义断言为 208 条，核心细化 Rubric 为 101 条。
+- 机器可读 Eval 增加 `single-offer-decision-001`、`multi-offer-comparison-001`、`offer-negotiation-closure-001` 和 `current-job-vs-offer-001`；当前手工测试和机器可读合约为 37 个，已登记语义断言为 213 条，核心细化 Rubric 为 106 条。
 
 ### 轻量入口与省 token
 
@@ -39,7 +40,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - Smoke 生成流程会检查占位符、5 个必测 case、原始输入一致性、非空助手回复、40 位 `source_commit`、干净工作区、`source_commit === HEAD`、提交内 `evals/cases.json` 与结果 `suite_sha256` 匹配和输出路径，避免把模板或错误输入当作真实报告。
 - 新增 `scripts/test-generate-smoke-report.mjs`，在临时 Git 仓库中验证模板占位符、缺失/重复 case、输入不一致、空回复、非法 commit、脏工作区、路径错误、runner 失败和 check 失败删除等路径。
 - `.gitignore` 默认忽略 `evals/inputs/*.input.json`，防止完整助手回复被误提交。
-- 当前尚未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/36。
+- 当前尚未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/37。
 
 ### 投递复盘
 

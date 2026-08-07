@@ -2158,12 +2158,12 @@
     "checks_offer_red_flags_before_weighting": {
       "type": "must",
       "severity": "high",
-      "description": "Offer 比较前先检查一票否决或重大风险，而不是直接进入偏好权重。",
+      "description": "Offer 比较前先区分硬性限制、重大风险和可权衡项，而不是直接进入偏好权重。",
       "pass_criteria": [
-        "输出包含红线或风险检查，例如职责不一致、薪资不透明、试用期、通勤、合同/竞业、口头承诺或条件反复变化。"
+        "输出包含风险检查，并区分用户明确不能接受的硬性限制、必须确认的重大风险和可以权衡的代价。"
       ],
       "fail_signals": [
-        "只按薪资、平台和成长排序，没有先识别可能导致不能接受的风险。"
+        "只按薪资、平台和成长排序，没有先识别可能导致不能接受或必须确认的风险。"
       ]
     },
     "compares_offer_with_user_priorities": {
@@ -2241,14 +2241,15 @@
       ],
       "fail_signals": [
         "Offer 分析结束后没有沉淀任何后续筛选标准，下一轮求职仍会重复同类消耗。"
-      ]
+      ],
+      "status": "draft"
     },
     "uses_mechanical_offer_scoring": {
       "type": "must_not",
       "severity": "high",
       "description": "用机械总分、精确分数或伪精确排名替代 Offer 判断。",
       "pass_criteria": [
-        "输出使用优先级、红线、未知项和高/中/低置信度，而不是精确总分。"
+        "输出使用优先级、风险分层、未知项和高/中/低置信度，而不是精确总分。"
       ],
       "fail_signals": [
         "给 A 82 分、B 79 分，或用总分直接决定选择。"
@@ -2296,6 +2297,72 @@
       ],
       "fail_signals": [
         "建议用户谎称已有更高 Offer、伪造市场行情或虚构其他公司薪资。"
+      ]
+    },
+    "distinguishes_formal_offer_from_pending_opportunity": {
+      "type": "must",
+      "severity": "high",
+      "description": "区分正式书面 Offer、附条件 Offer、口头 Offer、口头意向和仍在面试中的机会，不把进行中机会当成确定竞品 Offer。",
+      "pass_criteria": [
+        "输出说明哪些机会已经正式确认、哪些只是口头或进行中，并把未确认机会仅作为机会成本或谈判背景。"
+      ],
+      "fail_signals": [
+        "把还没发正式 offer 的机会当成已确认竞品 offer，或建议用户用它伪装成确定筹码。"
+      ]
+    },
+    "prepares_post_decision_screening_preferences": {
+      "type": "must",
+      "severity": "medium",
+      "description": "在用户尚未最终接受或拒绝 Offer 时，只准备后续 JD 筛选偏好的临时框架，不把它当成已完成决策闭环。",
+      "pass_criteria": [
+        "输出可用于后续筛选的偏好方向，并说明它会在接受、拒绝或继续求职后再定稿。"
+      ],
+      "fail_signals": [
+        "用户还未决定时就写成最终闭环，或声称已经完成下一批 JD 筛选标准。"
+      ]
+    },
+    "compares_offer_with_current_job": {
+      "type": "must",
+      "severity": "high",
+      "description": "当用户在职并比较新 Offer 时，应同时比较当前工作、新 Offer 和继续找，而不是只比较新 Offer 本身。",
+      "pass_criteria": [
+        "输出包含当前工作的稳定性、恢复成本、内容重复性或保留价值，并与新 offer 和继续求职放在同一决策框架中。"
+      ],
+      "fail_signals": [
+        "忽略当前工作，只判断新 offer 是否值得接。"
+      ]
+    },
+    "considers_current_job_switching_cost": {
+      "type": "must",
+      "severity": "medium",
+      "description": "在职跳槽判断应考虑切换成本，例如试用期、稳定性、通勤变化、恢复能力、直属经理、当前团队和离职后的可逆性。",
+      "pass_criteria": [
+        "输出说明离开当前工作的代价和新 offer 试用期、通勤、团队不确定性等切换成本。"
+      ],
+      "fail_signals": [
+        "只看新 offer 薪资更高或岗位更有趣，没有处理跳槽风险和当前工作的保留价值。"
+      ]
+    },
+    "considers_employment_type": {
+      "type": "must",
+      "severity": "high",
+      "description": "Offer 比较应独立检查雇佣关系，例如正式岗、外包、contractor、agency、fixed-term，而不是把它埋在公司规模或 title 里。",
+      "pass_criteria": [
+        "输出明确提到雇佣关系，并比较实际雇主、福利、合同期限、转正可能、项目结束安排、稳定性或简历表述差异。"
+      ],
+      "fail_signals": [
+        "只说大厂或小公司，没有处理外包、正式岗或合同关系带来的具体差异。"
+      ]
+    },
+    "distinguishes_hard_constraints_risks_and_tradeoffs": {
+      "type": "must",
+      "severity": "medium",
+      "description": "Offer 风险判断应区分硬性限制、重大风险和可权衡项，避免把所有不满意条件都叫一票否决。",
+      "pass_criteria": [
+        "输出把用户明确不能接受的条件、需要继续确认的高风险项和可以权衡的代价分开。"
+      ],
+      "fail_signals": [
+        "把通勤、奖金不确定、岗位模糊等全部混成同一类风险，或完全不区分风险层级。"
       ]
     }
   },
@@ -2395,11 +2462,16 @@
     "supports_single_offer_vs_continue_search",
     "identifies_decision_flipping_unknowns",
     "supports_offer_negotiation_before_final_choice",
-    "closes_loop_after_offer_decision",
+    "prepares_post_decision_screening_preferences",
     "uses_mechanical_offer_scoring",
     "equates_company_size_with_better_offer",
     "treat_conditional_compensation_as_guaranteed",
     "make_final_offer_decision_for_user",
-    "invent_competing_offer_or_market_salary"
+    "invent_competing_offer_or_market_salary",
+    "distinguishes_formal_offer_from_pending_opportunity",
+    "compares_offer_with_current_job",
+    "considers_current_job_switching_cost",
+    "considers_employment_type",
+    "distinguishes_hard_constraints_risks_and_tradeoffs"
   ]
 }

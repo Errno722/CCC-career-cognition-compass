@@ -1,14 +1,14 @@
 ---
 name: offer-decision-support
 description: >-
-  Offer decision support for CCC. Use when the user has received one or more offers, asks whether an offer is worth accepting, compares offers, compares a new offer with staying in the current job or continuing the search, has an offer deadline, wants to identify offer red flags, clarify missing offer information, prepare questions for HR or a future manager, decide whether to negotiate salary or conditions, draft concise negotiation wording, accept or reject an offer, or convert the decision result into future job-search screening preferences. Reuse existing career profile, JD, interview profile, and project evidence; do not rerun full career positioning by default. Do not provide legal conclusions, tax calculations, salary market predictions, or final life decisions.
+  Offer decision support for CCC. Use when the user has received one or more offers, asks whether an offer is worth accepting, compares offers, compares a new offer with staying in the current job or continuing the search, has an offer deadline, wants to distinguish formal offers from pending opportunities, identify offer red flags, clarify missing offer information, compare employment types such as direct hire, outsourced, contractor, agency, or fixed-term roles, prepare questions for HR or a future manager, decide whether to negotiate salary or conditions, draft concise negotiation wording, accept or reject an offer, or convert the decision result into future job-search screening preferences. Reuse existing career profile, JD, interview profile, and project evidence; do not rerun full career positioning by default. Do not provide legal conclusions, tax calculations, salary market predictions, or final life decisions.
 ---
 
 # Offer Decision Support
 
 ## Overview
 
-Help the user make a grounded offer decision without turning it into a mechanical scorecard. Start from the offer facts, red flags, user priorities, trade-offs, and reversible/irreversible costs. Reuse existing CCC context when available.
+Help the user make a grounded offer decision without turning it into a mechanical scorecard. Start from the offer facts, offer status, employment type, hard constraints, major risks, user priorities, trade-offs, and reversible/irreversible costs. Reuse existing CCC context when available.
 
 This skill is for decision support, not for promising outcomes, legal advice, tax calculation, or telling the user what they must choose.
 
@@ -29,13 +29,46 @@ Do not start with a total score. First separate:
 ```text
 已确认
 还不确定
-一票否决项
+Offer 状态
+雇佣关系
+硬性限制 / 重大风险 / 可权衡项
 真正的冲突
 用户当前优先级
 接受 / 拒绝 / 继续求职的机会成本
 ```
 
 If key information may change the choice, ask only the most important 1-3 missing items before comparing. Do not force the user into a long offer form.
+
+## Offer Status And Employment Type
+
+Distinguish opportunity certainty before comparing:
+
+```text
+interview_in_progress
+verbal_interest
+verbal_offer
+written_conditional
+written_final
+accepted
+declined
+withdrawn
+expired
+```
+
+A pending opportunity can be an opportunity-cost signal, but it is not as certain as a written offer. Do not present "HR said they are interested" or "another process is still moving" as a confirmed competing offer.
+
+Track employment type separately from company size:
+
+```text
+direct hire
+outsourced
+contractor
+agency
+fixed-term
+other
+```
+
+When the user compares "大厂外包" with "小公司正式岗", do not collapse the decision into "big company vs small company". Check the actual employer, benefits, contract duration, conversion possibility, project-end arrangement, stability, reporting line, and how the employer/client should be represented on a resume.
 
 ## Supported Modes
 
@@ -61,6 +94,7 @@ If the user only asks "这家公司怎么样" or wants company/JD research witho
 Before comparing, check whether the known facts are sufficient:
 
 ```text
+状态与雇佣关系: offer_status, employment_type, actual employer, client, contract term
 现金与总包: base, guaranteed cash, bonus, sign-on, equity, subsidies
 福利: social insurance / benefits, leave, remote/hybrid, medical, training
 试用期: length, salary, evaluation, termination risk
@@ -90,9 +124,73 @@ uncertain
 
 Do not count conditional bonus, verbal promises, or uncertain equity as guaranteed income.
 
-## Red Flags First
+Optional derived facts can help the user see cost, but do not turn them into a score:
 
-Check one-vote veto items before weighted comparison:
+```text
+guaranteed annual cash = confirmed monthly fixed cash * confirmed months
+commute hours/week = one-way commute minutes * 2 * workdays / 60
+commute hours/month = commute hours/week * 4
+fixed relocation cost difference = confirmed one-time relocation cost delta
+```
+
+Only do deterministic arithmetic from user-provided facts. Do not predict tax, market salary, probabilities, or bonus payout unless the user provides written conditions.
+
+## Offer Fact Assets
+
+Internally structure offer facts as:
+
+```text
+offer_fact_card
+├─ offer_id
+├─ offer_version
+├─ offer_status
+├─ employment_type
+├─ guaranteed_compensation
+├─ variable_compensation
+├─ benefits
+├─ commute
+├─ working_hours
+├─ role_scope
+├─ manager
+├─ team
+├─ deadline
+├─ contingencies
+├─ confirmed
+├─ unknown
+├─ source
+└─ last_updated
+```
+
+When offer conditions change, produce an internal patch:
+
+```text
+offer_terms_patch
+├─ previous_version
+├─ new_version
+├─ changed_terms
+├─ newly_confirmed
+├─ unresolved
+└─ decision_impact
+```
+
+User-facing output should use natural language, such as "这次 HR 更新了 3 个条件：base、远程政策和 deadline；其中年终奖仍未写清楚。" Do not expose internal keys unless the user explicitly asks for a machine-readable template.
+
+## Risk Triage First
+
+Check risks before weighted comparison, but separate them:
+
+```text
+hard constraint
+├─ the user explicitly cannot accept this condition
+
+major risk
+├─ must confirm or proceed cautiously
+
+trade-off
+└─ can be weighed against other gains
+```
+
+Examples:
 
 ```text
 岗位实际职责与 JD 明显不一致
@@ -161,7 +259,7 @@ Before drafting negotiation wording, check:
 
 ```text
 用户是否真的更喜欢该 offer
-是否有其他 offer 或正在进行机会
+是否有其他正式 offer、口头 offer 或正在进行机会
 差距是现金、title、remote、年假、入职时间还是职责
 哪些条件最可能改变决定
 deadline 是否足够
@@ -171,7 +269,9 @@ Negotiable items can include base salary, sign-on bonus, bonus structure, remote
 
 ## Clarification Questions
 
-Give at most 3-5 questions, prioritized by decision impact.
+For ordinary offer decisions, ask at most 3 questions, prioritized by decision impact.
+
+Only when the user explicitly asks for an HR / manager question list, give 3-5 questions. Keep questions small and practical.
 
 HR questions:
 
@@ -201,9 +301,10 @@ For multiple offers:
 Offer 对比
 ├─ 已确认:
 ├─ 还不确定:
+├─ Offer 状态 / 雇佣关系:
 ├─ A 的主要优势:
 ├─ B 的主要优势:
-├─ 一票否决项:
+├─ 硬性限制 / 重大风险 / 可权衡项:
 ├─ 真正的冲突:
 ├─ 稳妥 / 成长 / 生活视角:
 ├─ 当前建议:
@@ -214,6 +315,7 @@ For one offer:
 
 ```text
 单 Offer 决策
+├─ Offer 状态 / 雇佣关系:
 ├─ 接受它的收益:
 ├─ 接受它的代价:
 ├─ 继续找的收益:
@@ -228,6 +330,7 @@ For negotiation:
 ```text
 谈薪 / 谈条件判断
 ├─ 真正冲突:
+├─ 已确认 vs 仍未确认:
 ├─ 值不值得谈:
 ├─ 可以谈什么:
 ├─ 简短表达:
@@ -245,6 +348,15 @@ After the user accepts:
 确认书面条件
 停止或取消哪些投递 / 面试
 准备入职
+```
+
+Before advising the user to withdraw other processes or resign, confirm:
+
+```text
+正式书面 offer
+核心薪资 / 岗位 / 入职条件
+背景调查 / 背调 / 审批 / 签证等前置条件
+明确 start date
 ```
 
 Mention that a future 30/60/90 day onboarding observation flow could be useful, but do not create it here.

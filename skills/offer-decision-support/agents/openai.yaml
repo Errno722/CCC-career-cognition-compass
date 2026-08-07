@@ -1,6 +1,6 @@
 interface:
   display_name: "Offer Decision Support"
   short_description: "Compare offers, clarify risks, and plan negotiation"
-  default_prompt: "Use $offer-decision-support to整理 offer 条件、识别红线和关键未知项、比较单 offer / 多 offer / 当前工作、判断是否谈薪或谈条件，并把接受、拒绝或继续求职的结果反写为下一批 JD 筛选条件。"
+  default_prompt: "使用 $offer-decision-support：整理 Offer 条件，区分正式 Offer、口头 Offer 和进行中机会，识别硬性限制、重大风险和关键未知项，比较单 Offer / 多 Offer / 当前工作，判断是否谈薪或谈条件，并把接受、拒绝或继续求职的结果反写为下一批 JD 筛选条件。"
 policy:
   allow_implicit_invocation: true

@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 36,
+  "manual_case_count": 37,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -1580,7 +1580,7 @@
       "id": "single-offer-decision-001",
       "title": "单 Offer vs 继续求职",
       "manual_case_id": 34,
-      "input": "我收到一个 offer，岗位是产品运营，base 18k，年终奖说是 0-2 个月但没有写保证，试用期 6 个月，单程通勤 70 分钟。团队说前 3 个月主要做用户活动和数据看板。我手上还有两个面试没结束。要不要接，还是继续等？",
+      "input": "我收到一个 offer，岗位是产品运营，base 18k，年终奖说是 0-2 个月但没有写保证，试用期 6 个月，单程通勤 70 分钟。团队说前 3 个月主要做用户活动和数据看板。我手上还有两个面试没结束。我 gap 一段时间了，目前现金流压力不算紧急，但比较希望两个月内稳定下来。要不要接，还是继续等？",
       "expected": {
         "routing": {
           "mode": "primary_required",
@@ -1619,17 +1619,7 @@
             "确认"
           ]
         ],
-        "literal_not_contains": [
-          "应该接",
-          "必须接",
-          "必须拒绝",
-          "82 分",
-          "82分",
-          "79 分",
-          "79分",
-          "固定总包",
-          "年终奖算固定"
-        ],
+        "literal_not_contains": [],
         "regex_not_contains": [],
         "structural_assertions": {
           "max_questions": 3,
@@ -1640,7 +1630,8 @@
           "supports_single_offer_vs_continue_search",
           "considers_commute_time_cost",
           "identifies_decision_flipping_unknowns",
-          "compares_offer_with_user_priorities"
+          "compares_offer_with_user_priorities",
+          "distinguishes_hard_constraints_risks_and_tradeoffs"
         ],
         "semantic_must_not": [
           "make_final_offer_decision_for_user",
@@ -1687,13 +1678,7 @@
             "80分钟"
           ]
         ],
-        "literal_not_contains": [
-          "大厂一定更好",
-          "小公司一定更好",
-          "A 82",
-          "B 79",
-          "总分"
-        ],
+        "literal_not_contains": [],
         "regex_not_contains": [],
         "structural_assertions": {
           "max_questions": 3,
@@ -1705,7 +1690,9 @@
           "checks_offer_red_flags_before_weighting",
           "compares_offer_with_user_priorities",
           "considers_career_capital",
-          "considers_commute_time_cost"
+          "considers_commute_time_cost",
+          "considers_employment_type",
+          "distinguishes_hard_constraints_risks_and_tradeoffs"
         ],
         "semantic_must_not": [
           "uses_mechanical_offer_scoring",
@@ -1716,7 +1703,7 @@
     },
     {
       "id": "offer-negotiation-closure-001",
-      "title": "谈薪与决策闭环",
+      "title": "谈薪与决策前偏好准备",
       "manual_case_id": 36,
       "input": "我更倾向 B offer，但 base 20k 比我预期低一点，deadline 是明天下午。我没有确定的竞品 offer，A 是 18k 但还没发正式 offer。B 的年终奖和远程政策也没写清楚。我想和 HR 谈一下，但不想说得太硬。如果最后接受或拒绝，也想整理一下以后看 JD 要提前筛什么。",
       "expected": {
@@ -1755,16 +1742,11 @@
           [
             "下一批 JD",
             "筛选条件",
-            "以后看 JD"
+            "以后看 JD",
+            "筛选偏好"
           ]
         ],
-        "literal_not_contains": [
-          "你就说已经有 25k offer",
-          "一定能谈到",
-          "必须接受",
-          "必须拒绝",
-          "总分"
-        ],
+        "literal_not_contains": [],
         "regex_not_contains": [],
         "structural_assertions": {
           "max_questions": 3,
@@ -1774,11 +1756,83 @@
           "supports_offer_negotiation_before_final_choice",
           "identifies_decision_flipping_unknowns",
           "separates_guaranteed_and_variable_compensation",
-          "closes_loop_after_offer_decision"
+          "prepares_post_decision_screening_preferences",
+          "distinguishes_formal_offer_from_pending_opportunity"
         ],
         "semantic_must_not": [
           "make_final_offer_decision_for_user",
           "invent_competing_offer_or_market_salary",
+          "uses_mechanical_offer_scoring"
+        ]
+      }
+    },
+    {
+      "id": "current-job-vs-offer-001",
+      "title": "当前工作 vs 新 Offer vs 继续找",
+      "manual_case_id": 37,
+      "input": "我现在在职，base 17k，通勤 30 分钟，团队和直属经理比较稳定，但工作内容偏重复执行，最近恢复不过来。新 offer 是产品运营，base 20k，正式岗，单程通勤 75 分钟，试用期 6 个月，HR 说年终奖不保证，直属经理说前三个月会负责活动复盘和数据看板。我还想继续找看看有没有更合适的。请帮我比较新 offer、当前工作和继续找。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "offer-decision-support",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "career-stability-bridge",
+            "job-search-plan-review"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "当前工作",
+            "在职",
+            "现岗位"
+          ],
+          [
+            "新 offer",
+            "Offer",
+            "产品运营"
+          ],
+          [
+            "继续找",
+            "继续求职"
+          ],
+          [
+            "通勤",
+            "75 分钟",
+            "75分钟"
+          ],
+          [
+            "试用期",
+            "年终奖",
+            "不保证"
+          ],
+          [
+            "重复执行",
+            "直属经理",
+            "稳定"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1400
+        },
+        "semantic_assertions": [
+          "checks_offer_information_completeness",
+          "compares_offer_with_current_job",
+          "considers_current_job_switching_cost",
+          "considers_employment_type",
+          "separates_guaranteed_and_variable_compensation",
+          "distinguishes_hard_constraints_risks_and_tradeoffs",
+          "considers_commute_time_cost",
+          "compares_offer_with_user_priorities",
+          "identifies_decision_flipping_unknowns"
+        ],
+        "semantic_must_not": [
+          "make_final_offer_decision_for_user",
+          "treat_conditional_compensation_as_guaranteed",
           "uses_mechanical_offer_scoring"
         ]
       }

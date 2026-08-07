@@ -23,7 +23,7 @@ jd-resume-patch               JD 简历修改补丁
 career-materials-builder      中英文简历、作品集、平台材料、语气校准、英文面试表达
 interview-review-miner        面试关键词、面试官反馈、面试表达结构卡、英文表达校准、自我介绍框架、候选人面试资料卡补丁、角色化回答侧重点和后续修改
 job-search-plan-review        14 天计划、复盘、投递记录、发散收束、焦虑降噪、面试邀约信号画像
-offer-decision-support        单 Offer / 多 Offer / 在职对比、红线检查、谈薪与决策闭环
+offer-decision-support        单 Offer / 多 Offer / 在职对比、风险分层、谈薪与决策闭环
 career-stability-bridge       Gap、焦虑降噪、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
 
@@ -147,10 +147,11 @@ jd-resume-patch
 ## 更新记录
 
 ```text
-2026-08-07 / offer-decision-support v0.1.0
-- 新增 Offer 决策支持：单 Offer vs 继续求职、多 Offer 对比、新 Offer vs 当前工作，先检查信息完整度、红线、关键未知项和用户优先级，再进入比较。
+2026-08-07 / offer-decision-support v0.1.1
+- 新增 Offer 决策支持：单 Offer vs 继续求职、多 Offer 对比、新 Offer vs 当前工作，先检查 Offer 状态、雇佣关系、信息完整度、硬性限制、重大风险、关键未知项和用户优先级，再进入比较。
 - 新增谈薪 / 谈条件流程：先判断是否值得谈，区分 base、sign-on、奖金、远程、title、入职时间和职责边界，不虚构竞品 offer 或市场薪资。
 - 新增 Offer 闭环：接受、拒绝或继续求职后，把原因反写成当前求职周期的下一批 JD 筛选条件。
+- 补充 Offer 状态、雇佣关系、硬性限制 / 重大风险 / 可权衡项、在职对比和条件更新补丁，避免把口头机会、外包关系或临时偏好写成确定结论。
 
 2026-08-04 / career-cognition-compass v0.3.3
 - 纵向体验小修：内部 `focus_control` 和资料卡键名不直接暴露给普通用户，改用“本轮主线 / 暂存 / 下一步 / 如果要继续”等自然标签。

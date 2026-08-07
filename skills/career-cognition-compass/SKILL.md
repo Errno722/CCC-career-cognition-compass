@@ -50,7 +50,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 - 每次要用项目进入能力迁移、职业定位、JD 匹配、简历、作品集或面试故事前，先做项目事实完整度检查。只有 `EVIDENCE_READY` 项目可以作为下游材料来源。
 - 拆解 JD 时先判断 JD 的岗位类型和工作重心，例如执行岗、运营岗、产品岗、项目协调岗、数据岗、技术岗或混合岗。不要只按标题判断；用职责和交付物说明判断依据，让用户明确应该准备什么内容。
 - 用户提供已收到的面试邀请、投递记录、无回复岗位或邀约 JD 时，先总结面试邀约信号画像，并严格区分邀约构成、本批次观察回复率和未来回复可能性。必须展示分子/分母、时间窗口、渠道、简历版本和混杂因素；只输出高/中/低相对信号和小规模验证动作，不承诺精确回复概率，不把少量样本当成最终市场结论。
-- 用户收到 Offer、比较多个 Offer、纠结是否接受、继续等其他机会、和当前工作比较或想谈薪/谈条件时，进入 offer-decision-support。先检查 Offer 信息完整度、红线、关键未知项和用户当前优先级，再比较；不要用机械总分替代决策，不替用户做最终选择。Offer 决策后要把接受、拒绝或继续求职的理由反写成当前求职周期的下一批 JD 筛选条件。
+- 用户收到 Offer、比较多个 Offer、纠结是否接受、继续等其他机会、和当前工作比较或想谈薪/谈条件时，进入 offer-decision-support。先区分正式 Offer、口头 Offer、进行中机会和雇佣关系，再检查 Offer 信息完整度、硬性限制、重大风险、关键未知项和用户当前优先级；不要用机械总分替代决策，不替用户做最终选择。Offer 决策后要把接受、拒绝或继续求职的理由反写成当前求职周期的下一批 JD 筛选条件。
 - 面试后只记得关键词、不完整问题或面试官反馈时，先还原可能题型和反馈信号，再更新硬技能知识库、候选人面试资料卡补丁、简历修改方向和下次面试准备。普通用户回复优先写“候选人面试资料卡补丁”，不要强迫用户理解 `candidate_interview_profile_patch` 这类内部键名。不要把单次面试反馈当成最终评价；记录反馈来源类型、来源岗位、可信度和重复次数，重复出现在相似 JD 后再升级为模式。每次面试复盘后都要做复盘收束提醒：不要让用户停留在已经发生过的事太久，而是把注意力转向下一个可能机会或一个查缺补漏的小动作。已知面试官角色或问题明显来自不同角色时，按角色调整回答侧重点：事实不变，只改变前置重点和表达角度；角色未知时给一个通用结构加简短角色侧重，不生成长话术库。
 - 用户回答面试问题过长、细节太多、没有观点、STAR 讲成流水账、问题解决回答太单一，或英文/第二语言表达不自然时，输出面试表达结构卡：先找 JD 契合卖点，再用一句话观点、3-4 条 bullet、清楚的 Situation、条件分支和 5-20 分钟练习来改。
 - 用户要求自我介绍或面试答案时，默认给一二级框架和展开逻辑，不给逐字稿。自我介绍只聚焦 2 个与目标岗位最契合的能力点；面试答案先抽象 3-4 条“能力 + 简单验证”，再给短结构。
@@ -83,8 +83,8 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 15. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新候选人面试资料卡补丁和知识库，并输出简历/面试/JD 方向的小修改。若反馈指向表达不清、细节太多、STAR 用不好或问题解决思路单一，同步输出面试表达结构卡。复盘结尾必须提醒用户：这次面试是数据点，不是最终判决；不要停留在已发生的事太久，下一步转向下一个可能机会或今天一个查缺补漏动作。二面/三面准备时，先读取用户带回的候选人面试资料卡，判断本轮继承、不继承和需要重置的侧重点。已知面试官角色时，同步输出面试官角色回答卡：按 HR、用人经理、业务负责人、技术面试官、高管、Founder 或跨部门角色调整回答侧重点。角色映射只是准备启发，事实不变，只改变前置重点和表达角度。
 16. **投递后空档期。** 如果用户已经投完一批简历但还没有面试/反馈，进入 job-search-plan-review：复盘投递质量、整理 JD 共性、补一个可复用资产，并给今天 5-20 分钟动作。
 17. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
-18. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查已确认条件、未知项、红线、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
-19. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；普通无持久化环境不要声称已保存。
+18. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
+19. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；在建议取消其他流程或离职前，先确认正式书面 Offer、核心条件、前置审批 / 背调 / 签证和 start date。普通无持久化环境不要声称已保存。
 20. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、面试复盘卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
 21. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
 
@@ -157,7 +157,7 @@ job-search-plan-review
 ├─ 14-day plan, available-time schedule, daily/weekly review, application tracking, interview invitation signal profile, reply-likelihood pattern review, post-application idle period, pure interview waiting, HR follow-up wording
 
 offer-decision-support
-├─ single-offer decision, multi-offer comparison, offer vs current job, offer vs continue search, red flags, decision-flipping unknowns, negotiation readiness, HR/manager clarification questions, accept/reject/continue-search closure, current-cycle screening preferences
+├─ single-offer decision, multi-offer comparison, offer vs current job, offer vs continue search, formal/pending opportunity distinction, employment type, hard constraints, major risks, trade-offs, decision-flipping unknowns, negotiation readiness, HR/manager clarification questions, accept/reject/continue-search closure, current-cycle screening preferences
 
 career-stability-bridge
 └─ long Gap distress, low energy, work fatigue, resignation uncertainty, bridge/part-time work
