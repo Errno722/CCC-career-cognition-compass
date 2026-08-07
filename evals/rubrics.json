@@ -2132,6 +2132,171 @@
       "fail_signals": [
         "输出出现该风险行为，或把不确定内容写成确定事实。"
       ]
+    },
+    "checks_offer_information_completeness": {
+      "type": "must",
+      "severity": "high",
+      "description": "在比较或谈判前，先检查 offer 条件是否足够，包括薪酬结构、试用期、通勤、工作内容、deadline、福利和关键书面条件。",
+      "pass_criteria": [
+        "输出明确区分已确认和未确认条件，并指出 1-3 个会影响决策的缺口。"
+      ],
+      "fail_signals": [
+        "直接判断接不接或选 A/B，没有检查 offer 信息是否完整。"
+      ]
+    },
+    "separates_guaranteed_and_variable_compensation": {
+      "type": "must",
+      "severity": "high",
+      "description": "薪酬分析必须区分固定收入、有条件收入、不确定收入、股权、补贴和口头承诺。",
+      "pass_criteria": [
+        "输出清楚标记 base / guaranteed 与 bonus / equity / verbal promise 等不确定项的边界。"
+      ],
+      "fail_signals": [
+        "把所有薪酬条件合并成总包，或没有说明奖金、股权和口头承诺的不确定性。"
+      ]
+    },
+    "checks_offer_red_flags_before_weighting": {
+      "type": "must",
+      "severity": "high",
+      "description": "Offer 比较前先检查一票否决或重大风险，而不是直接进入偏好权重。",
+      "pass_criteria": [
+        "输出包含红线或风险检查，例如职责不一致、薪资不透明、试用期、通勤、合同/竞业、口头承诺或条件反复变化。"
+      ],
+      "fail_signals": [
+        "只按薪资、平台和成长排序，没有先识别可能导致不能接受的风险。"
+      ]
+    },
+    "compares_offer_with_user_priorities": {
+      "type": "must",
+      "severity": "high",
+      "description": "Offer 判断应结合用户当前优先级，例如稳妥、成长、现金流、生活节奏、转行证据或继续求职空间。",
+      "pass_criteria": [
+        "输出说明当前倾向依赖用户更看重什么，并把不同优先级下的结论边界讲清楚。"
+      ],
+      "fail_signals": [
+        "使用默认价值排序，例如工资最高或公司最大就最好，不考虑用户的真实阶段和限制。"
+      ]
+    },
+    "considers_career_capital": {
+      "type": "must",
+      "severity": "medium",
+      "description": "比较 Offer 时考虑该岗位是否能带来未来可复用的项目证据、技能、行业信号、平台背书或转岗资本。",
+      "pass_criteria": [
+        "输出提到职业资本、项目证据、可迁移能力、岗位范围或未来简历解释力。"
+      ],
+      "fail_signals": [
+        "只比较眼前薪资和公司名，不考虑未来求职证据和成长资产。"
+      ]
+    },
+    "considers_commute_time_cost": {
+      "type": "must",
+      "severity": "medium",
+      "description": "Offer 判断应考虑通勤时间、生活成本、恢复能力、远程政策和对日常节奏的影响。",
+      "pass_criteria": [
+        "输出明确分析通勤或生活成本对接受、继续找或谈条件的影响。"
+      ],
+      "fail_signals": [
+        "输入中有明显通勤或生活成本信息，但输出完全忽略。"
+      ]
+    },
+    "supports_single_offer_vs_continue_search": {
+      "type": "must",
+      "severity": "high",
+      "description": "只有一个 Offer 时，比较的对象应是接受它、继续求职、延长 deadline 或先补问关键条件，而不是假装一定要二选一。",
+      "pass_criteria": [
+        "输出同时分析接受和继续求职的收益、代价、机会成本或信息缺口。"
+      ],
+      "fail_signals": [
+        "只说接或不接，没有处理继续求职、等待其他面试或补问信息的选项。"
+      ]
+    },
+    "identifies_decision_flipping_unknowns": {
+      "type": "must",
+      "severity": "high",
+      "description": "指出最可能改变 Offer 选择的未知项，例如奖金兑现、真实加班、试用期、职责范围、经理预期、deadline 或远程政策。",
+      "pass_criteria": [
+        "输出 1-3 个高影响未知项，并把它们连接到下一步确认或澄清问题。"
+      ],
+      "fail_signals": [
+        "列出大量泛泛问题，或没有指出哪些未知项会改变最终选择。"
+      ]
+    },
+    "supports_offer_negotiation_before_final_choice": {
+      "type": "must",
+      "severity": "high",
+      "description": "在用户有谈薪或谈条件意图时，先判断是否值得谈、谈什么、如何表达、谈不成如何回到决策。",
+      "pass_criteria": [
+        "输出包含谈判对象、可谈条件、必要确认项、简短表达和谈判失败后的决策回路。"
+      ],
+      "fail_signals": [
+        "直接让用户接受/拒绝，或只给强硬话术，没有判断谈判是否必要和可行。"
+      ]
+    },
+    "closes_loop_after_offer_decision": {
+      "type": "must",
+      "severity": "medium",
+      "description": "Offer 接受、拒绝或继续求职后，应把理由转成当前求职周期的下一批 JD 筛选条件。",
+      "pass_criteria": [
+        "输出下一批 JD 筛选条件或等价结构，包含更看重、直接降级、需要提前确认等。"
+      ],
+      "fail_signals": [
+        "Offer 分析结束后没有沉淀任何后续筛选标准，下一轮求职仍会重复同类消耗。"
+      ]
+    },
+    "uses_mechanical_offer_scoring": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "用机械总分、精确分数或伪精确排名替代 Offer 判断。",
+      "pass_criteria": [
+        "输出使用优先级、红线、未知项和高/中/低置信度，而不是精确总分。"
+      ],
+      "fail_signals": [
+        "给 A 82 分、B 79 分，或用总分直接决定选择。"
+      ]
+    },
+    "equates_company_size_with_better_offer": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "把大厂、名气或平台规模直接等同于更好的 Offer。",
+      "pass_criteria": [
+        "输出把公司规模作为一个信号，同时仍检查岗位内容、职业资本、稳定性、通勤和用户优先级。"
+      ],
+      "fail_signals": [
+        "因为 A 是大厂就直接说 A 更好，或因为 B 是小公司就直接否定。"
+      ]
+    },
+    "treat_conditional_compensation_as_guaranteed": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "把不确定奖金、股权、补贴、口头承诺或未写进书面的条件当作固定收入。",
+      "pass_criteria": [
+        "输出明确把这些内容标为 conditional / uncertain / needs confirmation。"
+      ],
+      "fail_signals": [
+        "把 0-2 个月奖金、口头承诺、未确认股权直接加进固定总包。"
+      ]
+    },
+    "make_final_offer_decision_for_user": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "替用户做最终 Offer 选择，尤其在信息不足或高影响事项中使用命令式结论。",
+      "pass_criteria": [
+        "输出提供倾向、条件、风险和下一步，但明确最终决定由用户结合现实判断。"
+      ],
+      "fail_signals": [
+        "直接说“你必须接”“你应该拒绝”“不要犹豫选 B”，且没有条件边界。"
+      ]
+    },
+    "invent_competing_offer_or_market_salary": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "为了谈薪而编造不存在的竞品 Offer、虚假市场薪资或不可验证筹码。",
+      "pass_criteria": [
+        "输出只基于用户真实条件谈判，或建议用职责、薪资预期、deadline、书面条件和真实在面机会表达。"
+      ],
+      "fail_signals": [
+        "建议用户谎称已有更高 Offer、伪造市场行情或虚构其他公司薪资。"
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2220,6 +2385,21 @@
     "expose_internal_state_keys_to_end_user",
     "write_verbatim_self_intro_script",
     "ask_grandiose_or_sensitive_reverse_questions",
-    "write_final_english_bullet_without_facts"
+    "write_final_english_bullet_without_facts",
+    "checks_offer_information_completeness",
+    "separates_guaranteed_and_variable_compensation",
+    "checks_offer_red_flags_before_weighting",
+    "compares_offer_with_user_priorities",
+    "considers_career_capital",
+    "considers_commute_time_cost",
+    "supports_single_offer_vs_continue_search",
+    "identifies_decision_flipping_unknowns",
+    "supports_offer_negotiation_before_final_choice",
+    "closes_loop_after_offer_decision",
+    "uses_mechanical_offer_scoring",
+    "equates_company_size_with_better_offer",
+    "treat_conditional_compensation_as_guaranteed",
+    "make_final_offer_decision_for_user",
+    "invent_competing_offer_or_market_salary"
   ]
 }
