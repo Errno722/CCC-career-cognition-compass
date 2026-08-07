@@ -19,6 +19,7 @@ const requiredEntries = {
   "skills/interview-review-miner/SKILL.md": Object.keys(ruleVersions),
   "skills/jd-company-prep/SKILL.md": Object.keys(ruleVersions),
   "skills/job-search-plan-review/SKILL.md": Object.keys(ruleVersions),
+  "skills/offer-decision-support/SKILL.md": Object.keys(ruleVersions),
   "prompts/career-cognition-compass-prompt.md": Object.keys(ruleVersions),
   "prompts/copy-paste-prompt-lite-cn.md": Object.keys(ruleVersions),
   "prompts/copy-paste-prompt-cn.md": Object.keys(ruleVersions),
