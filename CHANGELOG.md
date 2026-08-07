@@ -8,6 +8,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 
 - 新增 [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md)，作为普通 LLM、手机端和第一次试用的轻量复制版。
 - 新增 [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md)，作为 WorkBuddy 默认部署入口；完整 [workbuddy/system-prompt.md](workbuddy/system-prompt.md) 继续保留给需要完整规则的场景。
+- 新增 [DOWNLOADS.md](DOWNLOADS.md) 和 `scripts/package-release.mjs`，用于生成轻量包、WorkBuddy 包和完整公开包，方便上传到 GitHub Release。
 - README、Quickstart、WorkBuddy 部署说明和兼容性矩阵改为优先推荐轻量入口，降低首次使用 token 成本。
 - 将跨模型继续统一为 `CCC 继续上下文`，只保留当前状态、本轮主线、已确认事实、可复用卡片、未确认信息和下一步，避免复制整段聊天。
 - 共享规则检查加入轻量 prompt 和 WorkBuddy lite prompt，防止轻量入口与完整版规则漂移。

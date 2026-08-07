@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Quickstart](https://img.shields.io/badge/start-QUICKSTART-blue.svg)](QUICKSTART.md)
+[![Downloads](https://img.shields.io/badge/downloads-DOWNLOADS-purple.svg)](DOWNLOADS.md)
 
 CCC 是 **Career Cognition Compass** 的缩写。
 
@@ -44,6 +45,8 @@ CCC 会先抓住本轮主线，暂存其他分支，再给你一个能继续推�
 | WorkBuddy | 想做国内可访问 Agent 的人 | 优先使用 [system-prompt-lite.md](workbuddy/system-prompt-lite.md)，完整说明见 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
 
 更详细的入口选择见：[QUICKSTART.md](QUICKSTART.md)。
+
+如果你不想翻目录，可以直接看：[DOWNLOADS.md](DOWNLOADS.md)。
 
 ## 隐私提醒
 
@@ -118,6 +121,7 @@ flowchart TD
 - 完整使用指南：[docs/full-guide.md](docs/full-guide.md)
 - 平台兼容性：[docs/compatibility.md](docs/compatibility.md)
 - 快速开始：[QUICKSTART.md](QUICKSTART.md)
+- 下载说明：[DOWNLOADS.md](DOWNLOADS.md)
 - Skills 目录：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)

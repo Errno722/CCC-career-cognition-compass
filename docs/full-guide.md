@@ -348,6 +348,7 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 
 - 项目说明：你正在看的这个 README
 - 快速开始：[QUICKSTART.md](../QUICKSTART.md)
+- 下载说明：[DOWNLOADS.md](../DOWNLOADS.md)
 - Skills：[skills/](../skills/)
 - Skill 使用说明：[SKILLS.md](../SKILLS.md)
 - WorkBuddy 部署说明：[workbuddy/](../workbuddy/)
