@@ -20,7 +20,9 @@ const requiredEntries = {
   "skills/jd-company-prep/SKILL.md": Object.keys(ruleVersions),
   "skills/job-search-plan-review/SKILL.md": Object.keys(ruleVersions),
   "prompts/career-cognition-compass-prompt.md": Object.keys(ruleVersions),
+  "prompts/copy-paste-prompt-lite-cn.md": Object.keys(ruleVersions),
   "prompts/copy-paste-prompt-cn.md": Object.keys(ruleVersions),
+  "workbuddy/system-prompt-lite.md": Object.keys(ruleVersions),
   "workbuddy/system-prompt.md": Object.keys(ruleVersions)
 };
 

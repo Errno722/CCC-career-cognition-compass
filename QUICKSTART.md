@@ -11,9 +11,11 @@
 步骤：
 
 1. 打开你常用的大模型。
-2. 复制 [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) 的内容。
+2. 复制轻量版 [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) 的内容。
 3. 粘贴到新对话里。
 4. 继续发送你的求职状态，可以很乱。
+
+如果你需要完整规则、长期调试或更复杂的工作流，再使用完整版 [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
 
 示例：
 
@@ -61,16 +63,18 @@ Use $interview-review-miner.
 最小部署只需要复制：
 
 ```text
-workbuddy/system-prompt.md
+workbuddy/system-prompt-lite.md
 ```
 
 步骤：
 
 1. 在 WorkBuddy 新建对话型 Agent。
 2. 名称填：`CCC Career Cognition Compass`。
-3. 把 [workbuddy/system-prompt.md](workbuddy/system-prompt.md) 全文复制到系统提示词。
+3. 把 [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) 全文复制到系统提示词。
 4. 设置开场白。
 5. 用 [workbuddy/test-cases.md](workbuddy/test-cases.md) 测试。
+
+如果平台上下文足够、你想启用更完整的规则细节，可以改用 [workbuddy/system-prompt.md](workbuddy/system-prompt.md)。
 
 完整说明见：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)。
 
@@ -96,7 +100,8 @@ WorkBuddy Agent
 
 | 情况 | 推荐入口 |
 | --- | --- |
-| 我只是自己试一下 | 普通大模型 + `copy-paste-prompt-cn.md` |
+| 我只是自己试一下 | 普通大模型 + `copy-paste-prompt-lite-cn.md` |
+| 我想要完整规则 | 普通大模型 + `copy-paste-prompt-cn.md` |
 | 我想维护和改造这个项目 | Codex / Claude Code + `skills/` |
 | 我想给国内用户一个手机可用入口 | WorkBuddy |
 | 我想在飞书里用 | WorkBuddy + 飞书配置 |
@@ -141,6 +146,14 @@ gap 一年 运营 ai 转行 不知道投什么
 ```
 
 好的结果应该是：先整理事实和缺口，不编造经历，不一上来生成完整简历，并给出少量下一步动作。
+
+如果一轮对话很长，或者你想换到另一个模型继续，可以让 CCC 输出：
+
+```text
+请给我一份 CCC 继续上下文。
+```
+
+这样只需要复制当前状态、主线、已确认事实、可复用卡片、未确认信息和下一步，不必复制完整聊天记录。
 
 如果你在维护仓库，可以运行机器可读合约检查：
 

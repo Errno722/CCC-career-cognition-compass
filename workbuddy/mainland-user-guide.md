@@ -17,6 +17,12 @@
 最小版本只需要一个文件：
 
 ```text
+workbuddy/system-prompt-lite.md
+```
+
+如果你希望保留更完整的场景规则，或平台上下文足够大，可以改用：
+
+```text
 workbuddy/system-prompt.md
 ```
 
@@ -27,6 +33,7 @@ workbuddy/system-prompt.md
 ```text
 README.md
 SKILLS.md
+prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-cn.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
@@ -102,7 +109,7 @@ Agent
 打开并复制：
 
 ```text
-workbuddy/system-prompt.md
+workbuddy/system-prompt-lite.md
 ```
 
 粘贴到 WorkBuddy 的类似位置：
@@ -139,6 +146,20 @@ Prompt
 最多 3 个下一步动作
 复杂内容分轮输出
 ```
+
+如果对话很长，或用户想切换到其他模型继续，可以让智能体输出：
+
+```text
+CCC 继续上下文
+- 当前状态:
+- 本轮主线:
+- 已确认事实:
+- 可复用卡片:
+- 未确认:
+- 下一步:
+```
+
+这样用户只需要复制这张卡，不需要复制整段聊天。
 
 如果用户是在手机上使用，回复要更短。第一轮尽量只给：
 
@@ -377,5 +398,6 @@ CCC 不做：
 - 腾讯云 WorkBuddy Enterprise 快速开始：[快速开始](https://cloud.tencent.com/document/product/1831/134527)
 - CodeBuddy WorkBuddy 企业智能体说明：[企业智能体](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/CloudAgent)
 - 本项目 WorkBuddy 部署材料：[README.md](README.md)
-- 系统提示词：[system-prompt.md](system-prompt.md)
+- 轻量系统提示词：[system-prompt-lite.md](system-prompt-lite.md)
+- 完整系统提示词：[system-prompt.md](system-prompt.md)
 - 测试用例：[test-cases.md](test-cases.md)

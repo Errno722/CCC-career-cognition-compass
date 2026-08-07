@@ -38,9 +38,10 @@ CCC 会先抓住本轮主线，暂存其他分支，再给你一个能继续推�
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| ChatGPT / 普通 LLM | 想马上试用的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
+| ChatGPT / 普通 LLM | 想马上试用、省 token 或手机端使用的人 | 复制 [copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
+| 普通 LLM 完整版 | 想要完整规则的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
 | Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](SKILLS.md) 和 [skills/](skills/) |
-| WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
+| WorkBuddy | 想做国内可访问 Agent 的人 | 优先使用 [system-prompt-lite.md](workbuddy/system-prompt-lite.md)，完整说明见 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
 
 更详细的入口选择见：[QUICKSTART.md](QUICKSTART.md)。
 
@@ -97,7 +98,7 @@ CCC 应该先整理，而不是直接写简历：
 - 投递后空档期计划：把等待消息的焦虑转成 5-20 分钟小动作。
 - 焦虑降噪：刷社媒更慌、反复刷新、等待反馈或比较别人时，拆出触发源、可控/不可控、信息摄入边界和一个小动作，不灌鸡汤。
 - 面试邀约信号画像：根据已收到的面试邀请、JD 和无回复样本，区分邀约构成、本批次观察回复率和下一批验证假设。
-- Token 节省模式：复用已有状态卡、项目卡、主简历和 JD 补丁，只输出差异、替换段落和下一步，减少跨模型或手机端反复消耗。
+- Token 节省模式：复用已有状态卡、项目卡、主简历和 JD 补丁，只输出差异、替换段落和下一步；必要时输出 `CCC 继续上下文`，减少跨模型或手机端反复消耗。
 - 隐私保护：默认提醒脱敏，不要求真实简历、offer、合同或完整面试记录。
 - 共享规则：`core/` 维护 focus control、确定性表达校准和 profile 持久化边界，避免不同入口规则漂移。
 
@@ -120,6 +121,8 @@ flowchart TD
 - Skills 目录：[SKILLS.md](SKILLS.md)
 - WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
 - 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
+- 轻量复制 Prompt：[prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md)
+- WorkBuddy 轻量系统提示词：[workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md)
 - 纵向可用性测试：[usability/README.md](usability/README.md)
 - Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/result-schema.json](evals/result-schema.json)、[evals/rubrics.json](evals/rubrics.json)
 - 真实 Smoke Report 输入模板：[evals/inputs/README.md](evals/inputs/README.md)
@@ -192,6 +195,6 @@ CCC 使用 MIT License。
 
 下一步可以这样做：
 
-- 第一次使用：复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
+- 第一次使用：复制轻量版 [copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md)；需要完整规则时再用 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
 - 发现问题：提交脱敏反馈，参考 [FEEDBACK.md](FEEDBACK.md)。
 - 想参与改进：先看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。

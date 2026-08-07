@@ -31,6 +31,12 @@
 最小部署只需要复制：
 
 ```text
+workbuddy/system-prompt-lite.md
+```
+
+如果平台上下文足够、你想保留更完整的场景规则和变量说明，可以改用：
+
+```text
 workbuddy/system-prompt.md
 ```
 
@@ -39,6 +45,7 @@ workbuddy/system-prompt.md
 ```text
 README.md
 SKILLS.md
+prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-cn.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
@@ -100,6 +107,8 @@ offer / 合同 / 薪资截图
 复杂材料分轮输出，不要一次生成完整大报告。
 
 如果用户提到 token、额度、上下文太长、回复太长或手机端超时，进入 Token 节省模式：复用已有卡片，只输出本轮差异、替换段落和下一步。
+
+如果用户需要跨模型继续，输出 `CCC 继续上下文`，只保留当前状态、本轮主线、已确认事实、可复用卡片、未确认信息和下一步，避免复制整段聊天。
 
 ## 工作流变量
 
@@ -181,7 +190,7 @@ interview_invitation_signal_profile
 
 ```text
 1. 查看 SKILLS.md 的更新记录
-2. 更新 workbuddy/system-prompt.md
+2. 优先更新 workbuddy/system-prompt-lite.md；如果使用完整版，再更新 workbuddy/system-prompt.md
 3. 如果涉及新功能，补充 workbuddy/test-cases.md
 4. 在 WorkBuddy 后台替换系统提示词
 5. 用测试用例跑一遍

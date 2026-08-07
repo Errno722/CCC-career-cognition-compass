@@ -21,7 +21,8 @@ CCC 是 Career Cognition Compass 的缩写。它是一个 AI 求职澄清与行�
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| 普通大模型 | 想直接复制 prompt 使用的人 | 复制 [copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md) |
+| 普通大模型轻量版 | 想直接试用、省 token 或手机端使用的人 | 复制 [copy-paste-prompt-lite-cn.md](../prompts/copy-paste-prompt-lite-cn.md) |
+| 普通大模型完整版 | 想要完整规则的人 | 复制 [copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md) |
 | Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](../SKILLS.md) 和 [skills/](../skills/) |
 | WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](../workbuddy/mainland-user-guide.md) |
 | 飞书入口 | 想让飞书作为聊天入口的人 | 查看 [飞书 × WorkBuddy 配置模板](../workbuddy/feishu-config.md) |
@@ -162,6 +163,20 @@ CCC 适合这些阶段的人：
 
 如果你担心 token、上下文长度、手机端超时，或需要把内容从一个模型复制到另一个模型，可以直接说“请用省 token 模式”。CCC 应该复用已有的状态卡、项目卡、主简历、JD 补丁和面试背景卡，只输出本轮新增信息、替换段落、差异补丁和下一步，而不是每次重写完整背景和整份材料。
 
+如果你想换模型继续，可以让 CCC 输出：
+
+```text
+CCC 继续上下文
+- 当前状态:
+- 本轮主线:
+- 已确认事实:
+- 可复用卡片:
+- 未确认:
+- 下一步:
+```
+
+之后只复制这张卡，不需要复制整段聊天。
+
 > **使用前请注意：** CCC 只提供整理、分析和建议，不替你做最终决定。涉及投递、离职、裸辞、offer、薪资、法律、医疗或签证等重要事项时，请结合现实情况自行判断，必要时咨询可信赖的人或专业人士。
 > 它会尽量说得不生硬，但主要功能不是提供情绪价值，而是帮你把事情理清楚、往前推进一点。
 
@@ -278,7 +293,7 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - 面试体验评估
 - 面试邀约信号画像
 - Token 节省卡
-- 本轮求职摘要
+- CCC 继续上下文
 - JD 简历修改补丁
 - JD 岗位类型判断卡
 - 能力聚焦检查
@@ -339,6 +354,7 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - WorkBuddy 大陆用户部署说明：[workbuddy/mainland-user-guide.md](../workbuddy/mainland-user-guide.md)
 - 飞书 × WorkBuddy 配置模板：[workbuddy/feishu-config.md](../workbuddy/feishu-config.md)
 - 传播素材：[SHARE.md](../SHARE.md)
+- 轻量可复制 Prompt：[prompts/copy-paste-prompt-lite-cn.md](../prompts/copy-paste-prompt-lite-cn.md)
 - 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](../prompts/career-cognition-compass-prompt.md)
 - 使用示例：[examples/](../examples/)

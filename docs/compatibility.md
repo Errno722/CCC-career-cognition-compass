@@ -76,14 +76,14 @@ evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
 | 平台 / 环境 | 状态 | 测试计划 | 公开覆盖 | 公开通过 | 公开验证 | 模型 / 版本 | 证据 | 推荐入口 |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 | Codex | Maintainer-used | 33 | 0 | - | - | 未记录 | 本地结构检查通过，尚无真实平台结果报告 | `skills/` |
-| WorkBuddy | Maintainer-used | 33 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 33 例正式执行记录 | `workbuddy/system-prompt.md` |
+| WorkBuddy | Maintainer-used | 33 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 33 例正式执行记录 | `workbuddy/system-prompt-lite.md` |
 | 飞书 + WorkBuddy | Community testing needed | 33 | 0 | - | - | 未记录 | 只有配置模板，尚未形成公开测试记录 | `workbuddy/feishu-config.md` |
-| ChatGPT / 普通 LLM | Contract-ready | 33 | 0 | - | - | 未记录 | 有 33 个机器可读合约和确定性输出 runner，尚无真实执行报告 | `prompts/copy-paste-prompt-cn.md` |
+| ChatGPT / 普通 LLM | Contract-ready | 33 | 0 | - | - | 未记录 | 有 33 个机器可读合约和确定性输出 runner，尚无真实执行报告 | `prompts/copy-paste-prompt-lite-cn.md` |
 | Claude Code | Community testing needed | 33 | 0 | - | - | 未记录 | 目录结构可迁移，需社区测试触发规则 | `skills/` |
-| DeepSeek | Community testing needed | 33 | 0 | - | - | 未记录 | 建议使用精简输入和分轮对话，尚无执行报告 | `prompts/copy-paste-prompt-cn.md` |
-| Kimi | Community testing needed | 33 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | `prompts/copy-paste-prompt-cn.md` |
-| 通义千问 | Experimental | 33 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | `prompts/copy-paste-prompt-cn.md` |
-| 豆包 | Experimental | 33 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | `prompts/copy-paste-prompt-cn.md` |
+| DeepSeek | Community testing needed | 33 | 0 | - | - | 未记录 | 建议使用精简输入和分轮对话，尚无执行报告 | `prompts/copy-paste-prompt-lite-cn.md` |
+| Kimi | Community testing needed | 33 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | `prompts/copy-paste-prompt-lite-cn.md` |
+| 通义千问 | Experimental | 33 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | `prompts/copy-paste-prompt-lite-cn.md` |
+| 豆包 | Experimental | 33 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | `prompts/copy-paste-prompt-lite-cn.md` |
 
 ## 迁移原则
 
