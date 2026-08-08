@@ -246,7 +246,9 @@ CCC does not provide tax advice and should not calculate take-home pay unless a 
 
 ## Region-sensitive Role Families
 
-Do not mechanically translate role names.
+Do not mechanically translate job titles across markets, companies, or industries.
+
+Example:
 
 Chinese "运营" is not always "Operations." Depending on actual responsibilities, it may map to:
 

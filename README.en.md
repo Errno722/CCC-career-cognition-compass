@@ -7,17 +7,21 @@
 </p>
 
 <p align="center">
-  From career chaos to evidence, judgment, and next actions.
+  English Edition
+</p>
+
+<p align="center">
+  Use CCC in English for local, cross-region, or cross-market job searches.
 </p>
 
 <p align="center">
   <a href="prompts/copy-paste-prompt-lite-en.md">Try the Lite Prompt</a>
   ·
+  <a href="QUICKSTART.en.md">Quickstart</a>
+  ·
+  <a href="DEMO.en.md">60-second Demo</a>
+  ·
   <a href="DOWNLOADS.md">Downloads</a>
-  ·
-  <a href="DEMO.md">60-second Demo</a>
-  ·
-  <a href="docs/full-guide.md">Full Guide</a>
 </p>
 
 <p align="center">
@@ -44,7 +48,7 @@ Current stage: Beta · Active Development. CCC can already be used for personal 
 
 > "I have applications and interviews, but no offer yet. I don't know what the signal means."
 
-> "I may need sponsorship, but I don't know how to separate that constraint from my actual job fit."
+> "I keep changing my resume and strategy, but I don't know whether I'm reacting to real signals or just getting anxious."
 
 ## Core Use Cases
 
@@ -127,13 +131,16 @@ More options: [QUICKSTART.en.md](QUICKSTART.en.md)
 
 ## Examples
 
-- [60-second Demo](DEMO.md)
+- [60-second Demo](DEMO.en.md)
+- [International / Cross-market Job Search](examples/international-job-search.md)
+
+Chinese-first scenario examples:
+
 - [Full Walkthrough](examples/full-walkthrough.md)
 - [Direction Confusion](examples/direction-confusion.md)
 - [Interview Judgment](examples/interview-judgment.md)
 - [No Outcome Loop](examples/no-outcome-loop.md)
 - [Offer Decision](examples/offer-decision.md)
-- [International / Cross-market Job Search](examples/international-job-search.md)
 
 ## Developer & Evaluation
 

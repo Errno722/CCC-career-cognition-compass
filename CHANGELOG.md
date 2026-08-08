@@ -18,6 +18,7 @@ Current project version: `0.1.0-beta`
 - 新增 [README.en.md](README.en.md) 和 international / cross-market job search 示例；英文入口不是中文版逐句翻译，而是补充 work authorization、visa sponsorship、location、timezone、local resume conventions、ATS、cover letter、LinkedIn、language claims、employment type、compensation structure 和 relocation 等跨市场求职变量。
 - 新增真正可复制的 [English Lite Prompt](prompts/copy-paste-prompt-lite-en.md)、[QUICKSTART.en.md](QUICKSTART.en.md) 和 [docs/international-job-search.md](docs/international-job-search.md)，让英文入口从介绍页升级为可执行入口。
 - 英文入口进一步明确 interaction language ≠ job market context：使用英文不代表跨市场求职，使用中文也不代表只在中国市场求职；地区 / 市场上下文只在会改变当前判断时触发。
+- English Edition 进一步改为面向偏好使用英语处理求职问题的用户，移除首页 sponsorship 偏向，新增 [DEMO.en.md](DEMO.en.md)，并将 title translation 示例移入 cross-market guide。
 - 新增 `international-job-search-constraints-001` 行为合约，覆盖 target region、sponsorship、remote eligibility、resume / CV 和敏感签证信息边界；second-language English 校准由英文面试语气合约承接。当前手工测试和机器可读合约为 42 个，已登记语义断言为 238 条，核心细化 Rubric 为 131 条。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 

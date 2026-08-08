@@ -47,6 +47,7 @@ Start with:
 
 - [README.en.md](README.en.md)
 - [QUICKSTART.en.md](QUICKSTART.en.md)
+- [DEMO.en.md](DEMO.en.md)
 - [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md)
 
 ## 三个包分别包含什么
@@ -60,6 +61,7 @@ README.md
 README.en.md
 QUICKSTART.md
 QUICKSTART.en.md
+DEMO.en.md
 DOWNLOADS.md
 prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-lite-en.md
@@ -77,6 +79,7 @@ README.md
 README.en.md
 QUICKSTART.md
 QUICKSTART.en.md
+DEMO.en.md
 DOWNLOADS.md
 workbuddy/README.md
 workbuddy/mainland-user-guide.md
