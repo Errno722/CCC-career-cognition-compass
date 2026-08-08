@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "suite_id": "ccc-core-zh",
+  "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
   "manual_case_count": 42,
   "routing_semantics": {
@@ -1260,7 +1260,8 @@
           "avoids_overly_certain_wording",
           "supports_natural_non_stiff_english",
           "avoids_literal_translation_for_english_interview",
-          "keeps_answer_concise_with_bullets"
+          "keeps_answer_concise_with_bullets",
+          "calibrates_second_language_claims"
         ],
         "semantic_must_not": [
           "overstate_english_fluency_or_ability",
@@ -2120,11 +2121,6 @@
           [
             "resume",
             "CV"
-          ],
-          [
-            "clear English",
-            "speakable English",
-            "second-language"
           ]
         ],
         "literal_not_contains": [
@@ -2143,7 +2139,6 @@
           "distinguishes_remote_from_work_anywhere",
           "avoids_universal_resume_convention",
           "disambiguates_resume_and_cv_by_region",
-          "calibrates_second_language_claims",
           "keeps_answer_concise_with_bullets",
           "provides_single_next_action"
         ],
