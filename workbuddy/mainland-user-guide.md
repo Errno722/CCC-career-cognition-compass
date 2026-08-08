@@ -183,6 +183,8 @@ needs_confirmation
 project_inventory
 project_cards
 project_state_records
+judgment_trace_cards
+methodology_trace_cards
 hard_skill_kb
 interview_question_bank
 interviewer_feedback_signals
@@ -195,6 +197,15 @@ positioning_cards
 current_action_plan
 post_application_idle_plan
 interview_invitation_signal_profile
+application_friction
+role_family_clusters
+direction_experiment_7d
+resume_architecture_cards
+minimal_tailoring_mode
+resume_freeze_status
+job_search_funnel
+sample_size_gate
+outcome_signal_pattern_records
 token_saving_cards
 recent_work_task_signals
 focus_control_cards
@@ -217,6 +228,18 @@ focus_control_cards
 ```
 
 期望：先整理重点，不直接生成简历，最多问 3 个问题，并给一个下一步小动作。
+
+```text
+我这两天看了几十个岗位，运营、产品助理、项目执行、数据分析都觉得可以。越看越不知道投什么，每个 JD 都像要重新改简历。
+```
+
+期望：识别求职摩擦，先做 Role Family 聚类和 7 天验证，不继续推荐岗位大清单，不要求每个 JD 重写完整简历。
+
+```text
+我投了 12 个产品运营和项目执行岗位，有 3 个 HR 回复，面了 2 个都没到二面。我是不是方向错了？
+```
+
+期望：先看投递/面试漏斗和样本量，区分 data point、signal、pattern 和 conclusion，不直接推翻方向。
 
 ```text
 我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。

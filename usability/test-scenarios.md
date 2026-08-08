@@ -236,6 +236,62 @@
 
 用户得到可复用的复盘资料卡和下一步，不把一次反馈扩大成长期否定。
 
+## Search Friction & Feedback Flow：求职摩擦与反馈循环
+
+这是一条独立测试线，不重排上面的 Scenario 1-6。用于观察 CCC 能否在用户看很多 JD、反复改简历、投递/面试没结果后，降低摩擦并正确解释信号。
+
+### Friction Scenario A：岗位过载
+
+**用户输入**
+
+```text
+我这两天看了几十个岗位，运营、产品助理、项目执行、数据分析都觉得可以。越看越不知道投什么。每个 JD 我又觉得应该重新改简历，改了几份以后我现在看到 JD 就烦，完全不想继续改。
+```
+
+**expected active thread**
+
+求职摩擦与反馈循环。先判断摩擦来源，再做 Role Family 聚类和 7 天验证，不继续推荐岗位大清单。
+
+**main output**
+
+- 求职摩擦卡。
+- 识别 direction / tailoring / identity / repetition fatigue 中的主要摩擦。
+- Role Family 聚类，最多 3 个活跃方向。
+- 7 天主验证方向。
+- Minimal Tailoring Mode。
+- Master Resume → Role Family Resume → JD Patch。
+
+**completion condition**
+
+用户知道接下来不是继续看更多岗位或重写更多简历，而是先用一个短期验证方向和最小 JD Patch 降低摩擦。
+
+### Friction Scenario B：投递后小样本无结果
+
+**用户输入**
+
+```text
+我最近投了 12 个产品运营和项目执行岗位，有 3 个 HR 找我，面了 2 个，都没有到二面。我现在觉得是不是方向错了，也想重新把简历全部改一遍。
+```
+
+**expected active thread**
+
+求职结果诊断。先看 Application / Interview Funnel 和 Sample Size Gate，不直接重置方向或重写整份简历。
+
+**main output**
+
+- 求职结果诊断。
+- 漏斗：投递 12、HR 回复 3、面试 2、二面 0、Offer 0。
+- 当前可以判断：简历并非完全没有市场信号。
+- 当前不能判断：用户不适合产品运营 / 项目执行。
+- 样本量等级：弱信号或待观察。
+- 本轮不要做：重新写第 4 份主简历。
+- 本周只验证：复盘两次面试的重复信号，补 Judgment Trace 或回答结构。
+- 如适用，建议 7 天 Resume Freeze，只做 JD Patch。
+
+**completion condition**
+
+用户把无结果视为可分析信号，而不是立即推翻方向或进入一 JD 一整份简历的高摩擦循环。
+
 ## Offer Decision Flow：Offer 决策独立纵向测试
 
 这是一条独立测试线，不重排上面的 Scenario 1-6。用于验证 CCC 收到 Offer 后是否能在短轮次内完成信息整理、风险识别、谈薪判断和决策闭环。

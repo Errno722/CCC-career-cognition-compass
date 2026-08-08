@@ -1,7 +1,7 @@
 ---
 name: job-search-plan-review
 description: >-
-  Short job-search planning and review. Use when the user needs a plan based on available time, daily/weekly review, application tracking, post-application idle-period planning after submitting resumes, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
+  Short job-search planning and review. Use when the user needs a plan based on available time, daily/weekly review, application tracking, application friction diagnosis, post-application idle-period planning after submitting resumes, no-outcome funnel diagnosis, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, Resume Freeze, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
   Also use when the user wants to summarize interview invitations received, compare invited roles/JDs with no-response applications, build an interview-invitation signal profile, and decide which role families or JD traits are more likely to get replies. For detailed JD skill analysis, use jd-company-prep as a helper.
 ---
 
@@ -10,6 +10,13 @@ description: >-
 ## Overview
 
 Create short, usable plans and reviews that help the user keep momentum without collecting unused materials.
+
+Core principle:
+
+```text
+没有结果，也会留下信号；
+但不是每一个信号都足以成为结论。
+```
 
 ## Shared Rule Versions
 
@@ -49,6 +56,8 @@ Use modes:
 低能量恢复
 兼职/过渡
 面试邀约信号画像
+求职摩擦与反馈循环
+无结果诊断
 ```
 
 If the user is over-diverging, output this before any plan:
@@ -179,6 +188,168 @@ Rules:
 - Preserve version isolation: do not let a high-reply operations profile automatically contaminate product, technical, or research resume versions.
 - If results suggest the user is being invited mostly by a role they do not want, frame it as leverage or bridge option, not as a forced direction.
 
+## Application Friction
+
+Use this when the user says they have seen many JDs, feel exhausted by deciding what to apply for, hate changing the resume again, or feel that every application requires a new self-definition.
+
+Examples:
+
+```text
+看到 JD 就烦
+每个 JD 都像要重新改一份简历
+改了几份以后完全不想继续
+不知道是不是方向错了，所以一直重写简历
+```
+
+Internal dimensions:
+
+```text
+application_friction
+├─ direction_friction
+├─ tailoring_friction
+├─ identity_friction
+├─ repetition_fatigue
+├─ perfectionism_cost
+└─ current_level
+```
+
+User-facing output:
+
+```text
+求职摩擦卡
+├─ 现在卡住的不是:
+├─ 更像是:
+├─ 摩擦来源:
+├─ 先降低成本:
+├─ 本周只验证:
+└─ 下一步:
+```
+
+Rules:
+
+- Do not call the user lazy, unmotivated, or lacking execution.
+- Do not respond with more role recommendations.
+- If the friction is direction-related, hand off to `career-direction-clarifier` for Role Family clustering and a 7-day experiment.
+- If the friction is resume-related, hand off to `career-materials-builder` and request Minimal Tailoring Mode.
+- If the friction follows repeated no-outcome cycles, run Job Search Funnel diagnosis before changing direction or rewriting the resume.
+
+## Job Search Funnel And No-Outcome Diagnostic
+
+Use this when the user has applied or interviewed but has no result, few replies, repeated rejections, or wants to decide whether to change direction or rewrite everything.
+
+Ask for the smallest useful funnel snapshot:
+
+```text
+过去 14-30 天:
+├─ 投递:
+├─ HR / Recruiter 回复:
+├─ 正式面试:
+├─ 二面:
+├─ 终面:
+└─ Offer:
+```
+
+If missing, ask for rough numbers only. Do not require exact tracking before giving a first diagnosis.
+
+Output:
+
+```text
+求职结果诊断
+├─ 当前漏斗:
+├─ 主要断点:
+├─ 现在可以判断:
+├─ 还不能判断:
+├─ 重复信号:
+├─ 这轮不要做:
+├─ 本周只验证:
+└─ 下一步:
+```
+
+Breakpoints and actions:
+
+```text
+投递 → 回复断点
+└─ 先看 Role Family、简历版本、JD 选择、渠道、资历层级，不优先练面试。
+
+有回复 → 正式面试断点
+└─ 先看求职动机、Gap / 转行动机、薪资、地点、入职时间、JD 基本匹配。
+
+一面断点
+└─ 先看项目事实、回答结构、岗位理解、基础技能、Judgment Trace。
+
+二面 / 终面断点
+└─ 不首先大改简历，先看独立判断、ownership、Methodology Trace、seniority、团队/岗位匹配、后期表达和竞争候选人。
+```
+
+## Sample Size Gate
+
+Use these labels instead of exact statistical promises:
+
+```text
+NO_SIGNAL
+样本太少，不能下结论。
+
+WEAK_SIGNAL
+出现一些重复现象，但还不稳定。
+
+REPEATED_SIGNAL
+多个相似样本重复指向同一问题。
+```
+
+Guidance:
+
+- 3-5 applications or one failed interview is usually a data point, not a conclusion.
+- 10-20 applications in the same Role Family with comparable resume versions create more useful observation value.
+- Multiple similar interview feedback items from different companies are closer to repeated signal.
+- Different channels, cities, seniority levels, role families, or resume versions must be separated or marked as confounders.
+
+## Outcome, Signal, Pattern, Conclusion
+
+Use this ladder before changing direction:
+
+```text
+single outcome
+└─ data point
+
+similar repeated outcomes
+└─ signal
+
+multiple independent sources
+└─ pattern
+
+pattern + enough context
+└─ possible strategy change
+```
+
+Rules:
+
+- Do not interpret one interview failure as "wrong direction".
+- Do not interpret three no-reply applications as "resume totally broken".
+- Do not interpret one interviewer saying "product experience is insufficient" as "the user is not suited for product".
+- If the evidence is weak, recommend a small validation batch or targeted interview review, not a full reset.
+
+## Resume Freeze
+
+Suggest Resume Freeze when:
+
+```text
+同一 Role Family 已有稳定简历
+已经能获得 HR 回复 / 面试
+没有新的明确简历级反馈
+用户正在因为少量失败反复重写
+```
+
+During Resume Freeze:
+
+```text
+7 天内不重写主简历
+只做 JD Patch
+每个 JD 最多改 3 个位置
+只有 repeated signal 才解冻
+```
+
+Do not freeze when the resume has never produced any reply, the Role Family changed, or the user receives repeated concrete feedback that the core resume evidence is mismatched.
+
 ## Interview Waiting And Feedback
 
 Use this when the user has interviewed and is waiting, wants to ask for feedback, or needs to decide whether a role is worth waiting for.
@@ -248,6 +419,9 @@ For weekly review:
 ## Version Record
 
 ```text
+v0.2.8 / 2026-08-08
+- Added Application Friction, Job Search Funnel, No-Outcome Diagnostic, Sample Size Gate, Outcome/Signal/Pattern/Conclusion, and Resume Freeze rules.
+
 v0.2.7 / 2026-08-04
 - Revised interview invitation signal profiling to separate invitation mix, observed batch reply rate, and future hypothesis.
 - Added numerator/denominator, sample-size level, confounders, resume-version isolation, and 5-10 application validation batches.

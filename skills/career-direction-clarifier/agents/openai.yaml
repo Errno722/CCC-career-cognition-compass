@@ -1,6 +1,6 @@
 interface:
   display_name: "Career Direction Clarifier"
-  short_description: "Clarify direction, reduce over-divergence, and read work-task signals"
-  default_prompt: "Use $career-direction-clarifier to clarify what I am really trying to solve, reduce over-divergence, and identify what my recent work tasks suggest about positioning."
+  short_description: "Clarify direction, cluster role families, reduce over-divergence, and read work-task signals"
+  default_prompt: "Use $career-direction-clarifier to clarify what I am really trying to solve, classify why I do not know what to apply for, cluster saved JDs into Role Families, set a 7-day direction experiment, reduce over-divergence, and identify what my recent work tasks suggest about positioning."
 policy:
   allow_implicit_invocation: true

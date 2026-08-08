@@ -2,6 +2,25 @@
 
 CCC 使用日期型版本记录。这里记录面向使用者能感知到的主要变化；更细的 skill 内部变化见 [SKILLS.md](SKILLS.md)。
 
+## 2026-08-08
+
+### 判断痕迹与方法沉淀
+
+- `career-project-experience-miner` 增加 Judgment Trace 和 Methodology Trace，用来还原用户当时的判断点、信号、替代方案、取舍、行动、结果和后验验证。
+- 新增 Judgment Depth `J0-J4`：从只说明执行，到解释结果、独立判断、取舍推理和后验学习；不为了求职包装把 J0/J1 自动升级成 J2/J3。
+- 新增 Methodology Maturity `M0-M4`：从尚无方法、初步经验规则，到重复验证、有适用边界和可迭代方法体系；防止把一次经历包装成成熟方法论。
+- 明确区分 `used_at_time` 和 `retrospective`，允许使用事后复盘形成的方法，但不能写成当时就在用的成熟方法。
+- 面试复盘加入五层追问：Execution、Reasoning、Judgment、Trade-off、Methodology，用于处理“为什么这么做”“你的判断是什么”等业务面试深挖。
+
+### 求职摩擦与反馈循环
+
+- 新增 Search Friction & Feedback Loop：看很多 JD、不知道投什么、反复改简历和投递/面试没结果不再被拆成孤立问题。
+- `career-direction-clarifier` 增加四类“不知道投什么”、Role Family 聚类和 7 天方向验证，避免继续生成岗位大清单。
+- `career-materials-builder` 增加 `Master Resume → Role Family Resume → JD Patch`、Tailoring Level 和 Minimal Tailoring Mode，避免回到“一 JD 一整份简历”的高摩擦流程。
+- `job-search-plan-review` 增加 Application Friction、Job Search Funnel、No-Outcome Diagnostic、Sample Size Gate、Outcome / Signal / Pattern / Conclusion 和 Resume Freeze。
+- 机器可读 Eval 增加 `judgment-trace-missing-001`、`judgment-methodology-trace-001`、`application-friction-001` 和 `job-search-no-outcome-diagnostic-001`；当前手工测试和机器可读合约为 41 个，已登记语义断言为 228 条，核心细化 Rubric 为 121 条。
+- 当前仍未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/41。
+
 ## 2026-08-07
 
 ### Offer 决策支持
@@ -12,7 +31,7 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 - 薪酬分析要求区分固定收入、有条件收入、不确定收入、股权、补贴和口头承诺，不把不确定奖金或未写入书面的条件当固定收入。
 - 谈薪 / 谈条件流程只基于真实条件、职责范围、deadline 和用户偏好，不虚构竞品 offer 或市场薪资，不承诺谈判结果。
 - 接受、拒绝或继续求职后，输出当前求职周期的下一批 JD 筛选条件，避免下一轮继续被同类不合适机会消耗。
-- 机器可读 Eval 增加 `single-offer-decision-001`、`multi-offer-comparison-001`、`offer-negotiation-closure-001` 和 `current-job-vs-offer-001`；当前手工测试和机器可读合约为 37 个，已登记语义断言为 213 条，核心细化 Rubric 为 106 条。
+- 机器可读 Eval 增加 `single-offer-decision-001`、`multi-offer-comparison-001`、`offer-negotiation-closure-001` 和 `current-job-vs-offer-001`；当时手工测试和机器可读合约为 37 个，已登记语义断言为 213 条，核心细化 Rubric 为 106 条。
 
 ### 轻量入口与省 token
 

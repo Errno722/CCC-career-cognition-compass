@@ -14,15 +14,15 @@ career-cognition-compass
 
 ```text
 career-intake-clarifier       混乱输入整理、发散初筛
-career-project-experience-miner 项目经历盘点与深挖
-career-direction-clarifier    方向澄清、发散收束、近期工作行为定位
+career-project-experience-miner 项目经历盘点与深挖、判断痕迹、方法沉淀
+career-direction-clarifier    方向澄清、Role Family 聚类、7 天方向验证、发散收束、近期工作行为定位
 career-transfer-map           可迁移能力、发散方向收束、近期工作任务信号和职业族群
 career-hard-skill-kb          硬技能知识库和术语表
 jd-company-prep               JD / 目标公司准备
 jd-resume-patch               JD 简历修改补丁
-career-materials-builder      中英文简历、作品集、平台材料、语气校准、英文面试表达
-interview-review-miner        面试关键词、面试官反馈、面试表达结构卡、英文表达校准、自我介绍框架、候选人面试资料卡补丁、角色化回答侧重点和后续修改
-job-search-plan-review        14 天计划、复盘、投递记录、发散收束、焦虑降噪、面试邀约信号画像
+career-materials-builder      中英文简历、三级简历架构、Minimal Tailoring、作品集、平台材料、语气校准、英文面试表达
+interview-review-miner        面试关键词、面试官反馈、五层追问、面试表达结构卡、英文表达校准、自我介绍框架、候选人面试资料卡补丁、角色化回答侧重点和后续修改
+job-search-plan-review        14 天计划、复盘、投递记录、求职摩擦、无结果漏斗诊断、Resume Freeze、焦虑降噪、面试邀约信号画像
 offer-decision-support        单 Offer / 多 Offer / 在职对比、风险分层、谈薪与决策闭环
 career-stability-bridge       Gap、焦虑降噪、低能量、在职疲惫、离职犹豫、兼职过渡
 ```
@@ -91,10 +91,10 @@ jd-resume-patch
 用户只说很乱、不知道怎么开始，或一开始就把很多岗位、技能、材料和计划混在一起
 → career-intake-clarifier 或 career-cognition-compass
 
-用户想梳理项目经历、说不清自己做过什么、不知道哪些经历算项目、项目没有数据或结果不清晰、简历/作品集缺项目素材
+用户想梳理项目经历、说不清自己做过什么、不知道哪些经历算项目、项目没有数据或结果不清晰、简历/作品集缺项目素材，或需要说清项目里的判断、取舍、方法沉淀
 → career-project-experience-miner
 
-用户不知道自己到底想找什么、同时发散到太多方向/技能/材料/平台/计划，或想根据最近实际在做/愿意继续做的工作任务判断定位
+用户不知道自己到底想找什么、看了很多 JD 不知道投什么、岗位标题相似但内容差异很大、同时发散到太多方向/技能/材料/平台/计划，或想根据最近实际在做/愿意继续做的工作任务判断定位
 → career-direction-clarifier
 
 用户想转行、转岗、判断能力迁移，或列出太多可能方向需要先收束
@@ -109,6 +109,9 @@ jd-resume-patch
 用户想根据 JD 改已有简历，但不想整份重写
 → jd-resume-patch；如果项目经历只有模糊名称，先补项目事实卡
 
+用户看 JD 看到烦、反复改简历、每个 JD 都像要重新定义自己，或想把简历改动降到最小
+→ career-materials-builder；使用 Master Resume → Role Family Resume → JD Patch 和 Minimal Tailoring Mode
+
 用户收到简历反馈，例如“模块太多”“个人总结太泛”“与 JD 不贴合”“工作年限短但经历堆太满”
 → jd-resume-patch
 
@@ -121,7 +124,7 @@ jd-resume-patch
 用户刚面试完、只记得面试关键词、不完整问题、面试官反馈，想把“xx 经验不足”等反馈用于后续简历/面试方向调整，想沉淀二面/三面可复用的候选人面试资料卡补丁，想优化面试表达结构，想准备不依赖逐字稿的自我介绍 / 面试答案框架，想让英文面试表达更自然，或想根据 HR、用人经理、业务、技术等面试官角色调整回答侧重点
 → interview-review-miner
 
-用户要行动计划、投递记录、面试邀约信号画像、投递后空档期计划、纯面试等待、询问 HR 进度/反馈话术和求职节奏复盘，或求职计划已经发散到多条主线
+用户要行动计划、投递记录、面试邀约信号画像、投递后空档期计划、投递/面试无结果诊断、Resume Freeze、纯面试等待、询问 HR 进度/反馈话术和求职节奏复盘，或求职计划已经发散到多条主线
 → job-search-plan-review
 
 用户收到 Offer、比较多个 Offer、只有一个 Offer 不知道接不接、要不要继续等其他机会、和当前工作比较、offer deadline 很近、想识别 offer 风险、要不要谈薪/谈条件，或接受/拒绝后想整理下一批筛选条件
@@ -147,6 +150,22 @@ jd-resume-patch
 ## 更新记录
 
 ```text
+2026-08-08 / career-project-experience-miner v0.1.3
+- 新增 Judgment Trace、Judgment Depth J0-J4、Methodology Trace、Methodology Maturity M0-M4 和 used_at_time / retrospective 边界。
+- 明确模型、数据、AI 或老板结论不能直接包装成用户本人独立业务判断。
+
+2026-08-08 / interview-review-miner v0.2.9
+- 新增五层追问：Execution、Reasoning、Judgment、Trade-off、Methodology，用于面试中“为什么这么做”“你的判断是什么”等深挖场景。
+
+2026-08-08 / career-materials-builder v0.3.12
+- 新增 Master Resume → Role Family Resume → JD Patch、Tailoring Level、Minimal Tailoring Mode 和 Resume Freeze handoff。
+
+2026-08-08 / job-search-plan-review v0.2.8
+- 新增 Application Friction、Job Search Funnel、No-Outcome Diagnostic、Sample Size Gate、Outcome / Signal / Pattern / Conclusion 和 Resume Freeze。
+
+2026-08-08 / career-direction-clarifier
+- 新增四类“不知道投什么”、Role Family 聚类和 7 天方向验证，避免继续输出岗位大清单。
+
 2026-08-07 / offer-decision-support v0.1.1
 - 新增 Offer 决策支持：单 Offer vs 继续求职、多 Offer 对比、新 Offer vs 当前工作，先检查 Offer 状态、雇佣关系、信息完整度、硬性限制、重大风险、关键未知项和用户优先级，再进入比较。
 - 新增谈薪 / 谈条件流程：先判断是否值得谈，区分 base、sign-on、奖金、远程、title、入职时间和职责边界，不虚构竞品 offer 或市场薪资。

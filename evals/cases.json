@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 39,
+  "manual_case_count": 41,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -1959,6 +1959,127 @@
         "semantic_must_not": [
           "does_not_invent_business_judgment",
           "write_resume_bullet_first"
+        ]
+      }
+    },
+    {
+      "id": "application-friction-001",
+      "title": "岗位过载与简历疲劳",
+      "manual_case_id": 40,
+      "input": "我这两天看了几十个岗位，运营、产品助理、项目执行、数据分析都觉得可以。越看越不知道投什么。每个 JD 我又觉得应该重新改简历，改了几份以后我现在看到 JD 就烦，完全不想继续改。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-direction-clarifier",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "career-materials-builder",
+            "job-search-plan-review"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "求职摩擦",
+            "摩擦",
+            "决策疲劳"
+          ],
+          [
+            "Role Family",
+            "岗位族群",
+            "聚类"
+          ],
+          [
+            "7 天",
+            "七天",
+            "短期验证"
+          ],
+          [
+            "Minimal Tailoring",
+            "最小定制",
+            "JD Patch"
+          ],
+          [
+            "不重写",
+            "不要重写",
+            "不新增"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1200
+        },
+        "semantic_assertions": [
+          "identifies_application_friction",
+          "clusters_roles_before_more_recommendations",
+          "uses_minimal_tailoring_mode"
+        ],
+        "semantic_must_not": [
+          "avoids_unnecessary_resume_rewrite"
+        ]
+      }
+    },
+    {
+      "id": "job-search-no-outcome-diagnostic-001",
+      "title": "投递面试无结果诊断",
+      "manual_case_id": 41,
+      "input": "我最近投了 12 个产品运营和项目执行岗位，有 3 个 HR 找我，面了 2 个，都没有到二面。我现在觉得是不是方向错了，也想重新把简历全部改一遍。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "job-search-plan-review",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "interview-review-miner",
+            "career-materials-builder",
+            "career-direction-clarifier"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "漏斗",
+            "Funnel",
+            "断点"
+          ],
+          [
+            "12",
+            "3",
+            "2"
+          ],
+          [
+            "样本",
+            "Sample Size",
+            "NO_SIGNAL",
+            "WEAK_SIGNAL"
+          ],
+          [
+            "不是完全没有信号",
+            "简历并非完全无信号",
+            "已有回复"
+          ],
+          [
+            "不重写",
+            "不要重新",
+            "Resume Freeze"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1300
+        },
+        "semantic_assertions": [
+          "diagnoses_job_search_funnel_stage",
+          "distinguishes_signal_from_conclusion",
+          "uses_sample_size_gate"
+        ],
+        "semantic_must_not": [
+          "avoids_direction_reset_from_small_sample",
+          "avoids_unnecessary_resume_rewrite"
         ]
       }
     }

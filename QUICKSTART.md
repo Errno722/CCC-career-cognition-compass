@@ -53,6 +53,18 @@ Use $career-project-experience-miner.
 ```
 
 ```text
+Use $career-project-experience-miner.
+
+我做了一个分析项目，但只知道模型显示 A 更好，说不清我自己的判断。请先帮我还原 Judgment Trace，不要直接包装成业务判断。
+```
+
+```text
+Use $career-direction-clarifier.
+
+我看了很多 JD，运营、产品助理、项目执行和数据分析都觉得能投，但越看越乱。请先帮我按 Role Family 聚类，做 7 天验证方向。
+```
+
+```text
 Use $interview-review-miner.
 
 我刚面试完，只记得几个关键词。面试官反馈说我业务经验不足，请帮我复盘。
@@ -151,6 +163,14 @@ gap 一年 运营 ai 转行 不知道投什么
 
 ```text
 我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。
+```
+
+```text
+我这两天看了几十个岗位，每个 JD 都像要重新改简历。请启用 Minimal Tailoring Mode。
+```
+
+```text
+我投了 12 个产品运营和项目执行岗位，有 3 个 HR 回复，面了 2 个都没到二面。请先看漏斗和样本量，不要直接说方向错了。
 ```
 
 ```text

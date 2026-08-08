@@ -1,7 +1,7 @@
 ---
 name: career-direction-clarifier
 description: >-
-  Career intention and direction clarification. Use when the user is unsure what the job search is really solving, says they do not know what they want, is branching into too many directions at once, wants to understand positioning from recent work tasks or work-task preferences, feels overwhelmed by social media, wants to understand job-search pain points, uses MBTI/zodiac/personality labels to describe themselves, or needs to choose a mode such as direction clarity, fast employment, career transition, target-company preparation, review, or restabilization. Not for resume-only optimization or clinical counseling.
+  Career intention and direction clarification. Use when the user is unsure what the job search is really solving, says they do not know what they want, is branching into too many directions at once, sees many JDs and does not know what to apply for, needs Role Family clustering or a 7-day direction experiment, wants to understand positioning from recent work tasks or work-task preferences, feels overwhelmed by social media, wants to understand job-search pain points, uses MBTI/zodiac/personality labels to describe themselves, or needs to choose a mode such as direction clarity, fast employment, career transition, target-company preparation, review, or restabilization. Not for resume-only optimization or clinical counseling.
 ---
 
 # Career Direction Clarifier
@@ -28,6 +28,90 @@ Use `core/focus-control.md` to keep one active thread, park extra branches, and 
 6. **Reduce noise.** If the user is overloaded by social media or advice, separate useful signal from anxiety-generating content.
 7. **Avoid premature certainty.** Offer hypotheses and validation actions, not life conclusions.
 8. **Keep focus.** Output the requested clarification first, then one necessary support card and one next action. Park resume, skill, platform, or long-term plan branches unless the user asks to expand.
+
+## Four Types Of "I Don't Know What To Apply For"
+
+When the user says they do not know what to apply for, first identify which problem is active:
+
+```text
+A. 真正方向未知
+没有稳定 Role Family，需要从经历、近期工作行为和市场 JD 建立 1-3 个假设。
+
+B. 已经缩小，但不敢放弃其他可能
+不是没有方向，而是不愿承担暂时选择的机会成本；需要 7 天验证，不需要终身结论。
+
+C. 岗位标题相同，但 JD 实际工作差异很大
+需要按 Role Family / Job Archetype 聚类，不按标题做决定。
+
+D. 求职耗竭 / 决策疲劳
+看到 JD、改材料、重新判断方向本身已经造成摩擦；需要降低选择和改材料成本。
+```
+
+Rules:
+
+- Do not answer these four situations with a bigger job list.
+- If the user has saved many JDs, cluster first; do not deeply analyze every JD.
+- If the user is exhausted, reduce the decision surface before giving any new recommendation.
+- If the user already has a possible direction, call it a short-term experiment, not a final identity.
+
+## Role Family Clustering
+
+Use this when the user provides 10-20 saved JDs, many job titles, or a messy list of roles.
+
+Cluster by:
+
+```text
+工作内容
+核心任务
+要求的证据
+工具
+seniority
+交付物
+```
+
+Do not cluster only by title. For example, "产品运营", "项目执行", "产品助理", and "增长运营" may overlap or separate depending on what the JD asks the person to deliver.
+
+Output:
+
+```text
+Role Family 聚类
+├─ Role Family A:
+│  ├─ 代表 JD:
+│  ├─ 核心任务:
+│  ├─ 需要的证据:
+│  ├─ 适合用户的证据:
+│  └─ 当前缺口:
+├─ Role Family B:
+└─ 先验证:
+```
+
+Keep at most 3 active families. Put low-signal or high-cost families into parking.
+
+## Seven-Day Direction Experiment
+
+Do not ask the user to decide their final career direction when the evidence is still thin. Use a 7-day experiment:
+
+```text
+7 天方向验证
+├─ 主验证方向:
+├─ 次方向:
+├─ 探索方向:
+├─ 本周不验证:
+├─ 观察:
+│  ├─ 投递回复:
+│  ├─ 面试邀请:
+│  ├─ JD 共性:
+│  ├─ 修改材料时是否抗拒:
+│  └─ 项目证据是否自然匹配:
+└─ 7 天后再判断:
+```
+
+Rules:
+
+- Say explicitly: this is short-term validation, not a lifetime decision.
+- Prefer small batches and observable signals over broad career conclusions.
+- If the user is in Gap, low energy, or decision fatigue, make the experiment smaller.
+- If the user gets no result, hand off to `job-search-plan-review` for funnel and sample-size diagnosis before resetting direction.
 
 ## Divergence Control
 

@@ -2441,6 +2441,94 @@
       "fail_signals": [
         "从一次经历直接包装成成熟方法论或完整方法体系。"
       ]
+    },
+    "identifies_application_friction": {
+      "type": "must",
+      "severity": "high",
+      "description": "识别用户不是单纯执行力差，而是出现方向选择、简历定制、身份重塑、重复疲劳或完美主义成本等求职摩擦。",
+      "pass_criteria": [
+        "输出指出至少一种求职摩擦来源，并把它与懒、能力差或不努力区分开。"
+      ],
+      "fail_signals": [
+        "只说继续投、继续改或提高执行力，没有识别摩擦来源。"
+      ]
+    },
+    "clusters_roles_before_more_recommendations": {
+      "type": "must",
+      "severity": "high",
+      "description": "面对大量 JD 或多方向岗位时，先按 Role Family / Job Archetype 聚类，而不是继续推荐更多岗位。",
+      "pass_criteria": [
+        "输出先聚类岗位族群或说明需要聚类，再选择 1-3 个短期验证方向。"
+      ],
+      "fail_signals": [
+        "直接给出更多岗位列表、更多行业选择或让用户继续无差别海投。"
+      ]
+    },
+    "uses_minimal_tailoring_mode": {
+      "type": "must",
+      "severity": "high",
+      "description": "当用户对 JD 定制和反复改简历疲劳时，启用 Minimal Tailoring Mode，限制修改范围和时间成本。",
+      "pass_criteria": [
+        "输出不重写完整简历，并限制为 JD Patch、少量位置或 5-10 分钟轻改。"
+      ],
+      "fail_signals": [
+        "要求用户继续为每个 JD 深度重写一整份简历。"
+      ]
+    },
+    "diagnoses_job_search_funnel_stage": {
+      "type": "must",
+      "severity": "high",
+      "description": "根据投递、HR 回复、正式面试、二面、终面和 Offer 识别漏斗主要断点，而不是只看总体成败。",
+      "pass_criteria": [
+        "输出至少识别投递到回复、回复到面试、一面、二面/终面或 Offer 中的一个断点。"
+      ],
+      "fail_signals": [
+        "只说成功率低或方向不行，没有定位漏斗断点。"
+      ]
+    },
+    "distinguishes_signal_from_conclusion": {
+      "type": "must",
+      "severity": "high",
+      "description": "区分 Outcome、Signal、Pattern 和 Conclusion，不把少量结果直接变成职业结论。",
+      "pass_criteria": [
+        "输出说明当前哪些只是数据点或弱信号，哪些还不足以成为结论。"
+      ],
+      "fail_signals": [
+        "把一两次失败直接解释成方向错误、能力不行或简历彻底失败。"
+      ]
+    },
+    "uses_sample_size_gate": {
+      "type": "must",
+      "severity": "high",
+      "description": "使用 NO_SIGNAL / WEAK_SIGNAL / REPEATED_SIGNAL 或等价样本量边界，避免过度解读小样本。",
+      "pass_criteria": [
+        "输出提到样本量、弱信号、重复信号或需要继续小批量验证。"
+      ],
+      "fail_signals": [
+        "不看样本量，直接下最终结论。"
+      ]
+    },
+    "avoids_direction_reset_from_small_sample": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "因为少量无回复、一次面试失败或单个反馈，直接建议用户换方向、重建定位或否定原方向。",
+      "pass_criteria": [
+        "输出保留方向假设，只建议小批量验证或针对性复盘。"
+      ],
+      "fail_signals": [
+        "直接说方向错了、不要再投这个方向或马上换到另一条路线。"
+      ]
+    },
+    "avoids_unnecessary_resume_rewrite": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "在没有重复简历级反馈或 Role Family 改变时，要求用户重写整份简历或无限新增相近简历版本。",
+      "pass_criteria": [
+        "输出优先使用主简历、岗位族群简历、JD Patch 或 Resume Freeze。"
+      ],
+      "fail_signals": [
+        "建议用户因为少量失败就重写全部简历或继续做多份相近简历。"
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2556,6 +2644,14 @@
     "extracts_judgment_trace",
     "extracts_methodology_trace",
     "distinguishes_retrospective_method_from_used_at_time",
-    "requires_methodology_evidence_before_claiming_maturity"
+    "requires_methodology_evidence_before_claiming_maturity",
+    "identifies_application_friction",
+    "clusters_roles_before_more_recommendations",
+    "uses_minimal_tailoring_mode",
+    "diagnoses_job_search_funnel_stage",
+    "distinguishes_signal_from_conclusion",
+    "uses_sample_size_gate",
+    "avoids_direction_reset_from_small_sample",
+    "avoids_unnecessary_resume_rewrite"
   ]
 }

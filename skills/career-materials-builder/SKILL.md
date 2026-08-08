@@ -369,6 +369,92 @@ Use a short warning when useful:
 注意：上一版可能带有 [项目管理] 偏向。本次会保留事实，但按 [研发] JD 重新排序和取舍。
 ```
 
+## Three-Level Resume Architecture
+
+Use this structure when the user has many JDs, many similar resume versions, or fatigue from repeated tailoring:
+
+```text
+Master Resume
+└─ fixed facts, education, dates, companies, real projects, reusable modules
+
+Role Family Resume
+└─ one stable version per role family, such as 产品运营 / 项目执行, 用户运营 / 内容运营, 数据 / 分析支持
+
+JD Patch
+└─ small changes for one JD only
+```
+
+Do not create:
+
+```text
+JD A → 全新简历 A
+JD B → 全新简历 B
+JD C → 全新简历 C
+```
+
+unless the user explicitly needs a separate role family version and the evidence supports it.
+
+## Tailoring Level
+
+Classify the effort before editing:
+
+```text
+Level 0 — No Tailoring
+低优先级、顺手投或同一 Role Family，直接使用 Role Family Resume。
+
+Level 1 — Light Tailoring
+同一 Role Family，只调关键词、顺序、2-3 个 bullet。
+目标 5-10 分钟。
+
+Level 2 — Targeted Tailoring
+非常想要且证据较匹配，允许 15-25 分钟深度定制。
+
+Level 3 — Do Not Force Fit
+如果必须重写大量材料、改变事实或重新塑造身份才能匹配，提示暂时不值得投入。
+```
+
+Core rule:
+
+```text
+不是每一个 JD 都值得一次新的自我定义。
+```
+
+## Minimal Tailoring Mode
+
+Trigger this when the user says:
+
+```text
+看到 JD 就烦
+不想再改简历
+已经反复改很多次
+每投一个岗位都像重新包装自己
+回复太少导致不停重写
+```
+
+Behavior:
+
+```text
+Minimal Tailoring Mode
+├─ 不重写完整简历:
+├─ 不新增第 3/4/5 份相近简历:
+├─ 每个 JD 最多改 3 个位置:
+├─ 默认 5-10 分钟结束:
+├─ 超过成本时判断这份 JD 是否值得投:
+└─ 输出 JD Patch:
+```
+
+Patch locations usually include:
+
+```text
+Summary / 标题
+关键词
+2-3 个 bullet 的顺序或表述
+1-2 个项目强调点
+招聘软件打招呼语
+```
+
+If the resume is already getting recruiter replies or interviews for a stable Role Family and no repeated resume-level feedback appears, suggest `Resume Freeze` and hand off to `job-search-plan-review` for funnel tracking.
+
 ## Output Options
 
 Choose one small material unless the user asks for a package:
@@ -512,6 +598,9 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.12 / 2026-08-08
+- Added Master Resume -> Role Family Resume -> JD Patch architecture, Tailoring Level, Minimal Tailoring Mode, and Resume Freeze handoff.
+
 v0.3.11 / 2026-08-08
 - Added Judgment / Methodology gate for resumes, interview materials, profiles, and English bullets.
 - Clarified that materials can structure verified judgment and early methodology, but must not invent decision ownership or mature methods.

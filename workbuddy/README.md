@@ -126,6 +126,8 @@ project_inventory
 project_cards
 project_evidence_gaps
 project_state_records
+judgment_trace_cards
+methodology_trace_cards
 temporary_draft_mode
 hard_skill_kb
 interview_question_bank
@@ -145,6 +147,15 @@ positioning_cards
 current_action_plan
 post_application_idle_plan
 interview_invitation_signal_profile
+application_friction
+role_family_clusters
+direction_experiment_7d
+resume_architecture_cards
+minimal_tailoring_mode
+resume_freeze_status
+job_search_funnel
+sample_size_gate
+outcome_signal_pattern_records
 ```
 
 变量用途：
@@ -157,6 +168,8 @@ interview_invitation_signal_profile
 - `project_cards`：单项目事实卡和个人贡献边界；
 - `project_evidence_gaps`：缺失数据、缺失证据和待确认信息；
 - `project_state_records`：按单个项目记录 DISCOVERED、PARTIALLY_MAPPED 或 EVIDENCE_READY，避免只给用户一个整体项目状态；
+- `judgment_trace_cards`：项目或面试中的关键判断点、用户本人判断、依据、取舍和后验验证；
+- `methodology_trace_cards`：真实重复经历里形成的方法沉淀、适用边界、不适用场景和成熟度；
 - `temporary_draft_mode`：用户赶投递时是否允许保守临时表达；
 - `jd_role_type_cards`：JD 岗位类型判断卡，记录岗位族群、工作重心、判断依据、置信度、容易误判和准备重点；
 - `hard_skill_kb`：技能、工具、证据、缺口；
@@ -178,6 +191,15 @@ interview_invitation_signal_profile
 - `recent_work_task_signals`：近期工作行为定位卡，记录用户最近实际在做、愿意继续做、做完更有掌控感或消耗的工作任务，并转成定位假设；
 - `focus_control_cards`：发散收束卡，记录当前分支、本轮主线、暂存分支、本轮不处理事项和下一步动作；
 - `positioning_cards`：职业定位 / 候选人叙事；
+- `application_friction`：求职摩擦来源，例如方向摩擦、定制摩擦、身份摩擦、重复疲劳或完美主义成本；
+- `role_family_clusters`：按 JD 工作内容、核心任务、证据要求、工具和交付物聚类后的岗位族群；
+- `direction_experiment_7d`：7 天主验证方向、次方向、探索方向和观察指标；
+- `resume_architecture_cards`：Master Resume、Role Family Resume 和 JD Patch 的关系；
+- `minimal_tailoring_mode`：是否启用每个 JD 最多改 3 个位置的低摩擦简历定制；
+- `resume_freeze_status`：同一 Role Family 简历是否进入 7 天冻结，只做 JD Patch；
+- `job_search_funnel`：投递、HR 回复、正式面试、二面、终面和 Offer 的漏斗数据；
+- `sample_size_gate`：NO_SIGNAL、WEAK_SIGNAL 或 REPEATED_SIGNAL；
+- `outcome_signal_pattern_records`：data point、signal、pattern 和 conclusion 的分层记录；
 - `current_action_plan`：不超过 14 天的小计划。
 - `post_application_idle_plan`：投完简历但未收到反馈时的空档期计划，包括投递质量复盘、JD 共性、可复用资产、信息摄入边界和当天 5-20 分钟动作。
 - `anxiety_noise_reduction_cards`：焦虑降噪卡，记录焦虑触发源、可控/不可控、暂停继续做的事、信息摄入边界和当天 5-20 分钟动作；
