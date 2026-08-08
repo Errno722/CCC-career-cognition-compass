@@ -49,14 +49,14 @@ body:
   - type: textarea
     id: goal
     attributes:
-      label: 你希望 CCC 帮你完成什么？
+      label: What do you want CCC to help you do? / 你希望 CCC 帮你完成什么？
       description: Keep it short. One concrete user goal is enough.
     validations:
       required: true
   - type: textarea
     id: input
     attributes:
-      label: 你实际输入了什么？
+      label: Actual input / 你实际输入了什么？
       description: Must be synthetic or anonymized. A short excerpt is better than a full conversation.
       placeholder: "Example: gap 一年 运营 AI 转行 不知道投什么"
     validations:
@@ -64,19 +64,19 @@ body:
   - type: textarea
     id: actual
     attributes:
-      label: CCC 实际哪里不符合预期？
+      label: What happened? / 发生了什么？
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: 你原本期待什么？
+      label: Expected behavior / 你原本期待什么？
     validations:
       required: true
   - type: dropdown
     id: anonymous_case
     attributes:
-      label: 是否愿意将该案例作为匿名测试案例？
+      label: May maintainers reuse a fully redacted version of this case in public tests or documentation? / 维护者是否可以在完全脱敏后，将该案例用于公开测试或文档？
       options:
         - "Yes"
         - "No"
@@ -85,7 +85,7 @@ body:
   - type: dropdown
     id: sensitive_info
     attributes:
-      label: 是否包含敏感信息？
+      label: Sensitive information / 是否包含敏感信息？
       options:
         - 已脱敏
         - 不涉及

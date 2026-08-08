@@ -12,13 +12,13 @@ body:
   - type: textarea
     id: problem
     attributes:
-      label: 你遇到的真实问题是什么？
+      label: What real user problem did you encounter? / 你遇到的真实问题是什么？
     validations:
       required: true
   - type: dropdown
     id: stage
     attributes:
-      label: 这个问题出现在哪个求职阶段？
+      label: Job-search stage / 这个问题出现在哪个求职阶段？
       options:
         - 混乱开局 / 方向判断
         - 项目经历
@@ -36,19 +36,19 @@ body:
   - type: textarea
     id: gap
     attributes:
-      label: 目前 CCC 为什么处理不好？
+      label: Why does CCC not handle this well yet? / 目前 CCC 为什么处理不好？
     validations:
       required: true
   - type: textarea
     id: outcome
     attributes:
-      label: 你期待用户最终能完成什么？
+      label: Desired user outcome / 你期待用户最终能完成什么？
     validations:
       required: true
   - type: dropdown
     id: request_type
     attributes:
-      label: 这是：
+      label: Request type / 这是：
       options:
         - 新场景
         - 现有场景优化
