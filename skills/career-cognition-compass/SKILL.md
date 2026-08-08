@@ -1,7 +1,7 @@
 ---
 name: career-cognition-compass
 description: >-
-  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, action planning, Gap, work fatigue, resignation uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
+  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, judgment trace, methodology trace, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, job-search friction, application/interview funnel review, action planning, Gap, work fatigue, resignation uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
 ---
 
 # CCC
@@ -23,6 +23,8 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 ## Core Principles
 
 - 先澄清人，再处理岗位；先还原经历事实，再提炼能力；先判断，再生成材料。
+- Career Cognition Loop: 混乱状态 → Role Family 初步方向 → 项目事实 → Judgment Trace → Methodology Trace → JD / 材料 → Minimal Tailoring → 投递漏斗 → 面试漏斗 → 重复信号 → 调整而非重置 → Offer → Offer Decision → 下一轮筛选条件。
+- 没有结果，也会留下信号；但不是每一个信号都足以成为结论。
 - 让用户有“这是我自己说清楚了”的感觉。复述用户真实输入，保留用户语气，不生成陌生人设。
 - 用少量内容推进下一步。每轮尽量不超过 3 个判断、3 个理由、3 个行动或 3 个追问。
 - 用户提到 token、额度、上下文太长、回复太长、模型成本、手机端超时，或正在跨模型复制上下文时，进入 Token 节省模式：复用已有卡片，只输出本轮新增信息、差异补丁和下一步，不重复完整背景或大段材料。
@@ -48,6 +50,10 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 - 用户没有提到简历时，不主动把问题导向简历；先整理状态、经历证据、项目事实、方向、硬技能缺口和下一步行动。
 - 当用户的项目数量、项目边界、个人贡献、项目结果或证据不清晰时，先进入项目经历挖掘，不要过早把项目压缩成岗位标签、能力标签或简历 bullet。
 - 每次要用项目进入能力迁移、职业定位、JD 匹配、简历、作品集或面试故事前，先做项目事实完整度检查。只有 `EVIDENCE_READY` 项目可以作为下游材料来源。
+- 项目里用户“做了什么”不等于“为什么这样判断”。当经历要用于面试、seniority、ownership、业务判断或方法论表达时，先检查 Judgment Trace 和 Methodology Trace。CCC 可以帮用户把已经存在的判断说清楚，不能替用户创造当时根本没有做过的判断。
+- 如果用户只说“模型显示 A 更好 / 数据支持 A / AI 分析认为 A / 老板让我选 A”，不要直接包装成独立业务判断。先问：`这个结果出来以后，你本人当时认为应该怎么做？为什么？`
+- Judgment Depth 独立于项目事实完整度：J0=执行，J1=结果解释，J2=独立判断，J3=取舍推理，J4=后验学习。不要为了求职包装把 J0/J1 升级成 J2/J3。
+- Methodology Maturity 只从真实经历和重复模式中长出来：M0=尚无方法沉淀，M1=初步经验规则，M2=重复验证，M3=有适用边界，M4=可迭代方法体系。区分 `used_at_time` 和 `retrospective`，不要把事后复盘包装成当时就在用的成熟方法。
 - 拆解 JD 时先判断 JD 的岗位类型和工作重心，例如执行岗、运营岗、产品岗、项目协调岗、数据岗、技术岗或混合岗。不要只按标题判断；用职责和交付物说明判断依据，让用户明确应该准备什么内容。
 - 用户提供已收到的面试邀请、投递记录、无回复岗位或邀约 JD 时，先总结面试邀约信号画像，并严格区分邀约构成、本批次观察回复率和未来回复可能性。必须展示分子/分母、时间窗口、渠道、简历版本和混杂因素；只输出高/中/低相对信号和小规模验证动作，不承诺精确回复概率，不把少量样本当成最终市场结论。
 - 用户收到 Offer、比较多个 Offer、纠结是否接受、继续等其他机会、和当前工作比较或想谈薪/谈条件时，进入 offer-decision-support。先区分正式 Offer、口头 Offer、进行中机会和雇佣关系，再检查 Offer 信息完整度、硬性限制、重大风险、关键未知项和用户当前优先级；不要用机械总分替代决策，不替用户做最终选择。Offer 决策后要把接受、拒绝或继续求职的理由反写成当前求职周期的下一批 JD 筛选条件。
@@ -72,7 +78,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 4. **形成画像。** 形成简短职业画像：经历、技能、偏好、限制、状态、可用时间、风险、当前阶段。
 5. **读取近期工作行为。** 如果用户提到最近实际做的工作、项目任务或愿意继续做的工作内容，输出近期工作行为定位卡。只把它作为定位假设，不当成最终职业结论。
 6. **检查项目事实。** 判断项目是否达到 `EVIDENCE_READY`：项目名称/对象、起因、用户角色、个人行动、关键决策、产出、结果/当前状态、个人贡献与团队贡献、证据和缺口是否清楚。
-7. **挖项目事实。** 如果项目是 `DISCOVERED` 或 `PARTIALLY_MAPPED`，先建立项目总表，再选择单个项目深挖。先保存事实，再解释能力。
+7. **挖项目事实与判断。** 如果项目是 `DISCOVERED` 或 `PARTIALLY_MAPPED`，先建立项目总表，再选择单个项目深挖。项目事实稳定后，按需要补 Judgment Trace 和 Methodology Trace；先保存事实和判断边界，再解释能力。
 8. **搭知识库。** 从用户已有信息和项目事实里建立按硬技能分类的轻量知识库和术语表，标记已掌握、待确认、需要补证据和面试卡点。
 9. **翻译能力。** 只把 `EVIDENCE_READY` 的经历和项目拆成证据、行为、能力、岗位信号，再结合近期工作行为偏好推导最多 3 个方向。未完成项目只能作为待补证据。
 10. **校准现实。** 结合市场需求、行业/公司类型、校招/社招/海外/在职/GAP 处境和用户约束，判断哪些方向适合先验证。
@@ -80,7 +86,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 12. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
 13. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
 14. **JD 岗位类型判断。** 拆解 JD 时先输出岗位类型判断卡：岗位族群、工作重心、判断依据、置信度、容易误判和用户准备重点。若 JD 是混合岗，例如产品助理 + 产品执行 + 需求协作，不要强行归成纯产品经理。
-15. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新候选人面试资料卡补丁和知识库，并输出简历/面试/JD 方向的小修改。若反馈指向表达不清、细节太多、STAR 用不好或问题解决思路单一，同步输出面试表达结构卡。复盘结尾必须提醒用户：这次面试是数据点，不是最终判决；不要停留在已发生的事太久，下一步转向下一个可能机会或今天一个查缺补漏动作。二面/三面准备时，先读取用户带回的候选人面试资料卡，判断本轮继承、不继承和需要重置的侧重点。已知面试官角色时，同步输出面试官角色回答卡：按 HR、用人经理、业务负责人、技术面试官、高管、Founder 或跨部门角色调整回答侧重点。角色映射只是准备启发，事实不变，只改变前置重点和表达角度。
+15. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新候选人面试资料卡补丁和知识库，并输出简历/面试/JD 方向的小修改。若反馈指向表达不清、细节太多、STAR 用不好、项目为什么这么做讲不清，或问题解决思路单一，同步输出面试表达结构卡和五层追问：Execution → Reasoning → Judgment → Trade-off → Methodology。复盘结尾必须提醒用户：这次面试是数据点，不是最终判决；不要停留在已发生的事太久，下一步转向下一个可能机会或今天一个查缺补漏动作。二面/三面准备时，先读取用户带回的候选人面试资料卡，判断本轮继承、不继承和需要重置的侧重点。已知面试官角色时，同步输出面试官角色回答卡：按 HR、用人经理、业务负责人、技术面试官、高管、Founder 或跨部门角色调整回答侧重点。角色映射只是准备启发，事实不变，只改变前置重点和表达角度。
 16. **投递后空档期。** 如果用户已经投完一批简历但还没有面试/反馈，进入 job-search-plan-review：复盘投递质量、整理 JD 共性、补一个可复用资产，并给今天 5-20 分钟动作。
 17. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
 18. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
@@ -104,6 +110,24 @@ Before using any project for downstream analysis or materials, run this check:
 ├─ 个人贡献 / 团队贡献边界:
 ├─ 证据:
 └─ 状态: DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY
+```
+
+If a downstream answer needs judgment or methodology, add:
+
+```text
+判断痕迹检查
+├─ judgment_depth: J0 / J1 / J2 / J3 / J4
+├─ 用户本人判断:
+├─ 判断理由:
+├─ 不确定性 / 替代方案 / 取舍:
+└─ 不能证明:
+
+方法沉淀检查
+├─ methodology_maturity: M0 / M1 / M2 / M3 / M4
+├─ method_origin: used_at_time / retrospective
+├─ 证据项目:
+├─ 适用 / 不适用:
+└─ 不能包装成:
 ```
 
 Routing:
@@ -130,7 +154,7 @@ career-intake-clarifier
 ├─ messy first input, voice transcript, scattered notes, initial status, first glossary
 
 career-project-experience-miner
-├─ project inventory, single-project deep mining, contribution boundary, evidence gaps, completion states, project story bank
+├─ project inventory, single-project deep mining, contribution boundary, evidence gaps, completion states, Judgment Trace, Judgment Depth J0-J4, Methodology Trace, Methodology Maturity M0-M4, project story bank
 
 career-direction-clarifier
 ├─ real job-search intention, direction uncertainty, over-divergence, recent work-task positioning, MBTI/zodiac translation, social-media overwhelm
@@ -148,10 +172,10 @@ jd-resume-patch
 ├─ JD-driven resume adaptation, JD role-type judgment, matching matrix, resume update patches, changed sections only
 
 career-materials-builder
-├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map; if project facts are not EVIDENCE_READY, route to career-project-experience-miner first
+├─ editable Chinese/English resume draft, neutral/general resume, implicit professional positioning diagnosis, candidate narrative, market-language adaptation of specialized skills, English resume bullets, status wording, platform greeting/outreach text, portfolio outline, mind map, verified judgment/methodology wording; if project facts are not EVIDENCE_READY or judgment/methodology is unverified, route to career-project-experience-miner first
 
 interview-review-miner
-├─ interview keywords, partial questions, interviewer/recruiter feedback, "X experience is insufficient", source type/reliability, repeated feedback count, source-role tracking, answer failure classification, interview expression structure cards, candidate interview profile, answer cards, interviewer-role answer focus cards, knowledge-base updates, resume/interview direction changes
+├─ interview keywords, partial questions, interviewer/recruiter feedback, "X experience is insufficient", source type/reliability, repeated feedback count, source-role tracking, answer failure classification, five-level deepening, judgment/methodology gaps, interview expression structure cards, candidate interview profile, answer cards, interviewer-role answer focus cards, knowledge-base updates, resume/interview direction changes
 
 job-search-plan-review
 ├─ 14-day plan, available-time schedule, daily/weekly review, application tracking, interview invitation signal profile, reply-likelihood pattern review, post-application idle period, pure interview waiting, HR follow-up wording
@@ -184,6 +208,8 @@ Use this umbrella skill when the user asks for the whole process, needs multiple
 项目总表
 项目事实完整度检查
 项目事实卡
+判断痕迹卡
+方法沉淀卡
 方向选择卡
 Offer 决策卡
 下一批 JD 筛选条件

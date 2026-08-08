@@ -1,7 +1,7 @@
 ---
 name: interview-review-miner
 description: >-
-  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, build/update a candidate interview profile for later rounds, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, improve interview answer structure, adjust resume/JD positioning after feedback, evaluate interview/company signals, or decide what to improve before the next interview. Always close reviews by helping the user stop over-focusing on the past interview and shift to the next opportunity or a small gap-closing action. For pure waiting, HR follow-up timing, or wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact questions, and do not promise outcomes.
+  Interview review and feedback-mining skill for CCC. Use when the user just finished an interview, remembers keywords or partial questions, received interviewer/recruiter feedback such as "experience in X is insufficient", wants to infer likely business or technical questions from keywords, update the hard-skill knowledge base, build/update a candidate interview profile for later rounds, count repeated feedback signals, classify why an answer failed, create next-interview answer cards, improve interview answer structure, mine judgment depth or methodology from interview answers, adjust resume/JD positioning after feedback, evaluate interview/company signals, or decide what to improve before the next interview. Always close reviews by helping the user stop over-focusing on the past interview and shift to the next opportunity or a small gap-closing action. For pure waiting, HR follow-up timing, or wording without interview content, use job-search-plan-review. Preserve uncertainty, do not invent exact questions, and do not promise outcomes.
 ---
 
 # Interview Review Miner
@@ -11,6 +11,14 @@ description: >-
 Turn messy interview memories into usable learning assets: likely question types, tested skills, interviewer feedback signals, resume/interview-direction changes, and small next actions.
 
 This skill is not for emotional comfort or full interview coaching by default. It helps the user learn from one interview without over-interpreting every signal.
+
+Core boundary:
+
+```text
+做了什么 ≠ 为什么这样判断
+模型 / 数据 / 老板结论 ≠ 用户本人判断
+一次面试追问 ≠ 用户没有能力
+```
 
 ## Shared Rule Versions
 
@@ -110,6 +118,7 @@ Rules:
 - Do not paste long external answers. Summarize answer patterns and adapt them to the user's evidence.
 - If the question is technical/tool-based, route updates to `career-hard-skill-kb`.
 - If the question depends on a project case and the project is vague, route to `career-project-experience-miner` before writing a polished answer.
+- If the question tests business judgment, ownership, seniority, strategy, product sense, data interpretation, or "why did you choose this", check whether the relevant project has a usable Judgment Trace. If not, ask one judgment-recovery question or route to `career-project-experience-miner` before producing a polished answer.
 
 ## Interviewer Feedback Mining
 
@@ -349,6 +358,42 @@ Output:
 └─ 下次改法:
 ```
 
+## Five-Level Interview Deepening
+
+Use this when the interviewer deep-dives, the user says their answer felt empty, or the target role requires business judgment, ownership, strategy, product sense, data interpretation, or seniority.
+
+Do not force every answer through all five levels. Move one level deeper only when the prior level has enough facts.
+
+```text
+Level 1 — Execution
+你做了什么？
+
+Level 2 — Reasoning
+为什么这么做？
+
+Level 3 — Judgment
+你本人认为应该怎么做？
+
+Level 4 — Trade-off
+为什么不是另一个方案？
+什么情况下你会改变判断？
+
+Level 5 — Methodology
+类似问题以后，你有没有形成一套可以复用的判断方式？
+```
+
+If the user reaches Level 5, ask one boundary question when useful:
+
+```text
+这个方法什么时候不适用？
+```
+
+If the user only repeats a model result, data result, AI analysis, or manager instruction, do not package it as independent judgment. Ask:
+
+```text
+这个结果出来以后，你本人当时认为应该怎么做？为什么？
+```
+
 ## Interview Expression Structure
 
 Use this when feedback or self-review suggests the user answered with too many details, lacked a clear point, used STAR mechanically, became nervous and filled space, or needs to answer in English / a second language without sounding memorized.
@@ -363,6 +408,8 @@ Output:
 ├─ 证据 bullet points: 3-4 条，最多 5 句，不写成逐字稿
 ├─ Situation 放大: 背景 / 目标 / 限制 / 轻重缓急
 ├─ Action 精简: 只讲关键判断和动作，不讲流水账
+├─ 判断追问: 你的判断 / 为什么 / 关键证据 / 不确定性 / 替代方案 / 取舍 / 改变判断条件 / 后验结果
+├─ 方法沉淀: 适用场景 / 不适用场景 / 证据项目（如真实存在）
 ├─ 条件分支: 如果 A 因为 B，用 C；如果 A 因为 D，用 E
 ├─ Result / Learning: 结果、边界或学到的判断
 ├─ 自我介绍框架: 2 个能力点 + 与目标岗位的契合逻辑
@@ -378,6 +425,7 @@ Rules:
 - For self-introduction, focus on 2 abilities that match the target role. Do not over-expand education, timeline, tools, or all past experiences unless the user asks.
 - Abstract the user's experience into 3-4 ability claims with simple verification: one concrete task, project, tool, audience, result boundary, or repeated behavior per ability.
 - Use "claim first, evidence second": one clear conclusion, then 3-4 supporting bullets. Keep the supporting part under 5 sentences unless the user asks for a long answer.
+- Do not invent judgment or methodology to make the interview answer sound senior. If the user only has execution evidence, keep the answer at execution/result-interpretation level and ask for the missing judgment.
 - STAR is not a template to recite. Make `Situation` useful by clarifying context, goal, constraint, urgency, or trade-off before `Action`.
 - For problem-solving questions, use conditional thinking instead of one fixed answer: diagnose possible causes, then map each cause to a different action.
 - Do not overcorrect into fake confidence. If the user lacks evidence, say what can be framed conservatively and what should be marked as a gap.
@@ -664,6 +712,11 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.9 / 2026-08-08
+- Added five-level interview deepening: execution, reasoning, judgment, trade-off, methodology.
+- Added Judgment Trace checks for project answers that test ownership, business judgment, strategy, or data interpretation.
+- Clarified that model/data/manager outputs cannot be packaged as the user's independent judgment without user reasoning.
+
 v0.2.8 / 2026-08-04
 - Split `candidate_interview_profile` into base and role-family layers.
 - Default ordinary prompt/runtime profile updates to user-facing `候选人面试资料卡补丁`; keep raw persistence fields internal unless the user asks for templates or configuration.

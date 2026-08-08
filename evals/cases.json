@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 37,
+  "manual_case_count": 39,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -1834,6 +1834,131 @@
           "make_final_offer_decision_for_user",
           "treat_conditional_compensation_as_guaranteed",
           "uses_mechanical_offer_scoring"
+        ]
+      }
+    },
+    {
+      "id": "judgment-trace-missing-001",
+      "title": "模型结果不等于用户判断",
+      "manual_case_id": 38,
+      "input": "我做了一个用户流失预测模型，模型显示 A 类用户流失风险最高，所以最后建议重点运营 A 类用户。帮我整理成一个看起来有业务判断的面试回答。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-project-experience-miner",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "interview-review-miner",
+            "career-materials-builder"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "模型",
+            "预测模型",
+            "模型结果"
+          ],
+          [
+            "用户判断",
+            "你的判断",
+            "本人判断"
+          ],
+          [
+            "为什么",
+            "理由",
+            "判断依据"
+          ],
+          [
+            "A 类用户",
+            "A类用户"
+          ],
+          [
+            "不能",
+            "暂时不能",
+            "不直接"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1100
+        },
+        "semantic_assertions": [
+          "separates_model_output_from_user_judgment",
+          "asks_for_decision_reasoning_when_missing"
+        ],
+        "semantic_must_not": [
+          "does_not_invent_business_judgment",
+          "invent_experience",
+          "write_resume_bullet_first"
+        ]
+      }
+    },
+    {
+      "id": "judgment-methodology-trace-001",
+      "title": "真实 Judgment 到 Methodology",
+      "manual_case_id": 39,
+      "input": "AB 测试做了两周，A 方案数据明显更高，但我当时建议先不要全量上线。因为两周窗口太短，而且刚好碰到促销活动。我让团队再观察一个月，趋势还在，才最终上线。类似事情后来我也遇到过，我现在一般不会看到短期提升就马上放大。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-project-experience-miner",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "interview-review-miner",
+            "career-materials-builder"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "暂缓",
+            "不要全量",
+            "先不要全量"
+          ],
+          [
+            "两周",
+            "窗口太短",
+            "促销"
+          ],
+          [
+            "取舍",
+            "trade-off",
+            "速度"
+          ],
+          [
+            "一个月",
+            "后验",
+            "趋势"
+          ],
+          [
+            "方法",
+            "方法沉淀",
+            "经验规则"
+          ],
+          [
+            "适用",
+            "不适用",
+            "边界"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1300
+        },
+        "semantic_assertions": [
+          "extracts_judgment_trace",
+          "extracts_methodology_trace",
+          "distinguishes_retrospective_method_from_used_at_time",
+          "requires_methodology_evidence_before_claiming_maturity"
+        ],
+        "semantic_must_not": [
+          "does_not_invent_business_judgment",
+          "write_resume_bullet_first"
         ]
       }
     }

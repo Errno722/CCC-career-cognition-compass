@@ -1,7 +1,7 @@
 ---
 name: career-materials-builder
 description: >-
-  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, self-introduction frameworks, portfolio outline, mind map, interview notes, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts or produce full portfolios by default.
+  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, self-introduction frameworks, portfolio outline, mind map, interview notes, judgment/methodology-based interview material, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts, judgment, methodology, or produce full portfolios by default.
 ---
 
 # Career Materials Builder
@@ -65,6 +65,16 @@ If project evidence is only a project name or a vague label, do not immediately 
 
 Use `career-project-experience-miner` when the user needs to remember, inventory, or deep-mine projects before writing materials.
 
+If the material would claim judgment, ownership, trade-off reasoning, decision making, strategy, product sense, business judgment, or methodology, check for a usable Judgment Trace or Methodology Trace first.
+
+```text
+Judgment Trace missing
+└─ Do not write "我综合判断..." or "I decided..." as if the user made that judgment. Ask for the user's reasoning or write a conservative boundary.
+
+Methodology Trace missing
+└─ Do not write "形成了一套方法论" from one execution example. Use "初步经验" or ask for repeated evidence.
+```
+
 Completion gate:
 
 ```text
@@ -73,6 +83,25 @@ DISCOVERED / PARTIALLY_MAPPED
 
 EVIDENCE_READY
 └─ Safe to create editable wording while preserving boundaries.
+```
+
+Judgment / Methodology gate:
+
+```text
+J0 / J1
+└─ Can describe execution and result interpretation. Do not claim independent decision ownership.
+
+J2 / J3
+└─ Can write judgment and trade-off wording if the user's reasoning is explicit.
+
+J4
+└─ Can include retrospective learning.
+
+M0 / M1
+└─ Can say "初步经验 / early working rule".
+
+M2 / M3 / M4
+└─ Can write reusable methodology, with applicable contexts and exceptions.
 ```
 
 If the user asks "帮我把过去做过的项目整理成作品集" and the project facts are incomplete, first route to `career-project-experience-miner`. Do not start with portfolio themes.
@@ -211,6 +240,8 @@ Rules:
 - Keep the user's real background visible enough that the positioning can survive interviews.
 - Do not fabricate education, company, title, project, data, client, tool, certificate, award, or personality traits.
 - Do not turn a support role into a lead role unless the user can prove ownership.
+- Do not turn analysis output, model output, AI advice, or manager instruction into the user's own judgment unless the user has explained their decision reasoning.
+- Do not turn retrospective learning into "当时我就是按这套成熟方法论执行" unless the project record says `used_at_time`.
 - If the user wants a more aggressive positioning, treat it as `平衡策略`: strengthen evidence and order, but mark weak claims as `[待确认]`.
 - Do not build positioning from hobbies. If the user says they like something, ask what recent work task shows it: audience, deliverable, tool, context, result, or feedback.
 - Treat recent work-task preference as `positioning_hypothesis` until it is supported by project facts, JD needs, interview invitations, or repeated work evidence.
@@ -481,6 +512,10 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.11 / 2026-08-08
+- Added Judgment / Methodology gate for resumes, interview materials, profiles, and English bullets.
+- Clarified that materials can structure verified judgment and early methodology, but must not invent decision ownership or mature methods.
+
 v0.3.10 / 2026-08-04
 - Added shared focus rule so materials generation starts from the user's requested deliverable and parks unrelated resume, portfolio, LinkedIn, greeting, interview, or persona branches.
 

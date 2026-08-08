@@ -1,7 +1,7 @@
 ---
 name: career-project-experience-miner
 description: >-
-  Project experience inventory and deep-mining skill for CCC. Use when the user wants to organize, inventory, or deep-mine projects, cannot explain what they did, has scattered personal/work/course/side projects, does not know which experiences count as projects, lacks portfolio or resume project material, has no clear data/results, paused or failed projects, short work history with many modules, or needs reusable project facts before career positioning, transferable-skill mapping, JD matching, resume writing, portfolio outline, or interview storytelling. Build project inventory, single-project fact cards, personal contribution boundaries, evidence gaps, and story bank. Do not turn projects into resume bullets before facts are confirmed.
+  Project experience inventory and deep-mining skill for CCC. Use when the user wants to organize, inventory, or deep-mine projects, cannot explain what they did, has scattered personal/work/course/side projects, does not know which experiences count as projects, lacks portfolio or resume project material, has no clear data/results, paused or failed projects, short work history with many modules, cannot explain their judgment or methodology inside a project, or needs reusable project facts before career positioning, transferable-skill mapping, JD matching, resume writing, portfolio outline, or interview storytelling. Build project inventory, single-project fact cards, judgment traces, methodology traces, personal contribution boundaries, evidence gaps, and story bank. Do not turn projects into resume bullets before facts are confirmed.
 ---
 
 # Career Project Experience Miner
@@ -29,12 +29,23 @@ Order:
 → 项目盘点
 → 单项目深挖
 → 事实与证据确认
+→ Judgment Trace / Methodology Trace（如真实存在）
 → 完成度判断
 → 能力提炼
 → 再交给职业定位 / JD / 简历 / 面试表达
 ```
 
 Do not skip from a project name to capability labels. A project is not ready for resume, JD, or positioning work until it reaches `EVIDENCE_READY`.
+
+Core evidence boundary:
+
+```text
+AI can structure a judgment,
+but must not invent the user's judgment.
+
+CCC 可以帮用户把已经存在的判断说清楚，
+不能替用户创造当时根本没有做过的判断。
+```
 
 ## Project Scope
 
@@ -106,6 +117,8 @@ Before handoff, check whether these fields are usable:
 用户角色是否明确
 个人行动是否明确
 关键决策是否明确
+用户本人判断是否明确（如该项目需要）
+方法沉淀是否有真实证据（如用户声称有方法）
 产出是否明确
 结果或当前状态是否明确
 个人贡献与团队贡献是否可区分
@@ -160,6 +173,168 @@ eligible_for_downstream: true / false
 
 Only set `eligible_for_downstream: true` for an individual `EVIDENCE_READY` project. Other projects remain in inventory or evidence gaps.
 
+## Judgment Trace
+
+Use this when a project includes a real decision point, business judgment, prioritization, trade-off, interpretation of data/model output, or interviewer likely asks "你为什么这么做？你的判断是什么？"
+
+Internal structure:
+
+```text
+judgment_trace
+├─ situation:
+├─ decision_point:
+├─ available_signals:
+├─ alternatives:
+├─ user_judgment:
+├─ reasoning:
+├─ uncertainty:
+├─ tradeoff:
+├─ action:
+├─ outcome:
+├─ retrospective_validation:
+└─ source:
+```
+
+User-facing structure:
+
+```text
+判断痕迹
+├─ 当时需要决定什么？
+├─ 你看到哪些信号？
+├─ 你本人当时怎么判断？
+├─ 为什么？
+├─ 当时还有什么不确定？
+├─ 为什么没有选另一个方案？
+├─ 最后是推进、暂缓、验证还是放弃？
+└─ 后来结果有没有支持当时的判断？
+```
+
+Most important prompt when judgment is missing:
+
+```text
+这个结果出来以后，你本人当时认为应该怎么做？为什么？
+```
+
+If the user only says "模型显示 A 更好", "数据支持 A", "AI 分析认为 A", or "老板让我选 A", treat those as inputs/results, not independent judgment. Ask:
+
+```text
+这些是输入或结果。你自己的判断是什么？
+```
+
+If the user did not make an independent judgment, record:
+
+```text
+目前可证明:
+- 完成分析
+- 能解释模型结果
+
+暂时不能证明:
+- 独立业务判断
+- decision ownership
+```
+
+This is not negative. It is an evidence boundary.
+
+## Judgment Depth
+
+Track judgment depth as a dimension separate from `DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY`.
+
+```text
+J0 — Execution only
+能说明自己做了什么。
+
+J1 — Result interpretation
+能解释结果意味着什么。
+
+J2 — Independent judgment
+能说明自己建议什么，以及为什么。
+
+J3 — Trade-off reasoning
+能说明替代方案、不确定性和取舍。
+
+J4 — Retrospective learning
+能用后验结果反思原判断，并说明现在是否会调整。
+```
+
+Rules:
+
+- J0 不等于能力差。
+- Different roles need different judgment depth.
+- Do not upgrade J0/J1 into J2/J3 for resume or interview packaging.
+- Judge depth only from real user evidence.
+
+## Methodology Trace
+
+Use this only when repeated project patterns or real reflections exist. Methodology must grow from real experiences, not from a single polished story.
+
+Internal structure:
+
+```text
+methodology_trace
+├─ methodology_id:
+├─ problem_family:
+├─ repeated_pattern:
+├─ judgment_criteria:
+├─ decision_sequence:
+├─ reusable_steps:
+├─ why_it_works:
+├─ applicable_context:
+├─ exceptions:
+├─ evidence_cases:
+├─ retrospective_or_used_at_time:
+├─ maturity:
+└─ current_version:
+```
+
+User-facing structure:
+
+```text
+方法沉淀
+├─ 你反复遇到的是什么问题？
+├─ 你后来发现了什么规律？
+├─ 现在遇到类似问题，你通常先看什么？
+├─ 再看什么？
+├─ 哪些条件会让你改变顺序？
+├─ 这个方法在哪些真实项目里用过？
+├─ 什么时候不适用？
+└─ 有没有一次这个方法没起作用，让你后来改了它？
+```
+
+## Methodology Maturity And Origin
+
+Track maturity:
+
+```text
+M0 — 尚无方法沉淀
+只有一次执行经历。
+
+M1 — 初步经验规则
+从一次或少量经历中形成暂定经验。
+
+M2 — 重复验证的方法
+在多个类似场景使用过。
+
+M3 — 有适用边界的方法
+知道什么时候有效、什么时候不适用。
+
+M4 — 可迭代的方法体系
+经历过失败、反例或新证据，并主动修改方法。
+```
+
+Track origin:
+
+```text
+method_origin
+├─ used_at_time
+└─ retrospective
+```
+
+Both can be useful in interviews, but do not package retrospective learning as if the user already used a mature method at the time. If the user only has one example, a truthful phrasing is:
+
+```text
+这是我目前形成的一个初步经验，还不能算成熟的方法论。
+```
+
 ## Memory Prompts
 
 Use light prompts to wake up memory. Ask at most 3 at a time.
@@ -199,13 +374,16 @@ Deep-mine one project at a time. Use this structure, but do not force every fiel
 关键限制
 采取的行动
 做过的关键判断
+判断痕迹（如存在）
 使用的工具和方法
+方法沉淀（如存在）
 协作对象
 具体产出
 结果和数据
 遇到的问题
 调整和迭代
 最终状态
+后验验证
 可验证证据
 尚未确认的信息
 ```
@@ -287,6 +465,9 @@ Instead ask concrete fact-recovery questions:
 你亲自做了哪些部分？
 哪些部分由 AI / Codex / 模板 / 团队完成？
 你做过哪些决定？
+这个结果出来后，你本人当时认为应该怎么做？为什么？
+为什么你认为这些证据足够采取行动？
+什么情况下你会改变这个判断？
 过程中推翻或调整过什么？
 最后交付了什么？
 有人使用或反馈过吗？
@@ -329,13 +510,13 @@ project-inventory.md
 └─ 所有项目总目录、类型、时间、当前完整度、是否值得深挖
 
 project-cards.md
-└─ 每个项目的事实卡、个人贡献边界、已确认/待确认字段
+└─ 每个项目的事实卡、个人贡献边界、判断痕迹、方法沉淀、已确认/待确认字段
 
 project-evidence-gaps.md
 └─ 缺失数据、缺失证据、待确认事实、7 天内可补材料
 
 project-story-bank.md
-└─ 简历表达方向、面试故事线、作品集大纲、不同岗位可复用角度
+└─ 简历表达方向、面试故事线、作品集大纲、不同岗位可复用角度；只使用已确认的 Judgment / Methodology
 ```
 
 Important: `project-inventory.md`, `project-cards.md`, and `project-evidence-gaps.md` are fact assets. `project-story-bank.md` is an expression asset.
@@ -370,7 +551,9 @@ Handoff format:
 ```text
 可交接项目
 ├─ project_id / project_name / status: EVIDENCE_READY
-├─ usable_facts / contribution_boundary / evidence / do_not_claim
+├─ judgment_depth: J0-J4
+├─ methodology_maturity: M0-M4 / not_applicable
+├─ usable_facts / contribution_boundary / judgment_trace / methodology_trace / evidence / do_not_claim
 └─ suggested_downstream: transfer / JD prep / resume patch / portfolio / interview
 
 不可交接项目
@@ -400,8 +583,10 @@ For a completed project card:
 
 ```text
 项目事实卡
-├─ 项目名称 / 背景 / 你的贡献 / 工具方法 / 产出 / 结果 / 证据 / 待确认
+├─ 项目名称 / 背景 / 你的贡献 / 工具方法 / 判断痕迹 / 方法沉淀 / 产出 / 结果 / 证据 / 待确认
 └─ 完成度: DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY
+└─ 判断深度: J0-J4 / 暂不适用
+└─ 方法成熟度: M0-M4 / 暂不适用
 
 可提炼能力: ...
 暂不应该夸大的地方: ...
@@ -415,12 +600,21 @@ For a completed project card:
 - Do not force every project to become a portfolio case.
 - Do not judge a paused, failed, unpaid, or learning project as useless.
 - Do not overstate results, ownership, technical depth, client impact, or commercial success.
+- Do not invent judgment, decision ownership, trade-off reasoning, or methodology.
+- Do not turn model output, data output, AI recommendation, or manager instruction into the user's independent business judgment unless the user explains their own reasoning.
+- Do not turn one experience into a mature methodology. Mark it as early experience when appropriate.
 - Do not make one project fit every role. Preserve reusable facts first; adapt expression later.
 - Do not ask for private company documents, contracts, salary screenshots, or sensitive client data.
 
 ## Version Record
 
 ```text
+v0.1.3 / 2026-08-08
+- Added Judgment Trace for real project decision points and model/data-output versus user-judgment separation.
+- Added Judgment Depth J0-J4 as a dimension separate from project fact readiness.
+- Added Methodology Trace, Methodology Maturity M0-M4, and method_origin used_at_time / retrospective.
+- Clarified CCC can structure existing judgment or methodology, but cannot invent them for resume or interview packaging.
+
 v0.1.2 / 2026-07-28
 - Added project versus task boundary.
 - Added panorama stopping conditions.

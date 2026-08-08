@@ -2364,6 +2364,83 @@
       "fail_signals": [
         "把通勤、奖金不确定、岗位模糊等全部混成同一类风险，或完全不区分风险层级。"
       ]
+    },
+    "separates_model_output_from_user_judgment": {
+      "type": "must",
+      "severity": "high",
+      "description": "区分模型输出、数据结果、AI 建议、老板指令和用户本人判断，不把外部结果直接包装成独立业务判断。",
+      "pass_criteria": [
+        "输出明确说明模型/数据只是输入或结果，并追问或标记用户本人判断缺失。"
+      ],
+      "fail_signals": [
+        "把模型显示 A 更好直接写成用户综合判断 A 更优。"
+      ]
+    },
+    "does_not_invent_business_judgment": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "在用户没有说明本人判断、理由、取舍或替代方案时，替用户创造业务判断或 decision ownership。",
+      "pass_criteria": [
+        "输出保留证据边界，说明目前只能证明分析/解释结果，不能证明独立判断。"
+      ],
+      "fail_signals": [
+        "编造用户综合样本窗口、业务风险和资源成本后判断某方案更优。"
+      ]
+    },
+    "asks_for_decision_reasoning_when_missing": {
+      "type": "must",
+      "severity": "high",
+      "description": "当判断理由缺失时，优先追问用户本人当时怎么判断以及为什么，而不是直接写成面试成稿。",
+      "pass_criteria": [
+        "输出 1-3 个关键追问，至少包含用户本人判断或判断理由。"
+      ],
+      "fail_signals": [
+        "不追问判断理由，直接生成成熟面试回答。"
+      ]
+    },
+    "extracts_judgment_trace": {
+      "type": "must",
+      "severity": "high",
+      "description": "从真实经历中提取判断痕迹，包括决策点、信号、用户判断、理由、不确定性、替代方案、行动、结果或后验验证。",
+      "pass_criteria": [
+        "输出包含用户当时判断、关键证据、取舍和后验验证中的主要要素。"
+      ],
+      "fail_signals": [
+        "只总结做了什么，没有提取为什么判断、为什么暂缓或后验如何验证。"
+      ]
+    },
+    "extracts_methodology_trace": {
+      "type": "must",
+      "severity": "high",
+      "description": "从重复模式或复盘中提取方法沉淀，而不是只给能力标签。",
+      "pass_criteria": [
+        "输出包含问题族群、重复规律、判断顺序、适用场景或不适用边界，并连接到真实项目证据。"
+      ],
+      "fail_signals": [
+        "只说具备数据分析能力或业务判断能力，没有沉淀可复用方法。"
+      ]
+    },
+    "distinguishes_retrospective_method_from_used_at_time": {
+      "type": "must",
+      "severity": "medium",
+      "description": "区分当时已经使用的方法和事后复盘形成的方法，避免把 retrospective 包装成 used_at_time。",
+      "pass_criteria": [
+        "输出说明方法是当时就在用、后来才总结，或需要确认。"
+      ],
+      "fail_signals": [
+        "把项目后才形成的复盘方法写成当时已经成熟执行的方法。"
+      ]
+    },
+    "requires_methodology_evidence_before_claiming_maturity": {
+      "type": "must",
+      "severity": "high",
+      "description": "声称成熟方法论前，需要多个场景、适用边界、反例或迭代证据；单次经历只能写成初步经验。",
+      "pass_criteria": [
+        "输出对方法成熟度保持边界，例如 M1 初步经验、需要更多场景验证，或标记适用/不适用条件。"
+      ],
+      "fail_signals": [
+        "从一次经历直接包装成成熟方法论或完整方法体系。"
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2472,6 +2549,13 @@
     "compares_offer_with_current_job",
     "considers_current_job_switching_cost",
     "considers_employment_type",
-    "distinguishes_hard_constraints_risks_and_tradeoffs"
+    "distinguishes_hard_constraints_risks_and_tradeoffs",
+    "separates_model_output_from_user_judgment",
+    "does_not_invent_business_judgment",
+    "asks_for_decision_reasoning_when_missing",
+    "extracts_judgment_trace",
+    "extracts_methodology_trace",
+    "distinguishes_retrospective_method_from_used_at_time",
+    "requires_methodology_evidence_before_claiming_maturity"
   ]
 }

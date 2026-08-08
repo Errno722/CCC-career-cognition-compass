@@ -1,6 +1,6 @@
 interface:
   display_name: "Project Experience Miner"
-  short_description: "Mine project facts before resume or JD use"
-  default_prompt: "Use $career-project-experience-miner to inventory and deep-mine my projects into reusable facts, contribution boundaries, evidence gaps, and story bank before resume or JD adaptation."
+  short_description: "Mine project facts, judgment traces, and evidence gaps"
+  default_prompt: "Use $career-project-experience-miner to inventory and deep-mine my projects into reusable facts, contribution boundaries, judgment traces, methodology traces, evidence gaps, and story bank before resume, JD, or interview adaptation."
 policy:
   allow_implicit_invocation: true
