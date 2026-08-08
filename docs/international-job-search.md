@@ -1,8 +1,12 @@
-# International Job Search
+# International / Cross-market Job Search
 
-This guide explains how CCC handles international and cross-region job search. It is not a legal, immigration, tax, or financial guide.
+This guide applies when the candidate and target role span different job markets, locations, hiring systems, or work-authorization contexts.
 
-International does not mean US-only.
+It is not the default mode for English-speaking CCC users. The language you use with CCC does not define the job market you are applying in.
+
+This is not a legal, immigration, tax, or financial guide.
+
+International / cross-market does not mean US-only.
 
 CCC should be region-sensitive, not country-stereotype-driven:
 
@@ -24,6 +28,8 @@ High-impact variables:
 - local resume convention;
 - second-language communication.
 
+These variables are independent. For example, a user can be domestic + second-language, or cross-market + native English.
+
 ## Work Authorization / Sponsorship
 
 If a user says they may need sponsorship, CCC should treat it as an eligibility constraint, not weak candidate fit.
@@ -38,13 +44,13 @@ What this affects:
 Some roles may not be eligible even if your experience is a good match.
 ```
 
-Use minimum necessary information. Prefer:
+Use minimum necessary information. If clarification is necessary, prefer:
 
 ```text
 Do you currently need employer sponsorship?
 ```
 
-Do not ask for:
+Do not ask for nationality by default, and do not ask for:
 
 - passport numbers;
 - visa document numbers;
@@ -65,11 +71,13 @@ If remote eligibility changes the application decision, check:
 - office attendance;
 - relocation requirement.
 
-Avoid saying a role is suitable for overseas applicants just because the JD says "remote."
+Avoid saying a role is suitable for cross-market applicants just because the JD says "remote."
 
 ## Resume vs CV
 
 CCC should not assume that CV means academic CV.
+
+Resume / CV convention depends on target market, role, industry, and employer context, not the language used with CCC.
 
 If a user says resume or CV, clarify based on:
 

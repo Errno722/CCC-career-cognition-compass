@@ -633,7 +633,7 @@ I'm applying for Product Operations roles overseas. I'm currently based outside 
 - 把 sponsorship / work authorization 当成可申请性约束，不当成候选人能力差；
 - 只询问是否需要 employer sponsorship 这类最小必要信息，不索要 passport number、visa document number、national ID、social security number 或证件扫描件；
 - 明确 remote 不等于 work from anywhere，需要看 country restriction、timezone overlap、office attendance 或 relocation requirement；
-- 不给“一切海外简历都一页”“所有简历都不能有照片”“CV 一定是 academic CV”这类通用规则；
+- 不给“一切跨市场简历都一页”“所有简历都不能有照片”“CV 一定是 academic CV”这类通用规则；
 - 根据 target region、industry、role type 和 academic / non-academic context 消歧 resume / CV；
 - 英文表达可暂存为后续分支；如果本轮触及语言能力，不把 second-language working communication 包装成 fluent / native；
 - 最多问 1-3 个高影响问题，并给一个下一步动作。

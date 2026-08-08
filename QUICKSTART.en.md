@@ -14,6 +14,14 @@ Before using it, redact sensitive information. Do not send passport numbers, vis
 Example:
 
 ```text
+I'm based in the US and applying for US Product Operations roles.
+English is my preferred language for this conversation.
+I want help deciding what to fix first in my resume and interview prep.
+```
+
+Another example:
+
+```text
 I'm applying for Product Operations roles in the UK.
 English is my second language and I may need sponsorship.
 I've had several interviews but no offer.
@@ -29,15 +37,21 @@ skills/
 
 Start with [SKILLS.md](SKILLS.md). Most users should begin with `career-cognition-compass`, then move to a narrower skill only when the task is clear.
 
-## International Job Search
+## Job Search Context
 
-Before region-specific advice, CCC may need:
+The language you use with CCC does not determine your job market.
 
-- target region;
-- work authorization / sponsorship;
-- location constraints.
+CCC only checks location, target market, work authorization, relocation, remote eligibility, local hiring conventions, or second-language communication when they can change the current answer.
 
-International does not mean US-only. Remote does not always mean work from anywhere.
+Examples:
+
+```text
+English user + US roles from the US -> domestic context
+English user + UK roles from the US -> cross-market context
+Second-language English user + local roles -> domestic + second-language context
+```
+
+Remote does not always mean work from anywhere.
 
 More detail: [docs/international-job-search.md](docs/international-job-search.md)
 

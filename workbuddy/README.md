@@ -160,7 +160,7 @@ outcome_signal_pattern_records
 
 变量用途：
 
-- `current_status`：Gap、在职、离职、校招、转行、海外求职等；
+- `current_status`：Gap、在职、离职、校招、转行、国际 / 跨市场 / 跨地区求职等；
 - `input_type`：混乱输入、JD、简历片段、面试复盘、行动计划；
 - `confirmed_facts`：已经确认的经历事实；
 - `needs_confirmation`：不能直接当事实的推断；

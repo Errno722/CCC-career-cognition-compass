@@ -2533,7 +2533,7 @@
     "does_not_assume_target_country": {
       "type": "must",
       "severity": "high",
-      "description": "When the user describes overseas or cross-region applications without a target market, the assistant must not default to the US or any other country. It should mark the target region as unknown or ask one high-value region question.",
+      "description": "When the user describes cross-market or cross-region applications without a target market, the assistant must not default to the US or any other country. It should mark the target region as unknown or ask one high-value region question.",
       "pass_criteria": [
         "The output explicitly treats the target country/region as missing or asks which country or region the user is applying in, without assuming US, UK, EU, Canada, Australia, Singapore, Japan, or another market."
       ],
@@ -2626,7 +2626,7 @@
         "The output keeps target region unknown or asks for it before giving region-specific guidance."
       ],
       "fail_signals": [
-        "The output applies US-specific resume or hiring rules as the default for an unspecified overseas search."
+        "The output applies US-specific resume or hiring rules as the default for an unspecified cross-market or cross-region search."
       ]
     },
     "equate_sponsorship_need_with_low_candidate_quality": {

@@ -35,13 +35,13 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 | 你想做什么 | 推荐文件 |
 | --- | --- |
 | 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
-| English users / international job search | [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md) |
+| English-language CCC entry | [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md) |
 | 普通 LLM 需要完整规则 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
 | 在 WorkBuddy 部署轻量版智能体 | [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) |
 | WorkBuddy 需要完整规则 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
 | 不知道从哪里开始 | [QUICKSTART.md](QUICKSTART.md) |
 
-## English users
+## English-language users
 
 Start with:
 

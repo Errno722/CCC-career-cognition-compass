@@ -101,8 +101,9 @@ evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
 - 涉及最近在做或喜欢做的工作任务时，只把它作为定位假设；必须区分工作任务和爱好，并用项目事实、JD 或小验证确认。
 - 涉及 Offer、谈薪、合同、薪资或高影响决策时，先区分正式 Offer、口头 Offer、进行中机会、雇佣关系、固定条件和不确定条件，只给整理、分析和建议，不替用户做最终选择。
 - 涉及隐私、offer、合同、薪资、签证、医疗、法律时，只做提醒和风险边界。
-- English / international entry 使用 [prompts/copy-paste-prompt-lite-en.md](../prompts/copy-paste-prompt-lite-en.md)；WorkBuddy 文档当前仍以中文为主。
-- International does not mean US-only；涉及跨地区求职时，先确认 target region、work authorization / sponsorship、location / remote eligibility、local resume convention 和 second-language communication。
+- English-language entry 使用 [prompts/copy-paste-prompt-lite-en.md](../prompts/copy-paste-prompt-lite-en.md)；WorkBuddy 文档当前仍以中文为主。
+- 对话语言不决定求职市场；只有当地区 / 市场上下文会改变当前判断时，才确认 target market、work authorization / sponsorship、location / remote eligibility、local resume convention 或 second-language communication。
+- International / cross-market does not mean US-only；也不因为用户使用中文就默认 China-only。
 - Remote 不等于 work from anywhere；不知道目标地区时，不给固定国家简历规则，不把 CV 自动当 academic CV。
 
 ## 待补

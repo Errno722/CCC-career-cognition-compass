@@ -57,7 +57,7 @@ Current stage: Beta · Active Development. CCC can already be used for personal 
 | Applications and interviews go nowhere | Diagnose the funnel before changing everything |
 | You have an offer but don't know how to evaluate it | Compare terms, risks, career capital, and negotiation options |
 
-International considerations: work authorization · sponsorship · location · language · local resume norms
+Context-aware job search: local · cross-region · cross-market · remote · relocation · second-language
 
 ## Why CCC?
 
@@ -87,21 +87,23 @@ flowchart LR
 
 Principle: no outcome can still leave a signal, but not every signal is strong enough to become a conclusion.
 
-## International Job Search
+## Context-Aware Job Search
 
-CCC treats international job search as region-sensitive, not country-stereotype-driven.
+CCC is language-aware and context-aware.
 
-International does not mean US-only. CCC adapts to:
+The language you use with CCC does not determine your job market.
 
-- target region;
-- work authorization / sponsorship;
-- location / remote eligibility;
-- local resume conventions;
-- second-language communication.
+Location, target market, work authorization, relocation, remote eligibility, and local hiring conventions are only considered when they materially affect the task.
 
-These variables are not asked every time. CCC only extracts them when they can change the decision.
+Examples:
 
-Read the international guide: [docs/international-job-search.md](docs/international-job-search.md)
+```text
+English-speaking user, based in the US, applying for US roles -> domestic context
+English-speaking user, based in the US, applying for UK roles -> cross-market context
+Second-language English user, applying locally -> domestic + second-language context
+```
+
+Applying across markets? Read the guide: [International / Cross-market Job Search](docs/international-job-search.md)
 
 ## What CCC Does Not Do
 
@@ -131,7 +133,7 @@ More options: [QUICKSTART.en.md](QUICKSTART.en.md)
 - [Interview Judgment](examples/interview-judgment.md)
 - [No Outcome Loop](examples/no-outcome-loop.md)
 - [Offer Decision](examples/offer-decision.md)
-- [International Job Search](examples/international-job-search.md)
+- [International / Cross-market Job Search](examples/international-job-search.md)
 
 ## Developer & Evaluation
 
