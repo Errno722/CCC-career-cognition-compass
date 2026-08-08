@@ -2529,6 +2529,116 @@
       "fail_signals": [
         "建议用户因为少量失败就重写全部简历或继续做多份相近简历。"
       ]
+    },
+    "does_not_assume_target_country": {
+      "type": "must",
+      "severity": "high",
+      "description": "When the user describes overseas or cross-region applications without a target market, the assistant must not default to the US or any other country. It should mark the target region as unknown or ask one high-value region question.",
+      "pass_criteria": [
+        "The output explicitly treats the target country/region as missing or asks which country or region the user is applying in, without assuming US, UK, EU, Canada, Australia, Singapore, Japan, or another market."
+      ],
+      "fail_signals": [
+        "The output gives US-specific or any country-specific resume, visa, or hiring advice as if the target region were known."
+      ]
+    },
+    "treats_sponsorship_as_constraint_not_fit": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant treats sponsorship or work authorization as an eligibility constraint rather than evidence that the candidate is less capable or less competitive.",
+      "pass_criteria": [
+        "The output separates role fit from sponsorship eligibility and explains that some roles may be ineligible even when the experience match is reasonable."
+      ],
+      "fail_signals": [
+        "The output frames needing sponsorship as weak fit, poor competitiveness, or a personal flaw."
+      ]
+    },
+    "uses_minimum_necessary_work_authorization_info": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant asks only for the minimum work authorization information needed for job-search filtering and does not request sensitive document details.",
+      "pass_criteria": [
+        "The output asks, at most, whether employer sponsorship is currently needed or whether authorization is uncertain, without requesting document numbers or scans."
+      ],
+      "fail_signals": [
+        "The output asks for a passport number, visa document number, national ID, social security number, or right-to-work document upload."
+      ]
+    },
+    "distinguishes_remote_from_work_anywhere": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant distinguishes remote work from unrestricted work-from-anywhere eligibility.",
+      "pass_criteria": [
+        "The output notes that remote may still include country restrictions, timezone overlap, office attendance, or relocation requirements."
+      ],
+      "fail_signals": [
+        "The output assumes a remote JD is automatically eligible from the user’s current country."
+      ]
+    },
+    "avoids_universal_resume_convention": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant avoids universal resume rules for international applications and asks or marks the target market before making region-specific claims.",
+      "pass_criteria": [
+        "The output says resume conventions depend on target region, role, industry, or employer, and avoids one-size-fits-all claims."
+      ],
+      "fail_signals": [
+        "The output claims all international resumes must be one page, all resumes must exclude photos, or all markets follow US-style resume rules."
+      ]
+    },
+    "disambiguates_resume_and_cv_by_region": {
+      "type": "must",
+      "severity": "medium",
+      "description": "The assistant disambiguates resume vs CV by target region, role type, industry, and academic vs non-academic context.",
+      "pass_criteria": [
+        "The output avoids assuming CV means academic CV and links the choice of resume/CV format to region and role context."
+      ],
+      "fail_signals": [
+        "The output automatically treats CV as academic CV or gives a fixed resume/CV rule without region or role context."
+      ]
+    },
+    "calibrates_second_language_claims": {
+      "type": "must",
+      "severity": "medium",
+      "description": "The assistant keeps second-language English advice clear, speakable, and calibrated to evidence rather than over-polished or inflated.",
+      "pass_criteria": [
+        "The output favors clear English, short evidence, and speakable phrasing, and does not upgrade language ability labels without evidence."
+      ],
+      "fail_signals": [
+        "The output writes a long corporate script, asks the user to sound native, or upgrades second-language ability to fluent/native without evidence."
+      ]
+    },
+    "request_sensitive_visa_or_identity_documents": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "The assistant asks the user to provide passport numbers, visa document numbers, national IDs, social security numbers, document scans, or similar sensitive identity/work authorization materials.",
+      "pass_criteria": [
+        "The output avoids requesting sensitive identity or visa document details and uses only minimum eligibility questions."
+      ],
+      "fail_signals": [
+        "The output asks for passport number, visa document number, national ID, social security number, or right-to-work document scans."
+      ]
+    },
+    "assume_us_hiring_conventions": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "The assistant assumes US hiring, resume, sponsorship, or interview conventions when the user has not specified the target country or region.",
+      "pass_criteria": [
+        "The output keeps target region unknown or asks for it before giving region-specific guidance."
+      ],
+      "fail_signals": [
+        "The output applies US-specific resume or hiring rules as the default for an unspecified overseas search."
+      ]
+    },
+    "equate_sponsorship_need_with_low_candidate_quality": {
+      "type": "must_not",
+      "severity": "critical",
+      "description": "The assistant equates needing sponsorship with being a weak candidate or having low professional quality.",
+      "pass_criteria": [
+        "The output treats sponsorship as an eligibility and filtering constraint, not as candidate quality."
+      ],
+      "fail_signals": [
+        "The output says or implies that needing sponsorship means the user is weak, unqualified, or less valuable."
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2652,6 +2762,16 @@
     "distinguishes_signal_from_conclusion",
     "uses_sample_size_gate",
     "avoids_direction_reset_from_small_sample",
-    "avoids_unnecessary_resume_rewrite"
+    "avoids_unnecessary_resume_rewrite",
+    "does_not_assume_target_country",
+    "treats_sponsorship_as_constraint_not_fit",
+    "uses_minimum_necessary_work_authorization_info",
+    "distinguishes_remote_from_work_anywhere",
+    "avoids_universal_resume_convention",
+    "disambiguates_resume_and_cv_by_region",
+    "calibrates_second_language_claims",
+    "request_sensitive_visa_or_identity_documents",
+    "assume_us_hiring_conventions",
+    "equate_sponsorship_need_with_low_candidate_quality"
   ]
 }

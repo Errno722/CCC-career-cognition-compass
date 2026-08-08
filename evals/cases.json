@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core-zh",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 41,
+  "manual_case_count": 42,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2080,6 +2080,79 @@
         "semantic_must_not": [
           "avoids_direction_reset_from_small_sample",
           "avoids_unnecessary_resume_rewrite"
+        ]
+      }
+    },
+    {
+      "id": "international-job-search-constraints-001",
+      "title": "International job search constraints",
+      "manual_case_id": 42,
+      "input": "I'm applying for Product Operations roles overseas. I'm currently based outside the target country and may need sponsorship. English is my second language. Some JDs say remote, but I don't know whether that means I can work from my current country. I also don't know whether I should use a one-page resume or CV. Help me figure out what to check first.",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": [
+            "career-direction-clarifier",
+            "career-materials-builder",
+            "jd-company-prep",
+            "job-search-plan-review",
+            "offer-decision-support"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "target region",
+            "Target region",
+            "country or region"
+          ],
+          [
+            "sponsorship",
+            "work authorization",
+            "authorized"
+          ],
+          [
+            "remote",
+            "work from anywhere",
+            "country restriction"
+          ],
+          [
+            "resume",
+            "CV"
+          ],
+          [
+            "clear English",
+            "speakable English",
+            "second-language"
+          ]
+        ],
+        "literal_not_contains": [
+          "US resume rules",
+          "you are a weak candidate"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1300
+        },
+        "semantic_assertions": [
+          "does_not_assume_target_country",
+          "treats_sponsorship_as_constraint_not_fit",
+          "uses_minimum_necessary_work_authorization_info",
+          "distinguishes_remote_from_work_anywhere",
+          "avoids_universal_resume_convention",
+          "disambiguates_resume_and_cv_by_region",
+          "calibrates_second_language_claims",
+          "keeps_answer_concise_with_bullets",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "request_sensitive_visa_or_identity_documents",
+          "assume_us_hiring_conventions",
+          "equate_sponsorship_need_with_low_candidate_quality",
+          "request_sensitive_data",
+          "overstate_english_fluency_or_ability"
         ]
       }
     }

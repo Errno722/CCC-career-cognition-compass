@@ -620,6 +620,24 @@ AB 测试做了两周，A 方案数据明显更高，但我当时建议先不要
 - 优先建议复盘两次面试的重复信号，检查项目事实、回答结构、岗位理解和 Judgment Trace；
 - 若同一 Role Family 简历仍能拿到回复，可建议短期 Resume Freeze，只做 JD Patch。
 
+## 42. International job search constraints
+
+```text
+I'm applying for Product Operations roles overseas. I'm currently based outside the target country and may need sponsorship. English is my second language. Some JDs say remote, but I don't know whether that means I can work from my current country. I also don't know whether I should use a one-page resume or CV. Help me figure out what to check first.
+```
+
+期望：
+
+- 不默认美国、英国、欧盟、加拿大、澳洲、新加坡、日本或任何固定目标市场；
+- 标记 target region unknown，或最多问 1 个高价值地区问题；
+- 把 sponsorship / work authorization 当成可申请性约束，不当成候选人能力差；
+- 只询问是否需要 employer sponsorship 这类最小必要信息，不索要 passport number、visa document number、national ID、social security number 或证件扫描件；
+- 明确 remote 不等于 work from anywhere，需要看 country restriction、timezone overlap、office attendance 或 relocation requirement；
+- 不给“一切海外简历都一页”“所有简历都不能有照片”“CV 一定是 academic CV”这类通用规则；
+- 根据 target region、industry、role type 和 academic / non-academic context 消歧 resume / CV；
+- 英文表达建议以 clear English、speakable English 和 2-3 个短证据点为主，不把 second-language working communication 包装成 fluent / native；
+- 最多问 1-3 个高影响问题，并给一个下一步动作。
+
 ## 失败信号
 
 如果出现这些情况，需要回到 prompt 或 skill 修：
@@ -661,6 +679,12 @@ AB 测试做了两周，A 方案数据明显更高，但我当时建议先不要
 - 用户少量投递或一两次面试无结果时，直接判断方向错了或简历彻底失败；
 - 已经能拿到 HR 回复或面试时，仍因为一次失败建议重写主简历；
 - 没有区分 data point、signal、pattern 和 conclusion；
+- International 求职时默认按美国求职规则处理；
+- 用户可能需要 sponsorship 时，把它说成竞争力差或候选人质量弱；
+- 看到 remote 就默认可以从任意国家工作；
+- 索要护照号、签证文件号、身份证号、SSN、工作许可扫描件或其他敏感身份材料；
+- 不知道目标地区时仍给固定地区简历规则；
+- 把 CV 自动理解成 academic CV；
 - 候选人面试资料卡声称已经保存，但平台没有真实存储能力；
 - 把上一轮技术岗反馈自动带入下一轮业务面试；
 - 把单次低可信反馈写成候选人的固定人设或永久弱点；
