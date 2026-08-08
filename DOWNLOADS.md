@@ -2,19 +2,15 @@
 
 这页给不熟悉 GitHub 或不想翻目录的用户准备。你可以直接复制单个文件，也可以从 GitHub Release 下载打包好的 zip。
 
-## 直接复制
+## 先选这个
 
-如果你只是想马上使用 CCC，不需要下载整个仓库。
-
-| 你想做什么 | 推荐文件 |
+| 你想做什么 | 推荐 |
 | --- | --- |
-| 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
-| 普通 LLM 需要完整规则 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
-| 在 WorkBuddy 部署轻量版智能体 | [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) |
-| WorkBuddy 需要完整规则 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
-| 不知道从哪里开始 | [QUICKSTART.md](QUICKSTART.md) |
+| 只想马上试用 | `CCC-lite-pack.zip` 或直接复制 [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) |
+| 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` 或复制 [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
+| 想研究完整项目 | `CCC-full-pack.zip` |
 
-## Release 下载包
+## Release 下载
 
 如果仓库已经发布 Release，可以在 GitHub 的 `Releases` 页面下载这些文件包：
 
@@ -33,6 +29,16 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 ```
 
 如果还没有 Release，先使用 GitHub 页面中的单文件复制方式，或点击仓库绿色 `Code` 按钮下载 `Download ZIP`。
+
+## 也可以直接复制
+
+| 你想做什么 | 推荐文件 |
+| --- | --- |
+| 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
+| 普通 LLM 需要完整规则 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
+| 在 WorkBuddy 部署轻量版智能体 | [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) |
+| WorkBuddy 需要完整规则 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
+| 不知道从哪里开始 | [QUICKSTART.md](QUICKSTART.md) |
 
 ## 三个包分别包含什么
 
@@ -93,4 +99,4 @@ node scripts/check-markdown-links.mjs
 git status --short
 ```
 
-不要把真实简历、真实联系方式、offer、合同、薪资截图、未脱敏面试记录或公司内部资料放进任何下载包。
+不要把真实简历、真实联系方式、Offer、合同、薪资截图、未脱敏面试记录或公司内部资料放进任何下载包。

@@ -1,8 +1,8 @@
 # CCC Quickstart
 
-这份文件帮助你快速选择 CCC 的使用入口。CCC 是 Career Cognition Compass 的缩写，它不是单纯的简历生成器，而是帮助使用者从混乱求职状态中整理经历、方向、JD、简历、面试复盘、Offer 决策和下一步行动。
+这份文件帮助你快速选择 CCC 的使用入口。CCC 是 Career Cognition Compass 的缩写，它不是单纯的简历生成器，而是帮助使用者从混乱求职状态中整理经历、方向、JD、面试复盘、Offer 决策和下一步行动。
 
-使用前请先脱敏，不要提交电话、邮箱、身份证、薪资截图、offer、合同、公司内部资料或完整面试记录。
+使用前请先脱敏，不要提交电话、邮箱、身份证、薪资截图、Offer、合同、公司内部资料或完整面试记录。
 
 如果你只想下载文件包，不想翻目录，可以看：[DOWNLOADS.md](DOWNLOADS.md)。
 
@@ -19,15 +19,9 @@
 
 如果你需要完整规则、长期调试或更复杂的工作流，再使用完整版 [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
 
-示例：
-
-```text
-我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
-```
-
 ## 我想用 Codex / Claude Code
 
-适合：想把 CCC 当成可迁移的 skill / agent 工作流，或者想继续维护这个项目。
+适合：想把 CCC 当成可迁移的 Skill / Agent 工作流，或者想继续维护这个项目。
 
 入口：
 
@@ -44,37 +38,7 @@ Use $career-cognition-compass.
 我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
 ```
 
-如果任务很明确，可以用拆分 skill：
-
-```text
-Use $career-project-experience-miner.
-
-我做过一些项目，但说不清它们有什么价值。请先帮我做项目总表，再选 1 个项目深挖成事实卡。
-```
-
-```text
-Use $career-project-experience-miner.
-
-我做了一个分析项目，但只知道模型显示 A 更好，说不清我自己的判断。请先帮我还原 Judgment Trace，不要直接包装成业务判断。
-```
-
-```text
-Use $career-direction-clarifier.
-
-我看了很多 JD，运营、产品助理、项目执行和数据分析都觉得能投，但越看越乱。请先帮我按 Role Family 聚类，做 7 天验证方向。
-```
-
-```text
-Use $interview-review-miner.
-
-我刚面试完，只记得几个关键词。面试官反馈说我业务经验不足，请帮我复盘。
-```
-
-```text
-Use $offer-decision-support.
-
-我收到一个 offer，通勤比较远，奖金不确定，还有两个面试没结束。请帮我判断要不要接、要不要谈条件，或者继续等。
-```
+如果任务很明确，可以再调用拆分 Skill。完整说明见：[SKILLS.md](SKILLS.md)。
 
 ## 我想部署到 WorkBuddy
 
@@ -98,86 +62,48 @@ workbuddy/system-prompt-lite.md
 
 完整说明见：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)。
 
-## 我想接入飞书
-
-适合：想把飞书作为 CCC 的聊天入口。
-
-推荐架构：
-
-```text
-CCC System Prompt
-↓
-WorkBuddy Agent
-↓
-飞书机器人 / 飞书群 / 飞书私聊
-```
-
-配置模板见：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)。
-
 ## 我不知道选哪个入口
-
-可以这样判断：
 
 | 情况 | 推荐入口 |
 | --- | --- |
-| 我只是自己试一下 | 普通大模型 + `copy-paste-prompt-lite-cn.md` |
-| 我想要完整规则 | 普通大模型 + `copy-paste-prompt-cn.md` |
-| 我想维护和改造这个项目 | Codex / Claude Code + `skills/` |
-| 我想给国内用户一个手机可用入口 | WorkBuddy |
-| 我想在飞书里用 | WorkBuddy + 飞书配置 |
-| 我只想看效果 | [DEMO.md](DEMO.md) |
+| 我只是自己试一下 | 普通大模型 + [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) |
+| 我想要完整规则 | 普通大模型 + [Full Prompt](prompts/copy-paste-prompt-cn.md) |
+| 我想维护和改造这个项目 | Codex / Claude Code + [skills/](skills/) |
+| 我想给国内用户一个手机可用入口 | [WorkBuddy](workbuddy/README.md) |
+| 我想看效果 | [DEMO.md](DEMO.md) |
 | 我想知道平台差异 | [docs/compatibility.md](docs/compatibility.md) |
 
-## 我想分享这个项目
+## 快速体验场景
 
-适合：想把 CCC 发到 GitHub、社交平台、公众号、社群或个人主页。
+只保留 4 个代表场景。完整测试见 [workbuddy/test-cases.md](workbuddy/test-cases.md) 和 [usability/](usability/)。
 
-可以直接复制 [SHARE.md](SHARE.md) 里的：
-
-- 一句话介绍；
-- GitHub About 描述；
-- Topics；
-- 小红书 / 公众号短文案；
-- 群聊转发版；
-- 社交预览图文案。
-
-## 最小测试
-
-无论使用哪个入口，都可以先测这 5 句话：
+### 1. 混乱开局
 
 ```text
-你好
+我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
 ```
 
-```text
-gap 一年 运营 ai 转行 不知道投什么
-```
+### 2. 项目经历
 
 ```text
 我搭过一个 Shopify 网站，但没有销售，也不知道这算不算项目。
 ```
 
-```text
-我刚面试完，面试官反馈说我 B 端产品经验不足。
-```
-
-```text
-我这两天投了 30 份简历，还没有面试消息，现在空档期不知道该做什么，总想刷新招聘软件。
-```
-
-```text
-我这两天看了几十个岗位，每个 JD 都像要重新改简历。请启用 Minimal Tailoring Mode。
-```
+### 3. 投递 / 面试没结果
 
 ```text
 我投了 12 个产品运营和项目执行岗位，有 3 个 HR 回复，面了 2 个都没到二面。请先看漏斗和样本量，不要直接说方向错了。
 ```
 
+### 4. Offer 决策
+
 ```text
-我收到一个 offer，但不确定要不要接。base、奖金、通勤和 deadline 都有点纠结，请先帮我拆关键未知项。
+我收到一个 Offer，但不确定要不要接。base、奖金、通勤和 deadline 都有点纠结，请先帮我拆关键未知项。
 ```
 
 好的结果应该是：先整理事实和缺口，不编造经历，不一上来生成完整简历，并给出少量下一步动作。
+
+## 继续上下文
 
 如果一轮对话很长，或者你想换到另一个模型继续，可以让 CCC 输出：
 
@@ -187,7 +113,9 @@ gap 一年 运营 ai 转行 不知道投什么
 
 这样只需要复制当前状态、主线、已确认事实、可复用卡片、未确认信息和下一步，不必复制完整聊天记录。
 
-如果你在维护仓库，可以运行机器可读合约检查：
+## 维护者检查
+
+如果你在维护仓库，可以运行：
 
 ```bash
 node scripts/check-evals.mjs

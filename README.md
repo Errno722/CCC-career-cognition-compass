@@ -1,157 +1,143 @@
-# CCC — Career Cognition Compass
+<h1 align="center">CCC — Career Cognition Compass</h1>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Quickstart](https://img.shields.io/badge/start-QUICKSTART-blue.svg)](QUICKSTART.md)
-[![Downloads](https://img.shields.io/badge/downloads-DOWNLOADS-purple.svg)](DOWNLOADS.md)
+<p align="center">
+  从混乱的求职状态，到事实、判断和下一步行动。
+</p>
 
-CCC 是 **Career Cognition Compass** 的缩写。
+<p align="center">
+  <a href="prompts/copy-paste-prompt-lite-cn.md">立即试用</a>
+  ·
+  <a href="DOWNLOADS.md">下载</a>
+  ·
+  <a href="DEMO.md">60 秒 Demo</a>
+  ·
+  <a href="docs/full-guide.md">完整文档</a>
+</p>
 
-它不是一键生成简历的工具，而是一个开源的 AI 求职澄清与行动辅导项目：帮你从信息爆炸、Gap、转行、在职疲惫、JD 焦虑、面试复盘和 Offer 纠结里，整理出事实、选择和下一步小动作。
+<p align="center">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green.svg"></a>
+  <a href="QUICKSTART.md"><img alt="Quickstart" src="https://img.shields.io/badge/start-quickstart-blue.svg"></a>
+  <a href="DOWNLOADS.md"><img alt="Downloads" src="https://img.shields.io/badge/downloads-ready-orange.svg"></a>
+  <img alt="Open Source" src="https://img.shields.io/badge/open%20source-yes-lightgrey.svg">
+</p>
 
-## 你可以直接这样开始
+CCC 是一个开源求职认知与行动工作流。
 
-不需要先写结构化表格。你可以发一段很乱的话，也可以一句一句来：
+它不会一上来替你生成一整份简历，而是先帮你把混乱状态整理成事实、判断和下一步行动。
 
-```text
-我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
+## 你可能正在经历这些
+
+> “我看了很多岗位，还是不知道该投哪一个。”
+
+> “每个 JD 都像要重新改一份简历，我已经不想改了。”
+
+> “面试官问我：你的判断是什么？我发现我只会复述模型结果。”
+
+> “投了几次、面了几次都没有结果，我开始怀疑是不是方向错了。”
+
+> “两个 Offer 条件完全不同，我不知道到底该看什么。”
+
+## 6 个核心使用场景
+
+| 你现在卡在哪里 | CCC 会帮你做什么 |
+| --- | --- |
+| 不知道投什么 | Role Family 聚类 + 7 天方向验证 |
+| 经历很多但说不清 | 项目事实 + Judgment Trace |
+| 每个 JD 都要改简历，很烦 | Master Resume → Role Family Resume → JD Patch |
+| 面试一追问就空 | Judgment / Methodology 深挖 |
+| 投了、面了，但没有结果 | Funnel + Signal / Pattern 判断 |
+| 收到 Offer 不知道怎么选 | Offer 比较 + 谈判 + 决策闭环 |
+
+查看全部能力：[docs/full-guide.md](docs/full-guide.md)
+
+## Before / After
+
+| Before | CCC |
+| --- | --- |
+| “gap 一年，运营、AI、产品都想投……” | 本轮主线：先验证最有证据的 Role Family |
+| 每个方向都想一起准备 | 其他分支暂存，下一轮可以用短标签继续 |
+| 不知道项目算不算经历 | 先还原项目事实，再判断能否进入材料 |
+| 面试反馈让人怀疑自己 | 区分一次反馈、重复信号和真正需要补的证据 |
+| 不知道今天做什么 | 下一步：只给一个能完成的小动作 |
+
+完整演示：[DEMO.md](DEMO.md)；长案例：[examples/full-walkthrough.md](examples/full-walkthrough.md)
+
+## 60 秒 Demo
+
+CCC 的核心体验不是“产出一堆材料”，而是把一段混乱输入收束成一个主线、一个事实卡和一个下一步。
+
+1. 用户发一段混乱输入。
+2. CCC 只抓一个本轮主线，暂存其他分支。
+3. 用户回复“继续补项目”。
+4. CCC 还原项目事实，不提前包装成成果。
+5. 用户提供 JD。
+6. CCC 输出一个材料补丁和下一步。
+
+查看：[DEMO.md](DEMO.md)
+
+## Career Cognition Loop
+
+CCC 不是线性求职漏斗，而是帮助你在投递、面试、反馈和 Offer 之间循环更新认知。
+
+```mermaid
+flowchart LR
+  A["混乱状态"] --> B["方向假设"]
+  B --> C["项目事实"]
+  C --> D["判断 / 方法"]
+  D --> E["JD / 材料"]
+  E --> F["投递 / 面试"]
+  F --> G["反馈 / Offer"]
+  G --> H["更新下一轮筛选条件"]
+  H --> B
 ```
 
-```text
-我在职，但每天很累，下班后恢复不过来，也不知道该不该离职。
-```
+原则：没有结果，也会留下信号；但不是每一个信号都足以成为结论。
 
-```text
-这是一个产品运营 JD，帮我看硬技能、岗位类型和我应该怎么准备。
-```
-
-```text
-我收到一个 offer，但通勤很远，奖金也不确定。帮我判断要不要接，还是继续等其他机会。
-```
-
-CCC 会先抓住本轮主线，暂存其他分支，再给你一个能继续推进的小动作。
-
-## 它会帮你做什么
-
-- 把混乱输入整理成事实、缺口、暂存分支和下一步。
-- 根据项目、工作任务和最近愿意继续做的事，形成可验证的定位假设。
-- 深挖项目经历，区分“亲自做过”“参与过”“只是了解”和“还没有证据”。
-- 还原 Judgment Trace 和 Methodology Trace，帮助你说清“为什么这样判断”和“哪些经验真的能复用”，但不替你编造判断或方法论。
-- 拆解 JD 的岗位类型和核心能力，避免只按岗位标题改材料。
-- 看很多 JD、不知道投什么、反复改简历或投递面试没结果时，先做 Role Family 聚类、7 天方向验证、Minimal Tailoring 和漏斗诊断。
-- 做简历补丁、英文表达、面试准备和面试复盘，但不默认替你编造或夸大。
-- 在投递后、等待面试反馈、Gap 焦虑或信息过载时，帮你回到可控的小动作。
-- 收到 Offer 后，帮你拆条件、区分硬性限制和重大风险、比较机会成本、准备谈薪或澄清问题，并把选择反写成下一批 JD 筛选条件。
-
-## 最快使用方式
+## 最快开始
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| ChatGPT / 普通 LLM | 想马上试用、省 token 或手机端使用的人 | 复制 [copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
-| 普通 LLM 完整版 | 想要完整规则的人 | 复制 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
-| Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](SKILLS.md) 和 [skills/](skills/) |
-| WorkBuddy | 想做国内可访问 Agent 的人 | 优先使用 [system-prompt-lite.md](workbuddy/system-prompt-lite.md)，完整说明见 [WorkBuddy 大陆用户部署说明](workbuddy/mainland-user-guide.md) |
+| 🚀 普通用户 | 想马上试用、省 token 或手机端使用 | 复制 [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) |
+| 🛠 Codex / Claude Code | 想使用可拆分 Skill 的人 | 查看 [SKILLS.md](SKILLS.md) |
+| 📱 WorkBuddy | 想做国内可访问 Agent | 复制 [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
 
-更详细的入口选择见：[QUICKSTART.md](QUICKSTART.md)。
+其他入口：[QUICKSTART.md](QUICKSTART.md)
 
-如果你不想翻目录，可以直接看：[DOWNLOADS.md](DOWNLOADS.md)。
+## CCC 不会做什么
 
-## 隐私提醒
-
-不要发送身份证、真实电话、私人邮箱、offer、合同、薪资截图、完整简历、完整面试记录或公司内部信息。可以先用“某平台”“某公司”“某岗位”“联系方式已脱敏”替代。
-
-CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
-
-## 它不会做什么
-
-- 不承诺帮你拿到 offer。
-- 不替你决定离职、裸辞、接受 offer 或职业方向。
+- 不承诺帮你拿到 Offer。
+- 不替你决定离职、裸辞、接受 Offer 或职业方向。
 - 不鼓励编造经历、数据、证书、项目结果或“完美人设”。
 - 不把一次面试反馈直接当成你的长期缺陷。
 - 不用一堆看似有用的材料制造新的焦虑。
 
-## Before / After
+使用前请先脱敏，不要提交身份证、真实电话、私人邮箱、Offer、合同、薪资截图、完整简历、完整面试记录或公司内部信息。CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
 
-原始输入可以很乱：
+## 更多资源
+
+| Start | Use | See | Build |
+| --- | --- | --- | --- |
+| [Quickstart](QUICKSTART.md) | [Full Guide](docs/full-guide.md) | [Demo](DEMO.md) | [Eval](evals/README.md) |
+| [Downloads](DOWNLOADS.md) | [Skills](SKILLS.md) | [Examples](examples/full-walkthrough.md) | [Contributing](CONTRIBUTING.md) |
+| [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) | [WorkBuddy](workbuddy/README.md) | [Compatibility](docs/compatibility.md) | [Changelog](CHANGELOG.md) |
+
+配套 LaTeX 简历模板：[latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
+
+## Repository Map
 
 ```text
-我现在很乱，gap 一年多，之前做过运营，也学过一点 AI，不知道还能投什么。
+skills/       核心 Skill
+prompts/      普通 LLM Prompt
+workbuddy/    WorkBuddy 部署
+evals/        行为测试
+usability/    纵向可用性测试
+docs/         完整文档
 ```
 
-CCC 应该先整理，而不是直接写简历：
+<details>
+<summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-```text
-我听到的重点：
-- Gap 一年多
-- 有运营经历
-- 接触过 AI
-- 目前卡在投递方向
-
-还缺的关键信息：
-1. 之前运营具体偏内容、用户、活动、数据，还是别的方向？
-2. AI 学到什么程度：工具使用、prompt、Agent、编程，还是课程了解？
-
-今天先做一件小事：
-- 用 10 分钟列出过去运营里最熟的 3 件事，以及用过的 3 个 AI 工具。
-```
-
-## 核心能力
-
-- 混乱输入整理：支持长文本、语音转文字、碎片词和无标点输入。
-- 项目经历深挖：先盘点项目，再确认个人贡献、证据和结果边界。
-- 项目事实门禁：`DISCOVERED → PARTIALLY_MAPPED → EVIDENCE_READY`。
-- 判断与方法沉淀：区分“模型/数据结果”和“用户本人判断”，用 `J0-J4` 标记 Judgment Depth，用 `M0-M4` 标记 Methodology Maturity，避免伪业务判断和伪方法论。
-- 能力迁移判断：帮助不知道自己能投什么岗位的人找到可验证方向。
-- 近期工作行为定位：根据最近实际在做、愿意继续做或做完更有掌控感的工作任务，形成定位假设；不把爱好直接当职业结论。
-- 发散收束：当用户同时想投很多方向、学很多技能、做很多材料时，先归类分支，只推进 1 个本轮主线。
-- JD 与简历补丁：先判断 JD 岗位类型和工作重心，再聚焦 2-3 个核心能力；使用 `Master Resume → Role Family Resume → JD Patch`，避免每次重写整份简历。
-- 求职摩擦与反馈循环：岗位过载先做 Role Family 聚类，简历疲劳进入 Minimal Tailoring Mode；投递/面试无结果时先看漏斗、样本量和重复信号，不用少量失败推翻方向。
-- 面试准备与复盘：整理关键词、不完整问题和面试官反馈，输出候选人面试资料卡补丁；按 HR、业务、技术等面试官角色调整回答侧重点；用面试表达结构卡训练清晰回答；自我介绍和面试答案默认给可记忆框架；面试反问卡只给岗位级小问题。
-- Offer 决策支持：单 Offer vs 继续求职、多 Offer 对比、新 Offer vs 当前工作；先区分正式 Offer、口头 Offer、进行中机会和雇佣关系，再看信息完整度、硬性限制、重大风险和关键未知项，不用机械打分，不替用户做最终选择。
-- 语气校准与英文面试：简历和面试准备避免过度肯定，英文表达不逐句硬翻译，优先给自然、可说出口、可验证的英文框架和短句。
-- 投递后空档期计划：把等待消息的焦虑转成 5-20 分钟小动作。
-- 焦虑降噪：刷社媒更慌、反复刷新、等待反馈或比较别人时，拆出触发源、可控/不可控、信息摄入边界和一个小动作，不灌鸡汤。
-- 面试邀约信号画像：根据已收到的面试邀请、JD 和无回复样本，区分邀约构成、本批次观察回复率和下一批验证假设。
-- Token 节省模式：复用已有状态卡、项目卡、主简历和 JD 补丁，只输出差异、替换段落和下一步；必要时输出 `CCC 继续上下文`，减少跨模型或手机端反复消耗。
-- 隐私保护：默认提醒脱敏，不要求真实简历、offer、合同或完整面试记录。
-- 共享规则：`core/` 维护 focus control、确定性表达校准和 profile 持久化边界，避免不同入口规则漂移。
-
-## 工作流
-
-```mermaid
-flowchart TD
-  A["混乱输入 / 语音转文字 / JD / 简历片段 / 面试回忆 / Offer"] --> B["状态与意图澄清"]
-  B --> C["Role Family 初步方向"]
-  C --> D["项目事实 / Judgment Trace / Methodology Trace"]
-  D --> E["JD / 材料 / Minimal Tailoring"]
-  E --> F["投递漏斗 / 面试漏斗 / 重复信号"]
-  F --> G["调整而非重置 / Offer Decision / 下一轮筛选条件"]
-```
-
-## 配套资源
-
-- 完整使用指南：[docs/full-guide.md](docs/full-guide.md)
-- 平台兼容性：[docs/compatibility.md](docs/compatibility.md)
-- 快速开始：[QUICKSTART.md](QUICKSTART.md)
-- 下载说明：[DOWNLOADS.md](DOWNLOADS.md)
-- Skills 目录：[SKILLS.md](SKILLS.md)
-- WorkBuddy 部署：[workbuddy/mainland-user-guide.md](workbuddy/mainland-user-guide.md)
-- 飞书配置：[workbuddy/feishu-config.md](workbuddy/feishu-config.md)
-- 轻量复制 Prompt：[prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md)
-- WorkBuddy 轻量系统提示词：[workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md)
-- 纵向可用性测试：[usability/README.md](usability/README.md)
-- Eval 合约：[evals/cases.json](evals/cases.json)、[evals/schema.json](evals/schema.json)、[evals/result-schema.json](evals/result-schema.json)、[evals/rubrics.json](evals/rubrics.json)
-- 真实 Smoke Report 输入模板：[evals/inputs/README.md](evals/inputs/README.md)
-- Demo：[DEMO.md](DEMO.md)
-- 传播素材：[SHARE.md](SHARE.md)
-- 支持与赞赏：[SUPPORT.md](SUPPORT.md)
-
-配套 LaTeX 简历模板：
-
-- [latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
-
-## 开发者与测试
-
-CCC 的工程化测试信息放在这里，避免第一次打开仓库的人被 Eval、Schema 和 Runner 细节挡住。
+41 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -204,12 +190,14 @@ node scripts/generate-smoke-report.mjs \
 
 填写后的 `*.input.json` 默认不提交；只有确认回复为合成、脱敏测试数据时，才提交生成的 `evals/results/<adapter>/*.json`。在没有真实模型输出前，不要生成或提交 Smoke Report。
 
-## 开源
+</details>
 
-CCC 使用 MIT License。
+## License / Contributing / Support
 
-下一步可以这样做：
+CCC 使用 [MIT License](LICENSE)。
 
-- 第一次使用：复制轻量版 [copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md)；需要完整规则时再用 [copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md)。
-- 发现问题：提交脱敏反馈，参考 [FEEDBACK.md](FEEDBACK.md)。
-- 想参与改进：先看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。
+发现问题：提交脱敏反馈，参考 [FEEDBACK.md](FEEDBACK.md)。
+
+想参与改进：先看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。
+
+支持与赞赏：[SUPPORT.md](SUPPORT.md)

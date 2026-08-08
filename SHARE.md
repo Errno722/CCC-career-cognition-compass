@@ -4,10 +4,14 @@ CCC 是 **Career Cognition Compass** 的缩写。这份文件用于项目主页�
 
 ## GitHub About
 
-Description，不超过 120 个中文字符：
+Description，推荐二选一：
 
 ```text
-CCC 是开源求职认知罗盘，帮助使用者从混乱状态中整理经历、方向、JD、面试复盘和下一步行动。
+Open-source career cognition workflow for turning messy job-search states into evidence, judgment, action, and better decisions.
+```
+
+```text
+开源求职认知工作流：把混乱状态整理成事实、判断、行动与更清楚的职业决策。
 ```
 
 Topics：
@@ -15,14 +19,12 @@ Topics：
 ```text
 career
 job-search
+career-change
 resume
 interview-prep
-career-change
-gap
 ai-agent
 prompt-engineering
-skills
-workbuddy
+open-source
 zh-cn
 ```
 
