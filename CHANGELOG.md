@@ -2,7 +2,7 @@
 
 CCC 使用日期型版本记录。这里记录面向使用者能感知到的主要变化；更细的 skill 内部变化见 [SKILLS.md](SKILLS.md)。
 
-Current project release: `0.1.0-beta`
+Current project version: `0.1.0-beta`
 
 ## 2026-08-09
 
@@ -12,10 +12,12 @@ Current project release: `0.1.0-beta`
 - 新增 GitHub Issue Templates：usability feedback、bug report、deployment problem、documentation 和 feature request，优先收集脱敏、最小复现、真实使用摩擦。
 - 新增 Pull Request Template，要求说明用户问题、行为契约影响、隐私检查和测试结果。
 - 新增 [ROADMAP.md](ROADMAP.md)，记录 Beta / Active Development 阶段、Now / Next / Later 和 Not Planned 范围。
-- 新增顶层 [VERSION](VERSION)，当前项目 release version 为 `0.1.0-beta`。
+- 新增顶层 [VERSION](VERSION)，当前项目 version 为 `0.1.0-beta`。
 - 新增 [docs/release-notes-template.md](docs/release-notes-template.md)，用于准备 Beta Release，不自动发布 GitHub Release。
 - 新增短场景 examples：方向混乱、面试判断、投递/面试无结果循环和 Offer 决策。
 - 新增 [README.en.md](README.en.md) 和 international job search 示例；英文入口不是中文版逐句翻译，而是补充 work authorization、visa sponsorship、location、timezone、local resume conventions、ATS、cover letter、LinkedIn、language claims、employment type、compensation structure 和 relocation 等海外求职变量。
+- 新增真正可复制的 [English Lite Prompt](prompts/copy-paste-prompt-lite-en.md)、[QUICKSTART.en.md](QUICKSTART.en.md) 和 [docs/international-job-search.md](docs/international-job-search.md)，让英文入口从介绍页升级为可执行入口。
+- 新增 `international-job-search-constraints-001` 行为合约，覆盖 target region、sponsorship、remote eligibility、resume / CV、second-language English 和敏感签证信息边界；当前手工测试和机器可读合约为 42 个，已登记语义断言为 238 条，核心细化 Rubric 为 131 条。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 
 ## 2026-08-08
@@ -34,8 +36,8 @@ Current project release: `0.1.0-beta`
 - `career-direction-clarifier` 增加四类“不知道投什么”、Role Family 聚类和 7 天方向验证，避免继续生成岗位大清单。
 - `career-materials-builder` 增加 `Master Resume → Role Family Resume → JD Patch`、Tailoring Level 和 Minimal Tailoring Mode，避免回到“一 JD 一整份简历”的高摩擦流程。
 - `job-search-plan-review` 增加 Application Friction、Job Search Funnel、No-Outcome Diagnostic、Sample Size Gate、Outcome / Signal / Pattern / Conclusion 和 Resume Freeze。
-- 机器可读 Eval 增加 `judgment-trace-missing-001`、`judgment-methodology-trace-001`、`application-friction-001` 和 `job-search-no-outcome-diagnostic-001`；当前手工测试和机器可读合约为 41 个，已登记语义断言为 228 条，核心细化 Rubric 为 121 条。
-- 当前仍未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/41。
+- 机器可读 Eval 增加 `judgment-trace-missing-001`、`judgment-methodology-trace-001`、`application-friction-001` 和 `job-search-no-outcome-diagnostic-001`；该轮手工测试和机器可读合约为 41 个，已登记语义断言为 228 条，核心细化 Rubric 为 121 条。
+- 该轮仍未生成正式真实平台报告，公开平台覆盖、公开唯一通过和公开已验证通过仍为 0/41。
 
 ## 2026-08-07
 

@@ -32,7 +32,7 @@ CCC 是一个开源求职认知与行动工作流。
 
 它不会一上来替你生成一整份简历，而是先帮你把混乱状态整理成事实、判断和下一步行动。
 
-当前阶段：Beta · 持续真实场景测试中。CCC 已可用于个人求职辅助，但公开真实 Smoke Report 仍不足，因此不声称对所有模型或所有平台稳定有效。
+当前阶段：Beta · 持续真实场景测试中。CCC 已可用于个人求职辅助，但公开真实 Smoke Report 覆盖仍为 0，因此不声称对所有模型或所有平台稳定有效。
 
 ## 你可能正在经历这些
 
@@ -59,15 +59,15 @@ CCC 是一个开源求职认知与行动工作流。
 
 查看全部能力：[docs/full-guide.md](docs/full-guide.md)
 
-## Why CCC?
+## 为什么是 CCC？
 
-| Common workflow | CCC |
+| 常见做法 | CCC |
 | --- | --- |
-| Generate first | Clarify first |
-| Rewrite for every JD | Role Family + Patch |
-| Treat one rejection as a verdict | Signal → Pattern → Conclusion |
-| Repeat model output | Separate result from your judgment |
-| Give many recommendations | One main thread + one next action |
+| 先生成 | 先澄清 |
+| 每个 JD 都重写 | Role Family + Patch |
+| 一次拒绝就推翻方向 | Signal → Pattern → Conclusion |
+| 复述模型结果 | 区分结果和自己的判断 |
+| 给很多建议 | 一个主线 + 一个下一步 |
 
 ## Before / After
 
@@ -157,7 +157,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-41 behavior contracts · deterministic eval runner · public smoke testing pending
+42 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -173,21 +173,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：41
-机器可读合约：41
-已登记语义断言：228
-已人工细化核心 Rubric：121
+手工测试场景：42
+机器可读合约：42
+已登记语义断言：238
+已人工细化核心 Rubric：131
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/41
-Runner 执行覆盖：0/41
-公开平台覆盖：0/41
-Runner 唯一通过：0/41
-公开唯一通过：0/41
-已验证 Runner 通过：0/41
-公开已验证通过：0/41
+声明唯一覆盖：0/42
+Runner 执行覆盖：0/42
+公开平台覆盖：0/42
+Runner 唯一通过：0/42
+公开唯一通过：0/42
+已验证 Runner 通过：0/42
+公开已验证通过：0/42
 语义已审次数：0
 评估对象：assistant_output_only
 ```

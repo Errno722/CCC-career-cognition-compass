@@ -28,6 +28,7 @@ Role Family hypothesis:
 2. Business Operations: reporting, workflow improvement, business process, cross-functional execution
 
 Important constraints:
+- Target region: unknown
 - Work authorization: unknown
 - Sponsorship: may be required
 - Location eligibility: unknown

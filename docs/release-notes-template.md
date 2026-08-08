@@ -15,16 +15,17 @@ Use this template when preparing a GitHub Release. Do not publish a release unti
 ## Ways to use
 
 - Lite Prompt
+- English Lite Prompt
 - Full Prompt
 - Codex / Claude Code Skills
-- WorkBuddy
+- WorkBuddy (Chinese-first documentation)
 
 ## Current limitations
 
 - Still under usability testing
 - Model behavior differs by platform
 - No guarantee of interview or Offer outcomes
-- Public Smoke Report coverage is still limited
+- Public real-platform Smoke Report coverage is currently 0
 
 ## Release files
 

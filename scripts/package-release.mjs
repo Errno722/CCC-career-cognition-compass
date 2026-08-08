@@ -14,8 +14,10 @@ const packages = [
       "README.md",
       "README.en.md",
       "QUICKSTART.md",
+      "QUICKSTART.en.md",
       "DOWNLOADS.md",
       "prompts/copy-paste-prompt-lite-cn.md",
+      "prompts/copy-paste-prompt-lite-en.md",
       "SECURITY.md",
       "SUPPORT.md",
       "LICENSE"
@@ -27,6 +29,7 @@ const packages = [
       "README.md",
       "README.en.md",
       "QUICKSTART.md",
+      "QUICKSTART.en.md",
       "DOWNLOADS.md",
       "workbuddy/README.md",
       "workbuddy/mainland-user-guide.md",

@@ -35,10 +35,19 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 | 你想做什么 | 推荐文件 |
 | --- | --- |
 | 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
+| English users / international job search | [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md) |
 | 普通 LLM 需要完整规则 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
 | 在 WorkBuddy 部署轻量版智能体 | [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) |
 | WorkBuddy 需要完整规则 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
 | 不知道从哪里开始 | [QUICKSTART.md](QUICKSTART.md) |
+
+## English users
+
+Start with:
+
+- [README.en.md](README.en.md)
+- [QUICKSTART.en.md](QUICKSTART.en.md)
+- [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md)
 
 ## 三个包分别包含什么
 
@@ -50,8 +59,10 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 README.md
 README.en.md
 QUICKSTART.md
+QUICKSTART.en.md
 DOWNLOADS.md
 prompts/copy-paste-prompt-lite-cn.md
+prompts/copy-paste-prompt-lite-en.md
 SECURITY.md
 SUPPORT.md
 LICENSE
@@ -65,6 +76,7 @@ LICENSE
 README.md
 README.en.md
 QUICKSTART.md
+QUICKSTART.en.md
 DOWNLOADS.md
 workbuddy/README.md
 workbuddy/mainland-user-guide.md

@@ -6,7 +6,7 @@ Beta / Active Development
 
 CCC 已可用于真实个人求职辅助，但仍处于持续 usability testing 阶段。
 
-当前没有足够公开真实 Smoke Reports，因此不声称对所有模型或所有平台稳定有效。
+当前公开真实 Smoke Report 覆盖仍为 0，因此不声称对所有模型或所有平台稳定有效。
 
 ## Now
 
@@ -15,19 +15,21 @@ CCC 已可用于真实个人求职辅助，但仍处于持续 usability testing 
 - Demo GIF / Social Preview
 - 第一批真实 Smoke Reports
 - 降低 Prompt / Skill 使用门槛
-- 中文与英文入口清晰化
+- first usable English Lite entry
+- first international behavior contract
 
 ## Next
 
 - 根据重复真实反馈调整规则
-- 改进海外求职场景
+- real international usability feedback
+- region-specific documentation based on verified needs
 - 改进跨模型 / 跨会话继续
 - 增加少量真实匿名案例
 - 提升 Release 稳定性
 
 ## Later
 
-- 更完整 international job search support
+- broader international support
 - 更成熟的英文文档
 - 更多平台适配
 - 更系统的真实模型对比
