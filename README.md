@@ -1,6 +1,12 @@
 <h1 align="center">CCC — Career Cognition Compass</h1>
 
 <p align="center">
+  <a href="README.md">中文</a>
+  ·
+  <a href="README.en.md">English</a>
+</p>
+
+<p align="center">
   从混乱的求职状态，到事实、判断和下一步行动。
 </p>
 
@@ -18,12 +24,15 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green.svg"></a>
   <a href="QUICKSTART.md"><img alt="Quickstart" src="https://img.shields.io/badge/start-quickstart-blue.svg"></a>
   <a href="DOWNLOADS.md"><img alt="Downloads" src="https://img.shields.io/badge/downloads-ready-orange.svg"></a>
+  <img alt="Status: Beta" src="https://img.shields.io/badge/status-beta-yellow.svg">
   <img alt="Open Source" src="https://img.shields.io/badge/open%20source-yes-lightgrey.svg">
 </p>
 
 CCC 是一个开源求职认知与行动工作流。
 
 它不会一上来替你生成一整份简历，而是先帮你把混乱状态整理成事实、判断和下一步行动。
+
+当前阶段：Beta · 持续真实场景测试中。CCC 已可用于个人求职辅助，但公开真实 Smoke Report 仍不足，因此不声称对所有模型或所有平台稳定有效。
 
 ## 你可能正在经历这些
 
@@ -49,6 +58,16 @@ CCC 是一个开源求职认知与行动工作流。
 | 收到 Offer 不知道怎么选 | Offer 比较 + 谈判 + 决策闭环 |
 
 查看全部能力：[docs/full-guide.md](docs/full-guide.md)
+
+## Why CCC?
+
+| Common workflow | CCC |
+| --- | --- |
+| Generate first | Clarify first |
+| Rewrite for every JD | Role Family + Patch |
+| Treat one rejection as a verdict | Signal → Pattern → Conclusion |
+| Repeat model output | Separate result from your judgment |
+| Give many recommendations | One main thread + one next action |
 
 ## Before / After
 
@@ -120,6 +139,7 @@ flowchart LR
 | [Quickstart](QUICKSTART.md) | [Full Guide](docs/full-guide.md) | [Demo](DEMO.md) | [Eval](evals/README.md) |
 | [Downloads](DOWNLOADS.md) | [Skills](SKILLS.md) | [Examples](examples/full-walkthrough.md) | [Contributing](CONTRIBUTING.md) |
 | [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) | [WorkBuddy](workbuddy/README.md) | [Compatibility](docs/compatibility.md) | [Changelog](CHANGELOG.md) |
+| [Roadmap](ROADMAP.md) | [English README](README.en.md) | [Scenario Examples](examples/direction-confusion.md) | [Release Notes Template](docs/release-notes-template.md) |
 
 配套 LaTeX 简历模板：[latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
 

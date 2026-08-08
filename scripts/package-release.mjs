@@ -12,6 +12,7 @@ const packages = [
     name: "CCC-lite-pack",
     files: [
       "README.md",
+      "README.en.md",
       "QUICKSTART.md",
       "DOWNLOADS.md",
       "prompts/copy-paste-prompt-lite-cn.md",
@@ -24,6 +25,7 @@ const packages = [
     name: "CCC-workbuddy-pack",
     files: [
       "README.md",
+      "README.en.md",
       "QUICKSTART.md",
       "DOWNLOADS.md",
       "workbuddy/README.md",
@@ -40,8 +42,11 @@ const packages = [
     name: "CCC-full-pack",
     files: [
       "README.md",
+      "README.en.md",
       "QUICKSTART.md",
       "DOWNLOADS.md",
+      "ROADMAP.md",
+      "VERSION",
       "SKILLS.md",
       "CHANGELOG.md",
       "CONTRIBUTING.md",

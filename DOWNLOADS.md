@@ -48,7 +48,9 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 
 ```text
 README.md
+README.en.md
 QUICKSTART.md
+DOWNLOADS.md
 prompts/copy-paste-prompt-lite-cn.md
 SECURITY.md
 SUPPORT.md
@@ -61,7 +63,9 @@ LICENSE
 
 ```text
 README.md
+README.en.md
 QUICKSTART.md
+DOWNLOADS.md
 workbuddy/README.md
 workbuddy/mainland-user-guide.md
 workbuddy/system-prompt-lite.md
@@ -74,7 +78,7 @@ LICENSE
 
 ### CCC-full-pack.zip
 
-适合维护者、开发者和想研究完整项目结构的人。它包含公开仓库中的主要文档、skills、prompts、evals 和脚本，但不包含未脱敏求职材料、私有文件、填写后的 Smoke input 或本地生成结果。
+适合维护者、开发者和想研究完整项目结构的人。它包含公开仓库中的主要文档、skills、prompts、evals、examples、Roadmap、英文入口和脚本，但不包含未脱敏求职材料、私有文件、填写后的 Smoke input 或本地生成结果。
 
 ## 维护者如何打包
 

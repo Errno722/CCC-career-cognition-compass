@@ -2,6 +2,22 @@
 
 CCC 使用日期型版本记录。这里记录面向使用者能感知到的主要变化；更细的 skill 内部变化见 [SKILLS.md](SKILLS.md)。
 
+Current project release: `0.1.0-beta`
+
+## 2026-08-09
+
+### 开源产品体验
+
+- README 重排为产品首页结构，让第一次打开仓库的人优先看到定位、使用场景、Demo、Career Cognition Loop、快速开始和边界说明。
+- 新增 GitHub Issue Templates：usability feedback、bug report、deployment problem、documentation 和 feature request，优先收集脱敏、最小复现、真实使用摩擦。
+- 新增 Pull Request Template，要求说明用户问题、行为契约影响、隐私检查和测试结果。
+- 新增 [ROADMAP.md](ROADMAP.md)，记录 Beta / Active Development 阶段、Now / Next / Later 和 Not Planned 范围。
+- 新增顶层 [VERSION](VERSION)，当前项目 release version 为 `0.1.0-beta`。
+- 新增 [docs/release-notes-template.md](docs/release-notes-template.md)，用于准备 Beta Release，不自动发布 GitHub Release。
+- 新增短场景 examples：方向混乱、面试判断、投递/面试无结果循环和 Offer 决策。
+- 新增 [README.en.md](README.en.md) 和 international job search 示例；英文入口不是中文版逐句翻译，而是补充 work authorization、visa sponsorship、location、timezone、local resume conventions、ATS、cover letter、LinkedIn、language claims、employment type、compensation structure 和 relocation 等海外求职变量。
+- 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
+
 ## 2026-08-08
 
 ### 判断痕迹与方法沉淀

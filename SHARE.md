@@ -25,8 +25,15 @@ interview-prep
 ai-agent
 prompt-engineering
 open-source
+international-job-search
 zh-cn
 ```
+
+## GitHub Repository Settings
+
+建议在 GitHub 仓库右侧 About 区保持短描述，不要塞入所有功能。Topics 控制在约 10 个以内，避免重复语义标签。
+
+Social Preview 需要在 GitHub 仓库设置中手动上传。推荐图像规范见 [assets/README.md](assets/README.md)，不要使用 “Get Hired Faster”“Land Your Dream Job” 或类似成功学承诺。
 
 ## 小红书介绍
 
