@@ -1,0 +1,93 @@
+name: Usability feedback
+description: Share where CCC did not fit a real job-search situation.
+title: "[Usability]: "
+labels: ["usability", "feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing CCC.
+
+        Do not submit real names, phone numbers, private emails, national IDs, passport numbers, visa document numbers, full resumes, real offers, contracts, salary screenshots, confidential employer information, or complete interview transcripts.
+  - type: dropdown
+    id: entry
+    attributes:
+      label: 使用入口 / Entry
+      options:
+        - ChatGPT / 普通 LLM
+        - Codex / Claude Code
+        - WorkBuddy
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: 使用语言 / Language
+      options:
+        - 中文
+        - English
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: scenario
+    attributes:
+      label: 使用场景 / Scenario
+      options:
+        - 不知道投什么
+        - 项目经历
+        - JD / Resume
+        - 面试准备
+        - 面试复盘
+        - 求职无结果
+        - Offer 决策
+        - 海外求职
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: 你希望 CCC 帮你完成什么？
+      description: Keep it short. One concrete user goal is enough.
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: 你实际输入了什么？
+      description: Must be synthetic or anonymized. A short excerpt is better than a full conversation.
+      placeholder: "Example: gap 一年 运营 AI 转行 不知道投什么"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: CCC 实际哪里不符合预期？
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你原本期待什么？
+    validations:
+      required: true
+  - type: dropdown
+    id: anonymous_case
+    attributes:
+      label: 是否愿意将该案例作为匿名测试案例？
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: dropdown
+    id: sensitive_info
+    attributes:
+      label: 是否包含敏感信息？
+      options:
+        - 已脱敏
+        - 不涉及
+    validations:
+      required: true

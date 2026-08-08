@@ -1,0 +1,69 @@
+name: Bug report
+description: Report a reproducible CCC behavior problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please provide a minimum reproducible example, not a full conversation.
+
+        Do not submit credentials, real resumes, offers, contracts, salary screenshots, private contact details, or confidential employer information.
+  - type: input
+    id: platform
+    attributes:
+      label: 入口 / 平台
+      placeholder: "Example: WorkBuddy, ChatGPT, Codex, Claude Code"
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: 模型（如果知道）
+      placeholder: "Example: unknown, GPT-5, Claude, WorkBuddy default"
+  - type: dropdown
+    id: language
+    attributes:
+      label: 使用语言
+      options:
+        - 中文
+        - English
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: step
+    attributes:
+      label: 问题发生在哪一步？
+    validations:
+      required: true
+  - type: textarea
+    id: mre
+    attributes:
+      label: 最小复现输入
+      description: Use synthetic or anonymized input only.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际输出
+      description: A short excerpt is enough.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: dropdown
+    id: reproducible
+    attributes:
+      label: 是否可重复？
+      options:
+        - Yes
+        - No
+        - Not sure
+    validations:
+      required: true

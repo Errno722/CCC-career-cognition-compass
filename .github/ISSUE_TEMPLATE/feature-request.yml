@@ -1,0 +1,58 @@
+name: Feature request
+description: Suggest an improvement based on a real job-search problem.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the real user problem first, not a large feature design.
+
+        CCC intentionally avoids automatic mass applications, fabricated resumes, and "best career" algorithms.
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你遇到的真实问题是什么？
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: 这个问题出现在哪个求职阶段？
+      options:
+        - 混乱开局 / 方向判断
+        - 项目经历
+        - JD / Resume
+        - 面试准备
+        - 面试复盘
+        - 求职无结果
+        - Offer 决策
+        - 海外求职
+        - Deployment
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: 目前 CCC 为什么处理不好？
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: 你期待用户最终能完成什么？
+    validations:
+      required: true
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: 这是：
+      options:
+        - 新场景
+        - 现有场景优化
+        - 文档问题
+        - 平台兼容问题
+    validations:
+      required: true

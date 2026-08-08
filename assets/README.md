@@ -119,7 +119,9 @@ Career Cognition Compass
 一句话：
 
 ```text
-From career chaos to clarity and next actions
+From career chaos
+to evidence, judgment,
+and next actions.
 ```
 
 GitHub Social Preview 需要维护者手动在仓库设置中上传。README 不能自动设置 GitHub 社交预览图。

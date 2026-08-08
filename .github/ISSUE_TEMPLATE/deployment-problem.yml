@@ -1,0 +1,61 @@
+name: Deployment problem
+description: Report a setup problem with WorkBuddy, Feishu, Codex skills, copy-paste prompts, or another agent platform.
+title: "[Deployment]: "
+labels: ["deployment"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not submit API keys, tokens, passwords, private workspace URLs, credentials, or personal job-search materials.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 平台
+      options:
+        - WorkBuddy
+        - 飞书
+        - Codex / Claude Code Skill
+        - Prompt copy-paste
+        - Other Agent platform
+    validations:
+      required: true
+  - type: textarea
+    id: deployment
+    attributes:
+      label: 部署方式
+      placeholder: "Example: copied workbuddy/system-prompt-lite.md into a WorkBuddy agent"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: 使用 Lite / Full
+      options:
+        - Lite
+        - Full
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: 具体错误
+      description: Remove tokens, keys, workspace IDs, and private URLs.
+    validations:
+      required: true
+  - type: textarea
+    id: step
+    attributes:
+      label: 在哪一步失败？
+    validations:
+      required: true
+  - type: dropdown
+    id: reproducible
+    attributes:
+      label: 是否能复现？
+      options:
+        - Yes
+        - No
+        - Not sure
+    validations:
+      required: true

@@ -1,0 +1,31 @@
+name: Documentation
+description: Suggest a correction or clarification in the docs.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: 文档位置
+      placeholder: "Example: README.md, QUICKSTART.md, workbuddy/mainland-user-guide.md"
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: 哪里不清楚或不准确？
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 你建议怎么改？
+  - type: dropdown
+    id: privacy
+    attributes:
+      label: 是否包含敏感信息？
+      options:
+        - 不涉及
+        - 已脱敏
+    validations:
+      required: true
