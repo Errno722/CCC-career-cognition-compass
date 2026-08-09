@@ -34,13 +34,15 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 
 ## 网盘下载镜像
 
-如果用户不方便使用 GitHub，可以把同一批 release packages 上传到网盘。网盘不要直接放整个仓库目录，建议只放打包后的 ZIP 和说明文件：
+如果你访问 GitHub 不方便，可以使用下面的百度网盘镜像。网盘文件与同版本 GitHub Release 对应。
 
 **百度网盘镜像：** [打开 mirror](https://pan.baidu.com/s/1SYO4kyh8ccuImnhWIEJkjQ?pwd=2529)
 
 提取码：`2529`
 
 请优先下载带版本号的 ZIP。普通用户下载 `CCC-lite-pack-v0.1.0-beta.zip` 就够了。
+
+网盘文件夹内容：
 
 ```text
 CCC-v0.1.0-beta/
@@ -56,8 +58,6 @@ CCC-v0.1.0-beta/
 1. 普通用户优先下载 `CCC-lite-pack-v0.1.0-beta.zip`。
 2. WorkBuddy 用户下载 `CCC-workbuddy-pack-v0.1.0-beta.zip`。
 3. 维护者、开发者或想研究完整项目的人下载 `CCC-full-pack-v0.1.0-beta.zip`。
-
-不要覆盖旧版本。发布新版本时，把旧版本移入历史版本文件夹，并更新 `latest.txt`。
 
 ## 也可以直接复制
 
@@ -146,6 +146,8 @@ dist/mirror/CCC-v0.1.0-beta/CCC-full-pack-v0.1.0-beta.zip
 ```
 
 无版本号 ZIP 适合上传 GitHub Release 并配合 `/latest/download/` 直链使用；`dist/mirror/CCC-v0.1.0-beta/` 适合直接拖到网盘，带版本号 ZIP 解压后也会得到带版本号的目录，避免多版本同名覆盖。
+
+发布新版本时，不要覆盖旧版本。建议把旧版本移入网盘历史版本文件夹，并更新 `latest.txt`。
 
 上传到 GitHub Release 前，请确认：
 
