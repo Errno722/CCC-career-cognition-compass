@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  Use CCC in English for local, cross-region, or cross-market job searches.
+  From career chaos to evidence, judgment, and next actions.
 </p>
 
 <p align="center">
