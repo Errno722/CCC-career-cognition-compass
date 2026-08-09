@@ -12,9 +12,9 @@ It does not:
 - generate Smoke Reports
 - claim platform validation
 
-Use only synthetic, desensitized materials. Do not use real phone numbers, email addresses, resumes, offers, contracts, salary screenshots, confidential employer information, or complete interview records.
+Use only synthetic or fully redacted materials. Do not use real phone numbers, email addresses, resumes, offers, contracts, salary screenshots, confidential employer information, or complete interview records.
 
-## Flow A: English Domestic
+## Flow A: Domestic Job Search
 
 Scenario:
 
@@ -47,7 +47,7 @@ Here's a JD.
 
 Should:
 
-- stay focused on targeting, evidence, and interview signal
+- stay focused on targeting, evidence, and interview signals
 - use natural English
 - avoid full resume rewrites
 - give one next action
@@ -59,7 +59,7 @@ Should not:
 - call this international job search
 - introduce cross-market rules without reason
 
-## Flow B: English Cross-Market
+## Flow B: Cross-Market Job Search
 
 Scenario:
 
@@ -99,7 +99,7 @@ Should not:
 - assume US rules for UK applications
 - treat sponsorship as low candidate quality
 
-## Flow C: Domestic + Second-Language
+## Flow C: Domestic + Second-Language Communication
 
 Scenario:
 

@@ -13,7 +13,7 @@
 
 - [synthetic-user-profile.md](synthetic-user-profile.md)：完全虚构的测试用户背景。
 - [test-scenarios.md](test-scenarios.md)：6 个连续使用场景。
-- [english-edition-smoke-plan.md](english-edition-smoke-plan.md)：英文版人工连续体验测试计划。
+- [english-edition-usability-plan.md](english-edition-usability-plan.md)：英文版人工连续体验测试计划。
 - [observation-template.md](observation-template.md)：单轮观察记录模板。
 - [friction-log.md](friction-log.md)：体验摩擦登记表。
 - [demo-script.md](demo-script.md)：30-60 秒演示脚本。
