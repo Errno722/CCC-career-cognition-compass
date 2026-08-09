@@ -35,6 +35,18 @@ CCC-workbuddy-pack.zip
 CCC-full-pack.zip
 ```
 
+For netdisk mirrors, upload the versioned files generated from `VERSION`:
+
+```text
+CCC-lite-pack-v0.1.0-beta.zip
+CCC-workbuddy-pack-v0.1.0-beta.zip
+CCC-full-pack-v0.1.0-beta.zip
+latest.txt
+先看我.txt
+```
+
+GitHub Release is the source of truth. Netdisk folders are download mirrors only.
+
 ## Pre-release checks
 
 ```bash

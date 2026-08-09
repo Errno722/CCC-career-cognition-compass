@@ -6,6 +6,7 @@ const repoRoot = process.cwd();
 const distDir = path.join(repoRoot, "dist");
 const stagingDir = path.join(distDir, "release-staging");
 const outputDir = path.join(distDir, "release");
+const versionFile = path.join(repoRoot, "VERSION");
 
 const packages = [
   {
@@ -17,6 +18,7 @@ const packages = [
       "QUICKSTART.en.md",
       "DEMO.en.md",
       "DOWNLOADS.md",
+      "VERSION",
       "prompts/copy-paste-prompt-lite-cn.md",
       "prompts/copy-paste-prompt-lite-en.md",
       "SECURITY.md",
@@ -33,6 +35,7 @@ const packages = [
       "QUICKSTART.en.md",
       "DEMO.en.md",
       "DOWNLOADS.md",
+      "VERSION",
       "workbuddy/README.md",
       "workbuddy/mainland-user-guide.md",
       "workbuddy/system-prompt-lite.md",
@@ -101,6 +104,24 @@ function ensureExists(relativePath) {
   if (!fs.existsSync(absolutePath)) {
     throw new Error(`Missing release source: ${relativePath}`);
   }
+}
+
+function readReleaseVersion() {
+  if (!fs.existsSync(versionFile)) {
+    throw new Error("Missing VERSION file.");
+  }
+
+  const version = fs.readFileSync(versionFile, "utf8").trim();
+
+  if (!/^v?[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/.test(version)) {
+    throw new Error(`Invalid VERSION value: ${version}`);
+  }
+
+  return version;
+}
+
+function toVersionTag(version) {
+  return version.startsWith("v") ? version : `v${version}`;
 }
 
 function shouldExclude(relativePath) {
@@ -181,17 +202,95 @@ function zipPackage(packageName) {
   return zipPath;
 }
 
+function copyVersionedZip(zipPath, packageName, versionTag) {
+  const versionedZipPath = path.join(outputDir, `${packageName}-${versionTag}.zip`);
+  fs.copyFileSync(zipPath, versionedZipPath);
+  return versionedZipPath;
+}
+
+function writeDistributionNotes(versionTag) {
+  const latestPath = path.join(outputDir, "latest.txt");
+  const readmePath = path.join(outputDir, "先看我.txt");
+  const today = new Date().toISOString().slice(0, 10);
+
+  fs.writeFileSync(
+    latestPath,
+    [
+      `Current version: ${versionTag}`,
+      `Updated: ${today}`,
+      "",
+      "Recommended for most users:",
+      `CCC-lite-pack-${versionTag}.zip`,
+      "",
+      "Official source of truth:",
+      "GitHub - Errno722/CCC-career-cognition-compass",
+      "",
+      "Netdisk files are download mirrors of the GitHub Release packages."
+    ].join("\n") + "\n",
+    "utf8"
+  );
+
+  fs.writeFileSync(
+    readmePath,
+    [
+      "CCC — Career Cognition Compass",
+      "",
+      `当前版本：${versionTag}`,
+      "",
+      "如果你只是想马上试用：",
+      `下载 CCC-lite-pack-${versionTag}.zip`,
+      "",
+      "如果你使用 WorkBuddy：",
+      `下载 CCC-workbuddy-pack-${versionTag}.zip`,
+      "",
+      "如果你想研究完整项目、Skills、Evals 和脚本：",
+      `下载 CCC-full-pack-${versionTag}.zip`,
+      "",
+      "项目仍处于 Beta / Active Development。",
+      "",
+      "官方最新版本和更新记录：",
+      "GitHub: Errno722/CCC-career-cognition-compass",
+      "",
+      "注意：",
+      "请不要向 CCC 上传身份证、护照、签证文件号、完整 Offer、",
+      "合同、薪资截图、私人联系方式或公司内部资料。",
+      "",
+      "English:",
+      `Current version: ${versionTag}`,
+      "",
+      "If you just want to try CCC, download:",
+      `CCC-lite-pack-${versionTag}.zip`,
+      "",
+      "If you use WorkBuddy, download:",
+      `CCC-workbuddy-pack-${versionTag}.zip`,
+      "",
+      "If you want the full public project, download:",
+      `CCC-full-pack-${versionTag}.zip`,
+      "",
+      "Please use only synthetic or fully redacted materials."
+    ].join("\n") + "\n",
+    "utf8"
+  );
+
+  return [latestPath, readmePath];
+}
+
 function packageRelease() {
   const zipCheck = spawnSync("zip", ["-v"], { stdio: "ignore" });
   if (zipCheck.error || zipCheck.status !== 0) {
     throw new Error("The `zip` command is required to build release packages.");
   }
 
+  const version = readReleaseVersion();
+  const versionTag = toVersionTag(version);
+
   fs.rmSync(stagingDir, { recursive: true, force: true });
+  fs.rmSync(outputDir, { recursive: true, force: true });
   fs.mkdirSync(stagingDir, { recursive: true });
   fs.mkdirSync(outputDir, { recursive: true });
 
   const outputs = [];
+  const versionedOutputs = [];
 
   for (const releasePackage of packages) {
     const packageRoot = path.join(stagingDir, releasePackage.name);
@@ -201,13 +300,17 @@ function packageRelease() {
       copyEntry(file, packageRoot);
     }
 
-    outputs.push(zipPackage(releasePackage.name));
+    const zipPath = zipPackage(releasePackage.name);
+    outputs.push(zipPath);
+    versionedOutputs.push(copyVersionedZip(zipPath, releasePackage.name, versionTag));
   }
+
+  const distributionNotes = writeDistributionNotes(versionTag);
 
   fs.rmSync(stagingDir, { recursive: true, force: true });
 
-  console.log("release packages created:");
-  for (const output of outputs) {
+  console.log(`release packages created for ${versionTag}:`);
+  for (const output of [...outputs, ...versionedOutputs, ...distributionNotes]) {
     const relativePath = path.relative(repoRoot, output);
     const sizeKb = Math.ceil(fs.statSync(output).size / 1024);
     console.log(`- ${relativePath} (${sizeKb} KB)`);
