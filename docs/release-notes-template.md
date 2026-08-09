@@ -35,17 +35,18 @@ CCC-workbuddy-pack.zip
 CCC-full-pack.zip
 ```
 
-For netdisk mirrors, upload the versioned files generated from `VERSION`:
+For netdisk mirrors, upload the generated mirror folder:
 
 ```text
-CCC-lite-pack-v0.1.0-beta.zip
-CCC-workbuddy-pack-v0.1.0-beta.zip
-CCC-full-pack-v0.1.0-beta.zip
-latest.txt
-先看我.txt
+dist/mirror/CCC-v0.1.0-beta/
+├─ 先看我.txt
+├─ latest.txt
+├─ CCC-lite-pack-v0.1.0-beta.zip
+├─ CCC-workbuddy-pack-v0.1.0-beta.zip
+└─ CCC-full-pack-v0.1.0-beta.zip
 ```
 
-GitHub Release is the source of truth. Netdisk folders are download mirrors only.
+Version chain: `VERSION` defines the build version; GitHub Release is the official distribution channel; netdisk folders are download mirrors only.
 
 ## Pre-release checks
 

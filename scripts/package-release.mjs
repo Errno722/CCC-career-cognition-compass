@@ -6,6 +6,7 @@ const repoRoot = process.cwd();
 const distDir = path.join(repoRoot, "dist");
 const stagingDir = path.join(distDir, "release-staging");
 const outputDir = path.join(distDir, "release");
+const mirrorDir = path.join(distDir, "mirror");
 const versionFile = path.join(repoRoot, "VERSION");
 
 const packages = [
@@ -202,15 +203,41 @@ function zipPackage(packageName) {
   return zipPath;
 }
 
-function copyVersionedZip(zipPath, packageName, versionTag) {
-  const versionedZipPath = path.join(outputDir, `${packageName}-${versionTag}.zip`);
-  fs.copyFileSync(zipPath, versionedZipPath);
-  return versionedZipPath;
+function zipDirectory(directoryName, outputDirectory, zipName) {
+  const zipPath = path.join(outputDirectory, zipName);
+  fs.rmSync(zipPath, { force: true });
+
+  const result = spawnSync("zip", ["-qr", zipPath, directoryName], {
+    cwd: stagingDir,
+    stdio: "pipe"
+  });
+
+  if (result.status !== 0) {
+    const stderr = result.stderr.toString().trim();
+    throw new Error(`zip failed for ${zipName}${stderr ? `: ${stderr}` : ""}`);
+  }
+
+  return zipPath;
 }
 
-function writeDistributionNotes(versionTag) {
-  const latestPath = path.join(outputDir, "latest.txt");
-  const readmePath = path.join(outputDir, "先看我.txt");
+function zipVersionedPackage(packageName, versionTag, mirrorPackageDir) {
+  const versionedPackageName = `${packageName}-${versionTag}`;
+  const sourceRoot = path.join(stagingDir, packageName);
+  const versionedRoot = path.join(stagingDir, versionedPackageName);
+
+  fs.rmSync(versionedRoot, { recursive: true, force: true });
+  fs.cpSync(sourceRoot, versionedRoot, { recursive: true });
+
+  return zipDirectory(
+    versionedPackageName,
+    mirrorPackageDir,
+    `${versionedPackageName}.zip`
+  );
+}
+
+function writeDistributionNotes(versionTag, mirrorPackageDir) {
+  const latestPath = path.join(mirrorPackageDir, "latest.txt");
+  const readmePath = path.join(mirrorPackageDir, "先看我.txt");
   const today = new Date().toISOString().slice(0, 10);
 
   fs.writeFileSync(
@@ -222,10 +249,13 @@ function writeDistributionNotes(versionTag) {
       "Recommended for most users:",
       `CCC-lite-pack-${versionTag}.zip`,
       "",
-      "Official source of truth:",
-      "GitHub - Errno722/CCC-career-cognition-compass",
+      "Build version source:",
+      `VERSION -> ${versionTag}`,
       "",
-      "Netdisk files are download mirrors of the GitHub Release packages."
+      "Official source of truth:",
+      "GitHub Release - Errno722/CCC-career-cognition-compass",
+      "",
+      "Netdisk files are download mirrors of the same release packages."
     ].join("\n") + "\n",
     "utf8"
   );
@@ -248,12 +278,15 @@ function writeDistributionNotes(versionTag) {
       "",
       "项目仍处于 Beta / Active Development。",
       "",
-      "官方最新版本和更新记录：",
-      "GitHub: Errno722/CCC-career-cognition-compass",
+      "版本关系：",
+      `VERSION 决定构建版本：${versionTag}`,
+      "GitHub Release 是官方公开发行渠道。",
+      "百度网盘是同一批 Release 文件的国内下载镜像。",
       "",
       "注意：",
       "请不要向 CCC 上传身份证、护照、签证文件号、完整 Offer、",
       "合同、薪资截图、私人联系方式或公司内部资料。",
+      "你可以使用自己的真实经历，但请先删除敏感个人信息和雇主机密信息。",
       "",
       "English:",
       `Current version: ${versionTag}`,
@@ -267,7 +300,13 @@ function writeDistributionNotes(versionTag) {
       "If you want the full public project, download:",
       `CCC-full-pack-${versionTag}.zip`,
       "",
-      "Please use only synthetic or fully redacted materials."
+      "Version chain:",
+      `VERSION defines the build version: ${versionTag}`,
+      "GitHub Release is the official distribution channel.",
+      "Netdisk is a download mirror of the same release files.",
+      "",
+      "You may use your real experience with CCC, but redact sensitive personal and employer information first.",
+      "Do not share identity document numbers, private contact details, full offer letters, contracts, salary screenshots, or confidential company information."
     ].join("\n") + "\n",
     "utf8"
   );
@@ -283,11 +322,14 @@ function packageRelease() {
 
   const version = readReleaseVersion();
   const versionTag = toVersionTag(version);
+  const mirrorPackageDir = path.join(mirrorDir, `CCC-${versionTag}`);
 
   fs.rmSync(stagingDir, { recursive: true, force: true });
   fs.rmSync(outputDir, { recursive: true, force: true });
+  fs.rmSync(mirrorDir, { recursive: true, force: true });
   fs.mkdirSync(stagingDir, { recursive: true });
   fs.mkdirSync(outputDir, { recursive: true });
+  fs.mkdirSync(mirrorPackageDir, { recursive: true });
 
   const outputs = [];
   const versionedOutputs = [];
@@ -302,10 +344,12 @@ function packageRelease() {
 
     const zipPath = zipPackage(releasePackage.name);
     outputs.push(zipPath);
-    versionedOutputs.push(copyVersionedZip(zipPath, releasePackage.name, versionTag));
+    versionedOutputs.push(
+      zipVersionedPackage(releasePackage.name, versionTag, mirrorPackageDir)
+    );
   }
 
-  const distributionNotes = writeDistributionNotes(versionTag);
+  const distributionNotes = writeDistributionNotes(versionTag, mirrorPackageDir);
 
   fs.rmSync(stagingDir, { recursive: true, force: true });
 

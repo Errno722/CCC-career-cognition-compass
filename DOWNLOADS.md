@@ -10,7 +10,7 @@
 | 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` / `CCC-workbuddy-pack-v0.1.0-beta.zip` 或复制 [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
 | 想研究完整项目 | `CCC-full-pack.zip` / `CCC-full-pack-v0.1.0-beta.zip` |
 
-GitHub Releases 是官方版本源；网盘只作为国内下载镜像。版本以 [VERSION](VERSION) 和 GitHub Release 为准。
+版本关系： [VERSION](VERSION) 决定构建版本；GitHub Release 是官方公开发行渠道；网盘是同一批 Release 文件的国内下载镜像。
 
 ## Release 下载
 
@@ -36,13 +36,9 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 
 如果用户不方便使用 GitHub，可以把同一批 release packages 上传到网盘。网盘不要直接放整个仓库目录，建议只放打包后的 ZIP 和说明文件：
 
-当前国内下载镜像：
+**百度网盘镜像：** [打开 CCC-release](https://pan.baidu.com/s/1uk67NDyEDfQB26YHIDB8yw?pwd=g7q1)
 
-```text
-百度网盘：CCC-release
-链接：https://pan.baidu.com/s/1uk67NDyEDfQB26YHIDB8yw?pwd=g7q1
-提取码：g7q1
-```
+提取码：`g7q1`
 
 请优先下载带版本号的 ZIP。普通用户下载 `CCC-lite-pack-v0.1.0-beta.zip` 就够了。
 
@@ -142,14 +138,14 @@ node scripts/package-release.mjs
 dist/release/CCC-lite-pack.zip
 dist/release/CCC-workbuddy-pack.zip
 dist/release/CCC-full-pack.zip
-dist/release/CCC-lite-pack-v0.1.0-beta.zip
-dist/release/CCC-workbuddy-pack-v0.1.0-beta.zip
-dist/release/CCC-full-pack-v0.1.0-beta.zip
-dist/release/latest.txt
-dist/release/先看我.txt
+dist/mirror/CCC-v0.1.0-beta/先看我.txt
+dist/mirror/CCC-v0.1.0-beta/latest.txt
+dist/mirror/CCC-v0.1.0-beta/CCC-lite-pack-v0.1.0-beta.zip
+dist/mirror/CCC-v0.1.0-beta/CCC-workbuddy-pack-v0.1.0-beta.zip
+dist/mirror/CCC-v0.1.0-beta/CCC-full-pack-v0.1.0-beta.zip
 ```
 
-无版本号 ZIP 适合上传 GitHub Release 并配合 `/latest/download/` 直链使用；带版本号 ZIP 适合上传网盘，避免用户下载后不知道具体版本。
+无版本号 ZIP 适合上传 GitHub Release 并配合 `/latest/download/` 直链使用；`dist/mirror/CCC-v0.1.0-beta/` 适合直接拖到网盘，带版本号 ZIP 解压后也会得到带版本号的目录，避免多版本同名覆盖。
 
 上传到 GitHub Release 前，请确认：
 
