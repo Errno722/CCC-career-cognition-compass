@@ -134,6 +134,16 @@ high repeated feedback
 └─ 才考虑调整主简历、候选人叙事或投递范围。
 ```
 
+For employed users with limited after-work energy, prefer the smallest material path:
+
+```text
+Master Resume
+└─ Role Family Resume
+   └─ JD Patch
+```
+
+Do not ask them to rebuild all materials for early market exploration. If one Role Family is already producing replies or interviews and there is no repeated resume-level negative feedback, suggest a temporary Resume Freeze and only patch the current JD.
+
 ## Resume Scope
 
 Include these common sections when creating a resume draft or template:

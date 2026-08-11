@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const ignoredDirs = new Set([".git", "node_modules", "private", "career-materials", "portable", "marketing", "screenshots"]);
+const ignoredDirs = new Set([".git", "node_modules", "dist", "private", "career-materials", "portable", "marketing", "screenshots"]);
 const markdownFiles = [];
 
 function walk(dir) {

@@ -2530,6 +2530,28 @@
         "建议用户因为少量失败就重写全部简历或继续做多份相近简历。"
       ]
     },
+    "keeps_employed_exploration_reversible": {
+      "type": "must",
+      "severity": "high",
+      "description": "When an employed user only wants to explore the market, the assistant keeps the process reversible and does not treat exploration as a resignation decision.",
+      "pass_criteria": [
+        "The output frames market exploration as validation or observation, preserves options such as staying, internal transfer, negotiation, or small-scale search, and avoids turning the request into a resignation plan."
+      ],
+      "fail_signals": [
+        "The output assumes the user should resign, prepares a resignation plan, or treats exploratory applications as a final decision to leave."
+      ]
+    },
+    "respects_employed_user_energy_budget": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant scopes job-search actions to the employed user's stated available time and recovery capacity instead of prescribing a full-scale job search.",
+      "pass_criteria": [
+        "The output explicitly uses the available weekly time or fatigue signal to limit the plan, reduce tailoring load, and choose one small next action or a small batch."
+      ],
+      "fail_signals": [
+        "The output asks for daily mass applications, full resume rewrites, multiple parallel tracks, or an unrealistic schedule that ignores the user's after-work fatigue."
+      ]
+    },
     "does_not_assume_target_country": {
       "type": "must",
       "severity": "high",
@@ -2763,6 +2785,8 @@
     "uses_sample_size_gate",
     "avoids_direction_reset_from_small_sample",
     "avoids_unnecessary_resume_rewrite",
+    "keeps_employed_exploration_reversible",
+    "respects_employed_user_energy_budget",
     "does_not_assume_target_country",
     "treats_sponsorship_as_constraint_not_fit",
     "uses_minimum_necessary_work_authorization_info",

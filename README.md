@@ -38,6 +38,8 @@ CCC 是一个开源求职认知与行动工作流。
 
 > “我看了很多岗位，还是不知道该投哪一个。”
 
+> “我现在还在职，但越来越累，也不知道是该继续撑、开始找工作，还是先看看市场。”
+
 > “每个 JD 都像要重新改一份简历，我已经不想改了。”
 
 > “面试官问我：你的判断是什么？我发现我只会复述模型结果。”
@@ -56,6 +58,8 @@ CCC 是一个开源求职认知与行动工作流。
 | 面试一追问就空 | Judgment / Methodology 深挖 |
 | 投了、面了，但没有结果 | Funnel + Signal / Pattern 判断 |
 | 收到 Offer 不知道怎么选 | Offer 比较 + 谈判 + 决策闭环 |
+
+也支持在职换工作、离职犹豫、在职小规模看机会，以及当前工作 vs 新 Offer 的比较。
 
 查看全部能力：[docs/full-guide.md](docs/full-guide.md)
 
@@ -163,7 +167,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-42 behavior contracts · deterministic eval runner · public smoke testing pending
+43 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -179,21 +183,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：42
-机器可读合约：42
-已登记语义断言：238
-已人工细化核心 Rubric：131
+手工测试场景：43
+机器可读合约：43
+已登记语义断言：240
+已人工细化核心 Rubric：133
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/42
-Runner 执行覆盖：0/42
-公开平台覆盖：0/42
-Runner 唯一通过：0/42
-公开唯一通过：0/42
-已验证 Runner 通过：0/42
-公开已验证通过：0/42
+声明唯一覆盖：0/43
+Runner 执行覆盖：0/43
+公开平台覆盖：0/43
+Runner 唯一通过：0/43
+公开唯一通过：0/43
+已验证 Runner 通过：0/43
+公开已验证通过：0/43
 语义已审次数：0
 评估对象：assistant_output_only
 ```

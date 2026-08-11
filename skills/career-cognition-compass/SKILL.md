@@ -1,7 +1,7 @@
 ---
 name: career-cognition-compass
 description: >-
-  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, judgment trace, methodology trace, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, job-search friction, application/interview funnel review, action planning, Gap, work fatigue, resignation uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
+  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, judgment trace, methodology trace, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, job-search friction, application/interview funnel review, action planning, Gap, employed market exploration, work fatigue, resignation uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
 ---
 
 # CCC
@@ -41,6 +41,9 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 - 所有任务规划默认不超过 14 天，并按用户可用时间和精力状态安排。用户投完简历但还没反馈时，进入投递后空档期计划；用户已经收到面试邀约时，进入面试邀约信号画像，判断哪些岗位/JD 特征更容易得到回复，避免反复刷新、过度改简历或无目的刷社媒。
 - 情绪波动时先降低行动颗粒度。先帮用户恢复一点可控感，再处理岗位、简历或投递。
 - 在职用户因工作感到焦虑、累、快撑不住时，先做压力来源和可恢复性判断，再讨论跳槽、离职或裸辞；不要直接推简历或给离职结论。
+- 在职用户不是单一“想离职”场景。先判断本轮是工作消耗、离职犹豫、市场探索、求职精力限制、正在面试，还是 Offer 决策；不要把“先看看市场”升级成离职计划。
+- 在职探索 / 骑驴找马时，默认可逆的小规模市场验证：1 个主 Role Family、1 份 Role Family Resume、5-10 个相关 JD、观察回复和 JD 信号，再决定是否扩大、换方向、暂时不辞职、内部转岗或谈边界。
+- 在职求职必须服从精力预算。低能量时本周只保留 1 个主动作；中等能量时简历补丁 + 3-5 个岗位；高能量时再加入面试准备、复盘和投递节奏。每轮最多推进 1 个主任务。
 - 区分 `confirmed`、`needs_confirmation`、`inference`、`user_preference`。不要把推断写成事实。
 - 语言要职业、克制、可验证；不要夸大，不把参与写成主导，不把了解写成熟练。
 - 建立用户自己的术语表。遇到 `SP`、`PM`、`AI`、`LLM` 这类可能跨行业变义的缩写，先结合语境判断，关键处再确认。
@@ -85,18 +88,19 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 8. **搭知识库。** 从用户已有信息和项目事实里建立按硬技能分类的轻量知识库和术语表，标记已掌握、待确认、需要补证据和面试卡点。
 9. **翻译能力。** 只把 `EVIDENCE_READY` 的经历和项目拆成证据、行为、能力、岗位信号，再结合近期工作行为偏好推导最多 3 个方向。未完成项目只能作为待补证据。
 10. **校准现实。** 结合市场需求、行业/公司类型、校招/社招/海外/在职/GAP 处境和用户约束，判断哪些方向适合先验证。
-11. **选择节奏。** 进入职业澄清模式、焦虑降噪模式、情绪稳定模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
-12. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
-13. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
-14. **JD 岗位类型判断。** 拆解 JD 时先输出岗位类型判断卡：岗位族群、工作重心、判断依据、置信度、容易误判和用户准备重点。若 JD 是混合岗，例如产品助理 + 产品执行 + 需求协作，不要强行归成纯产品经理。
-15. **求职摩擦与反馈循环。** 如果用户看了很多 JD、不知道投什么、不想改简历、反复改材料、投递/面试没结果后想重置方向，先进入 job-search-plan-review 和 career-direction-clarifier：判断摩擦来源，做 Role Family 聚类，选择 7 天主验证方向，启用 Minimal Tailoring Mode，检查 Application Funnel / Interview Funnel 和 Sample Size Gate。
-16. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新候选人面试资料卡补丁和知识库，并输出简历/面试/JD 方向的小修改。若反馈指向表达不清、细节太多、STAR 用不好、项目为什么这么做讲不清，或问题解决思路单一，同步输出面试表达结构卡和五层追问：Execution → Reasoning → Judgment → Trade-off → Methodology。复盘结尾必须提醒用户：这次面试是数据点，不是最终判决；不要停留在已发生的事太久，下一步转向下一个可能机会或今天一个查缺补漏动作。二面/三面准备时，先读取用户带回的候选人面试资料卡，判断本轮继承、不继承和需要重置的侧重点。已知面试官角色时，同步输出面试官角色回答卡：按 HR、用人经理、业务负责人、技术面试官、高管、Founder 或跨部门角色调整回答侧重点。角色映射只是准备启发，事实不变，只改变前置重点和表达角度。
-17. **投递后空档期。** 如果用户已经投完一批简历但还没有面试/反馈，进入 job-search-plan-review：复盘投递质量、整理 JD 共性、补一个可复用资产，并给今天 5-20 分钟动作；如果用户开始反复重写主简历，先判断是否应该 Resume Freeze。
-18. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
-19. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
-20. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；在建议取消其他流程或离职前，先确认正式书面 Offer、核心条件、前置审批 / 背调 / 签证和 start date。普通无持久化环境不要声称已保存。
-21. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、面试复盘卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
-22. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
+11. **在职路径判断。** 如果用户还在职，先判断是工作消耗、离职犹豫、市场探索、求职精力不足、正在面试还是 Offer 决策。只有当前工作状态会影响策略时，输出在职状态卡；用户只是想看看市场时，默认小规模验证，不进入离职计划。
+12. **选择节奏。** 进入职业澄清模式、焦虑降噪模式、情绪稳定模式、在职探索模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
+13. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
+14. **版本隔离。** 如果用户切换 JD 或岗位族群，先检查上一版简历是否带有特定岗位偏向；保留事实，重置不适合新 JD 的表达。
+15. **JD 岗位类型判断。** 拆解 JD 时先输出岗位类型判断卡：岗位族群、工作重心、判断依据、置信度、容易误判和用户准备重点。若 JD 是混合岗，例如产品助理 + 产品执行 + 需求协作，不要强行归成纯产品经理。
+16. **求职摩擦与反馈循环。** 如果用户看了很多 JD、不知道投什么、不想改简历、反复改材料、投递/面试没结果后想重置方向，先进入 job-search-plan-review 和 career-direction-clarifier：判断摩擦来源，做 Role Family 聚类，选择 7 天主验证方向，启用 Minimal Tailoring Mode，检查 Application Funnel / Interview Funnel 和 Sample Size Gate。
+17. **面试复盘。** 如果用户刚面试完、只记得关键词、收到“xx 经验不足”等面试官反馈，先进入 interview-review-miner：还原可能题型、判断反馈信号、记录来源类型、来源岗位、可信度和重复次数，更新候选人面试资料卡补丁和知识库，并输出简历/面试/JD 方向的小修改。若反馈指向表达不清、细节太多、STAR 用不好、项目为什么这么做讲不清，或问题解决思路单一，同步输出面试表达结构卡和五层追问：Execution → Reasoning → Judgment → Trade-off → Methodology。复盘结尾必须提醒用户：这次面试是数据点，不是最终判决；不要停留在已发生的事太久，下一步转向下一个可能机会或今天一个查缺补漏动作。二面/三面准备时，先读取用户带回的候选人面试资料卡，判断本轮继承、不继承和需要重置的侧重点。已知面试官角色时，同步输出面试官角色回答卡：按 HR、用人经理、业务负责人、技术面试官、高管、Founder 或跨部门角色调整回答侧重点。角色映射只是准备启发，事实不变，只改变前置重点和表达角度。
+18. **投递后空档期。** 如果用户已经投完一批简历但还没有面试/反馈，进入 job-search-plan-review：复盘投递质量、整理 JD 共性、补一个可复用资产，并给今天 5-20 分钟动作；如果用户开始反复重写主简历，先判断是否应该 Resume Freeze。
+19. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
+20. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
+21. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；在建议取消其他流程或离职前，先确认正式书面 Offer、核心条件、前置审批 / 背调 / 签证和 start date。普通无持久化环境不要声称已保存。
+22. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、在职状态卡、在职市场验证卡、在职精力预算卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、面试复盘卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
+23. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
 
 ## Project Fact Gate
 
@@ -149,6 +153,34 @@ EVIDENCE_READY
 
 If the user has several projects, first make a project inventory. Do not deep-mine only the first project unless the user explicitly chooses it.
 
+## Employed Job Search Path
+
+Use this path when the user is currently employed and the current job may affect job-search strategy, energy, risk, or offer decisions. Do not treat all employed users as resignation cases.
+
+```text
+在职状态卡
+├─ 当前最主要的问题: 工作消耗 / 离职犹豫 / 市场探索 / 求职精力限制 / 正在面试 / Offer 决策
+├─ 已知现职状态:
+├─ 每周可用于求职的时间:
+├─ 是否已投递 / 面试 / 收到 Offer:
+├─ 当前工作是否存在明显风险:
+├─ 本轮主线:
+├─ 暂存:
+└─ 下一步 5-20 分钟动作:
+```
+
+Only output this card when it helps the current task. Otherwise keep it as internal triage.
+
+Rules:
+
+- Separate current-work exhaustion from job-search exhaustion and direction anxiety.
+- If the user only wants to explore the market, keep the process reversible: one Role Family, one Role Family Resume, 5-10 relevant JDs, then observe reply and JD signals.
+- If the user has limited after-work energy, set an energy budget before planning. Low energy means one main action this week; medium energy means resume patch plus 3-5 roles; high energy may add interview prep or review.
+- Do not require a complete resume rewrite, daily mass applications, or multiple simultaneous job-search tracks.
+- For employed privacy, avoid non-public company materials, internal docs, customer data, internal pay/contract screenshots, and sensitive screenshots. Use placeholders such as `[公司A]`, `[客户A]`, `[项目A]`, `[内部系统]`, or `[数据已脱敏]`.
+- Stay within career support. Do not become workplace consulting, management consulting, labor-law advice, or therapy unless a narrow boundary affects staying, job search, work boundaries, offer decisions, or safety.
+- Treat "暂时不辞职" as a valid outcome when the current evidence supports staying, observing, internal transfer, negotiation, recovery, or small-scale validation.
+
 ## Companion Skill Routing
 
 When the task is narrow, use the precise companion skill instead of loading this whole umbrella workflow:
@@ -188,7 +220,7 @@ offer-decision-support
 ├─ single-offer decision, multi-offer comparison, offer vs current job, offer vs continue search, formal/pending opportunity distinction, employment type, hard constraints, major risks, trade-offs, decision-flipping unknowns, negotiation readiness, HR/manager clarification questions, accept/reject/continue-search closure, current-cycle screening preferences
 
 career-stability-bridge
-└─ long Gap distress, low energy, work fatigue, resignation uncertainty, bridge/part-time work
+└─ long Gap distress, low energy, work fatigue, employed market exploration, resignation uncertainty, energy budgeting, bridge/part-time work
 ```
 
 Use this umbrella skill when the user asks for the whole process, needs multiple modules at once, or is still too unclear to route safely.
@@ -209,6 +241,9 @@ Use this umbrella skill when the user asks for the whole process, needs multiple
 职业画像卡
 发散收束卡
 近期工作行为定位卡
+在职状态卡
+在职市场验证卡
+在职精力预算卡
 项目总表
 项目事实完整度检查
 项目事实卡

@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 42,
+  "manual_case_count": 43,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2148,6 +2148,83 @@
           "equate_sponsorship_need_with_low_candidate_quality",
           "request_sensitive_data",
           "overstate_english_fluency_or_ability"
+        ]
+      }
+    },
+    {
+      "id": "employed-market-exploration-001",
+      "title": "在职市场探索",
+      "manual_case_id": 43,
+      "input": "我现在还在职，没有决定离职，只是想先看看外面的机会。下班后比较累，每周大概只能拿出三四个小时求职。我是不是应该先把简历全部重写，然后每天大量投递？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-stability-bridge",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "career-direction-clarifier",
+            "career-materials-builder",
+            "job-search-plan-review"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "在职探索",
+            "市场探索",
+            "看看外面的机会",
+            "先看看市场"
+          ],
+          [
+            "三四个小时",
+            "3-4 小时",
+            "3–4 小时",
+            "每周 3-4",
+            "每周三四"
+          ],
+          [
+            "Role Family",
+            "岗位族群",
+            "主方向",
+            "主要方向"
+          ],
+          [
+            "Role Family Resume",
+            "岗位方向简历",
+            "岗位族群简历"
+          ],
+          [
+            "JD Patch",
+            "简历补丁",
+            "小补丁"
+          ],
+          [
+            "小规模",
+            "小批量",
+            "验证"
+          ],
+          [
+            "下一步",
+            "小动作",
+            "最小动作"
+          ]
+        ],
+        "literal_not_contains": [],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1300
+        },
+        "semantic_assertions": [
+          "keeps_employed_exploration_reversible",
+          "respects_employed_user_energy_budget",
+          "uses_minimal_tailoring_mode",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "decide_resignation_for_user",
+          "avoids_unnecessary_resume_rewrite",
+          "create_overwhelming_multi_track_plan"
         ]
       }
     }

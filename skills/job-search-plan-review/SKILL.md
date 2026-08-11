@@ -1,7 +1,7 @@
 ---
 name: job-search-plan-review
 description: >-
-  Short job-search planning and review. Use when the user needs a plan based on available time, daily/weekly review, application tracking, application friction diagnosis, post-application idle-period planning after submitting resumes, no-outcome funnel diagnosis, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, Resume Freeze, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
+  Short job-search planning and review. Use when the user needs a plan based on available time, daily/weekly review, application tracking, application friction diagnosis, employed market exploration with limited after-work energy, post-application idle-period planning after submitting resumes, no-outcome funnel diagnosis, pure interview waiting structure, HR follow-up timing or wording, role evaluation while waiting, rejection recovery, next 1-3 actions, social-media information control, Resume Freeze, or a habit-building job-search rhythm. For interview keywords, partial questions, interviewer feedback such as "X experience is insufficient", and resume/interview-direction updates after an interview, use interview-review-miner instead. Keep plans within 14 days and adapt to energy, cashflow, deadlines, and current job constraints.
   Also use when the user wants to summarize interview invitations received, compare invited roles/JDs with no-response applications, build an interview-invitation signal profile, and decide which role families or JD traits are more likely to get replies. For detailed JD skill analysis, use jd-company-prep as a helper.
 ---
 
@@ -29,6 +29,7 @@ Core principle:
 - Default to a maximum of 14 days.
 - Ask for available time if missing: hours per day/week, weekdays/weekends, interview dates, current job/class constraints, cashflow deadline, and energy level.
 - If the user is low energy, give one 5-20 minute action instead of a full plan.
+- If the user is employed and only exploring the market, keep the plan reversible: one Role Family, one Role Family Resume, one small JD batch, then review signals.
 - Prefer 1-3 actions per day or review cycle.
 - If the user is trying to pursue many branches at once, set an active-track limit: 1 main track, 1 optional secondary track, and a parking lot for the rest.
 - If the user is anxious, do not respond with motivational slogans. Use anxiety as a planning signal: identify the trigger, separate controllable from uncontrollable items, set an information-intake boundary, and give one small action.
@@ -58,6 +59,8 @@ Use modes:
 面试邀约信号画像
 求职摩擦与反馈循环
 无结果诊断
+在职市场探索
+在职精力预算
 ```
 
 If the user is over-diverging, output this before any plan:
