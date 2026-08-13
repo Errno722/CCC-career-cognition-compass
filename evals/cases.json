@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 43,
+  "manual_case_count": 44,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2225,6 +2225,80 @@
           "decide_resignation_for_user",
           "avoids_unnecessary_resume_rewrite",
           "create_overwhelming_multi_track_plan"
+        ]
+      }
+    },
+    {
+      "id": "recruiter-pre-interview-reply-001",
+      "title": "HR 面试前筛选问题回复",
+      "manual_case_id": 44,
+      "input": "HR 在 Boss 上问我：\n“您好，请问您目前是在职吗？为什么考虑看新的机会？如果流程合适，大概多久可以到岗？”\n\n我的情况：\n- 目前在职\n- 主要想找更偏产品运营和数据分析的岗位\n- 正常需要一个月左右交接\n\n帮我回一下，别写得太像模板。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "job-search-plan-review",
+            "jd-company-prep"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "可以直接回",
+            "可以这样回",
+            "可以回"
+          ],
+          [
+            "目前在职",
+            "现在在职",
+            "还在职"
+          ],
+          [
+            "产品运营",
+            "数据分析"
+          ],
+          [
+            "一个月左右",
+            "1 个月左右",
+            "一个月"
+          ],
+          [
+            "别写得太像模板",
+            "自然",
+            "不太模板"
+          ]
+        ],
+        "literal_not_contains": [
+          "版本一",
+          "版本二",
+          "首先",
+          "其次",
+          "最后",
+          "非常荣幸",
+          "贵司",
+          "十分契合",
+          "创造价值",
+          "立即到岗",
+          "马上到岗"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 1,
+          "max_characters": 650
+        },
+        "semantic_assertions": [
+          "answers_recruiter_screening_question_directly",
+          "keeps_recruiter_reply_natural_and_sendable",
+          "avoids_overly_certain_wording",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "invent_experience",
+          "overstate_english_fluency_or_ability",
+          "produce_overlong_detail_dump",
+          "regenerate_full_material_package"
         ]
       }
     }

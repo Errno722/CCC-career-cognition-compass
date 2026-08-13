@@ -1,7 +1,7 @@
 ---
 name: career-materials-builder
 description: >-
-  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, self-introduction frameworks, portfolio outline, mind map, interview notes, judgment/methodology-based interview material, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts, judgment, methodology, or produce full portfolios by default.
+  Editable job-search materials builder. Use when the user asks for Chinese or English resume drafts/templates, neutral/general resume structure, professional positioning/persona rebuild, candidate narrative, market-language adaptation of specialized skills, resume section structure, English resume bullets, campus versus experienced resume adjustments, status wording such as resigned/open to work/gap, LinkedIn or platform wording, recruiter outreach/greeting messages, job-platform opening messages, recruiter pre-interview screening replies, HR screening-question replies, self-introduction frameworks, portfolio outline, mind map, interview notes, judgment/methodology-based interview material, expression strategy such as interview-rate-first versus truthful-fit-first positioning, or concise job-search materials after intake. Keep outputs editable and evidence-based; do not fabricate facts, judgment, methodology, or produce full portfolios by default.
 ---
 
 # Career Materials Builder
@@ -554,6 +554,68 @@ Rules:
 
 If the user only provides a resume and no JD, ask what role family the greeting is for. If they want a general version, write one neutral greeting and mark the parts that should change for each role.
 
+## Recruiter Pre-Interview Replies
+
+Use this when the user pastes or summarizes a recruiter / HR screening question before the formal interview and asks how to reply.
+
+Triggers include:
+
+```text
+HR 问我...
+HR 这样问怎么回
+面试前 HR 问...
+Recruiter asked me...
+How should I reply to the recruiter?
+```
+
+This is different from recruiter outreach:
+
+```text
+候选人 -> HR
+└─ 招聘软件打招呼语 / recruiter outreach
+
+HR -> 候选人 -> HR
+└─ HR 面试前回复 / HR 筛选问题回复
+```
+
+Default behavior:
+
+- Give one recommended sendable reply by default.
+- Match the recruiter's tone: casual, neutral, or formal.
+- Answer only what was asked.
+- Use known facts from the current context.
+- Do not restart onboarding, request a full resume, or give broad career coaching.
+- Do not explain the whole strategy unless the user asks.
+- If a missing fact materially changes the reply, ask one necessary question instead of inventing.
+
+Default output:
+
+```text
+可以直接回：
+"..."
+```
+
+For chat platforms such as BOSS, WeChat, or LinkedIn DM, keep the reply human:
+
+- 1-3 short sentences.
+- No full self-introduction unless HR asks for it.
+- No long numbered analysis unless HR asked in a table-like format.
+- No generic corporate filler such as `感谢您的关注`, `非常荣幸`, `贵司`, `十分契合`, `期待进一步深入沟通`, or `相信我能为贵司创造价值` by default.
+- Preserve the user's original voice when editing their draft; only fix stiffness, length, order, risk, over-commitment, and obvious AI tone.
+
+Fact boundaries:
+
+- Current status / notice period: distinguish employed, resigned, gap, contract notice, actual handover time, and negotiable timing.
+- Why looking: use the user's real reason; do not attack the current employer or use empty growth-platform wording.
+- Experience: if direct experience is missing, say `直接经验不算多`, `接触过`, `做过相关项目`, or `有部分可迁移经验`; do not upgrade to `丰富经验`, `精通`, or `深度参与`.
+- Salary expectation: use only the user's stated range or ask once. Do not invent salary numbers, market averages, or raise percentages.
+- Current salary: do not encourage false reporting. If the user prefers not to disclose, help shift to expected range, package scope, or role fit.
+- English ability: keep to evidence such as daily email, meetings, project communication, or working communication. Do not write fluent/native-level without evidence.
+- Work authorization / sponsorship: ask only minimum eligibility-level facts when relevant. Do not request passport, visa number, ID number, or document scans.
+- Travel, commute, onsite, remote, weekends, or working style: do not answer `可以` just to increase interview odds. Reflect the user's real boundary or use a conditional reply such as `短期可以，长期高频想再了解频率`.
+
+If HR asks multiple screening questions at once, answer them in one compact chat reply unless HR used a form-like format. Do not turn it into a resume, cover letter, or HR communication guide.
+
 ## Expression Strategy
 
 Some users want to maximize interview chances; others prefer to present a more transparent picture to screen for better-fit companies. Ask or infer the preference when it affects wording.
@@ -608,6 +670,10 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.13 / 2026-08-13
+- Added recruiter pre-interview screening replies for HR questions before formal interviews.
+- Default to one natural, sendable reply that answers only what was asked and does not invent salary, availability, experience, English ability, or work authorization details.
+
 v0.3.12 / 2026-08-08
 - Added Master Resume -> Role Family Resume -> JD Patch architecture, Tailoring Level, Minimal Tailoring Mode, and Resume Freeze handoff.
 

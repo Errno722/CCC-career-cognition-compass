@@ -142,6 +142,8 @@ CCC 会区分“对话语言”和“求职市场”。
 
 使用前请先脱敏，不要提交身份证、真实电话、私人邮箱、Offer、合同、薪资截图、完整简历、完整面试记录或公司内部信息。CCC 只提供整理、分析和建议，最终决定仍由使用者自己做。
 
+也可以直接粘贴 HR 在约面前问的问题，让 CCC 帮你组织成自然、可发送的回复。
+
 ## 更多资源
 
 | Start | Use | See | Build |
@@ -167,7 +169,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-43 behavior contracts · deterministic eval runner · public smoke testing pending
+44 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -183,21 +185,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：43
-机器可读合约：43
-已登记语义断言：240
-已人工细化核心 Rubric：133
+手工测试场景：44
+机器可读合约：44
+已登记语义断言：242
+已人工细化核心 Rubric：135
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/43
-Runner 执行覆盖：0/43
-公开平台覆盖：0/43
-Runner 唯一通过：0/43
-公开唯一通过：0/43
-已验证 Runner 通过：0/43
-公开已验证通过：0/43
+声明唯一覆盖：0/44
+Runner 执行覆盖：0/44
+公开平台覆盖：0/44
+Runner 唯一通过：0/44
+公开唯一通过：0/44
+已验证 Runner 通过：0/44
+公开已验证通过：0/44
 语义已审次数：0
 评估对象：assistant_output_only
 ```

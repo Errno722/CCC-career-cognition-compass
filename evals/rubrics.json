@@ -2661,6 +2661,36 @@
       "fail_signals": [
         "The output says or implies that needing sponsorship means the user is weak, unqualified, or less valuable."
       ]
+    },
+    "answers_recruiter_screening_question_directly": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant directly answers the recruiter or HR screening questions using known facts instead of turning the task into broad career coaching, onboarding, or strategy explanation.",
+      "pass_criteria": [
+        "The output gives a sendable reply or a direct reply draft that answers the actual HR questions from the prompt.",
+        "The reply uses the provided facts such as current employment status, reason for looking, and notice period when they are available.",
+        "If a necessary fact is missing, the assistant asks at most one targeted clarification rather than inventing it."
+      ],
+      "fail_signals": [
+        "The output restarts full CCC onboarding, asks for a complete resume, or gives broad career coaching instead of answering the HR question.",
+        "The output ignores one or more HR screening questions that can be answered from the provided facts.",
+        "The output invents availability, salary, experience, work authorization, or other material facts."
+      ]
+    },
+    "keeps_recruiter_reply_natural_and_sendable": {
+      "type": "must",
+      "severity": "medium",
+      "description": "The recruiter or HR reply is concise, conversationally professional, tone-matched, and usable as a real chat message without generic corporate or AI-style filler.",
+      "pass_criteria": [
+        "The reply is short enough to send in a recruiter chat and generally uses one recommended version by default.",
+        "The wording follows the recruiter's formality level and avoids unnecessary self-introduction or cover-letter phrasing.",
+        "The output avoids obvious AI filler, long strategy explanation, and generic corporate lines unless the user asked for a formal email."
+      ],
+      "fail_signals": [
+        "The output gives several unsolicited versions, a long HR communication guide, or a full self-introduction when one short reply is needed.",
+        "The wording sounds like a cover letter or marketing copy, with phrases such as very honored, perfect fit, your esteemed company, or create value.",
+        "The assistant repeats the HR question or explains the strategy more than it provides a usable reply."
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2796,6 +2826,8 @@
     "calibrates_second_language_claims",
     "request_sensitive_visa_or_identity_documents",
     "assume_us_hiring_conventions",
-    "equate_sponsorship_need_with_low_candidate_quality"
+    "equate_sponsorship_need_with_low_candidate_quality",
+    "answers_recruiter_screening_question_directly",
+    "keeps_recruiter_reply_natural_and_sendable"
   ]
 }
