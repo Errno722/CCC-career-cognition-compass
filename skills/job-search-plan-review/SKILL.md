@@ -29,6 +29,7 @@ Core principle:
 - Default to a maximum of 14 days.
 - Ask for available time if missing: hours per day/week, weekdays/weekends, interview dates, current job/class constraints, cashflow deadline, and energy level.
 - If the user is low energy, give one 5-20 minute action instead of a full plan.
+- If the user gives a narrow time box such as 10 minutes, 30 minutes, 1 hour, tonight, lunch break, commute, or a short weekend block, choose one highest-value action for the current stage instead of generating a general job-search plan.
 - If the user is employed and only exploring the market, keep the plan reversible: one Role Family, one Role Family Resume, one small JD batch, then review signals.
 - Prefer 1-3 actions per day or review cycle.
 - If the user is trying to pursue many branches at once, set an active-track limit: 1 main track, 1 optional secondary track, and a parking lot for the rest.
@@ -107,6 +108,7 @@ Rules:
 - Do not assume the only answer is "apply more". Check whether the last batch had clear role family, JD fit, resume version, and tracking.
 - Use the idle period to improve one reusable asset: JD pattern notes, one project fact card, one hard-skill practice, one interview answer card, or one application tracker update.
 - If the user is anxious or low energy, give one 5-20 minute action and one stopping rule.
+- If the user asks what to do with 30 minutes or 1 hour after applications are already sent and there is no near interview, prioritize a real signal review: invited/no-response JD patterns, application tracker cleanup, next 3-5 high-relevance roles, or one evidence gap that blocks interviews. Do not suggest indiscriminate mass applying.
 - Follow-up is usually for recruiter conversations or active processes. For cold applications with no interaction, prefer improving pipeline quality and continuing small-batch applications over chasing every company.
 
 ## Anxiety Noise Reduction
@@ -412,6 +414,28 @@ For weekly review:
 └─ 下周调整:
 ```
 
+## Time-Boxed Next Action For Job Search
+
+Use this when the user asks what is worth doing with limited job-search time and the main context is applications, waiting, funnel review, or job-search rhythm.
+
+```text
+有限时间下一步
+├─ 现在最值得做:
+├─ 为什么是它:
+├─ 怎么做:
+├─ 先不做:
+└─ 停止条件:
+```
+
+Rules:
+
+- Choose one action that unlocks the next stage; do not list all useful job-search tasks.
+- If a near deadline or recent event exists, handle it before general planning.
+- If the user has no interviews and direction is unclear, use the time for a small JD signal check: find a few real JDs and note repeated responsibilities, skills, and role-family traits.
+- If the Role Family is stable and producing replies, avoid rewriting the main resume; prefer JD Patch, interview prep, project evidence, or next small-batch validation.
+- If the user is tired, recommend a smaller action and stop condition rather than filling the entire available block.
+- Ask at most one stage question when context is missing.
+
 ## Boundaries
 
 - Do not create 30/60/90 day plans unless explicitly requested.
@@ -422,6 +446,10 @@ For weekly review:
 ## Version Record
 
 ```text
+v0.2.9 / 2026-08-13
+- Added time-boxed next action planning for limited job-search time.
+- Clarified that post-application idle time should prioritize signal review, one reusable asset, or a small validation batch rather than mass applying or repeated resume rewrites.
+
 v0.2.8 / 2026-08-08
 - Added Application Friction, Job Search Funnel, No-Outcome Diagnostic, Sample Size Gate, Outcome/Signal/Pattern/Conclusion, and Resume Freeze rules.
 

@@ -39,6 +39,19 @@ Offer 状态
 
 If key information may change the choice, ask only the most important 1-3 missing items before comparing. Do not force the user into a long offer form.
 
+If the user has an offer deadline and a limited time budget, use that time to identify decision-changing unknowns and hard constraints, not to revisit resume, direction, or long-term skill plans.
+
+```text
+有限时间 Offer 判断
+├─ 明天/近期必须决定什么:
+├─ 会改变决定的未知项:
+├─ 当前不能接受的硬限制:
+├─ 需要向 HR / 经理确认:
+└─ 到这里停:
+```
+
+Keep the recommendation narrow. Do not fill the time with a full career reset, full company research, or resume improvements.
+
 ## Offer Status And Employment Type
 
 Distinguish opportunity certainty before comparing:

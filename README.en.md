@@ -144,7 +144,7 @@ Chinese-first scenario examples:
 
 ## Developer & Evaluation
 
-44 behavior contracts · deterministic eval runner · public smoke testing pending
+45 behavior contracts · deterministic eval runner · public smoke testing pending
 
 See [evals/README.md](evals/README.md), [ROADMAP.md](ROADMAP.md), and [docs/compatibility.md](docs/compatibility.md).
 

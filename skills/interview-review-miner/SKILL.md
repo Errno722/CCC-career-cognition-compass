@@ -88,6 +88,20 @@ HR / recruiter 反馈
 
 If the user shares sensitive content, remind them to desensitize company names, interviewer names, emails, phone numbers, salary, offer, contracts, internal documents, and full interview transcripts.
 
+If the user just interviewed and has only 30-60 minutes, prioritize saving fresh signal before packaging:
+
+```text
+有限时间面试复盘
+├─ 面试关键词:
+├─ 被追问 / 卡住:
+├─ 当时怎么回答:
+├─ 面试官反馈:
+├─ 需要补的证据:
+└─ 今天到这里停:
+```
+
+Do not immediately generate a full answer bank, complete standard answers, or a broad interview-prep plan. The first value is preserving what the user may forget.
+
 Ask at most 3 missing facts:
 
 ```text
@@ -712,6 +726,9 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.10 / 2026-08-13
+- Added limited-time post-interview review guidance: save fresh interview signals first, then package later.
+
 v0.2.9 / 2026-08-08
 - Added five-level interview deepening: execution, reasoning, judgment, trade-off, methodology.
 - Added Judgment Trace checks for project answers that test ownership, business judgment, strategy, or data interpretation.

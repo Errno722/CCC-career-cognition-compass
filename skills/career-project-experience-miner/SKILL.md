@@ -92,6 +92,15 @@ Then choose one project to deep-mine:
 
 If the user has multiple projects, keep the rest in `project-inventory.md` instead of losing them.
 
+When the user has limited time, do not attempt to mine every project. Use the time to make one project more usable:
+
+```text
+30-60 分钟
+└─ 只补 1 个最重要项目的背景、个人角色、关键行动、为什么这样做、结果/证据和还缺什么。
+```
+
+If an interview is soon, choose the project most likely to be asked about rather than the project with the most impressive label. The goal is to make one answer defensible, not to finish the whole project archive.
+
 Minimum panorama scan:
 
 ```text
@@ -609,6 +618,9 @@ For a completed project card:
 ## Version Record
 
 ```text
+v0.1.4 / 2026-08-13
+- Added limited-time project-mining guidance: choose one important project and clarify only the facts most likely to unlock interview or material use.
+
 v0.1.3 / 2026-08-08
 - Added Judgment Trace for real project decision points and model/data-output versus user-judgment separation.
 - Added Judgment Depth J0-J4 as a dimension separate from project fact readiness.

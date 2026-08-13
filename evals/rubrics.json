@@ -2691,6 +2691,49 @@
         "The wording sounds like a cover letter or marketing copy, with phrases such as very honored, perfect fit, your esteemed company, or create value.",
         "The assistant repeats the HR question or explains the strategy more than it provides a usable reply."
       ]
+    },
+    "prioritizes_time_boxed_next_action": {
+      "type": "must",
+      "severity": "high",
+      "description": "When the user provides a limited time budget, the assistant selects one current highest-value action instead of listing many useful tasks or generating a broad plan.",
+      "pass_criteria": [
+        "The output names one primary action that fits the user's time budget and current job-search stage.",
+        "The output explains briefly why this action has higher current value than other possible tasks.",
+        "Other possible tasks are parked, postponed, or omitted rather than expanded into a large backlog."
+      ],
+      "fail_signals": [
+        "The output gives a broad multi-task plan, a long list of possible actions, or parallel resume/project/interview/application tasks.",
+        "The output ignores the limited time budget or treats it as a generic job-search planning request.",
+        "The output asks the user to redo onboarding despite enough context to choose a next action."
+      ]
+    },
+    "respects_energy_within_time_budget": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant treats available time as a maximum rather than a quota and adjusts the recommendation when the user reports low energy.",
+      "pass_criteria": [
+        "The output explicitly or implicitly allows using only part of the available time when the user is tired.",
+        "The recommended task is small enough to complete without exhausting the user further.",
+        "The output includes a clear stopping condition or says the user can stop after the useful minimum."
+      ],
+      "fail_signals": [
+        "The output fills the entire time block with tasks despite the user reporting low energy.",
+        "The output frames the situation as an efficiency challenge or productivity sprint.",
+        "The output gives no stopping point and encourages the user to keep adding tasks."
+      ]
+    },
+    "default_to_learning_new_skill": {
+      "type": "must_not",
+      "severity": "medium",
+      "description": "The assistant defaults to learning a new skill or watching tutorials when the user has limited job-search time, even though a deadline, interview, project evidence gap, or market signal should be prioritized first.",
+      "pass_criteria": [
+        "The output recommends learning only when the target JD repeatedly requires the skill, the user truly lacks it, and the time box can produce verifiable progress.",
+        "In interview or deadline contexts, the output prioritizes evidence, answers, HR/offer decisions, or signal review over generic learning."
+      ],
+      "fail_signals": [
+        "The output recommends learning SQL, Python, AI, or another skill by default without connecting it to the immediate bottleneck.",
+        "The output sends the user to tutorials or courses when the prompt is about tomorrow's interview, HR reply, offer deadline, or project evidence gap."
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2828,6 +2871,9 @@
     "assume_us_hiring_conventions",
     "equate_sponsorship_need_with_low_candidate_quality",
     "answers_recruiter_screening_question_directly",
-    "keeps_recruiter_reply_natural_and_sendable"
+    "keeps_recruiter_reply_natural_and_sendable",
+    "prioritizes_time_boxed_next_action",
+    "respects_energy_within_time_budget",
+    "default_to_learning_new_skill"
   ]
 }

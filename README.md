@@ -89,6 +89,8 @@ CCC 是一个开源求职认知与行动工作流。
 
 CCC 的核心体验不是“产出一堆材料”，而是把一段混乱输入收束成一个主线、一个事实卡和一个下一步。
 
+如果你只有 30 分钟或 1 小时，也可以直接告诉 CCC 你的时间预算，它会优先帮你选当前最值得做的一件事。
+
 1. 用户发一段混乱输入。
 2. CCC 只抓一个本轮主线，暂存其他分支。
 3. 用户回复“继续补项目”。
@@ -169,7 +171,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-44 behavior contracts · deterministic eval runner · public smoke testing pending
+45 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -185,21 +187,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：44
-机器可读合约：44
-已登记语义断言：242
-已人工细化核心 Rubric：135
+手工测试场景：45
+机器可读合约：45
+已登记语义断言：245
+已人工细化核心 Rubric：138
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/44
-Runner 执行覆盖：0/44
-公开平台覆盖：0/44
-Runner 唯一通过：0/44
-公开唯一通过：0/44
-已验证 Runner 通过：0/44
-公开已验证通过：0/44
+声明唯一覆盖：0/45
+Runner 执行覆盖：0/45
+公开平台覆盖：0/45
+Runner 唯一通过：0/45
+公开唯一通过：0/45
+已验证 Runner 通过：0/45
+公开已验证通过：0/45
 语义已审次数：0
 评估对象：assistant_output_only
 ```

@@ -144,6 +144,23 @@ Master Resume
 
 Do not ask them to rebuild all materials for early market exploration. If one Role Family is already producing replies or interviews and there is no repeated resume-level negative feedback, suggest a temporary Resume Freeze and only patch the current JD.
 
+If the user gives a limited time budget and asks what to fix in materials, choose one patch:
+
+```text
+有限时间材料补丁
+├─ 现在只改:
+├─ 为什么:
+├─ 替换 / 调整:
+└─ 到这里停:
+```
+
+Rules:
+
+- Do not rebuild the full resume, portfolio, LinkedIn, self-introduction, and greeting in one time box.
+- If an interview is soon, material work should support the interview: one project explanation, one self-intro frame, or 1-2 likely questions. Do not start a full resume rewrite.
+- If the Role Family is stable and receiving replies, prefer Resume Freeze plus JD Patch over rewriting the main resume.
+- If project facts are incomplete, use the time to clarify one project fact gap rather than polish unsupported bullets.
+
 ## Resume Scope
 
 Include these common sections when creating a resume draft or template:

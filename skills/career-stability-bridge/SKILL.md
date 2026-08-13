@@ -66,6 +66,27 @@ Rules:
 └─ 20 分钟:
 ```
 
+### Limited Time With Low Energy
+
+Use when the user gives a time budget but also says they are tired, drained, unable to recover, or only able to do a little.
+
+```text
+有限时间低精力卡
+├─ 可用时间:
+├─ 不必用满:
+├─ 现在最值得做:
+├─ 怎么做:
+└─ 停止条件:
+```
+
+Rules:
+
+- Treat the available time as a maximum, not a quota.
+- A valid answer can use only part of the time: `今晚有 1 小时 + 很累` can become `先做 30-40 分钟，然后停`.
+- Reduce the task to one action that protects continuity: save 5 interview keywords, collect 3 JDs, clarify one project background/role, patch one bullet, or write one HR reply.
+- Do not turn low energy into a productivity challenge. Avoid minute-by-minute plans, efficiency slogans, or filling the whole evening.
+- If there is a near deadline, still respect energy: choose the most deadline-relevant small action, not a full preparation package.
+
 ### Work Anxiety / Fatigue
 
 Use when employed users mention anxiety, fatigue, being drained, inability to recover, poor sleep, or "快撑不住".
@@ -191,6 +212,10 @@ Do not tell the user to quit or stay.
 ## Version Record
 
 ```text
+v0.1.3 / 2026-08-13
+- Added limited-time low-energy handling: available time is a maximum, not a quota, and the recommendation may intentionally use only part of the time.
+- Clarified that tired users should receive one continuity-preserving action rather than a full time-blocked productivity plan.
+
 v0.1.2 / 2026-08-12
 - Added employed status, employed market exploration, energy budgeting, and employed privacy boundaries.
 - Clarified that market exploration should remain reversible and should not become an automatic resignation plan.

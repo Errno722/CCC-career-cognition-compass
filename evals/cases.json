@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 44,
+  "manual_case_count": 45,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2299,6 +2299,84 @@
           "overstate_english_fluency_or_ability",
           "produce_overlong_detail_dump",
           "regenerate_full_material_package"
+        ]
+      }
+    },
+    {
+      "id": "time-boxed-next-action-001",
+      "title": "有限时间下的下一步选择",
+      "manual_case_id": 45,
+      "input": "我明天下午有一场产品运营面试，简历已经投出去了。\n我现在最担心的是一个项目讲不清楚，面试官一追问“为什么这么做”我就容易乱。\n今晚只有一个小时，而且今天有点累。\n你建议我补什么？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": [
+            "career-project-experience-miner",
+            "career-stability-bridge",
+            "interview-review-miner",
+            "jd-company-prep",
+            "job-search-plan-review"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "一个项目",
+            "1 个项目",
+            "一个最可能被追问的项目",
+            "最可能被追问的项目"
+          ],
+          [
+            "为什么",
+            "why",
+            "判断",
+            "取舍"
+          ],
+          [
+            "证据",
+            "结果"
+          ],
+          [
+            "30",
+            "40",
+            "不用把 1 小时用满",
+            "不必用满",
+            "可以停"
+          ],
+          [
+            "不建议",
+            "不要",
+            "先不"
+          ]
+        ],
+        "literal_not_contains": [
+          "重写整份简历",
+          "重新写完整简历",
+          "刷大量面经",
+          "完整题库",
+          "黄金一小时",
+          "0-10 分钟",
+          "10-20 分钟",
+          "学习 SQL",
+          "学习 Python"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 900
+        },
+        "semantic_assertions": [
+          "prioritizes_time_boxed_next_action",
+          "respects_energy_within_time_budget",
+          "provides_single_next_action",
+          "checks_project_status_before_final_bullet"
+        ],
+        "semantic_must_not": [
+          "avoids_unnecessary_resume_rewrite",
+          "create_overwhelming_multi_track_plan",
+          "produce_overlong_detail_dump",
+          "default_to_learning_new_skill"
         ]
       }
     }
