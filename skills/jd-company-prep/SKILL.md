@@ -188,18 +188,23 @@ Rules:
 
 Use this when the user asks how to answer likely interview questions, when the JD includes problem-solving responsibilities, or when the user says they tend to answer too much, too scattered, or too mechanically.
 
+First classify the question type and choose the answer structure. Do not turn every likely question into STAR.
+
 Output:
 
 ```text
 面试表达准备卡
+├─ 问题类型:
+├─ 建议结构: 先回答 / 2-3 个支撑点 / 证据或例子 / 收回岗位
 ├─ JD 契合卖点: 1-3 个
 ├─ 能力 + 简单验证: 3-4 条
 ├─ 自我介绍框架: 2 个能力点 + 与目标岗位的契合逻辑
 ├─ 可能被问的问题:
 ├─ 一句话观点:
-├─ 3-4 条 bullet points: 展开逻辑，不是逐字稿
+├─ 2-3 条 bullet points: 展开逻辑，不是逐字稿
 ├─ Situation 要讲清的背景:
 ├─ 条件分支回答:
+├─ 可以留给追问:
 ├─ 不能夸大的地方:
 ├─ 英文 / 第二语言表达提示:
 └─ 5-20 分钟练习:
@@ -210,10 +215,13 @@ Rules:
 - Prepare around JD-aligned selling points instead of memorizing long scripts.
 - If no JD is available, use only the target role or job family as provisional anchors, mark them as assumptions, and ask for the JD before finalizing answer frames.
 - Do not produce full verbatim scripts by default. Give first-level structure and second-level expansion logic so the user can remember and adapt in the interview.
+- Use STAR only for project, behavior, conflict, failure, or concrete past-experience questions. For motivation, judgment, trade-off, skill, open opinion, or case questions, use a matching structure instead.
 - For self-introduction, choose only 2 strongest role-fit abilities, then attach one simple evidence point to each. Do not turn it into a full resume summary.
 - Abstract the user's experience into 3-4 ability + evidence pairs before building answer frames.
 - Keep answers concise: one clear claim, then 3-4 bullets, normally no more than 5 supporting sentences.
+- Put secondary detail under `可以留给追问`. Do not front-load every detail into the first answer.
 - In STAR answers, do not skip context. Clarify situation, stakes, constraints, and priority before action.
+- For judgment or "why did you do this" questions, surface the user's actual reasoning, alternatives, uncertainty, and trade-off. If those facts are missing, mark them as gaps instead of inventing judgment.
 - For "what if A happens" questions, avoid one-size-fits-all answers. Use a conditional frame: if the cause is B, do C; if the cause is D, do E.
 - For English or second-language interviews, prioritize clear, truthful, natural wording over native-like phrasing. Let the user keep their real personality and professional boundaries.
 - Do not turn this into a long question bank. Give 1-3 high-impact answer frames.
@@ -309,6 +317,10 @@ JD / 公司准备卡
 ## Version Record
 
 ```text
+v0.1.7 / 2026-08-13
+- Added question-type-based interview answer prep.
+- STAR now applies only to fitting past-experience questions; judgment, trade-off, skill, open opinion, and case questions use their own structures.
+
 v0.1.6 / 2026-08-04
 - Added shared rule markers and focus-control output priority.
 - Clarified reverse questions should choose 2-4 useful role-level questions from the four recommended directions, not force every direction each time.

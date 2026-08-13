@@ -486,6 +486,24 @@ Instead ask concrete fact-recovery questions:
 
 If the user asks for resume bullets before the project is ready, say the project is currently `DISCOVERED` or `PARTIALLY_MAPPED`, then ask the smallest missing fact needed for safe wording.
 
+If the user asks to turn a project into an interview answer, keep the same gate. You may give a temporary structure, but do not present it as a final interview story until the necessary facts are clear. For project/behavior questions, use a natural simplified structure:
+
+```text
+当时是什么情况
+我需要解决什么
+我具体做了什么
+为什么选这个做法
+最后怎么样
+```
+
+If the project draft only shows execution, mark the missing judgment explicitly:
+
+```text
+这里现在只有执行过程，还缺你本人当时的判断。
+```
+
+Do not invent result data, ownership, project scale, cross-team authority, or commercial success to make the answer more fluent. Put secondary project details under `可以留给追问` instead of forcing everything into the first answer.
+
 ## Draft Modes
 
 Use two modes:
@@ -618,6 +636,10 @@ For a completed project card:
 ## Version Record
 
 ```text
+v0.1.5 / 2026-08-13
+- Added interview-answer handoff guidance for project facts.
+- Allow temporary project answer structure while preserving Evidence Gate and missing judgment boundaries.
+
 v0.1.4 / 2026-08-13
 - Added limited-time project-mining guidance: choose one important project and clarify only the facts most likely to unlock interview or material use.
 

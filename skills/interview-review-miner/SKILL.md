@@ -412,20 +412,25 @@ If the user only repeats a model result, data result, AI analysis, or manager in
 
 Use this when feedback or self-review suggests the user answered with too many details, lacked a clear point, used STAR mechanically, became nervous and filled space, or needs to answer in English / a second language without sounding memorized.
 
+Before choosing an answer frame, identify the question type: self-introduction, motivation, project/behavior, judgment/decision, problem-solving/case, open opinion, skill/professional knowledge, trade-off, failure/conflict/review, or another type. STAR is only one option for project/behavior answers.
+
 Output:
 
 ```text
 面试表达结构卡
+├─ 这个问题在考察什么:
+├─ 建议结构: 先回答 / 2-3 个支撑点 / 证据或例子 / 收回问题
 ├─ JD 契合卖点: 1-3 个，与岗位核心能力对应
 ├─ 能力 + 简单验证: 3-4 条，每条只放一个事实证据
 ├─ 一句话观点: 先总后分
-├─ 证据 bullet points: 3-4 条，最多 5 句，不写成逐字稿
+├─ 证据 bullet points: 2-3 条，最多 5 句，不写成逐字稿
 ├─ Situation 放大: 背景 / 目标 / 限制 / 轻重缓急
 ├─ Action 精简: 只讲关键判断和动作，不讲流水账
 ├─ 判断追问: 你的判断 / 为什么 / 关键证据 / 不确定性 / 替代方案 / 取舍 / 改变判断条件 / 后验结果
 ├─ 方法沉淀: 适用场景 / 不适用场景 / 证据项目（如真实存在）
 ├─ 条件分支: 如果 A 因为 B，用 C；如果 A 因为 D，用 E
 ├─ Result / Learning: 结果、边界或学到的判断
+├─ 可以留给追问:
 ├─ 自我介绍框架: 2 个能力点 + 与目标岗位的契合逻辑
 ├─ 第二语言表达: 用自己的关键词和短句，不追求母语者腔调
 └─ 练习动作: 5-20 分钟
@@ -436,11 +441,14 @@ Rules:
 - Start from JD-aligned selling points. Do not let the user answer every question with all details they remember.
 - If no JD is available, do not invent exact JD selling points. Use the target role or job family as provisional anchors, label them as provisional, and ask the user to add the JD when they have it.
 - Do not output full verbatim scripts for self-introduction or interview answers by default. Give a one/two-level framework and expansion logic that the user can remember.
+- If the user gives a scattered answer, first extract the main thread and reorder known facts. Do not invent missing ownership, scale, data, business result, or project outcome to make the answer smoother.
+- Use `可以留给追问` to reduce first-answer overload. The first answer should answer the question clearly; secondary details can wait.
 - For self-introduction, focus on 2 abilities that match the target role. Do not over-expand education, timeline, tools, or all past experiences unless the user asks.
 - Abstract the user's experience into 3-4 ability claims with simple verification: one concrete task, project, tool, audience, result boundary, or repeated behavior per ability.
-- Use "claim first, evidence second": one clear conclusion, then 3-4 supporting bullets. Keep the supporting part under 5 sentences unless the user asks for a long answer.
+- Use "claim first, evidence second": one clear conclusion, then 2-3 supporting bullets. Keep the supporting part under 5 sentences unless the user asks for a long answer.
 - Do not invent judgment or methodology to make the interview answer sound senior. If the user only has execution evidence, keep the answer at execution/result-interpretation level and ask for the missing judgment.
 - STAR is not a template to recite. Make `Situation` useful by clarifying context, goal, constraint, urgency, or trade-off before `Action`.
+- For judgment or "why did you do this" questions, do not accept action as judgment. If the draft only has execution, say: `这里现在只有执行过程，还缺你本人当时的判断。`
 - For problem-solving questions, use conditional thinking instead of one fixed answer: diagnose possible causes, then map each cause to a different action.
 - Do not overcorrect into fake confidence. If the user lacks evidence, say what can be framed conservatively and what should be marked as a gap.
 - For English or second-language interviews, help the user internalize meaning first, then express it in simple natural wording. Do not require native-like expression or a memorized script.
@@ -688,7 +696,7 @@ For interviewer feedback:
 3. 反馈可能指向的缺口
 4. 简历需要怎么调
 5. 面试回答需要怎么调
-6. 面试表达结构卡：JD 卖点、先总后分、3-4 条 bullet、Situation 和条件分支
+6. 面试表达结构卡：JD 卖点、先总后分、2-3 个支撑点、Situation 和条件分支
 7. 不同面试官角色下应该怎么调整侧重点
 8. 候选人面试资料卡补丁
 9. 之后投 JD / 方向要注意什么
@@ -726,6 +734,10 @@ For repeated feedback:
 ## Version Record
 
 ```text
+v0.2.11 / 2026-08-13
+- Strengthened structured interview expression: classify question type before choosing answer structure.
+- Added rambling-answer reordering, speakable short samples, and `可以留给追问` boundaries without inventing facts.
+
 v0.2.10 / 2026-08-13
 - Added limited-time post-interview review guidance: save fresh interview signals first, then package later.
 

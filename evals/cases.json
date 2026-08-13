@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 45,
+  "manual_case_count": 46,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2377,6 +2377,84 @@
           "create_overwhelming_multi_track_plan",
           "produce_overlong_detail_dump",
           "default_to_learning_new_skill"
+        ]
+      }
+    },
+    {
+      "id": "structured-interview-expression-001",
+      "title": "面试结构化表达",
+      "manual_case_id": 46,
+      "input": "面试官问我：\n“讲一个你推动跨团队项目的例子。”\n\n我现在会这样回答：\n\n“之前我们有一个项目，然后当时其实时间比较紧，我先跟产品聊了，也跟运营沟通过，后来发现大家理解不太一样，然后我就整理了一些东西，最后项目还是上线了。过程中也有很多沟通，我主要就是推进这些事情。”\n\n我觉得说得很散。\n不要帮我编新的经历，帮我整理成面试里更清楚、能说出口的结构。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-materials-builder",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "career-project-experience-miner",
+            "interview-review-miner",
+            "jd-company-prep"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "项目经历题",
+            "行为经历题",
+            "项目 / 行为",
+            "跨团队项目"
+          ],
+          [
+            "主线",
+            "回答主线",
+            "核心主线"
+          ],
+          [
+            "先回答",
+            "先说结论",
+            "一句话观点"
+          ],
+          [
+            "为什么",
+            "判断",
+            "取舍"
+          ],
+          [
+            "留给追问",
+            "追问时再展开",
+            "可以放到追问"
+          ]
+        ],
+        "literal_not_contains": [
+          "提升 30%",
+          "提升30%",
+          "主导了整个项目",
+          "大型跨团队项目",
+          "完整负责",
+          "显著提升",
+          "综上所述",
+          "基于以上分析",
+          "赋能",
+          "沉淀",
+          "闭环"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 1200
+        },
+        "semantic_assertions": [
+          "selects_interview_structure_by_question_type",
+          "reorganizes_rambling_answer_without_inventing_facts",
+          "keeps_interview_answer_speakable",
+          "outputs_two_level_framework_not_script",
+          "balances_star_situation_action_result",
+          "avoids_overly_certain_wording"
+        ],
+        "semantic_must_not": [
+          "turn_answer_into_memorized_script",
+          "produce_overlong_detail_dump",
+          "invent_experience"
         ]
       }
     }

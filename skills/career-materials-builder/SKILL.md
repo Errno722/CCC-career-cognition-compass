@@ -503,19 +503,24 @@ LinkedIn / Open to Work 表达
 
 ## Self-Introduction And Answer Frameworks
 
-When the user asks for a self-introduction, interview answer, "tell me about yourself", "why are you suitable", or similar material, do not default to a full script.
+When the user asks for a self-introduction, interview answer, "tell me about yourself", "why are you suitable", how to answer a specific interview question, or sends a rambling draft, do not default to a full script.
+
+First identify what the question is testing and choose a structure. Do not apply STAR mechanically to every answer.
 
 Output framework:
 
 ```text
 自我介绍 / 面试答案框架卡
 ├─ 目标岗位:
+├─ 问题类型:
 ├─ 能力抽象: 3-4 条能力 + 简单验证
 ├─ 自我介绍主线:
 │  ├─ 能力 1: 与岗位契合 + 一个验证事实
 │  └─ 能力 2: 与岗位契合 + 一个验证事实
-├─ 面试答案一级框架: 观点 / 判断 / 选择
-├─ 二级展开逻辑: 3-4 条 bullet，不超过 5 句支撑内容
+├─ 面试答案一级框架: 先回答 / 观点 / 判断 / 选择
+├─ 二级展开逻辑: 2-3 个支撑点，不超过 5 句支撑内容
+├─ 证据 / 例子:
+├─ 可以留给追问:
 ├─ 可替换关键词:
 └─ 不要展开的内容:
 ```
@@ -523,8 +528,12 @@ Output framework:
 Rules:
 
 - Give a first-level structure and second-level expansion logic, not a paragraph for the user to memorize.
+- Default to `先回答 -> 2-3 个支撑点 -> 证据 / 例子 -> 收回问题或岗位`.
+- Use STAR only when the question is about a project, behavior, conflict, failure, or a concrete past experience. For motivation, judgment, trade-off, skill, open opinion, and case questions, choose the matching structure instead.
 - Keep self-introduction focused on 2 role-fit abilities. Do not compress the full resume into the introduction.
 - Abstract experience into 3-4 ability claims with simple verification such as a task, project, tool, user group, process, output, result boundary, or repeated behavior.
+- For rambling drafts, preserve the user's facts and useful wording, then reorder, remove repetition, and point out missing evidence or judgment. Do not make the answer look stronger by adding invented data, ownership, scale, or results.
+- Keep the first answer speakable. Put secondary details under `可以留给追问` instead of front-loading every fact.
 - If the user explicitly asks for a final script, give a short editable draft after the framework, and mark it as optional.
 - Do not over-expand education, full timeline, tool lists, personality claims, or unrelated projects.
 - Keep claims evidence-based and interview-defensible.
@@ -687,6 +696,10 @@ For this scenario, ask for at most 3 facts:
 ## Version Record
 
 ```text
+v0.3.14 / 2026-08-13
+- Added structured interview expression routing for specific questions and rambling drafts.
+- Choose answer structure by question type, use STAR only when it fits, and separate main answer from details left for follow-up.
+
 v0.3.13 / 2026-08-13
 - Added recruiter pre-interview screening replies for HR questions before formal interviews.
 - Default to one natural, sendable reply that answers only what was asked and does not invent salary, availability, experience, English ability, or work authorization details.

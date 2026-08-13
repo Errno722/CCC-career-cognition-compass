@@ -2734,6 +2734,45 @@
         "The output recommends learning SQL, Python, AI, or another skill by default without connecting it to the immediate bottleneck.",
         "The output sends the user to tutorials or courses when the prompt is about tomorrow's interview, HR reply, offer deadline, or project evidence gap."
       ]
+    },
+    "selects_interview_structure_by_question_type": {
+      "type": "must",
+      "severity": "high",
+      "description": "Chooses the answer structure based on what the interview question is testing instead of applying STAR mechanically to every question.",
+      "pass_criteria": [
+        "The output identifies or clearly implies the question type before choosing the answer shape.",
+        "STAR is used only when the question is about a concrete project, behavior, conflict, failure, or past experience; other question types use matching structures."
+      ],
+      "fail_signals": [
+        "The output turns every interview answer into STAR regardless of question type.",
+        "The output gives a generic answer template without explaining what the specific question is testing."
+      ]
+    },
+    "reorganizes_rambling_answer_without_inventing_facts": {
+      "type": "must",
+      "severity": "critical",
+      "description": "Preserves the user's actual facts while removing repetition, reordering the main thread, and exposing missing evidence or reasoning instead of filling gaps with invented content.",
+      "pass_criteria": [
+        "The output keeps the factual elements the user gave and makes their order clearer.",
+        "Missing data, ownership, scale, result, judgment, or trade-off is marked as a gap rather than invented."
+      ],
+      "fail_signals": [
+        "The output adds unprovided metrics, ownership, project scale, commercial impact, team authority, or success claims.",
+        "The output overwrites the user's draft with a polished but unsupported story."
+      ]
+    },
+    "keeps_interview_answer_speakable": {
+      "type": "must",
+      "severity": "medium",
+      "description": "Keeps interview answer guidance concise, natural, and speakable, leaving secondary details for follow-up instead of front-loading everything.",
+      "pass_criteria": [
+        "The output provides a short structure, key sentence, or compact sample the user could say aloud.",
+        "The output separates the main answer from details that can be left for interviewer follow-up."
+      ],
+      "fail_signals": [
+        "The output creates a long memorized script or dense essay that is hard to say aloud.",
+        "The output includes every possible detail in the first answer with no follow-up boundary."
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2874,6 +2913,9 @@
     "keeps_recruiter_reply_natural_and_sendable",
     "prioritizes_time_boxed_next_action",
     "respects_energy_within_time_budget",
-    "default_to_learning_new_skill"
+    "default_to_learning_new_skill",
+    "selects_interview_structure_by_question_type",
+    "reorganizes_rambling_answer_without_inventing_facts",
+    "keeps_interview_answer_speakable"
   ]
 }

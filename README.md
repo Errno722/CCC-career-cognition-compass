@@ -55,7 +55,7 @@ CCC 是一个开源求职认知与行动工作流。
 | 不知道投什么 | Role Family 聚类 + 7 天方向验证 |
 | 经历很多但说不清 | 项目事实 + Judgment Trace |
 | 每个 JD 都要改简历，很烦 | Master Resume → Role Family Resume → JD Patch |
-| 面试一追问就空 | Judgment / Methodology 深挖 |
+| 面试一追问就空 / 回答容易说散 | 判断、方法和结构化表达 |
 | 投了、面了，但没有结果 | Funnel + Signal / Pattern 判断 |
 | 收到 Offer 不知道怎么选 | Offer 比较 + 谈判 + 决策闭环 |
 
@@ -171,7 +171,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-45 behavior contracts · deterministic eval runner · public smoke testing pending
+46 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -187,21 +187,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：45
-机器可读合约：45
-已登记语义断言：245
-已人工细化核心 Rubric：138
+手工测试场景：46
+机器可读合约：46
+已登记语义断言：248
+已人工细化核心 Rubric：141
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/45
-Runner 执行覆盖：0/45
-公开平台覆盖：0/45
-Runner 唯一通过：0/45
-公开唯一通过：0/45
-已验证 Runner 通过：0/45
-公开已验证通过：0/45
+声明唯一覆盖：0/46
+Runner 执行覆盖：0/46
+公开平台覆盖：0/46
+Runner 唯一通过：0/46
+公开唯一通过：0/46
+已验证 Runner 通过：0/46
+公开已验证通过：0/46
 语义已审次数：0
 评估对象：assistant_output_only
 ```

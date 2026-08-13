@@ -24,6 +24,7 @@ Current project version: `0.1.0-beta`
 - 在职用户支持从“疲惫 / 离职犹豫 / 当前工作 vs Offer”扩展为连续路径：工作消耗、在职市场探索、骑驴找马、求职精力预算、Minimal Tailoring、小规模市场验证和“暂时不辞职”都成为合法状态。新增 `employed-market-exploration-001` 行为合约，当前手工测试和机器可读合约为 43 个，已登记语义断言为 240 条，核心细化 Rubric 为 133 条。
 - 新增 HR 面试前沟通 / 筛选问题回复能力，放入 `career-materials-builder`，用于用户粘贴 HR / Recruiter 约面前问题时直接生成 1 条自然、可发送回复；默认不重新 onboarding、不索要完整简历、不输出多版本，不编造薪资、到岗、经验、英语能力、work authorization 或 sponsorship。新增 `recruiter-pre-interview-reply-001` 行为合约，当前手工测试和机器可读合约为 44 个，已登记语义断言为 242 条，核心细化 Rubric 为 135 条。
 - 新增有限时间下的下一步选择能力，强化原有 Focus Control：用户只有 10 分钟、30 分钟、1 小时、今晚或周末一点时间时，CCC 根据 deadline、面试 / HR / Offer、投递阶段、证据缺口和精力，只选当前最值得做的一件事；低精力时不要求把时间用满。新增 `time-boxed-next-action-001` 行为合约，当前手工测试和机器可读合约为 45 个，已登记语义断言为 245 条，核心细化 Rubric 为 138 条。
+- 新增面试结构化表达能力：用户问某个面试题怎么组织、发来散乱回答，或说自己越说越乱时，CCC 先判断题型，再用“先回答 -> 2-3 个支撑点 -> 证据 / 例子 -> 收回问题”的自然结构整理已有事实；STAR 只用于适合的项目 / 行为经历题，判断题必须保留本人判断和取舍缺口。新增 `structured-interview-expression-001` 行为合约，当前手工测试和机器可读合约为 46 个，已登记语义断言为 248 条，核心细化 Rubric 为 141 条。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 
 ## 2026-08-08

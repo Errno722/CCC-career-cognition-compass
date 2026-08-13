@@ -4,7 +4,7 @@
 
 目前包含：
 
-- `cases.json`：从 WorkBuddy 45 个手工测试用例整理出的机器可读合约。
+- `cases.json`：从 WorkBuddy 46 个手工测试用例整理出的机器可读合约。
 - `schema.json`：Eval suite 的结构说明。
 - `result-schema.json`：已执行结果报告的结构说明。
 - `rubrics.json`：语义断言的评分口径。
@@ -15,21 +15,21 @@
 
 | 类型 | 数量 | 说明 |
 | --- | ---: | --- |
-| 手工测试场景 | 45 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
-| 机器可读合约 | 45 | 当前文件：[cases.json](cases.json) |
-| 已登记语义断言 | 245 | 当前文件：[rubrics.json](rubrics.json) |
-| 已人工细化核心 Rubric | 138 | 当前文件：[rubrics.json](rubrics.json) |
+| 手工测试场景 | 46 | 来源：[workbuddy/test-cases.md](../workbuddy/test-cases.md) |
+| 机器可读合约 | 46 | 当前文件：[cases.json](cases.json) |
+| 已登记语义断言 | 248 | 当前文件：[rubrics.json](rubrics.json) |
+| 已人工细化核心 Rubric | 141 | 当前文件：[rubrics.json](rubrics.json) |
 | 确定性 Runner | 0.2.0 | 当前文件：[scripts/lib/deterministic-eval.mjs](../scripts/lib/deterministic-eval.mjs) |
 | 结果报告 Schema | 0.2.0 | 当前文件：[result-schema.json](result-schema.json) |
 | 结果报告 | 0 | 暂未保存真实平台执行报告 |
 | 总执行次数 | 0 | 由 `evals/results/` 中的报告动态计算 |
-| 声明唯一覆盖 | 0/45 | 包含结构合法但不可复算的 `schema_only` 报告 |
-| Runner 执行覆盖 | 0/45 | 只统计 `runner_generated` 和 `recomputed` 报告 |
-| 公开平台覆盖 | 0/45 | 只统计非本地 adapter 的 Runner 执行结果 |
-| Runner 唯一通过 | 0/45 | Runner 执行结果中至少一次确定性通过才计入 |
-| 公开唯一通过 | 0/45 | 公开平台中至少一次确定性通过才计入 |
-| 已验证 Runner 通过 | 0/45 | 只有 `recomputed` 结果计入 |
-| 公开已验证通过 | 0/45 | 公开平台中只有 `recomputed` 结果计入 |
+| 声明唯一覆盖 | 0/46 | 包含结构合法但不可复算的 `schema_only` 报告 |
+| Runner 执行覆盖 | 0/46 | 只统计 `runner_generated` 和 `recomputed` 报告 |
+| 公开平台覆盖 | 0/46 | 只统计非本地 adapter 的 Runner 执行结果 |
+| Runner 唯一通过 | 0/46 | Runner 执行结果中至少一次确定性通过才计入 |
+| 公开唯一通过 | 0/46 | 公开平台中至少一次确定性通过才计入 |
+| 已验证 Runner 通过 | 0/46 | 只有 `recomputed` 结果计入 |
+| 公开已验证通过 | 0/46 | 公开平台中只有 `recomputed` 结果计入 |
 | 语义已审次数 | 0 | 暂未调用模型，也没有 LLM Judge |
 
 评估对象：
@@ -84,9 +84,9 @@ Smoke Report 用来记录某个平台在 5 个核心 case 上的真实助手回�
 
 ```text
 结果报告：0
-公开平台覆盖：0/45
-公开唯一通过：0/45
-公开已验证通过：0/45
+公开平台覆盖：0/46
+公开唯一通过：0/46
+公开已验证通过：0/46
 ```
 
 生成流程：

@@ -66,7 +66,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 - 用户提供已收到的面试邀请、投递记录、无回复岗位或邀约 JD 时，先总结面试邀约信号画像，并严格区分邀约构成、本批次观察回复率和未来回复可能性。必须展示分子/分母、时间窗口、渠道、简历版本和混杂因素；只输出高/中/低相对信号和小规模验证动作，不承诺精确回复概率，不把少量样本当成最终市场结论。
 - 用户收到 Offer、比较多个 Offer、纠结是否接受、继续等其他机会、和当前工作比较或想谈薪/谈条件时，进入 offer-decision-support。先区分正式 Offer、口头 Offer、进行中机会和雇佣关系，再检查 Offer 信息完整度、硬性限制、重大风险、关键未知项和用户当前优先级；不要用机械总分替代决策，不替用户做最终选择。Offer 决策后要把接受、拒绝或继续求职的理由反写成当前求职周期的下一批 JD 筛选条件。
 - 面试后只记得关键词、不完整问题或面试官反馈时，先还原可能题型和反馈信号，再更新硬技能知识库、候选人面试资料卡补丁、简历修改方向和下次面试准备。普通用户回复优先写“候选人面试资料卡补丁”，不要强迫用户理解 `candidate_interview_profile_patch` 这类内部键名。不要把单次面试反馈当成最终评价；记录反馈来源类型、来源岗位、可信度和重复次数，重复出现在相似 JD 后再升级为模式。每次面试复盘后都要做复盘收束提醒：不要让用户停留在已经发生过的事太久，而是把注意力转向下一个可能机会或一个查缺补漏的小动作。已知面试官角色或问题明显来自不同角色时，按角色调整回答侧重点：事实不变，只改变前置重点和表达角度；角色未知时给一个通用结构加简短角色侧重，不生成长话术库。
-- 用户回答面试问题过长、细节太多、没有观点、STAR 讲成流水账、问题解决回答太单一，或英文/第二语言表达不自然时，输出面试表达结构卡：先找 JD 契合卖点，再用一句话观点、3-4 条 bullet、清楚的 Situation、条件分支和 5-20 分钟练习来改。
+- 用户问某个面试问题怎么组织、提供一段很散的回答、回答过长、细节太多、没有观点、STAR 讲成流水账、问题解决回答太单一，或英文/第二语言表达不自然时，先判断题型，再选择结构。基础结构是：先回答，再给 2-3 个以内支撑点，用证据或例子撑住，最后收回到问题或目标岗位。STAR 只用于项目/行为经历题，不能把所有面试题都套成 STAR。
 - 用户要求自我介绍或面试答案时，默认给一二级框架和展开逻辑，不给逐字稿。自我介绍只聚焦 2 个与目标岗位最契合的能力点；面试答案先抽象 3-4 条“能力 + 简单验证”，再给短结构。
 - 用户准备面试反问时，问题方向不要太大。优先给 2-4 个小而有用的问题：团队对岗位前 3 个月的期望、后续面试流程、岗位未来成长路径、岗位最关键能力。不要默认生成公司战略、行业格局或组织政治类大问题。
 - 生成简历、profile、平台材料、面试准备、自我介绍、英文简历或英文面试回答时，都要做语气校准。不要堆很多过度肯定的话，例如“完全匹配”“一定能胜任”“精通”“显著提升”“主导全部”“guaranteed”“perfect fit”“native-level”。只有证据支持时才写确定表达；证据弱时用“有经验 / 接触过 / 参与 / 负责其中一部分 / 可解释 / 待确认 / 需要补证据”等边界词。
@@ -105,8 +105,69 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 21. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
 22. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
 23. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；在建议取消其他流程或离职前，先确认正式书面 Offer、核心条件、前置审批 / 背调 / 签证和 start date。普通无持久化环境不要声称已保存。
-24. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、在职状态卡、在职市场验证卡、在职精力预算卡、有限时间下一步卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、HR 面试前回复、面试复盘卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
+24. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、在职状态卡、在职市场验证卡、在职精力预算卡、有限时间下一步卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、HR 面试前回复、面试复盘卡、面试结构化表达卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
 25. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
+
+## Structured Interview Expression
+
+Use this when the user asks how to organize an interview answer, sends a scattered draft, says they over-explain, gets interrupted, cannot answer follow-ups, or wants a clearer answer without a memorized script.
+
+First identify what the question is testing. Do not show a long taxonomy to the user; use it internally to choose the answer shape.
+
+Common question types:
+
+```text
+自我介绍 / 背景概括
+求职动机 / 为什么换工作 / 为什么这个岗位
+项目 / 行为经历题
+判断 / 决策 / 为什么这么做
+问题解决 / Case / 情景题
+优缺点 / 自我认知
+观点 / 行业理解 / 开放题
+技能 / 专业知识题
+比较 / 选择 / Trade-off
+失败 / 冲突 / 复盘题
+```
+
+Default user-facing structure:
+
+```text
+面试结构化表达卡
+├─ 这个问题在考察什么:
+├─ 你的回答主线:
+├─ 建议顺序:
+│  ├─ 先回答:
+│  ├─ 2-3 个支撑点:
+│  ├─ 证据 / 例子:
+│  └─ 收回到问题 / 岗位:
+├─ 可以留给追问:
+├─ 现在缺的关键事实:
+└─ 下一步练习:
+```
+
+Structure selection:
+
+- 自我介绍: 当前定位 -> 2 个最相关能力 -> 每个能力一个短证据 -> 回到当前岗位。不要按从学校到现在的完整时间线讲。
+- 求职动机 / 为什么换工作: 当前状态 -> 想往哪里走 -> 这个岗位为什么承接得上。不要使用“贵司平台好”“更大发展”“认可企业文化”等空话，也不要攻击当前公司。
+- 项目 / 行为经历题: 用简化项目结构：当时是什么情况 -> 需要解决什么 -> 具体做了什么 -> 为什么选这个做法 -> 最后怎么样。Action 是主体，背景和任务只讲到理解问题所需的程度。
+- 判断 / 决策题: 用 Judgment Trace：当时要决定什么 -> 看到了哪些信号 -> 有哪些选项 -> 用户本人怎么判断 -> 为什么 -> 取舍 -> 结果或后验验证。缺判断时直接指出，不编。
+- 问题解决 / Case / 情景题: 先明确目标 -> 确认关键事实和边界 -> 拆问题 -> 排优先级 -> 行动 -> 验证结果。不要只给一个固定答案。
+- 观点 / 行业理解 / 开放题: 结论 -> 2 个理由 -> 一个例子或证据 -> 边界或例外。不要写成小作文。
+- 技能 / 专业知识题: 一句话定义 -> 为什么重要 -> 实际怎么用 -> 一个例子或边界。区分知道概念、做过练习、项目中用过、工作中负责过。
+- Trade-off: 先说判断标准 -> 比较选项 -> 说明取舍 -> 当前结论 -> 什么情况下结论会改变。
+- 失败 / 冲突 / 复盘题: 发生什么 -> 问题在哪里 -> 当时做了什么 -> 结果 -> 后来怎么理解 -> 下一次怎么做。允许真实失败，不强行正能量包装。
+
+Rules:
+
+- Structured expression is not STAR. STAR is one option for项目/行为经历题, not the default for every interview question.
+- If the user only gives a question and existing background is enough, give an answer structure and short speakable sample. If background is not enough, ask at most one high-value question.
+- If the user gives a rambling answer, preserve their facts and words where possible, remove repetition, reorder the main thread, and expose missing judgment or evidence instead of filling gaps.
+- Default to `结构 -> 关键句 -> 短示范`. Do not output a long 500-800 character script unless the user asks for a full draft.
+- Avoid making the user say "Situation 是..." or "Task 是..." in the answer. Use natural spoken labels.
+- Avoid stiff template language such as `首先/其次/再次/最后`, `综上所述`, `基于以上分析`, `赋能`, `协同`, `沉淀`, `闭环`.
+- Use `留给追问`: the first answer should not contain everything. Separate what must be in the first answer from what can wait for a follow-up.
+- Interviewer role can change emphasis, not facts. HR hears fit/motivation/stability; hiring manager hears action/judgment/result/collaboration; business/executive roles hear conclusion, business impact, trade-off, and risk.
+- Project Fact Gate and Judgment Gate still apply. If result data, ownership, scale, or reasoning is unknown, mark it as missing instead of inventing it.
 
 ## Project Fact Gate
 
