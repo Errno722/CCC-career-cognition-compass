@@ -59,7 +59,7 @@ CCC 是一个开源求职认知与行动工作流。
 | 投了、面了，但没有结果 | Funnel + Signal / Pattern 判断 |
 | 收到 Offer 不知道怎么选 | Offer 比较 + 谈判 + 决策闭环 |
 
-也支持在职换工作、离职犹豫、在职小规模看机会，以及当前工作 vs 新 Offer 的比较。
+也支持在职换工作、离职犹豫、在职小规模看机会、组织或关键管理者变化后的去留判断，以及当前工作 vs 新 Offer 的比较。
 
 查看全部能力：[docs/full-guide.md](docs/full-guide.md)
 
@@ -171,7 +171,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-46 behavior contracts · deterministic eval runner · public smoke testing pending
+47 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -187,21 +187,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：46
-机器可读合约：46
-已登记语义断言：248
-已人工细化核心 Rubric：141
+手工测试场景：47
+机器可读合约：47
+已登记语义断言：251
+已人工细化核心 Rubric：144
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/46
-Runner 执行覆盖：0/46
-公开平台覆盖：0/46
-Runner 唯一通过：0/46
-公开唯一通过：0/46
-已验证 Runner 通过：0/46
-公开已验证通过：0/46
+声明唯一覆盖：0/47
+Runner 执行覆盖：0/47
+公开平台覆盖：0/47
+Runner 唯一通过：0/47
+公开唯一通过：0/47
+已验证 Runner 通过：0/47
+公开已验证通过：0/47
 语义已审次数：0
 评估对象：assistant_output_only
 ```

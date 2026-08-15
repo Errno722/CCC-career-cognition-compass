@@ -102,6 +102,20 @@ Treat "not choosing yet", "continue interviewing", and "wait until deadline afte
 
 If the user only asks "这家公司怎么样" or wants company/JD research without a real offer decision, use `jd-company-prep` instead.
 
+If the current-job baseline changed because a supportive manager, mentor, or key sponsor is leaving, do not automatically prefer the new offer. First re-check:
+
+```text
+当前工作基线更新
+├─ 新汇报线 / 接任者是否明确:
+├─ 当前项目和职责是否变化:
+├─ 成长机会 / ownership 是否还在:
+├─ 旧承诺是否有正式承接:
+├─ 团队稳定性:
+└─ 这会改变哪些比较项:
+```
+
+Treat the departure as a current-job uncertainty signal, not a final conclusion. If reporting line, responsibilities, or project access are still unknown, the offer decision may need a clarifying question or short observation window before comparing.
+
 ## Offer Information Check
 
 Before comparing, check whether the known facts are sufficient:
@@ -409,5 +423,6 @@ If the runtime has no real storage, say the card only exists in this reply and t
 - Do not use "A 82 / B 79" as the decision.
 - Do not treat big company, higher salary, or famous brand as automatic winner.
 - Do not count uncertain bonus/equity/verbal promises as guaranteed income.
+- Do not count a former manager's verbal promotion, growth, or project promise as a confirmed organizational condition unless there is written process, formal owner, or current-manager confirmation.
 - Do not make legal, labor, tax, visa, contract, or medical conclusions.
 - Do not add unrelated resume, interview, onboarding, resignation, or web automation features.

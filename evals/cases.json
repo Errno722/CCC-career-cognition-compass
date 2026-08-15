@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 46,
+  "manual_case_count": 47,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2455,6 +2455,95 @@
           "turn_answer_into_memorized_script",
           "produce_overlong_detail_dump",
           "invent_experience"
+        ]
+      }
+    },
+    {
+      "id": "manager-departure-uncertainty-001",
+      "title": "关键领导离职后的职业不确定感",
+      "manual_case_id": 47,
+      "input": "我直属领导今天突然告诉我他要离职了。\n\n他一直对我很好，也愿意给我机会，很多项目都会让我自己试，我之前其实挺愿意继续留在这里的。\n\n现在他突然要走，我一下很迷茫，甚至开始想我要不要也赶紧找工作。\n\n但目前公司还没说谁会接他的岗位，我自己的职责和项目也暂时没有变化。\n\n你觉得我现在应该怎么办？",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-stability-bridge",
+          "allowed_secondary": [
+            "career-cognition-compass",
+            "job-search-plan-review",
+            "career-direction-clarifier",
+            "offer-decision-support"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "情绪冲击",
+            "受到变化冲击",
+            "突然不确定",
+            "失去支持"
+          ],
+          [
+            "职责和项目暂时没有变化",
+            "职责和项目还没变",
+            "职责 / 项目暂时未变",
+            "项目和职责暂时没有变化"
+          ],
+          [
+            "接任者",
+            "汇报线",
+            "谁会接",
+            "新领导"
+          ],
+          [
+            "成长机会",
+            "自主权",
+            "项目 ownership",
+            "资源",
+            "晋升支持",
+            "稳定感"
+          ],
+          [
+            "观察",
+            "确认",
+            "小规模看市场",
+            "暂时不辞职"
+          ],
+          [
+            "下一步",
+            "小动作",
+            "这轮先做"
+          ]
+        ],
+        "literal_not_contains": [
+          "你也应该离职",
+          "你应该马上离职",
+          "立刻辞职",
+          "马上裸辞",
+          "全力投递",
+          "大量投递",
+          "新领导一定不好",
+          "公司肯定有问题",
+          "办公室政治",
+          "站队",
+          "他为什么离职"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 3,
+          "max_characters": 1000
+        },
+        "semantic_assertions": [
+          "acknowledges_anxiety_without_chicken_soup",
+          "separates_manager_departure_shock_from_job_change",
+          "does_not_convert_manager_departure_into_resignation",
+          "identifies_manager_dependent_job_conditions",
+          "keeps_employed_exploration_reversible",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "decide_resignation_for_user",
+          "create_overwhelming_multi_track_plan",
+          "produce_overlong_detail_dump"
         ]
       }
     }

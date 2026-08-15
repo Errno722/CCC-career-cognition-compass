@@ -2773,6 +2773,45 @@
         "The output creates a long memorized script or dense essay that is hard to say aloud.",
         "The output includes every possible detail in the first answer with no follow-up boundary."
       ]
+    },
+    "separates_manager_departure_shock_from_job_change": {
+      "type": "must",
+      "severity": "high",
+      "description": "Distinguishes the immediate shock of a supportive manager / mentor / key advocate leaving from confirmed changes in reporting line, responsibilities, projects, autonomy, growth, advancement support, or organizational conditions.",
+      "pass_criteria": [
+        "The output names the emotional shock or loss of support separately from confirmed facts.",
+        "The output marks unknowns such as successor, reporting line, project ownership, or responsibility changes instead of treating them as already changed."
+      ],
+      "fail_signals": [
+        "The output treats the user's fear as confirmed job deterioration without checking what has actually changed.",
+        "The output ignores confirmed facts that responsibilities and projects have not changed yet."
+      ]
+    },
+    "does_not_convert_manager_departure_into_resignation": {
+      "type": "must",
+      "severity": "critical",
+      "description": "Does not treat a supportive manager / mentor / key advocate leaving as evidence that the user should resign, naked-resign, or begin a full-scale job search immediately.",
+      "pass_criteria": [
+        "The output frames the departure as a new signal requiring observation or confirmation.",
+        "The output preserves options such as stay and observe, clarify carry-over, internal adjustment, small-scale market validation, or formal search later."
+      ],
+      "fail_signals": [
+        "The output says or implies the user should leave because the manager is leaving.",
+        "The output turns the event into immediate resignation planning or urgent mass applications."
+      ]
+    },
+    "identifies_manager_dependent_job_conditions": {
+      "type": "must",
+      "severity": "high",
+      "description": "Identifies which parts of the job's value materially depended on the departing person, such as autonomy, growth guidance, project ownership, manager advocacy, resources, protection from unreasonable work, promotion support, trust, or stability.",
+      "pass_criteria": [
+        "The output asks or states what the manager concretely provided rather than only saying the user liked the person.",
+        "The output links those supports to career conditions that may affect whether staying still makes sense."
+      ],
+      "fail_signals": [
+        "The output treats the issue only as missing a person emotionally and never converts it into observable job conditions.",
+        "The output talks about office relationships or personality fit without identifying growth, ownership, autonomy, resources, or advancement conditions."
+      ]
     }
   },
   "core_refined_rubrics": [
@@ -2915,6 +2954,9 @@
     "respects_energy_within_time_budget",
     "default_to_learning_new_skill",
     "selects_interview_structure_by_question_type",
+    "separates_manager_departure_shock_from_job_change",
+    "does_not_convert_manager_departure_into_resignation",
+    "identifies_manager_dependent_job_conditions",
     "reorganizes_rambling_answer_without_inventing_facts",
     "keeps_interview_answer_speakable"
   ]

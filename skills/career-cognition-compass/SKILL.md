@@ -1,7 +1,7 @@
 ---
 name: career-cognition-compass
 description: >-
-  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, judgment trace, methodology trace, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, job-search friction, application/interview funnel review, action planning, time-boxed next actions for limited job-search time, Gap, employed market exploration, work fatigue, resignation uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
+  Umbrella CCC (Career Cognition Compass) workflow for messy job-search situations: intake, project mining, judgment trace, methodology trace, direction clarification, transferable skills, hard-skill KB, JD/company prep, resume patches, materials, interview review, job-search friction, application/interview funnel review, action planning, time-boxed next actions for limited job-search time, Gap, employed market exploration, work fatigue, resignation uncertainty, key-manager departure uncertainty, bridge work, offer decision support, personality labels, acronyms, and cross-agent use. For narrow tasks, prefer companion skills such as career-project-experience-miner, career-transfer-map, jd-company-prep, jd-resume-patch, career-materials-builder, interview-review-miner, job-search-plan-review, offer-decision-support, or career-stability-bridge. Not for therapy, crisis counseling, automated applications, recruiting decisions, full portfolio generation, legal conclusions, tax calculations, or resume-only optimization.
 ---
 
 # CCC
@@ -44,6 +44,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 - 情绪波动时先降低行动颗粒度。先帮用户恢复一点可控感，再处理岗位、简历或投递。
 - 在职用户因工作感到焦虑、累、快撑不住时，先做压力来源和可恢复性判断，再讨论跳槽、离职或裸辞；不要直接推简历或给离职结论。
 - 在职用户不是单一“想离职”场景。先判断本轮是工作消耗、离职犹豫、市场探索、求职精力限制、正在面试，还是 Offer 决策；不要把“先看看市场”升级成离职计划。
+- 如果在职用户说对自己很重要的直属领导、Mentor 或关键支持者突然离职，导致开始怀疑是否还要留下，先路由到 `career-stability-bridge`。区分情绪冲击、已确认的组织变化，以及这位关键人物原本具体提供了哪些职业条件，例如成长机会、项目 ownership、资源、晋升支持、自主权或稳定感。不要把领导离职直接等同于用户也该离职；先确认哪些留下理由真的失效，再决定观察、内部调整、小规模看市场或正式求职。
 - 在职探索 / 骑驴找马时，默认可逆的小规模市场验证：1 个主 Role Family、1 份 Role Family Resume、5-10 个相关 JD、观察回复和 JD 信号，再决定是否扩大、换方向、暂时不辞职、内部转岗或谈边界。
 - 在职求职必须服从精力预算。低能量时本周只保留 1 个主动作；中等能量时简历补丁 + 3-5 个岗位；高能量时再加入面试准备、复盘和投递节奏。每轮最多推进 1 个主任务。
 - 区分 `confirmed`、`needs_confirmation`、`inference`、`user_preference`。不要把推断写成事实。
@@ -93,7 +94,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 9. **搭知识库。** 从用户已有信息和项目事实里建立按硬技能分类的轻量知识库和术语表，标记已掌握、待确认、需要补证据和面试卡点。
 10. **翻译能力。** 只把 `EVIDENCE_READY` 的经历和项目拆成证据、行为、能力、岗位信号，再结合近期工作行为偏好推导最多 3 个方向。未完成项目只能作为待补证据。
 11. **校准现实。** 结合市场需求、行业/公司类型、校招/社招/海外/在职/GAP 处境和用户约束，判断哪些方向适合先验证。
-12. **在职路径判断。** 如果用户还在职，先判断是工作消耗、离职犹豫、市场探索、求职精力不足、正在面试还是 Offer 决策。只有当前工作状态会影响策略时，输出在职状态卡；用户只是想看看市场时，默认小规模验证，不进入离职计划。
+12. **在职路径判断。** 如果用户还在职，先判断是工作消耗、关键人物变化、离职犹豫、市场探索、求职精力不足、正在面试还是 Offer 决策。直属领导、Mentor 或关键支持者离职时，先输出关键人物变化卡，不把这个事件直接翻译成离职结论。只有当前工作状态会影响策略时，输出在职状态卡；用户只是想看看市场时，默认小规模验证，不进入离职计划。
 13. **选择节奏。** 进入职业澄清模式、焦虑降噪模式、情绪稳定模式、在职探索模式、过渡兼职模式或快速就业模式。若用户已有目标 JD/公司，进入目标准备模式。
 14. **显式简历请求。** 如果用户明确说要改简历，进入简历材料模式：提醒脱敏，要求简历片段、目标岗位/JD、想改方向；材料足够时直接输出 1-3 个修改点或替换文本。若项目事实未达到 `EVIDENCE_READY`，先补项目事实卡，再改表达。
 15. **HR 面试前回复。** 如果用户粘贴 HR / Recruiter 在约面前的筛选问题并问怎么回，进入 career-materials-builder：先判断 HR 真实问的是当前状态、动机、经验、薪资、到岗、英语、工作地点、工作方式还是 work authorization；如果已知事实足够，直接给 1 条自然可发送回复。事实不足时只问 1 个会改变回复的关键事实，不编造具体数字、时间、经验或承诺。
@@ -105,7 +106,7 @@ Shared rules live in `core/focus-control.md`, `core/certainty-calibration.md`, a
 21. **面试邀约信号画像。** 如果用户已经收到面试邀请，并想知道接下来投什么岗位更容易有回复，进入 job-search-plan-review：对比邀约岗位/JD、投递基数、渠道、简历版本和无回复样本，输出相对高回复信号、低回复信号、样本边界和下一批小规模投递验证。
 22. **Offer 决策。** 如果用户收到 Offer、比较 Offer、纠结是否接受、继续求职、和当前工作比较或谈薪，进入 offer-decision-support：先检查 Offer 状态、雇佣关系、已确认条件、未知项、硬性限制、重大风险、用户优先级、机会成本、可逆性和职业资本，再输出单 Offer / 多 Offer / 在职跳槽决策卡。普通决策最多问 3 个关键问题；只有用户明确要 HR / 经理问题清单时才给 3-5 个问题。谈薪先判断是否值得谈、谈什么、deadline 和谈不成后如何回到决策。
 23. **Offer 闭环。** 用户接受、拒绝或继续求职后，输出 1-3 个下一步，并把这次选择反写为当前求职周期的下一批 JD 筛选条件；在建议取消其他流程或离职前，先确认正式书面 Offer、核心条件、前置审批 / 背调 / 签证和 start date。普通无持久化环境不要声称已保存。
-24. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、在职状态卡、在职市场验证卡、在职精力预算卡、有限时间下一步卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、HR 面试前回复、面试复盘卡、面试结构化表达卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
+24. **轻量输出。** 先按内部收束判断决定本轮只交付什么：用户请求的交付物优先，必要门禁其次；默认只给一个主卡片，例如职业画像卡、在职状态卡、关键人物变化卡、在职市场验证卡、在职精力预算卡、有限时间下一步卡、发散收束卡、近期工作行为定位卡、项目总表、项目事实卡、方向选择卡、下一步行动卡、求职摩擦卡、求职结果诊断、HR 面试前回复、面试复盘卡、面试结构化表达卡、面试邀约信号画像或 Offer 决策卡。其他材料只作为暂存分支，不一次性展开。
 25. **复盘调整。** 用每日 3 分钟、每周 15 分钟或节点复盘帮助用户形成求职习惯。
 
 ## Structured Interview Expression
@@ -226,7 +227,7 @@ Use this path when the user is currently employed and the current job may affect
 
 ```text
 在职状态卡
-├─ 当前最主要的问题: 工作消耗 / 离职犹豫 / 市场探索 / 求职精力限制 / 正在面试 / Offer 决策
+├─ 当前最主要的问题: 工作消耗 / 关键人物变化 / 离职犹豫 / 市场探索 / 求职精力限制 / 正在面试 / Offer 决策
 ├─ 已知现职状态:
 ├─ 每周可用于求职的时间:
 ├─ 是否已投递 / 面试 / 收到 Offer:
@@ -241,6 +242,7 @@ Only output this card when it helps the current task. Otherwise keep it as inter
 Rules:
 
 - Separate current-work exhaustion from job-search exhaustion and direction anxiety.
+- If a supportive manager, mentor, or key sponsor leaves, separate emotional shock from confirmed organizational change and actual job-condition change before any resignation or market-search decision.
 - If the user only wants to explore the market, keep the process reversible: one Role Family, one Role Family Resume, 5-10 relevant JDs, then observe reply and JD signals.
 - If the user has limited after-work energy, set an energy budget before planning. Low energy means one main action this week; medium energy means resume patch plus 3-5 roles; high energy may add interview prep or review.
 - Do not require a complete resume rewrite, daily mass applications, or multiple simultaneous job-search tracks.
@@ -287,7 +289,7 @@ offer-decision-support
 ├─ single-offer decision, multi-offer comparison, offer vs current job, offer vs continue search, formal/pending opportunity distinction, employment type, hard constraints, major risks, trade-offs, decision-flipping unknowns, negotiation readiness, HR/manager clarification questions, accept/reject/continue-search closure, current-cycle screening preferences
 
 career-stability-bridge
-└─ long Gap distress, low energy, work fatigue, employed market exploration, resignation uncertainty, energy budgeting, bridge/part-time work
+└─ long Gap distress, low energy, work fatigue, employed market exploration, key manager / mentor departure uncertainty, resignation uncertainty, energy budgeting, bridge/part-time work
 ```
 
 Use this umbrella skill when the user asks for the whole process, needs multiple modules at once, or is still too unclear to route safely.
@@ -309,6 +311,7 @@ Use this umbrella skill when the user asks for the whole process, needs multiple
 发散收束卡
 近期工作行为定位卡
 在职状态卡
+关键人物变化卡
 在职市场验证卡
 在职精力预算卡
 项目总表

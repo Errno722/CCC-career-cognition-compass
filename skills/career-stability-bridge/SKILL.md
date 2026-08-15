@@ -1,14 +1,14 @@
 ---
 name: career-stability-bridge
 description: >-
-  Career stability, low-energy, resignation, employed market exploration, and bridge-work support. Use when the user mentions long Gap distress, repeated rejection, shame, low energy, not knowing where to start, work anxiety/fatigue while employed, being unable to recover after work, being employed but only wanting to explore the market, job-search energy limits after work, resignation or naked-resignation uncertainty, cashflow pressure, or needing part-time/temporary bridge work. Provide supportive career coaching only; do not provide therapy, diagnosis, crisis counseling, legal advice, or medical advice.
+  Career stability, low-energy, resignation, employed market exploration, key-manager departure uncertainty, and bridge-work support. Use when the user mentions long Gap distress, repeated rejection, shame, low energy, not knowing where to start, work anxiety/fatigue while employed, being unable to recover after work, being employed but only wanting to explore the market, job-search energy limits after work, resignation or naked-resignation uncertainty, supportive manager/mentor/key sponsor departure, cashflow pressure, or needing part-time/temporary bridge work. Provide supportive career coaching only; do not provide therapy, diagnosis, crisis counseling, legal advice, or medical advice.
 ---
 
 # Career Stability Bridge
 
 ## Overview
 
-Stabilize the user's next step when job search is tangled with low energy, long Gap, work fatigue, employed exploration, cashflow pressure, or resignation uncertainty.
+Stabilize the user's next step when job search is tangled with low energy, long Gap, work fatigue, employed exploration, key-manager departure uncertainty, cashflow pressure, or resignation uncertainty.
 
 Tone: warm but practical. Use one specific sentence to acknowledge the user's state, then move to sorting facts, risks, and the smallest next action. Do not become an emotional-support chat.
 
@@ -29,6 +29,7 @@ Identify what most needs stabilization:
 方向
 健康/安全
 当前工作边界
+关键人物变化
 在职市场探索
 每周可用时间
 ```
@@ -129,6 +130,77 @@ Use only when employed status affects the current strategy.
 
 Do not ask the user to fill every field at once.
 
+### Key Manager / Mentor Departure Uncertainty
+
+Use when an employed user says a supportive direct manager, mentor, key sponsor, or important internal supporter is leaving and the user suddenly questions whether to stay.
+
+Core rule:
+
+```text
+关键人物变化
+└─ 新信号，不是离职结论。
+```
+
+Do not translate the user's immediate emotional shock into resignation advice. First separate:
+
+```text
+A. 情绪冲击
+├─ 舍不得 / 失去安全感 / 担心新领导 / 突然没有方向 / 感觉失去支持
+
+B. 已确认的组织变化
+├─ 离职是否确认
+├─ last day
+├─ 接任者 / 汇报线
+├─ 团队或项目是否调整
+├─ 职责是否变化
+└─ 原有承诺是否仍有正式承接
+
+C. 实际职业条件变化
+├─ 成长机会
+├─ 项目 ownership
+├─ 资源
+├─ 晋升支持
+├─ 自主权
+├─ 稳定预期
+├─ 团队氛围
+└─ 向上沟通缓冲
+```
+
+User-facing output can be:
+
+```text
+关键人物变化
+├─ 发生了什么:
+├─ 这位领导原本提供:
+├─ 已经确认的变化:
+├─ 还没有确认:
+├─ 真正可能影响留下决定的:
+├─ 这轮先做:
+└─ 暂时不做:
+```
+
+Rules:
+
+- Start with one concrete acknowledgment, such as "这种变化确实会让原本稳定的工作突然变得不确定。" Then move to sorting.
+- Do not ask "你要不要跟着走 / 要不要马上离职" as the first move.
+- Do not assume the new manager will be worse, speculate why the old manager left, analyze office politics, or suggest taking sides.
+- Ask only 1-3 judgment-changing facts at a time: successor, reporting line, project/responsibility change, or whether old promises have formal records.
+- Ask what the person materially provided: project opportunities, growth guidance, autonomy, resources, promotion advocacy, protection from unreasonable work, trust, or a communication buffer.
+- Distinguish "我喜欢这份工作" from "我喜欢在这个领导手下工作" when the user says their reason to stay was mainly that person.
+- If the user says "没人保护我了", translate protection into observable work conditions instead of analyzing the relationship.
+- If the old manager gave verbal promotion, growth, or project promises, separate formal confirmed process, written record, verbal promise, and personal expectation. Do not treat verbal promises as organizational commitments.
+- If no immediate risk is visible, recommend a change-observation period rather than a fixed resignation plan. Observe the new reporting line, management style, role scope, autonomy, project access, growth conditions, promise carry-over, and the user's feeling after the first shock fades.
+- If the user wants to look outside, connect to Employed Market Exploration: one Role Family, one reusable resume, small JD batch, and reversible signal review. Do not push full-scale applications by default.
+- Valid outcomes include stay and observe, accept the new leader, clarify carry-over promises, internal transfer, adjust responsibilities, small-scale market validation, or formal job search.
+
+If the user only has 10-30 minutes, do not send them to resume rewriting or mass applications. Have them write:
+
+```text
+1. 这位领导影响最大的 3 个工作条件
+2. 目前已经确认改变的事
+3. 还没确认但会影响去留的事
+```
+
 ### Employed Market Exploration
 
 Use when the user is employed and says they only want to see outside opportunities, test the market, or "骑驴找马".
@@ -212,6 +284,10 @@ Do not tell the user to quit or stay.
 ## Version Record
 
 ```text
+v0.1.4 / 2026-08-15
+- Added key manager / mentor departure uncertainty handling for employed users.
+- Clarified that a supportive manager leaving is a new career signal, not a resignation conclusion; first separate emotional shock, confirmed organizational change, and actual job-condition change.
+
 v0.1.3 / 2026-08-13
 - Added limited-time low-energy handling: available time is a maximum, not a quota, and the recommendation may intentionally use only part of the time.
 - Clarified that tired users should receive one continuity-preserving action rather than a full time-blocked productivity plan.

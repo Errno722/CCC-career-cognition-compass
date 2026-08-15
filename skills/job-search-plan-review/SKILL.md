@@ -31,6 +31,7 @@ Core principle:
 - If the user is low energy, give one 5-20 minute action instead of a full plan.
 - If the user gives a narrow time box such as 10 minutes, 30 minutes, 1 hour, tonight, lunch break, commute, or a short weekend block, choose one highest-value action for the current stage instead of generating a general job-search plan.
 - If the user is employed and only exploring the market, keep the plan reversible: one Role Family, one Role Family Resume, one small JD batch, then review signals.
+- If the user wants to look outside because a supportive manager, mentor, or key sponsor left, treat the departure as a new signal and keep the plan reversible. Do not turn it into a resignation plan or full-scale applications by default.
 - Prefer 1-3 actions per day or review cycle.
 - If the user is trying to pursue many branches at once, set an active-track limit: 1 main track, 1 optional secondary track, and a parking lot for the rest.
 - If the user is anxious, do not respond with motivational slogans. Use anxiety as a planning signal: identify the trigger, separate controllable from uncontrollable items, set an information-intake boundary, and give one small action.
@@ -192,6 +193,31 @@ Rules:
 - Recommend small-batch experiments, for example 5-10 applications per role family or resume version, rather than unlimited mass application.
 - Preserve version isolation: do not let a high-reply operations profile automatically contaminate product, technical, or research resume versions.
 - If results suggest the user is being invited mostly by a role they do not want, frame it as leverage or bridge option, not as a forced direction.
+
+## Manager Departure And Small-Scale Market Exploration
+
+Use this only after `career-stability-bridge` has separated the immediate emotional shock from confirmed work-condition changes, or when the user explicitly wants a small external signal check after a supportive manager / mentor / key sponsor leaves.
+
+Output can stay narrow:
+
+```text
+关键人物变化后的市场验证
+├─ 现在想验证:
+├─ 仍未确认的内部变化:
+├─ 主 Role Family:
+├─ 小批量 JD:
+├─ 观察信号:
+├─ 暂时不做:
+└─ 下一步:
+```
+
+Rules:
+
+- Do not treat the manager's departure as proof the user should leave.
+- Keep the exploration reversible: one Role Family, one reusable resume version, 5-10 relevant JDs, and a short review of replies / JD fit.
+- If the user's current responsibilities, projects, or reporting line have not changed yet, mark external search as optional validation, not urgent escape.
+- If old manager promises are only verbal, note they need confirmation from the new owner; do not use them as guaranteed organizational commitments.
+- Preserve valid outcomes: observe, clarify carry-over promises, internal transfer, adjust responsibilities, small-scale market validation, or formal job search later.
 
 ## Application Friction
 
@@ -446,6 +472,10 @@ Rules:
 ## Version Record
 
 ```text
+v0.2.10 / 2026-08-15
+- Added planning handoff for small-scale market validation after a supportive manager, mentor, or key sponsor leaves.
+- Clarified that manager departure is a signal for reversible validation, not an automatic resignation or full-scale application plan.
+
 v0.2.9 / 2026-08-13
 - Added time-boxed next action planning for limited job-search time.
 - Clarified that post-application idle time should prioritize signal review, one reusable asset, or a small validation batch rather than mass applying or repeated resume rewrites.
