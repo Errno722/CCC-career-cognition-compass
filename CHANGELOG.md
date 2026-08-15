@@ -29,6 +29,7 @@ Current project version: `0.1.1-beta`
 - 新增关键领导 / Mentor 离职后的职业不确定感支持，放入 `career-stability-bridge` 并同步主路由、Lite Prompt、WorkBuddy 和 Full Guide。该场景先区分情绪冲击、已确认组织变化和真实职业条件变化，不把关键人物离开直接等同于用户也该离职。新增 `manager-departure-uncertainty-001` 行为合约，当前手工测试和机器可读合约为 47 个，已登记语义断言为 251 条，核心细化 Rubric 为 144 条。
 - 新增更新后旧问题接续能力：用户替换新版 Prompt、重新部署 WorkBuddy、下载新版 ZIP / 网盘包或带回旧版资料卡时，CCC 先问“之前的问题是否解决 / 如果没有卡在哪”，再决定继续旧主线还是处理新问题；不重新完整 onboarding，也不声称自动记住旧对话。新增 `post-update-handoff-001` 行为合约，当前手工测试和机器可读合约为 48 个，已登记语义断言为 255 条，核心细化 Rubric 为 148 条。
 - 版本升至 `0.1.1-beta`，用于重新打包包含更新后旧问题接续能力的 GitHub Release 包和网盘镜像包。
+- 网盘镜像包增加 `更新指南.md` 和 `版本更新说明.txt`，每个 ZIP 内也包含 `VERSION_NOTES.txt`；Lite / WorkBuddy 包同步包含 [docs/update-guide.md](docs/update-guide.md)，方便不使用 GitHub 的用户理解如何更新。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 
 ## 2026-08-08

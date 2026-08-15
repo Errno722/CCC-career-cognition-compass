@@ -20,6 +20,7 @@ const packages = [
       "DEMO.en.md",
       "DOWNLOADS.md",
       "VERSION",
+      "docs/update-guide.md",
       "prompts/copy-paste-prompt-lite-cn.md",
       "prompts/copy-paste-prompt-lite-en.md",
       "SECURITY.md",
@@ -37,6 +38,7 @@ const packages = [
       "DEMO.en.md",
       "DOWNLOADS.md",
       "VERSION",
+      "docs/update-guide.md",
       "workbuddy/README.md",
       "workbuddy/mainland-user-guide.md",
       "workbuddy/system-prompt-lite.md",
@@ -220,6 +222,55 @@ function zipDirectory(directoryName, outputDirectory, zipName) {
   return zipPath;
 }
 
+function buildVersionNotes(versionTag) {
+  return [
+    "CCC Version Update Notes",
+    "",
+    `Version: ${versionTag}`,
+    "",
+    "Main changes in this package:",
+    "",
+    "- Added post-update handoff support: after replacing a Prompt, redeploying WorkBuddy, downloading a new ZIP / mirror package, or bringing back old CCC cards, CCC should first ask whether the previous issue was resolved and, if not, where the user is stuck.",
+    "- The update flow avoids restarting full onboarding when the user brings back an old CCC continuation card or old materials.",
+    "- Lite Prompt, English Lite Prompt, WorkBuddy prompts, update guide, and eval contracts are aligned with this behavior.",
+    "- Evaluation status: 48 behavior contracts, 255 semantic rubrics, 148 core refined rubrics, 0 public real-platform smoke reports.",
+    "",
+    "How to update:",
+    "",
+    "- General LLM users: replace the old Lite Prompt with the latest one from the package.",
+    "- WorkBuddy users: replace the old WorkBuddy system prompt with the latest `workbuddy/system-prompt-lite.md` or `workbuddy/system-prompt.md`.",
+    "- If you already have CCC cards, paste the previous card / CCC continuation context into the new conversation and ask for a delta instead of restarting.",
+    "",
+    "中文说明：",
+    "",
+    `当前版本：${versionTag}`,
+    "",
+    "本版本主要更新：",
+    "",
+    "- 新增更新后旧问题接续：用户替换 Prompt、重新部署 WorkBuddy、下载新版 ZIP / 网盘包，或带回旧版资料卡时，CCC 应先问“之前的问题解决了吗？如果没有，卡在哪？”。",
+    "- 更新后不要重新完整 onboarding；如果用户带回旧版资料卡或 CCC 继续上下文，只基于这些内容输出差异、卡点和下一步。",
+    "- Lite Prompt、英文 Lite Prompt、WorkBuddy Prompt、更新指南和 Eval 合约已同步该行为。",
+    "- 当前测试状态：48 个行为合约，255 条语义断言，148 条核心细化 Rubric，公开真实平台 Smoke Report 仍为 0。",
+    "",
+    "更新方式：",
+    "",
+    "- 普通 LLM 用户：用本包里的最新版 Lite Prompt 替换旧 Prompt。",
+    "- WorkBuddy 用户：用最新版 `workbuddy/system-prompt-lite.md` 或 `workbuddy/system-prompt.md` 替换旧系统提示词。",
+    "- 如果之前已有 CCC 资料卡，把旧卡片 / CCC 继续上下文复制到新对话里，请它只给差异补丁，不要从头开始。",
+    "",
+    "Privacy:",
+    "Do not include identity document numbers, private contact details, full offer letters, contracts, salary screenshots, complete interview transcripts, or confidential employer information in CCC conversations."
+  ].join("\n") + "\n";
+}
+
+function writePackageVersionNotes(packageRoot, versionTag) {
+  fs.writeFileSync(
+    path.join(packageRoot, "VERSION_NOTES.txt"),
+    buildVersionNotes(versionTag),
+    "utf8"
+  );
+}
+
 function zipVersionedPackage(packageName, versionTag, mirrorPackageDir) {
   const versionedPackageName = `${packageName}-${versionTag}`;
   const sourceRoot = path.join(stagingDir, packageName);
@@ -238,6 +289,8 @@ function zipVersionedPackage(packageName, versionTag, mirrorPackageDir) {
 function writeDistributionNotes(versionTag, mirrorPackageDir) {
   const latestPath = path.join(mirrorPackageDir, "latest.txt");
   const readmePath = path.join(mirrorPackageDir, "先看我.txt");
+  const updateGuidePath = path.join(mirrorPackageDir, "更新指南.md");
+  const versionNotesPath = path.join(mirrorPackageDir, "版本更新说明.txt");
   const today = new Date().toISOString().slice(0, 10);
 
   fs.writeFileSync(
@@ -248,6 +301,10 @@ function writeDistributionNotes(versionTag, mirrorPackageDir) {
       "",
       "Recommended for most users:",
       `CCC-lite-pack-${versionTag}.zip`,
+      "",
+      "Read before updating:",
+      "更新指南.md",
+      "版本更新说明.txt",
       "",
       "Build version source:",
       `VERSION -> ${versionTag}`,
@@ -266,6 +323,10 @@ function writeDistributionNotes(versionTag, mirrorPackageDir) {
       "CCC — Career Cognition Compass",
       "",
       `当前版本：${versionTag}`,
+      "",
+      "更新前先看：",
+      "1. 版本更新说明.txt",
+      "2. 更新指南.md",
       "",
       "如果你只是想马上试用：",
       `下载 CCC-lite-pack-${versionTag}.zip`,
@@ -311,7 +372,10 @@ function writeDistributionNotes(versionTag, mirrorPackageDir) {
     "utf8"
   );
 
-  return [latestPath, readmePath];
+  fs.copyFileSync(path.join(repoRoot, "docs", "update-guide.md"), updateGuidePath);
+  fs.writeFileSync(versionNotesPath, buildVersionNotes(versionTag), "utf8");
+
+  return [latestPath, readmePath, updateGuidePath, versionNotesPath];
 }
 
 function packageRelease() {
@@ -341,6 +405,8 @@ function packageRelease() {
     for (const file of releasePackage.files) {
       copyEntry(file, packageRoot);
     }
+
+    writePackageVersionNotes(packageRoot, versionTag);
 
     const zipPath = zipPackage(releasePackage.name);
     outputs.push(zipPath);

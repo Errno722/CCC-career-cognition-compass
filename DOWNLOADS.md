@@ -50,6 +50,8 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 CCC-v0.1.1-beta/
 ├─ 先看我.txt
 ├─ latest.txt
+├─ 更新指南.md
+├─ 版本更新说明.txt
 ├─ CCC-lite-pack-v0.1.1-beta.zip
 ├─ CCC-workbuddy-pack-v0.1.1-beta.zip
 └─ CCC-full-pack-v0.1.1-beta.zip
@@ -96,6 +98,8 @@ QUICKSTART.md
 QUICKSTART.en.md
 DEMO.en.md
 DOWNLOADS.md
+VERSION_NOTES.txt
+docs/update-guide.md
 prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-lite-en.md
 SECURITY.md
@@ -114,6 +118,8 @@ QUICKSTART.md
 QUICKSTART.en.md
 DEMO.en.md
 DOWNLOADS.md
+VERSION_NOTES.txt
+docs/update-guide.md
 workbuddy/README.md
 workbuddy/mainland-user-guide.md
 workbuddy/system-prompt-lite.md
@@ -144,6 +150,8 @@ dist/release/CCC-workbuddy-pack.zip
 dist/release/CCC-full-pack.zip
 dist/mirror/CCC-v0.1.1-beta/先看我.txt
 dist/mirror/CCC-v0.1.1-beta/latest.txt
+dist/mirror/CCC-v0.1.1-beta/更新指南.md
+dist/mirror/CCC-v0.1.1-beta/版本更新说明.txt
 dist/mirror/CCC-v0.1.1-beta/CCC-lite-pack-v0.1.1-beta.zip
 dist/mirror/CCC-v0.1.1-beta/CCC-workbuddy-pack-v0.1.1-beta.zip
 dist/mirror/CCC-v0.1.1-beta/CCC-full-pack-v0.1.1-beta.zip

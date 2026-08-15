@@ -41,6 +41,8 @@ For netdisk mirrors, upload the generated mirror folder:
 dist/mirror/CCC-v0.1.1-beta/
 ├─ 先看我.txt
 ├─ latest.txt
+├─ 更新指南.md
+├─ 版本更新说明.txt
 ├─ CCC-lite-pack-v0.1.1-beta.zip
 ├─ CCC-workbuddy-pack-v0.1.1-beta.zip
 └─ CCC-full-pack-v0.1.1-beta.zip
