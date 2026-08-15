@@ -171,7 +171,7 @@ docs/         完整文档
 <details>
 <summary><strong>🧪 Developer & Evaluation</strong></summary>
 
-47 behavior contracts · deterministic eval runner · public smoke testing pending
+48 behavior contracts · deterministic eval runner · public smoke testing pending
 
 ```bash
 node scripts/check-evals.mjs
@@ -187,21 +187,21 @@ git diff --check
 当前测试状态：
 
 ```text
-手工测试场景：47
-机器可读合约：47
-已登记语义断言：251
-已人工细化核心 Rubric：144
+手工测试场景：48
+机器可读合约：48
+已登记语义断言：255
+已人工细化核心 Rubric：148
 确定性 Runner：0.2.0
 结果报告 Schema：0.2.0
 结果报告：0
 总执行次数：0
-声明唯一覆盖：0/47
-Runner 执行覆盖：0/47
-公开平台覆盖：0/47
-Runner 唯一通过：0/47
-公开唯一通过：0/47
-已验证 Runner 通过：0/47
-公开已验证通过：0/47
+声明唯一覆盖：0/48
+Runner 执行覆盖：0/48
+公开平台覆盖：0/48
+Runner 唯一通过：0/48
+公开唯一通过：0/48
+已验证 Runner 通过：0/48
+公开已验证通过：0/48
 语义已审次数：0
 评估对象：assistant_output_only
 ```

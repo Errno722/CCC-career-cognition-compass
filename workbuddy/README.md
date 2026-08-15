@@ -215,8 +215,9 @@ outcome_signal_pattern_records
 2. 优先更新 workbuddy/system-prompt-lite.md；如果使用完整版，再更新 workbuddy/system-prompt.md
 3. 如果涉及新功能，补充 workbuddy/test-cases.md
 4. 在 WorkBuddy 后台替换系统提示词
-5. 用测试用例跑一遍
-6. 记录平台上实际失败的回复，再回到 skill 里修
+5. 更新后先测“旧问题是否解决 / 卡点在哪里”的接续问题
+6. 用测试用例跑一遍
+7. 记录平台上实际失败的回复，再回到 skill 里修
 ```
 
 如果你不是维护者，只是想把已经部署好的 WorkBuddy Agent 换成新版，先看：[CCC 更新指南](../docs/update-guide.md)。

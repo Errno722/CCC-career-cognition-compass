@@ -27,6 +27,7 @@ Current project version: `0.1.0-beta`
 - 新增有限时间下的下一步选择能力，强化原有 Focus Control：用户只有 10 分钟、30 分钟、1 小时、今晚或周末一点时间时，CCC 根据 deadline、面试 / HR / Offer、投递阶段、证据缺口和精力，只选当前最值得做的一件事；低精力时不要求把时间用满。新增 `time-boxed-next-action-001` 行为合约，当前手工测试和机器可读合约为 45 个，已登记语义断言为 245 条，核心细化 Rubric 为 138 条。
 - 新增面试结构化表达能力：用户问某个面试题怎么组织、发来散乱回答，或说自己越说越乱时，CCC 先判断题型，再用“先回答 -> 2-3 个支撑点 -> 证据 / 例子 -> 收回问题”的自然结构整理已有事实；STAR 只用于适合的项目 / 行为经历题，判断题必须保留本人判断和取舍缺口。新增 `structured-interview-expression-001` 行为合约，当前手工测试和机器可读合约为 46 个，已登记语义断言为 248 条，核心细化 Rubric 为 141 条。
 - 新增关键领导 / Mentor 离职后的职业不确定感支持，放入 `career-stability-bridge` 并同步主路由、Lite Prompt、WorkBuddy 和 Full Guide。该场景先区分情绪冲击、已确认组织变化和真实职业条件变化，不把关键人物离开直接等同于用户也该离职。新增 `manager-departure-uncertainty-001` 行为合约，当前手工测试和机器可读合约为 47 个，已登记语义断言为 251 条，核心细化 Rubric 为 144 条。
+- 新增更新后旧问题接续能力：用户替换新版 Prompt、重新部署 WorkBuddy、下载新版 ZIP / 网盘包或带回旧版资料卡时，CCC 先问“之前的问题是否解决 / 如果没有卡在哪”，再决定继续旧主线还是处理新问题；不重新完整 onboarding，也不声称自动记住旧对话。新增 `post-update-handoff-001` 行为合约，当前手工测试和机器可读合约为 48 个，已登记语义断言为 255 条，核心细化 Rubric 为 148 条。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 
 ## 2026-08-08

@@ -2812,11 +2812,64 @@
         "The output treats the issue only as missing a person emotionally and never converts it into observable job conditions.",
         "The output talks about office relationships or personality fit without identifying growth, ownership, autonomy, resources, or advancement conditions."
       ]
+    },
+    "asks_post_update_resolution_check": {
+      "type": "must",
+      "severity": "high",
+      "description": "When the user says they updated CCC, replaced a prompt, redeployed WorkBuddy, downloaded a new package, or brought old CCC context back, the assistant first checks whether the previous issue was resolved and, if not, where the user is stuck.",
+      "pass_criteria": [
+        "The output explicitly asks whether the previous issue was solved or resolved.",
+        "The output asks where the user is currently stuck if the issue is unresolved."
+      ],
+      "fail_signals": [
+        "The output starts a new task without checking whether the prior issue was resolved.",
+        "The output treats the update itself as the task and ignores the user's prior unresolved problem."
+      ]
+    },
+    "continues_from_user_provided_context_after_update": {
+      "type": "must",
+      "severity": "high",
+      "description": "After an update, the assistant uses the CCC continuation context or old cards provided in the current message to continue the existing thread instead of restarting the whole process.",
+      "pass_criteria": [
+        "The output refers to the user-provided continuation context, old card, old thread, or equivalent content.",
+        "The output keeps or resumes the relevant previous main thread and turns it into one next action, delta, or stuck-point check."
+      ],
+      "fail_signals": [
+        "The output ignores the provided continuation context.",
+        "The output asks the user to provide a complete background again despite enough continuation context to proceed."
+      ]
+    },
+    "preserves_update_context_without_claiming_memory": {
+      "type": "must",
+      "severity": "high",
+      "description": "The assistant preserves the boundary that it can only continue from context the user brought back this round, and does not claim long-term memory or storage after an update.",
+      "pass_criteria": [
+        "The output bases continuation on the provided old card or continuation context.",
+        "If storage or memory is mentioned, the output states that the user-provided context is being used rather than claiming automatic memory."
+      ],
+      "fail_signals": [
+        "The output says it remembers, saved, or will automatically keep the previous conversation without a real storage mechanism.",
+        "The output implies it has access to old conversation content not included in the current message."
+      ]
+    },
+    "restart_full_onboarding_after_update": {
+      "type": "must_not",
+      "severity": "high",
+      "description": "The assistant restarts full onboarding after a user update even though the user provided old CCC continuation context or cards.",
+      "pass_criteria": [
+        "The output only asks for the minimum missing information needed to continue.",
+        "The output does not request the full background, full resume, full project list, or full form again."
+      ],
+      "fail_signals": [
+        "The output asks the user to reintroduce their complete background, education, work history, skills, projects, and target roles.",
+        "The output ignores the update handoff and starts the initial CCC onboarding template from scratch."
+      ]
     }
   },
   "core_refined_rubrics": [
     "adapts_answer_focus_by_interviewer_role",
     "acknowledges_anxiety_without_chicken_soup",
+    "asks_post_update_resolution_check",
     "balances_star_situation_action_result",
     "builds_jd_aligned_selling_points",
     "change_facts_by_interviewer_role",
@@ -2888,6 +2941,8 @@
     "inherits_reusable_profile_evidence",
     "does_not_inherit_role_specific_profile_bias",
     "resets_profile_focus_for_new_round",
+    "continues_from_user_provided_context_after_update",
+    "preserves_update_context_without_claiming_memory",
     "preserves_profile_item_sources",
     "outputs_profile_patch",
     "marks_profile_as_output_only_without_storage",
@@ -2946,6 +3001,7 @@
     "disambiguates_resume_and_cv_by_region",
     "calibrates_second_language_claims",
     "request_sensitive_visa_or_identity_documents",
+    "restart_full_onboarding_after_update",
     "assume_us_hiring_conventions",
     "equate_sponsorship_need_with_low_candidate_quality",
     "answers_recruiter_screening_question_directly",

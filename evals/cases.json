@@ -2,7 +2,7 @@
   "schema_version": "0.3.0",
   "suite_id": "ccc-core",
   "evaluation_target": "assistant_output_only",
-  "manual_case_count": 47,
+  "manual_case_count": 48,
   "routing_semantics": {
     "primary_required": "The primary skill is the expected main handler. Secondary skills are allowed helpers, not mandatory unless a semantic assertion explicitly requires their behavior.",
     "route_trace_note": "Plain LLM prompt tests may not expose skill routing logs; in that case routing is judged semantically from the assistant output. Agent runtimes may validate actual routing_trace separately."
@@ -2543,6 +2543,86 @@
         "semantic_must_not": [
           "decide_resignation_for_user",
           "create_overwhelming_multi_track_plan",
+          "produce_overlong_detail_dump"
+        ]
+      }
+    },
+    {
+      "id": "post-update-handoff-001",
+      "title": "更新后旧问题接续",
+      "manual_case_id": 48,
+      "input": "我刚把 CCC 更新到新版，也复制了新的 Lite Prompt。\n\n这是上一版的 CCC 继续上下文：\n当前状态：在职，想小规模看市场。\n本轮主线：先判断运营 / 产品运营哪个方向更值得投。\n已确认事实：之前做过运营，下班后精力有限。\n可复用卡片：在职市场验证卡、JD 聚类草稿。\n未确认：简历还没有按 Role Family 固定。\n下一步：筛 3 个 JD 看共性。\n\n我现在想继续。",
+      "expected": {
+        "routing": {
+          "mode": "primary_required",
+          "primary": "career-cognition-compass",
+          "allowed_secondary": [
+            "job-search-plan-review",
+            "career-direction-clarifier",
+            "career-stability-bridge",
+            "jd-resume-patch"
+          ]
+        },
+        "literal_all_of": [],
+        "literal_any_of": [
+          [
+            "之前的问题解决了吗",
+            "之前的问题是否解决",
+            "旧问题解决",
+            "卡在哪"
+          ],
+          [
+            "上一版",
+            "继续上下文",
+            "旧卡片",
+            "你带回的内容"
+          ],
+          [
+            "接着",
+            "继续",
+            "不重新",
+            "不从头"
+          ],
+          [
+            "筛 3 个 JD",
+            "3 个 JD",
+            "JD 共性",
+            "Role Family"
+          ],
+          [
+            "下一步",
+            "小动作",
+            "差异",
+            "卡点"
+          ]
+        ],
+        "literal_not_contains": [
+          "请先完整介绍你的背景",
+          "请填写完整表格",
+          "从头开始",
+          "我已经记住",
+          "我会一直记住",
+          "已长期保存",
+          "focus_control",
+          "active_thread",
+          "parked_threads",
+          "persistence_mode"
+        ],
+        "regex_not_contains": [],
+        "structural_assertions": {
+          "max_questions": 2,
+          "max_characters": 800
+        },
+        "semantic_assertions": [
+          "asks_post_update_resolution_check",
+          "continues_from_user_provided_context_after_update",
+          "preserves_update_context_without_claiming_memory",
+          "provides_single_next_action"
+        ],
+        "semantic_must_not": [
+          "restart_full_onboarding_after_update",
+          "claim_profile_persisted_without_storage",
+          "expose_internal_state_keys_to_end_user",
           "produce_overlong_detail_dump"
         ]
       }
