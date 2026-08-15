@@ -12,6 +12,8 @@
 
 版本关系： [VERSION](VERSION) 决定构建版本；GitHub Release 是官方公开发行渠道；网盘是同一批 Release 文件的国内下载镜像。
 
+如果你已经用过旧版 CCC，更新方式见：[CCC 更新指南](docs/update-guide.md)。
+
 ## Release 下载
 
 如果仓库已经发布 Release，可以在 GitHub 的 `Releases` 页面下载这些文件包：
@@ -58,6 +60,8 @@ CCC-v0.1.0-beta/
 1. 普通用户优先下载 `CCC-lite-pack-v0.1.0-beta.zip`。
 2. WorkBuddy 用户下载 `CCC-workbuddy-pack-v0.1.0-beta.zip`。
 3. 维护者、开发者或想研究完整项目的人下载 `CCC-full-pack-v0.1.0-beta.zip`。
+
+如果你之前已经下载过旧版，不要直接混用旧版和新版 Prompt。先看 [CCC 更新指南](docs/update-guide.md)，再替换对应文件。
 
 ## 也可以直接复制
 

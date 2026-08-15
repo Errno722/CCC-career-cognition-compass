@@ -219,6 +219,8 @@ outcome_signal_pattern_records
 6. 记录平台上实际失败的回复，再回到 skill 里修
 ```
 
+如果你不是维护者，只是想把已经部署好的 WorkBuddy Agent 换成新版，先看：[CCC 更新指南](../docs/update-guide.md)。
+
 ## 测试
 
 使用 [test-cases.md](test-cases.md) 做回归测试。重点看：

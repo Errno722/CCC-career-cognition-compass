@@ -20,6 +20,7 @@ Current project version: `0.1.0-beta`
 - 英文入口进一步明确 interaction language ≠ job market context：使用英文不代表跨市场求职，使用中文也不代表只在中国市场求职；地区 / 市场上下文只在会改变当前判断时触发。
 - English Edition 进一步改为面向偏好使用英语处理求职问题的用户，移除首页 sponsorship 偏向，新增 [DEMO.en.md](DEMO.en.md)，并将 title translation 示例移入 cross-market guide。
 - 打包脚本现在读取 [VERSION](VERSION)，同时生成 GitHub Release 用的无版本号 ZIP，以及可直接上传网盘的 `dist/mirror/CCC-vX.Y.Z/` 文件夹；网盘 ZIP 内部目录也带版本号，并输出 `latest.txt` / `先看我.txt`，降低国内分发时的版本混乱。
+- 新增 [CCC 更新指南](docs/update-guide.md)，面向已经复制过 Prompt、下载过 ZIP 或部署过 WorkBuddy 的用户，说明如何替换 Lite Prompt、更新 WorkBuddy、选择新版网盘 / Release 包，以及旧对话和旧材料如何带到新版继续使用。
 - 新增 `international-job-search-constraints-001` 行为合约，覆盖 target region、sponsorship、remote eligibility、resume / CV 和敏感签证信息边界；second-language English 校准由英文面试语气合约承接。该轮手工测试和机器可读合约为 42 个，已登记语义断言为 238 条，核心细化 Rubric 为 131 条。
 - 在职用户支持从“疲惫 / 离职犹豫 / 当前工作 vs Offer”扩展为连续路径：工作消耗、在职市场探索、骑驴找马、求职精力预算、Minimal Tailoring、小规模市场验证和“暂时不辞职”都成为合法状态。新增 `employed-market-exploration-001` 行为合约，当前手工测试和机器可读合约为 43 个，已登记语义断言为 240 条，核心细化 Rubric 为 133 条。
 - 新增 HR 面试前沟通 / 筛选问题回复能力，放入 `career-materials-builder`，用于用户粘贴 HR / Recruiter 约面前问题时直接生成 1 条自然、可发送回复；默认不重新 onboarding、不索要完整简历、不输出多版本，不编造薪资、到岗、经验、英语能力、work authorization 或 sponsorship。新增 `recruiter-pre-interview-reply-001` 行为合约，当前手工测试和机器可读合约为 44 个，已登记语义断言为 242 条，核心细化 Rubric 为 135 条。

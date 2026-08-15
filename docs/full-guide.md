@@ -26,6 +26,7 @@ CCC 是 Career Cognition Compass 的缩写。它是一个 AI 求职澄清与行�
 | Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](../SKILLS.md) 和 [skills/](../skills/) |
 | WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](../workbuddy/mainland-user-guide.md) |
 | 飞书入口 | 想让飞书作为聊天入口的人 | 查看 [飞书 × WorkBuddy 配置模板](../workbuddy/feishu-config.md) |
+| 更新旧版 | 已经复制过 Prompt、下载过 ZIP 或部署过 WorkBuddy 的人 | 查看 [CCC 更新指南](update-guide.md) |
 
 更完整的入口选择见：[QUICKSTART.md](../QUICKSTART.md)。
 

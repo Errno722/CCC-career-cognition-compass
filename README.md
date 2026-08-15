@@ -151,9 +151,9 @@ CCC 会区分“对话语言”和“求职市场”。
 | Start | Use | See | Build |
 | --- | --- | --- | --- |
 | [Quickstart](QUICKSTART.md) | [Full Guide](docs/full-guide.md) | [Demo](DEMO.md) | [Eval](evals/README.md) |
-| [Downloads](DOWNLOADS.md) | [Skills](SKILLS.md) | [Examples](examples/full-walkthrough.md) | [Contributing](CONTRIBUTING.md) |
+| [Downloads](DOWNLOADS.md) | [Update Guide](docs/update-guide.md) | [Examples](examples/full-walkthrough.md) | [Contributing](CONTRIBUTING.md) |
 | [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) | [WorkBuddy](workbuddy/README.md) | [Compatibility](docs/compatibility.md) | [Changelog](CHANGELOG.md) |
-| [Roadmap](ROADMAP.md) | [English README](README.en.md) | [Scenario Examples](examples/direction-confusion.md) | [Release Notes Template](docs/release-notes-template.md) |
+| [Skills](SKILLS.md) | [Roadmap](ROADMAP.md) | [English README](README.en.md) | [Scenario Examples](examples/direction-confusion.md) |
 
 配套 LaTeX 简历模板：[latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)
 
