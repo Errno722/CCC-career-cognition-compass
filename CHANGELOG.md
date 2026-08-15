@@ -2,7 +2,7 @@
 
 CCC 使用日期型版本记录。这里记录面向使用者能感知到的主要变化；更细的 skill 内部变化见 [SKILLS.md](SKILLS.md)。
 
-Current project version: `0.1.0-beta`
+Current project version: `0.1.1-beta`
 
 ## 2026-08-09
 
@@ -12,7 +12,7 @@ Current project version: `0.1.0-beta`
 - 新增 GitHub Issue Templates：usability feedback、bug report、deployment problem、documentation 和 feature request，优先收集脱敏、最小复现、真实使用摩擦。
 - 新增 Pull Request Template，要求说明用户问题、行为契约影响、隐私检查和测试结果。
 - 新增 [ROADMAP.md](ROADMAP.md)，记录 Beta / Active Development 阶段、Now / Next / Later 和 Not Planned 范围。
-- 新增顶层 [VERSION](VERSION)，当前项目 version 为 `0.1.0-beta`。
+- 新增顶层 [VERSION](VERSION)，初始项目 version 为 `0.1.0-beta`。
 - 新增 [docs/release-notes-template.md](docs/release-notes-template.md)，用于准备 Beta Release，不自动发布 GitHub Release。
 - 新增短场景 examples：方向混乱、面试判断、投递/面试无结果循环和 Offer 决策。
 - 新增 [README.en.md](README.en.md) 和 international / cross-market job search 示例；英文入口不是中文版逐句翻译，而是补充 work authorization、visa sponsorship、location、timezone、local resume conventions、ATS、cover letter、LinkedIn、language claims、employment type、compensation structure 和 relocation 等跨市场求职变量。
@@ -28,6 +28,7 @@ Current project version: `0.1.0-beta`
 - 新增面试结构化表达能力：用户问某个面试题怎么组织、发来散乱回答，或说自己越说越乱时，CCC 先判断题型，再用“先回答 -> 2-3 个支撑点 -> 证据 / 例子 -> 收回问题”的自然结构整理已有事实；STAR 只用于适合的项目 / 行为经历题，判断题必须保留本人判断和取舍缺口。新增 `structured-interview-expression-001` 行为合约，当前手工测试和机器可读合约为 46 个，已登记语义断言为 248 条，核心细化 Rubric 为 141 条。
 - 新增关键领导 / Mentor 离职后的职业不确定感支持，放入 `career-stability-bridge` 并同步主路由、Lite Prompt、WorkBuddy 和 Full Guide。该场景先区分情绪冲击、已确认组织变化和真实职业条件变化，不把关键人物离开直接等同于用户也该离职。新增 `manager-departure-uncertainty-001` 行为合约，当前手工测试和机器可读合约为 47 个，已登记语义断言为 251 条，核心细化 Rubric 为 144 条。
 - 新增更新后旧问题接续能力：用户替换新版 Prompt、重新部署 WorkBuddy、下载新版 ZIP / 网盘包或带回旧版资料卡时，CCC 先问“之前的问题是否解决 / 如果没有卡在哪”，再决定继续旧主线还是处理新问题；不重新完整 onboarding，也不声称自动记住旧对话。新增 `post-update-handoff-001` 行为合约，当前手工测试和机器可读合约为 48 个，已登记语义断言为 255 条，核心细化 Rubric 为 148 条。
+- 版本升至 `0.1.1-beta`，用于重新打包包含更新后旧问题接续能力的 GitHub Release 包和网盘镜像包。
 - 继续保持公开真实 Smoke Report 为 0，不提前声称 verified 或 production ready。
 
 ## 2026-08-08
