@@ -76,14 +76,14 @@ evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
 | 平台 / 环境 | 状态 | 测试计划 | 公开覆盖 | 公开通过 | 公开验证 | 模型 / 版本 | 证据 | 推荐入口 |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 | Codex | Maintainer-used | 48 | 0 | - | - | 未记录 | 本地结构检查通过，尚无真实平台结果报告 | `skills/` |
-| WorkBuddy | Maintainer-used | 48 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 48 例正式执行记录 | `workbuddy/system-prompt-lite.md` |
+| WorkBuddy | Maintainer-used | 48 | 0 | - | - | 未记录 | 有部署与人工冒烟经验，尚无 48 例正式执行记录 | `workbuddy/system-prompt.md` |
 | 飞书 + WorkBuddy | Community testing needed | 48 | 0 | - | - | 未记录 | 只有配置模板，尚未形成公开测试记录 | `workbuddy/feishu-config.md` |
-| ChatGPT / 普通 LLM | Contract-ready | 48 | 0 | - | - | 未记录 | 有 48 个机器可读合约和确定性输出 runner，尚无真实执行报告 | CN: `prompts/copy-paste-prompt-lite-cn.md`; EN: `prompts/copy-paste-prompt-lite-en.md` |
+| ChatGPT / 普通 LLM | Contract-ready | 48 | 0 | - | - | 未记录 | 有 48 个机器可读合约和确定性输出 runner，尚无真实执行报告 | CN: `prompts/copy-paste-prompt-cn.md`; EN: `prompts/copy-paste-prompt-en.md` |
 | Claude Code | Community testing needed | 48 | 0 | - | - | 未记录 | 目录结构可迁移，需社区测试触发规则 | `skills/` |
-| DeepSeek | Community testing needed | 48 | 0 | - | - | 未记录 | 建议使用精简输入和分轮对话，尚无执行报告 | CN: `prompts/copy-paste-prompt-lite-cn.md`; EN: `prompts/copy-paste-prompt-lite-en.md` |
-| Kimi | Community testing needed | 48 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | CN: `prompts/copy-paste-prompt-lite-cn.md`; EN: `prompts/copy-paste-prompt-lite-en.md` |
-| 通义千问 | Experimental | 48 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | CN: `prompts/copy-paste-prompt-lite-cn.md`; EN: `prompts/copy-paste-prompt-lite-en.md` |
-| 豆包 | Experimental | 48 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | CN: `prompts/copy-paste-prompt-lite-cn.md`; EN: `prompts/copy-paste-prompt-lite-en.md` |
+| DeepSeek | Community testing needed | 48 | 0 | - | - | 未记录 | 建议使用短轮次、Focus Control 和 Token Saving Mode，尚无执行报告 | CN: `prompts/copy-paste-prompt-cn.md`; EN: `prompts/copy-paste-prompt-en.md` |
+| Kimi | Community testing needed | 48 | 0 | - | - | 未记录 | 适合长文本整理，但需要人工确认是否过早生成材料 | CN: `prompts/copy-paste-prompt-cn.md`; EN: `prompts/copy-paste-prompt-en.md` |
+| 通义千问 | Experimental | 48 | 0 | - | - | 未记录 | 可迁移，尚未建立稳定测试记录 | CN: `prompts/copy-paste-prompt-cn.md`; EN: `prompts/copy-paste-prompt-en.md` |
+| 豆包 | Experimental | 48 | 0 | - | - | 未记录 | 可迁移，建议使用短轮次和明确脱敏提醒 | CN: `prompts/copy-paste-prompt-cn.md`; EN: `prompts/copy-paste-prompt-en.md` |
 
 ## 迁移原则
 
@@ -101,7 +101,7 @@ evals/results/<adapter>/<YYYY-MM-DD>-smoke.json
 - 涉及最近在做或喜欢做的工作任务时，只把它作为定位假设；必须区分工作任务和爱好，并用项目事实、JD 或小验证确认。
 - 涉及 Offer、谈薪、合同、薪资或高影响决策时，先区分正式 Offer、口头 Offer、进行中机会、雇佣关系、固定条件和不确定条件，只给整理、分析和建议，不替用户做最终选择。
 - 涉及隐私、offer、合同、薪资、签证、医疗、法律时，只做提醒和风险边界。
-- English-language entry 使用 [prompts/copy-paste-prompt-lite-en.md](../prompts/copy-paste-prompt-lite-en.md)；WorkBuddy 文档当前仍以中文为主。
+- English-language entry 使用 [prompts/copy-paste-prompt-en.md](../prompts/copy-paste-prompt-en.md)；WorkBuddy 文档当前仍以中文为主。
 - 对话语言不决定求职市场；只有当地区 / 市场上下文会改变当前判断时，才确认 target market、work authorization / sponsorship、location / remote eligibility、local resume convention 或 second-language communication。
 - International / cross-market does not mean US-only；也不因为用户使用中文就默认 China-only。
 - Remote 不等于 work from anywhere；不知道目标地区时，不给固定国家简历规则，不把 CV 自动当 academic CV。

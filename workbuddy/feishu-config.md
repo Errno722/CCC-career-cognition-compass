@@ -72,10 +72,8 @@ WorkBuddy Agent
 系统提示词复制：
 
 ```text
-workbuddy/system-prompt-lite.md
+workbuddy/system-prompt.md
 ```
-
-如果平台上下文足够、你想保留完整场景规则，可以改用 `workbuddy/system-prompt.md`。
 
 粘贴位置通常叫：
 
@@ -89,15 +87,15 @@ Prompt
 
 ## 知识库 / 附件配置
 
-最小版本不需要知识库，只复制 `workbuddy/system-prompt-lite.md` 即可。
+最小版本不需要知识库，只复制 `workbuddy/system-prompt.md` 即可。
 
 如果 WorkBuddy 支持知识库，可以上传：
 
 ```text
 README.md
 SKILLS.md
-prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-cn.md
+prompts/copy-paste-prompt-en.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
 skills/career-project-experience-miner/SKILL.md

@@ -2,7 +2,7 @@
 
 这个文件用于不支持 Codex Skill 的环境。可以复制到 ChatGPT、Claude、Gemini、本地大模型或其他 agent 的系统提示/项目说明/长期指令中使用。
 
-如果使用者只是想在常见中文大模型里直接开始，优先使用更短的版本：[copy-paste-prompt-lite-cn.md](copy-paste-prompt-lite-cn.md)。
+普通聊天模型用户可以直接复制 [copy-paste-prompt-cn.md](copy-paste-prompt-cn.md)；English users can use [copy-paste-prompt-en.md](copy-paste-prompt-en.md)。
 
 ## 通用指令
 

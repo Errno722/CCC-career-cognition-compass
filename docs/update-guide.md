@@ -4,25 +4,25 @@
 
 CCC 的不同使用方式，更新方法不一样。先看你属于哪一种。
 
-## 我只是复制 Lite Prompt 使用
+## 我只是复制 CCC Prompt 使用
 
 适合：ChatGPT、Claude、DeepSeek、通义千问、Kimi、豆包、Gemini 等普通聊天模型。
 
-你需要更新的是这一份文件：
+中文用户更新这一份文件：
 
 ```text
-prompts/copy-paste-prompt-lite-cn.md
+prompts/copy-paste-prompt-cn.md
 ```
 
-如果你使用英文入口，更新：
+English users update:
 
 ```text
-prompts/copy-paste-prompt-lite-en.md
+prompts/copy-paste-prompt-en.md
 ```
 
 更新步骤：
 
-1. 打开最新版 Lite Prompt。
+1. 打开最新版 CCC Prompt。
 2. 复制全文。
 3. 到你正在使用的大模型里，新开一个对话，粘贴新版 Prompt。
 4. 如果你之前已经有职业画像卡、项目卡、候选人面试资料卡或 Offer 决策卡，把上一版卡片一起发给新对话。
@@ -34,12 +34,6 @@ prompts/copy-paste-prompt-lite-en.md
 适合：把 CCC 做成一个国内可访问的对话型 Agent。
 
 最常用更新文件：
-
-```text
-workbuddy/system-prompt-lite.md
-```
-
-如果你使用完整版，再更新：
 
 ```text
 workbuddy/system-prompt.md
@@ -72,7 +66,7 @@ workbuddy/system-prompt.md
 常见文件：
 
 ```text
-CCC-lite-pack-vX.Y.Z.zip
+CCC-prompt-pack-vX.Y.Z.zip
 CCC-workbuddy-pack-vX.Y.Z.zip
 CCC-full-pack-vX.Y.Z.zip
 ```
@@ -84,7 +78,9 @@ CCC-full-pack-vX.Y.Z.zip
 3. 解压后使用新版文件。
 4. 不要把旧版 Prompt 和新版 Prompt 混在同一个 Agent 里。
 
-普通用户优先下载 Lite Pack。WorkBuddy 用户下载 WorkBuddy Pack。开发者或想研究完整项目的人再下载 Full Pack。
+普通聊天模型用户优先下载 Prompt Pack。WorkBuddy 用户下载 WorkBuddy Pack。开发者或想研究完整项目的人再下载 Full Pack。
+
+如果你以前下载的是 `CCC-lite-pack-vX.Y.Z.zip`，新版对应 `CCC-prompt-pack-vX.Y.Z.zip`。它不是少功能版，而是普通聊天模型的正式入口包。
 
 ## 我从网盘下载
 
@@ -95,7 +91,7 @@ CCC-full-pack-vX.Y.Z.zip
 1. 打开网盘文件夹。
 2. 先看 `latest.txt`。
 3. 下载最新版本号的 ZIP。
-4. 如果你只是普通用户，优先下载 `CCC-lite-pack-vX.Y.Z.zip`。
+4. 如果你在普通聊天模型里使用 CCC，优先下载 `CCC-prompt-pack-vX.Y.Z.zip`。
 5. 如果你部署 WorkBuddy，下载 `CCC-workbuddy-pack-vX.Y.Z.zip`。
 
 不要只看文件修改时间，优先看版本号。

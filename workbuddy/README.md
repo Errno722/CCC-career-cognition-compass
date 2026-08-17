@@ -31,12 +31,6 @@
 最小部署只需要复制：
 
 ```text
-workbuddy/system-prompt-lite.md
-```
-
-如果平台上下文足够、你想保留更完整的场景规则和变量说明，可以改用：
-
-```text
 workbuddy/system-prompt.md
 ```
 
@@ -45,8 +39,8 @@ workbuddy/system-prompt.md
 ```text
 README.md
 SKILLS.md
-prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-cn.md
+prompts/copy-paste-prompt-en.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
 skills/career-project-experience-miner/SKILL.md
@@ -212,7 +206,7 @@ outcome_signal_pattern_records
 
 ```text
 1. 查看 SKILLS.md 的更新记录
-2. 优先更新 workbuddy/system-prompt-lite.md；如果使用完整版，再更新 workbuddy/system-prompt.md
+2. 更新 workbuddy/system-prompt.md
 3. 如果涉及新功能，补充 workbuddy/test-cases.md
 4. 在 WorkBuddy 后台替换系统提示词
 5. 更新后先测“旧问题是否解决 / 卡点在哪里”的接续问题

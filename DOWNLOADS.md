@@ -6,8 +6,8 @@
 
 | 你想做什么 | 推荐 |
 | --- | --- |
-| 只想马上试用 | `CCC-lite-pack.zip` / `CCC-lite-pack-v0.1.1-beta.zip` 或直接复制 [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) |
-| 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` / `CCC-workbuddy-pack-v0.1.1-beta.zip` 或复制 [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
+| 在普通聊天模型里马上试用 | `CCC-prompt-pack.zip` / `CCC-prompt-pack-v0.1.1-beta.zip` 或直接复制 [CCC 中文 Prompt](prompts/copy-paste-prompt-cn.md) / [CCC English Prompt](prompts/copy-paste-prompt-en.md) |
+| 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` / `CCC-workbuddy-pack-v0.1.1-beta.zip` 或复制 [WorkBuddy System Prompt](workbuddy/system-prompt.md) |
 | 想研究完整项目 | `CCC-full-pack.zip` / `CCC-full-pack-v0.1.1-beta.zip` |
 
 版本关系： [VERSION](VERSION) 决定构建版本；GitHub Release 是官方公开发行渠道；网盘是同一批 Release 文件的国内下载镜像。
@@ -19,7 +19,7 @@
 如果仓库已经发布 Release，可以在 GitHub 的 `Releases` 页面下载这些文件包：
 
 ```text
-CCC-lite-pack.zip
+CCC-prompt-pack.zip
 CCC-workbuddy-pack.zip
 CCC-full-pack.zip
 ```
@@ -27,12 +27,14 @@ CCC-full-pack.zip
 常用直链格式：
 
 ```text
-https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/download/CCC-lite-pack.zip
+https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/download/CCC-prompt-pack.zip
 https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/download/CCC-workbuddy-pack.zip
 https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/download/CCC-full-pack.zip
 ```
 
 如果还没有 Release，先使用 GitHub 页面中的单文件复制方式，或点击仓库绿色 `Code` 按钮下载 `Download ZIP`。
+
+旧版说明：`CCC-lite-pack.zip` 已由 `CCC-prompt-pack.zip` 取代。历史 Release 中的 `CCC-lite-pack` 仍代表旧版本；从新版开始，普通聊天模型用户使用 Prompt Pack。
 
 ## 网盘下载镜像
 
@@ -42,7 +44,7 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 
 提取码：`2529`
 
-请优先下载带版本号的 ZIP。普通用户下载 `CCC-lite-pack-v0.1.1-beta.zip` 就够了。
+请优先下载带版本号的 ZIP。普通用户下载 `CCC-prompt-pack-v0.1.1-beta.zip` 就够了。
 
 网盘文件夹内容：
 
@@ -52,14 +54,14 @@ CCC-v0.1.1-beta/
 ├─ latest.txt
 ├─ 更新指南.md
 ├─ 版本更新说明.txt
-├─ CCC-lite-pack-v0.1.1-beta.zip
+├─ CCC-prompt-pack-v0.1.1-beta.zip
 ├─ CCC-workbuddy-pack-v0.1.1-beta.zip
 └─ CCC-full-pack-v0.1.1-beta.zip
 ```
 
 网盘推荐顺序：
 
-1. 普通用户优先下载 `CCC-lite-pack-v0.1.1-beta.zip`。
+1. 普通用户优先下载 `CCC-prompt-pack-v0.1.1-beta.zip`。
 2. WorkBuddy 用户下载 `CCC-workbuddy-pack-v0.1.1-beta.zip`。
 3. 维护者、开发者或想研究完整项目的人下载 `CCC-full-pack-v0.1.1-beta.zip`。
 
@@ -69,11 +71,9 @@ CCC-v0.1.1-beta/
 
 | 你想做什么 | 推荐文件 |
 | --- | --- |
-| 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-lite-cn.md](prompts/copy-paste-prompt-lite-cn.md) |
-| English-language CCC entry | [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md) |
-| 普通 LLM 需要完整规则 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
-| 在 WorkBuddy 部署轻量版智能体 | [workbuddy/system-prompt-lite.md](workbuddy/system-prompt-lite.md) |
-| WorkBuddy 需要完整规则 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
+| 在 ChatGPT、Claude、DeepSeek、通义千问、Kimi 等普通聊天模型里试用 | [prompts/copy-paste-prompt-cn.md](prompts/copy-paste-prompt-cn.md) |
+| English-language CCC entry | [prompts/copy-paste-prompt-en.md](prompts/copy-paste-prompt-en.md) |
+| 在 WorkBuddy 部署智能体 | [workbuddy/system-prompt.md](workbuddy/system-prompt.md) |
 | 不知道从哪里开始 | [QUICKSTART.md](QUICKSTART.md) |
 
 ## English-language users
@@ -83,11 +83,11 @@ Start with:
 - [README.en.md](README.en.md)
 - [QUICKSTART.en.md](QUICKSTART.en.md)
 - [DEMO.en.md](DEMO.en.md)
-- [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md)
+- [prompts/copy-paste-prompt-en.md](prompts/copy-paste-prompt-en.md)
 
 ## 三个包分别包含什么
 
-### CCC-lite-pack.zip
+### CCC-prompt-pack.zip
 
 适合第一次试用和普通用户。
 
@@ -97,11 +97,13 @@ README.en.md
 QUICKSTART.md
 QUICKSTART.en.md
 DEMO.en.md
+DEMO.md
 DOWNLOADS.md
+VERSION
 VERSION_NOTES.txt
 docs/update-guide.md
-prompts/copy-paste-prompt-lite-cn.md
-prompts/copy-paste-prompt-lite-en.md
+prompts/copy-paste-prompt-cn.md
+prompts/copy-paste-prompt-en.md
 SECURITY.md
 SUPPORT.md
 LICENSE
@@ -122,7 +124,6 @@ VERSION_NOTES.txt
 docs/update-guide.md
 workbuddy/README.md
 workbuddy/mainland-user-guide.md
-workbuddy/system-prompt-lite.md
 workbuddy/system-prompt.md
 workbuddy/test-cases.md
 workbuddy/feishu-config.md
@@ -145,14 +146,14 @@ node scripts/package-release.mjs
 生成结果：
 
 ```text
-dist/release/CCC-lite-pack.zip
+dist/release/CCC-prompt-pack.zip
 dist/release/CCC-workbuddy-pack.zip
 dist/release/CCC-full-pack.zip
 dist/mirror/CCC-v0.1.1-beta/先看我.txt
 dist/mirror/CCC-v0.1.1-beta/latest.txt
 dist/mirror/CCC-v0.1.1-beta/更新指南.md
 dist/mirror/CCC-v0.1.1-beta/版本更新说明.txt
-dist/mirror/CCC-v0.1.1-beta/CCC-lite-pack-v0.1.1-beta.zip
+dist/mirror/CCC-v0.1.1-beta/CCC-prompt-pack-v0.1.1-beta.zip
 dist/mirror/CCC-v0.1.1-beta/CCC-workbuddy-pack-v0.1.1-beta.zip
 dist/mirror/CCC-v0.1.1-beta/CCC-full-pack-v0.1.1-beta.zip
 ```

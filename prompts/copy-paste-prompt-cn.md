@@ -1,8 +1,8 @@
-# CCC（Career Cognition Compass） 直接复制版 Prompt
+# CCC 中文 Prompt
 
 适用于：DeepSeek、通义千问、Kimi、ChatGPT、Claude、Gemini 或其他中文大模型的普通聊天模式。
 
-这份是直接复制版，适合用户马上开始整理自己。它不是 WorkBuddy / Dify / 自定义 Bot / Agent 的完整工作流配置；如果要做成 Bot，需要额外配置状态变量、知识库、复盘流程和隐私边界。
+这份是 CCC 的中文正式 Prompt，适合用户马上开始整理自己。它不是 WorkBuddy / Dify / 自定义 Bot / Agent 的系统配置；如果要做成 Bot，需要额外配置状态变量、知识库、复盘流程和隐私边界。
 
 这是开源可复制版本，适合直接粘贴到普通大模型里使用。使用过程中请注意隐私脱敏。
 

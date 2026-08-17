@@ -23,16 +23,18 @@ body:
     id: deployment
     attributes:
       label: Deployment method / 部署方式
-      placeholder: "Example: copied workbuddy/system-prompt-lite.md into a WorkBuddy agent"
+      placeholder: "Example: copied workbuddy/system-prompt.md into a WorkBuddy agent"
     validations:
       required: true
   - type: dropdown
     id: version
     attributes:
-      label: Lite or Full / 使用 Lite 还是 Full
+      label: Entrypoint / 使用入口
       options:
-        - Lite
-        - Full
+        - CCC Chinese Prompt
+        - CCC English Prompt
+        - WorkBuddy System Prompt
+        - Skills / Codex / Claude Code
         - Not sure
     validations:
       required: true

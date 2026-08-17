@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="prompts/copy-paste-prompt-lite-en.md">Try the Lite Prompt</a>
+  <a href="prompts/copy-paste-prompt-en.md">Try CCC Prompt</a>
   ·
   <a href="QUICKSTART.en.md">Quickstart</a>
   ·
@@ -123,9 +123,9 @@ Privacy reminder: do not share passport numbers, visa document numbers, national
 
 | Entry | Best for | Where to start |
 | --- | --- | --- |
-| General LLM | quick trial, lower token use, mobile use | [English Lite Prompt](prompts/copy-paste-prompt-lite-en.md) |
+| General LLM | ChatGPT, Claude, Gemini, DeepSeek, Kimi, Qwen, or another chat model | [CCC English Prompt](prompts/copy-paste-prompt-en.md) |
 | Codex / Claude Code | modular Skill workflow | [SKILLS.md](SKILLS.md) |
-| WorkBuddy | mainland China accessible Agent setup; documentation is currently Chinese-first | [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
+| WorkBuddy | mainland China accessible Agent setup; documentation is currently Chinese-first | [WorkBuddy System Prompt](workbuddy/system-prompt.md) |
 
 More options: [QUICKSTART.en.md](QUICKSTART.en.md)
 

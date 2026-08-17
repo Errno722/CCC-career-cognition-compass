@@ -21,8 +21,8 @@ CCC 是 Career Cognition Compass 的缩写。它是一个 AI 求职澄清与行�
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| 普通大模型轻量版 | 想直接试用、省 token 或手机端使用的人 | 复制 [copy-paste-prompt-lite-cn.md](../prompts/copy-paste-prompt-lite-cn.md) |
-| 普通大模型完整版 | 想要完整规则的人 | 复制 [copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md) |
+| 普通聊天模型中文入口 | 想在 ChatGPT、Claude、DeepSeek、通义千问、Kimi、Gemini 等模型里直接使用 | 复制 [copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md) |
+| 普通聊天模型英文入口 | 想用英文处理本地、跨地区、跨市场或第二语言求职问题 | 复制 [copy-paste-prompt-en.md](../prompts/copy-paste-prompt-en.md) |
 | Codex / Claude Code | 想使用可拆分 skill 的人 | 查看 [SKILLS.md](../SKILLS.md) 和 [skills/](../skills/) |
 | WorkBuddy | 想做国内可访问 Agent 的人 | 查看 [WorkBuddy 大陆用户部署说明](../workbuddy/mainland-user-guide.md) |
 | 飞书入口 | 想让飞书作为聊天入口的人 | 查看 [飞书 × WorkBuddy 配置模板](../workbuddy/feishu-config.md) |
@@ -526,8 +526,8 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - WorkBuddy 大陆用户部署说明：[workbuddy/mainland-user-guide.md](../workbuddy/mainland-user-guide.md)
 - 飞书 × WorkBuddy 配置模板：[workbuddy/feishu-config.md](../workbuddy/feishu-config.md)
 - 传播素材：[SHARE.md](../SHARE.md)
-- 轻量可复制 Prompt：[prompts/copy-paste-prompt-lite-cn.md](../prompts/copy-paste-prompt-lite-cn.md)
-- 可复制 Prompt：[prompts/copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md)
+- 中文 CCC Prompt：[prompts/copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md)
+- English CCC Prompt：[prompts/copy-paste-prompt-en.md](../prompts/copy-paste-prompt-en.md)
 - 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](../prompts/career-cognition-compass-prompt.md)
 - 使用示例：[examples/](../examples/)
 - 虚构 demo：[DEMO.md](../DEMO.md)

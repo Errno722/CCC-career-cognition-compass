@@ -17,12 +17,6 @@
 最小版本只需要一个文件：
 
 ```text
-workbuddy/system-prompt-lite.md
-```
-
-如果你希望保留更完整的场景规则，或平台上下文足够大，可以改用：
-
-```text
 workbuddy/system-prompt.md
 ```
 
@@ -33,8 +27,8 @@ workbuddy/system-prompt.md
 ```text
 README.md
 SKILLS.md
-prompts/copy-paste-prompt-lite-cn.md
 prompts/copy-paste-prompt-cn.md
+prompts/copy-paste-prompt-en.md
 prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
 skills/career-project-experience-miner/SKILL.md
@@ -109,7 +103,7 @@ Agent
 打开并复制：
 
 ```text
-workbuddy/system-prompt-lite.md
+workbuddy/system-prompt.md
 ```
 
 粘贴到 WorkBuddy 的类似位置：
@@ -436,6 +430,5 @@ CCC 不做：
 - 腾讯云 WorkBuddy Enterprise 快速开始：[快速开始](https://cloud.tencent.com/document/product/1831/134527)
 - CodeBuddy WorkBuddy 企业智能体说明：[企业智能体](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/CloudAgent)
 - 本项目 WorkBuddy 部署材料：[README.md](README.md)
-- 轻量系统提示词：[system-prompt-lite.md](system-prompt-lite.md)
-- 完整系统提示词：[system-prompt.md](system-prompt.md)
+- WorkBuddy System Prompt：[system-prompt.md](system-prompt.md)
 - 测试用例：[test-cases.md](test-cases.md)

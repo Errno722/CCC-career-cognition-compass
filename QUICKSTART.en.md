@@ -7,7 +7,7 @@ Before using it, redact sensitive information. Do not send passport numbers, vis
 ## I Just Want To Try It
 
 1. Open ChatGPT, Claude, Gemini, or another LLM.
-2. Copy [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md).
+2. Copy [prompts/copy-paste-prompt-en.md](prompts/copy-paste-prompt-en.md).
 3. Start a new chat.
 4. Send your situation in messy form.
 

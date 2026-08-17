@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="prompts/copy-paste-prompt-lite-cn.md">立即试用</a>
+  <a href="prompts/copy-paste-prompt-cn.md">立即试用</a>
   ·
   <a href="DOWNLOADS.md">下载</a>
   ·
@@ -130,9 +130,9 @@ CCC 会区分“对话语言”和“求职市场”。
 
 | 入口 | 适合谁 | 怎么开始 |
 | --- | --- | --- |
-| 🚀 普通用户 | 想马上试用、省 token 或手机端使用 | 复制 [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) |
+| 🚀 普通聊天模型 | 想在 ChatGPT / Claude / DeepSeek / Kimi / 通义千问 / Gemini 里直接使用 | 复制 [CCC 中文 Prompt](prompts/copy-paste-prompt-cn.md) |
 | 🛠 Codex / Claude Code | 想使用可拆分 Skill 的人 | 查看 [SKILLS.md](SKILLS.md) |
-| 📱 WorkBuddy | 想做国内可访问 Agent | 复制 [WorkBuddy Lite Prompt](workbuddy/system-prompt-lite.md) |
+| 📱 WorkBuddy | 想做国内可访问 Agent | 复制 [WorkBuddy System Prompt](workbuddy/system-prompt.md) |
 
 其他入口：[QUICKSTART.md](QUICKSTART.md)
 
@@ -154,7 +154,7 @@ CCC 会区分“对话语言”和“求职市场”。
 | --- | --- | --- | --- |
 | [Quickstart](QUICKSTART.md) | [Full Guide](docs/full-guide.md) | [Demo](DEMO.md) | [Eval](evals/README.md) |
 | [Downloads](DOWNLOADS.md) | [Update Guide](docs/update-guide.md) | [Examples](examples/full-walkthrough.md) | [Contributing](CONTRIBUTING.md) |
-| [Lite Prompt](prompts/copy-paste-prompt-lite-cn.md) | [WorkBuddy](workbuddy/README.md) | [Compatibility](docs/compatibility.md) | [Changelog](CHANGELOG.md) |
+| [CCC Prompt](prompts/copy-paste-prompt-cn.md) | [WorkBuddy](workbuddy/README.md) | [Compatibility](docs/compatibility.md) | [Changelog](CHANGELOG.md) |
 | [Skills](SKILLS.md) | [Roadmap](ROADMAP.md) | [English README](README.en.md) | [Scenario Examples](examples/direction-confusion.md) |
 
 配套 LaTeX 简历模板：[latex-resume-template-cn-en](https://github.com/Errno722/latex-resume-template-cn-en)

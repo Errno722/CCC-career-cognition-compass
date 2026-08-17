@@ -14,9 +14,8 @@ Use this template when preparing a GitHub Release. Do not publish a release unti
 
 ## Ways to use
 
-- Lite Prompt
-- English Lite Prompt
-- Full Prompt
+- CCC Chinese Prompt
+- CCC English Prompt
 - Codex / Claude Code Skills
 - WorkBuddy (Chinese-first documentation)
 
@@ -30,7 +29,7 @@ Use this template when preparing a GitHub Release. Do not publish a release unti
 ## Release files
 
 ```text
-CCC-lite-pack.zip
+CCC-prompt-pack.zip
 CCC-workbuddy-pack.zip
 CCC-full-pack.zip
 ```
@@ -43,7 +42,7 @@ dist/mirror/CCC-v0.1.1-beta/
 ├─ latest.txt
 ├─ 更新指南.md
 ├─ 版本更新说明.txt
-├─ CCC-lite-pack-v0.1.1-beta.zip
+├─ CCC-prompt-pack-v0.1.1-beta.zip
 ├─ CCC-workbuddy-pack-v0.1.1-beta.zip
 └─ CCC-full-pack-v0.1.1-beta.zip
 ```
