@@ -7,12 +7,15 @@
 - 验证 CCC 是否真的先收束主线，而不是一次展开所有任务。
 - 验证用户说“继续补项目”等短标签时，是否能恢复暂存分支。
 - 验证项目事实卡、JD 拆解、简历补丁和面试准备是否能串成一个工作流。
+- 验证用户带来新事件时，CCC 是否能继承旧事实、更新当前判断，而不是重新开始。
+- 验证上次建议做完 / 没做完后，CCC 是否能形成行动结果闭环，并调整下一步。
 - 观察回复是否过长、门禁是否过重、是否重复介绍背景、是否泄露内部字段。
 
 ## 测试材料
 
 - [synthetic-user-profile.md](synthetic-user-profile.md)：完全虚构的测试用户背景。
 - [test-scenarios.md](test-scenarios.md)：6 个连续使用场景。
+- [longitudinal-job-search-plan.md](longitudinal-job-search-plan.md)：14 天连续求职状态测试计划。
 - [english-edition-usability-plan.md](english-edition-usability-plan.md)：英文版人工连续体验测试计划。
 - [observation-template.md](observation-template.md)：单轮观察记录模板。
 - [friction-log.md](friction-log.md)：体验摩擦登记表。
@@ -33,6 +36,7 @@
 - 不要求每轮输出都完美；重点看用户是否能继续往前走。
 - 普通用户输出不应出现 `focus_control`、`active_thread`、`parked_threads`、`candidate_interview_profile_patch` 等内部字段。
 - 记录“本轮是否完成”，不要把“整个求职还没结束”误判成本轮失败。
+- 新事件不要自动等于结论；观察 CCC 是否区分 data point、signal、pattern 和 strategy change。
 
 ## 通过信号
 
@@ -43,6 +47,8 @@
 - JD 拆解能判断岗位类型和准备重点。
 - 面试准备给框架和展开逻辑，不给难记的逐字稿。
 - 面试复盘后能形成资料卡补丁，并提醒用户转向下一次机会或查缺补漏。
+- 用户隔天或隔几天带来 HR、面试、投递、Offer 或工作变化时，CCC 能说明当前判断是否变化，以及为什么。
+- 用户没执行上次动作时，CCC 能缩小或调整动作，而不是责备用户或重复原计划。
 
 ## 暂不观察
 

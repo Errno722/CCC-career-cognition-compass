@@ -12,9 +12,9 @@ Clarify what the user is actually trying to solve before recommending jobs. Trea
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1.1
+- SHARED_RULE focus-control v1.2
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1.1
+- SHARED_RULE profile-persistence v1.2
 
 Use `core/focus-control.md` to keep one active thread, park extra branches, and avoid turning direction clarification into a full materials package.
 

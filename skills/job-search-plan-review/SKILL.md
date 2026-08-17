@@ -20,9 +20,9 @@ Core principle:
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1.1
+- SHARED_RULE focus-control v1.2
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1.1
+- SHARED_RULE profile-persistence v1.2
 
 ## Planning Rules
 

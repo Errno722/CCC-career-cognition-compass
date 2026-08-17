@@ -22,9 +22,9 @@ Core boundary:
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1.1
+- SHARED_RULE focus-control v1.2
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1.1
+- SHARED_RULE profile-persistence v1.2
 
 Use `core/focus-control.md` to keep the current review narrow, `core/certainty-calibration.md` to avoid turning feedback into fixed identity, and `core/profile-persistence.md` for profile scope and storage claims.
 

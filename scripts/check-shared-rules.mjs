@@ -1,9 +1,9 @@
 import fs from "node:fs";
 
 const ruleVersions = {
-  "focus-control": "v1.1",
+  "focus-control": "v1.2",
   "certainty-calibration": "v1",
-  "profile-persistence": "v1.1"
+  "profile-persistence": "v1.2"
 };
 
 const coreFiles = {

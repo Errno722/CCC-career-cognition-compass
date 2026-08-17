@@ -33,6 +33,17 @@ yes / partial / no
 
 ## 体验观察
 
+- 新事件是什么：
+- 是否继承上一轮已确认事实：
+- 是否重复询问已给出的信息：
+- 是否重置方向 / 简历基线 / 候选人叙事：
+- 当前判断是否更新：
+- 判断依据是否清楚：
+- 下一步为什么是现在：
+- 做到哪里就停：
+- 用户是否执行了上次动作：
+- 执行结果 / 未执行原因：
+- 重新判断触发条件：
 - 是否抓住本轮主线：
 - 是否暂存其他分支：
 - 是否只给必要问题：
@@ -42,6 +53,19 @@ yes / partial / no
 - 是否给出可执行下一步：
 - 是否把事实、假设和建议区分清楚：
 - 是否成功使用上一轮继续标签恢复原分支：
+
+## 体验维度
+
+可选记录，不需要复杂打分：
+
+- Naturalness：
+- Brevity：
+- Speakability：
+- Actionability：
+- Context Reuse：
+- Unnecessary Structure：
+- Repeated Questions：
+- Premature Conclusion：
 
 ## 摩擦等级
 

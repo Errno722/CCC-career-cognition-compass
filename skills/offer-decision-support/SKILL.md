@@ -16,9 +16,9 @@ Do not rerun full career positioning by default. Reuse existing `职业画像卡
 
 ## Shared Rule Versions
 
-- SHARED_RULE focus-control v1.1
+- SHARED_RULE focus-control v1.2
 - SHARED_RULE certainty-calibration v1
-- SHARED_RULE profile-persistence v1.1
+- SHARED_RULE profile-persistence v1.2
 
 Use `core/focus-control.md` to keep the current offer thread narrow, `core/certainty-calibration.md` to avoid over-certainty, and `core/profile-persistence.md` when writing current-cycle preference updates.
 
