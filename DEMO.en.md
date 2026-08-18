@@ -74,7 +74,7 @@ Write the workflow project in 5 bullets: context, your role, action, result, evi
 ## Want More?
 
 - Start here: [QUICKSTART.en.md](QUICKSTART.en.md)
-- Copy the prompt: [prompts/copy-paste-prompt-lite-en.md](prompts/copy-paste-prompt-lite-en.md)
+- Copy the prompt: [prompts/copy-paste-prompt-en.md](prompts/copy-paste-prompt-en.md)
 - Applying across markets? See [examples/international-job-search.md](examples/international-job-search.md)
 
 ## Note

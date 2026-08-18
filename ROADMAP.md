@@ -15,8 +15,7 @@ CCC 已可用于真实个人求职辅助，但仍处于持续 usability testing 
 - Demo GIF / Social Preview
 - 第一批真实 Smoke Reports
 - 降低 Prompt / Skill 使用门槛
-- first usable English Lite entry
-- first international behavior contract
+- 验证中文 Prompt、English Prompt、WorkBuddy 与 Skills 的正式入口体验
 
 ## Next
 

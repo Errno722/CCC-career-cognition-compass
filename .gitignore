@@ -11,6 +11,9 @@ node_modules/
 __pycache__/
 *.pyc
 
+# Local projects that are not part of CCC.
+/apps/
+
 # Keep private drafts and job-search materials out of the repository.
 private/
 career-materials/

@@ -13,6 +13,7 @@
 
 ## 测试材料
 
+- [canonical-entrypoint-smoke-plan.md](canonical-entrypoint-smoke-plan.md)：三个正式入口的人工连续可用性验证；当前没有真实输出时状态保持 `not_run`。
 - [synthetic-user-profile.md](synthetic-user-profile.md)：完全虚构的测试用户背景。
 - [test-scenarios.md](test-scenarios.md)：6 个连续使用场景。
 - [longitudinal-job-search-plan.md](longitudinal-job-search-plan.md)：14 天连续求职状态测试计划。
@@ -23,9 +24,17 @@
 
 ## 使用方法
 
-1. 选择一个入口：普通 LLM、Codex / Claude Code、WorkBuddy 或其他平台。
+建议测试顺序：
+
+1. 先运行 [Canonical Entrypoint Smoke](canonical-entrypoint-smoke-plan.md)，确认正式入口和连续上下文的基础体验。
+2. 再运行 [Longitudinal Job Search Test](longitudinal-job-search-plan.md)，观察 14 天状态更新。
+3. 最后运行 [English Edition usability flows](english-edition-usability-plan.md)，补充英语本地、跨市场和第二语言语境。
+
+每次测试都：
+
+1. 选择一个入口和一个全新连续对话。
 2. 使用项目中的 CCC prompt / skill / agent 配置启动对话。
-3. 按 [test-scenarios.md](test-scenarios.md) 的顺序发送用户输入。
+3. 只发送本轮新事件，不重复完整背景。
 4. 每一轮都用 [observation-template.md](observation-template.md) 记录实际输出。
 5. 只有当同一类问题重复出现，或影响主流程完成时，才写入 [friction-log.md](friction-log.md)。
 

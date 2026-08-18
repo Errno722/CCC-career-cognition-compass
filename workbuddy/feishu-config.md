@@ -96,7 +96,6 @@ README.md
 SKILLS.md
 prompts/copy-paste-prompt-cn.md
 prompts/copy-paste-prompt-en.md
-prompts/career-cognition-compass-prompt.md
 skills/career-cognition-compass/SKILL.md
 skills/career-project-experience-miner/SKILL.md
 skills/career-materials-builder/SKILL.md

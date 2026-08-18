@@ -1,147 +1,64 @@
-# English Edition Usability Plan
+# English Edition Usability Checklist
 
-Purpose:
-Check whether the English Edition feels natural to English-language users and whether context-sensitive rules activate only when relevant.
+Purpose: add English-language naturalness and context-activation checks to the canonical continuous flows.
 
-This is a manual longitudinal usability plan.
+This is a manual usability checklist. It does not:
 
-It does not:
+- add behavior contracts;
+- change `manual_case_count`;
+- generate Smoke Reports;
+- claim platform validation.
 
-- add behavior contracts
-- change `manual_case_count`
-- generate Smoke Reports
-- claim platform validation
+Use only synthetic or fully redacted materials.
 
-Use only synthetic or fully redacted materials. Do not use real phone numbers, email addresses, resumes, offers, contracts, salary screenshots, confidential employer information, or complete interview records.
+## Test Source
 
-## Flow A: Domestic Job Search
+Do not maintain another copy of the English turn scripts here. Run these lanes from [canonical-entrypoint-smoke-plan.md](canonical-entrypoint-smoke-plan.md):
 
-Scenario:
+1. `Lane B1: English Domestic Job Search`
+2. `Lane B2: English Cross-Market Job Search`
+3. `Lane B3: Domestic + Second-Language Communication`
 
-```text
-User:
-Based in the US
-Applying for US Product Operations roles
-No work authorization issue mentioned
-Uses English naturally
-```
+Record each turn with [observation-template.md](observation-template.md).
 
-Suggested continuous inputs:
+## Domestic Context
 
-```text
-Turn 1:
-I'm applying for Product Operations roles and I keep changing my resume.
+Check that CCC:
 
-Turn 2:
-I've had three recruiter screens and two first-round interviews.
+- stays focused on targeting, evidence, resume patches, and interview signals;
+- does not ask about visa or sponsorship without a reason;
+- does not label the user an international candidate merely because the conversation is in English;
+- does not introduce cross-market Resume/CV rules;
+- retains employed status and limited-energy constraints when supplied.
 
-Turn 3:
-I don't know whether the problem is my resume or how I explain my projects.
+## Cross-Market Context
 
-Turn 4:
-Here's one project I usually talk about.
+Check that CCC:
 
-Turn 5:
-Here's a JD.
-```
+- activates target-market context only when it changes the answer;
+- separates candidate fit from work authorization and sponsorship;
+- distinguishes remote from work-from-anywhere;
+- checks local Resume/CV context without universal claims;
+- asks only minimum eligibility-level questions and does not request sensitive document details.
 
-Should:
+## Domestic + Second-Language Context
 
-- stay focused on targeting, evidence, and interview signals
-- use natural English
-- avoid full resume rewrites
-- give one next action
+Check that CCC:
 
-Should not:
+- activates second-language communication support without activating international framing;
+- prioritizes clear, short, speakable English;
+- does not upgrade working communication to fluent or native without evidence;
+- preserves the user's meaning instead of translating Chinese phrasing literally.
 
-- ask about visa
-- ask about sponsorship
-- call this international job search
-- introduce cross-market rules without reason
+## Naturalness Review
 
-## Flow B: Cross-Market Job Search
+For recruiter messages, interview structures, and resume patches, record:
 
-Scenario:
+- `Naturalness`: does it sound like a person rather than a policy document?
+- `Brevity`: can the user identify the main point quickly?
+- `Speakability`: can the user say the sentence naturally?
+- `Corporate tone`: does it sound like a cover letter when the user asked for a chat reply?
+- `Complexity`: are sentences more sophisticated than the user needs?
+- `Language claim`: does the output stay within supplied evidence?
 
-```text
-User:
-Based in one country
-Applying in another market
-May need sponsorship
-```
-
-Suggested continuous inputs:
-
-```text
-Turn 1:
-I'm based in the US and considering Product Operations roles in the UK.
-
-Turn 2:
-I may need employer sponsorship.
-
-Turn 3:
-Some roles say remote. Does that mean I can apply from the US?
-
-Turn 4:
-Should I use a resume or CV?
-```
-
-Should:
-
-- identify target market relevance
-- separate fit from work authorization
-- avoid sensitive visa questions
-- distinguish remote from work-from-anywhere
-- avoid universal resume rules
-
-Should not:
-
-- assume US rules for UK applications
-- treat sponsorship as low candidate quality
-
-## Flow C: Domestic + Second-Language Communication
-
-Scenario:
-
-```text
-User:
-Applying locally
-English is not first language
-No cross-market issue
-```
-
-Suggested continuous inputs:
-
-```text
-Turn 1:
-I'm applying locally and English is not my first language.
-
-Turn 2:
-I can work in English, but my interview answers sound too formal.
-
-Turn 3:
-Help me make this answer easier to say.
-```
-
-Should:
-
-- activate second-language communication
-- keep job-search context domestic
-- prefer speakable English
-- not inflate fluent or native claims
-
-Should not:
-
-- assume sponsorship
-- assume international job search
-
-## Watch For
-
-- unnecessary onboarding
-- repeated questions
-- context over-activation
-- full-resume rewrite drift
-- overly long answers
-- unnatural English
-- premature conclusions from small samples
-- unnecessary visa or sponsorship discussion
+Also record Rule Interference and Instruction Saturation through the shared observation template. Do not recommend prompt compression from one awkward output.

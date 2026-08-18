@@ -66,6 +66,8 @@ yes / partial / no
 - Unnecessary Structure：
 - Repeated Questions：
 - Premature Conclusion：
+- Rule Interference：是否因多个规则争抢主线而偏离用户本轮请求；涉及哪些规则：
+- Instruction Saturation：哪条规则在第几轮疑似失效；是否重复；是否有其他解释：
 
 ## 摩擦等级
 
@@ -89,3 +91,5 @@ P0 / P1 / P2 / P3
 yes / no / unsure
 
 注意：不要因为一次坏输出就立刻改规则。先判断这是模型波动、平台限制，还是 CCC 规则本身的系统性问题。
+
+只有 P0 / P1，或同一 P2 摩擦重复 2-3 次，才进入下一轮产品修改。P3 先记录。

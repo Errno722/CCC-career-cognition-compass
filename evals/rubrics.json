@@ -2232,18 +2232,6 @@
         "直接让用户接受/拒绝，或只给强硬话术，没有判断谈判是否必要和可行。"
       ]
     },
-    "closes_loop_after_offer_decision": {
-      "type": "must",
-      "severity": "medium",
-      "description": "Offer 接受、拒绝或继续求职后，应把理由转成当前求职周期的下一批 JD 筛选条件。",
-      "pass_criteria": [
-        "输出下一批 JD 筛选条件或等价结构，包含更看重、直接降级、需要提前确认等。"
-      ],
-      "fail_signals": [
-        "Offer 分析结束后没有沉淀任何后续筛选标准，下一轮求职仍会重复同类消耗。"
-      ],
-      "status": "draft"
-    },
     "uses_mechanical_offer_scoring": {
       "type": "must_not",
       "severity": "high",

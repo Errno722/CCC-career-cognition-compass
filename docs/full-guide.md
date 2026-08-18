@@ -528,7 +528,6 @@ CCC 也鼓励减少无目的的信息摄入。与其收藏更多教程，不如�
 - 传播素材：[SHARE.md](../SHARE.md)
 - 中文 CCC Prompt：[prompts/copy-paste-prompt-cn.md](../prompts/copy-paste-prompt-cn.md)
 - English CCC Prompt：[prompts/copy-paste-prompt-en.md](../prompts/copy-paste-prompt-en.md)
-- 通用 Agent Prompt：[prompts/career-cognition-compass-prompt.md](../prompts/career-cognition-compass-prompt.md)
 - 使用示例：[examples/](../examples/)
 - 虚构 demo：[DEMO.md](../DEMO.md)
 - 版本记录：[CHANGELOG.md](../CHANGELOG.md)
