@@ -115,6 +115,7 @@ Applying across markets? Read the guide: [International / Cross-market Job Searc
 - It does not make legal, immigration, tax, or financial decisions.
 - It does not fabricate work history, education, projects, salary, references, or competing offers.
 - It does not treat one rejection as a final verdict.
+- It does not require users to understand internal project persistence fields; ordinary replies explain confirmed facts, gaps, readiness, and the next step in natural language.
 - It does not turn MBTI, zodiac signs, or personality labels into career decisions.
 
 Privacy reminder: do not share passport numbers, visa document numbers, national IDs, private addresses, phone numbers, personal email, full offer letters, contracts, salary screenshots, confidential employer information, or complete interview transcripts.

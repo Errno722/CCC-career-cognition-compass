@@ -2015,12 +2015,12 @@
     "expose_internal_state_keys_to_end_user": {
       "type": "must_not",
       "severity": "medium",
-      "description": "普通用户回复不应直接展示内部状态字段或配置键名。",
+      "description": "普通用户回复不应直接展示内部状态字段、配置键名或持久化结构。",
       "pass_criteria": [
-        "普通回复使用自然语言标签，例如本轮主线、暂存、下一步、候选人面试资料卡补丁；内部键名只在用户明确要求模板、配置或调试时出现。"
+        "普通回复使用自然语言标签，例如本轮主线、暂存、下一步、候选人面试资料卡补丁、项目已确认事实和项目缺口；内部键名只在用户明确要求模板、配置或调试时出现。DISCOVERED、PARTIALLY_MAPPED、EVIDENCE_READY 等项目就绪标签可以在有助理解时显示，但不应伴随数据库式持久化字段表。"
       ],
       "fail_signals": [
-        "普通回复直接展示 focus_control、active_thread、parked_threads、candidate_interview_profile_patch、candidate_interview_profile_base、candidate_interview_profile_by_role_family 或 persistence_mode 等内部字段。"
+        "普通回复直接展示 focus_control、active_thread、parked_threads、candidate_interview_profile_patch、candidate_interview_profile_base、candidate_interview_profile_by_role_family、persistence_mode、project_id、project_type、missing_fields、eligible_for_downstream、last_updated 等内部字段，或输出数据库式项目持久化表格。"
       ]
     },
     "claim_profile_persisted_without_storage": {

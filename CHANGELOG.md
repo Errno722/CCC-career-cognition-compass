@@ -4,6 +4,14 @@ CCC 使用日期型版本记录。这里记录面向使用者能感知到的主�
 
 Current project version: `0.1.1-beta`
 
+## 2026-08-19
+
+### Canonical Prompt 定向修复
+
+- 根据首轮 50 轮真实 Codex Canonical Prompt 可用性观察，只修复一个已记录的 P1：项目梳理时普通回复暴露 `project_id`、`missing_fields`、`eligible_for_downstream`、`last_updated` 等内部持久化字段和数据库式表格。
+- 项目状态机制和事实门禁继续保留；`DISCOVERED`、`PARTIALLY_MAPPED`、`EVIDENCE_READY` 在有助于解释项目就绪度时仍可显示，普通用户侧改用自然语言说明已确认事实、缺口、材料可用边界和下一步。
+- 增强现有 `project-mining-001` 合约，不新增 Eval Case；Prompt 压缩仍为证据不足，本轮不处理。
+
 ## 2026-08-09
 
 ### 开源产品体验

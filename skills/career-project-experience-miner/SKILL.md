@@ -165,9 +165,11 @@ Only `EVIDENCE_READY` projects can be treated as reusable source material. `DISC
 
 Do not pressure the user to invent sales, users, conversion, revenue, or clients. A repository, screenshot, document, workflow, deployed page, demo, file list, decision log, or paused-project explanation can be enough.
 
-## Per-Project State Record
+## Internal Per-Project State Record
 
 Track status per project, not per user.
+
+Keep the persistence record internal unless the user explicitly asks for a reusable data template, configuration, or debugging view. In ordinary replies, do not print raw keys or a database-style project table. The readiness labels `DISCOVERED`, `PARTIALLY_MAPPED`, and `EVIDENCE_READY` may remain user-visible when they help explain why a project can or cannot move downstream.
 
 ```text
 project_id:
@@ -181,6 +183,16 @@ eligible_for_downstream: true / false
 ```
 
 Only set `eligible_for_downstream: true` for an individual `EVIDENCE_READY` project. Other projects remain in inventory or evidence gaps.
+
+Translate the internal record into natural user-facing language:
+
+```text
+这个项目目前整理到哪
+已经确认什么
+还缺什么
+现在能否用于简历 / JD / 面试 / 作品集
+下一步只补什么
+```
 
 ## Judgment Trace
 
@@ -573,7 +585,7 @@ EVIDENCE_READY
 
 If the target JD is already present, still build or confirm the project fact card before adapting wording. This prevents one JD from polluting the reusable project record.
 
-Handoff format:
+Internal handoff format:
 
 ```text
 可交接项目
@@ -589,6 +601,8 @@ Handoff format:
 ```
 
 ## Response Shape
+
+Use natural labels in ordinary replies. Do not expose `project_id`, `project_type`, `missing_fields`, `eligible_for_downstream`, `last_updated`, or the full persistence schema unless the user explicitly asks for a template, configuration, or debugging output. A readiness label may be shown when it helps the user understand the evidence gate; it should not be turned into a technical table.
 
 For a first project-mining response:
 
@@ -636,6 +650,10 @@ For a completed project card:
 ## Version Record
 
 ```text
+v0.1.6 / 2026-08-19
+- Kept per-project persistence fields internal and translated ordinary replies into natural project-progress language.
+- Preserved DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY as optional user-facing readiness labels.
+
 v0.1.5 / 2026-08-13
 - Added interview-answer handoff guidance for project facts.
 - Allow temporary project answer structure while preserving Evidence Gate and missing judgment boundaries.

@@ -150,6 +150,10 @@ jd-resume-patch
 ## 更新记录
 
 ```text
+2026-08-19 / career-project-experience-miner v0.1.6
+- 根据 Canonical Prompt 真实连续测试中的 P1 摩擦，将 project_id、missing_fields、eligible_for_downstream、last_updated 等项目持久化字段保持为内部记录；普通回复改用自然语言说明项目进度、已确认事实、缺口、可用边界和下一步。
+- 保留 DISCOVERED、PARTIALLY_MAPPED、EVIDENCE_READY 作为必要时可见的项目就绪标签，不删除项目事实门禁。
+
 2026-08-08 / career-project-experience-miner v0.1.3
 - 新增 Judgment Trace、Judgment Depth J0-J4、Methodology Trace、Methodology Maturity M0-M4 和 used_at_time / retrospective 边界。
 - 明确模型、数据、AI 或老板结论不能直接包装成用户本人独立业务判断。

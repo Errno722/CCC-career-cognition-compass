@@ -231,7 +231,8 @@
         "semantic_must_not": [
           "write_resume_bullet_first",
           "invent_sales_data",
-          "claim_business_success"
+          "claim_business_success",
+          "expose_internal_state_keys_to_end_user"
         ]
       }
     },

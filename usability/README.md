@@ -15,6 +15,7 @@
 
 - [canonical-entrypoint-smoke-plan.md](canonical-entrypoint-smoke-plan.md)：三个正式入口的人工连续可用性验证计划与当前运行状态。
 - [runs/2026-08-19-codex-canonical-validation.md](runs/2026-08-19-codex-canonical-validation.md)：首轮 50 轮真实 Codex 模型观察记录；WorkBuddy 部分是 Prompt 代理测试，不是 WorkBuddy 平台验证。
+- [runs/2026-08-19-project-state-field-regression.md](runs/2026-08-19-project-state-field-regression.md)：针对 `CF-001` 项目内部字段暴露的四轮真实 Codex 定向回归。
 - [synthetic-user-profile.md](synthetic-user-profile.md)：完全虚构的测试用户背景。
 - [test-scenarios.md](test-scenarios.md)：6 个连续使用场景。
 - [longitudinal-job-search-plan.md](longitudinal-job-search-plan.md)：14 天连续求职状态测试计划。

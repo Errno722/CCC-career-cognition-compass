@@ -68,6 +68,7 @@
 - 不急着写简历；
 - 先建立项目总表和项目事实卡；
 - 标记 DISCOVERED / PARTIALLY_MAPPED / EVIDENCE_READY；
+- 就绪状态可以在有助理解时显示，但普通回复不展示 `project_id`、`missing_fields`、`eligible_for_downstream`、`last_updated` 等内部字段或数据库式表格；
 - 区分用户亲自完成、参与、了解但未实践的部分；
 - 说明无销售数据时仍可证明什么，以及不能夸大的地方。
 

@@ -4,6 +4,8 @@ Status: `partially_run`
 
 Latest observed run: [2026-08-19 Codex Canonical Validation](runs/2026-08-19-codex-canonical-validation.md)
 
+Latest focused regression: [2026-08-19 Project State Field Regression](runs/2026-08-19-project-state-field-regression.md) (`CF-001` passed on Codex)
+
 - Chinese Prompt: 12-turn Codex model run completed.
 - English Domestic: 10-turn Codex model run completed.
 - English Cross-market: 10-turn Codex model run completed.
