@@ -4,6 +4,7 @@
 
 | ID | 日期 | 场景 | friction_type | 摩擦描述 | 等级 | 重复次数 | 影响入口 | 影响 | 临时处理 | possible_fix | 是否需要修复 |
 | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- |
+| CF-001 | 2026-08-19 | Chinese Canonical Turn 3：一句零散项目描述 | unnecessary_template / internal_state_exposure | 回复直接展示 `project_id`、`status`、`missing_fields`、`eligible_for_downstream` 等八列表格，并在事实很少时对用户展示 `PARTIALLY_MAPPED`。 | P1 | 1 | 中文 Prompt | 未编造事实，但增加理解负担，暴露实现式字段，并把“继续回忆项目”变成填写系统档案。 | 忽略字段名，只继续补项目目标、本人行动和结果。 | 保留内部项目状态；用户侧改成已确认事实、还缺什么、下一步最多 1-3 个问题。单独下一轮修，不在本次观察中改 Prompt。 | yes |
 
 ## Friction Types
 

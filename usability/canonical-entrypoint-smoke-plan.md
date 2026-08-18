@@ -1,6 +1,15 @@
 # Canonical Entrypoint Usability Plan
 
-Status: `not_run`
+Status: `partially_run`
+
+Latest observed run: [2026-08-19 Codex Canonical Validation](runs/2026-08-19-codex-canonical-validation.md)
+
+- Chinese Prompt: 12-turn Codex model run completed.
+- English Domestic: 10-turn Codex model run completed.
+- English Cross-market: 10-turn Codex model run completed.
+- English Second-language: 6-turn Codex model run completed.
+- WorkBuddy System Prompt: 12-turn Codex proxy run completed; actual WorkBuddy platform remains `not_run`.
+- Public automated Smoke Reports remain 0.
 
 This is a manual longitudinal usability plan for the three formal CCC entrypoints:
 
