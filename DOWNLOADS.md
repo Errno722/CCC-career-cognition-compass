@@ -6,9 +6,9 @@
 
 | 你想做什么 | 推荐 |
 | --- | --- |
-| 在普通聊天模型里马上试用 | `CCC-prompt-pack.zip` / `CCC-prompt-pack-v0.1.1-beta.zip` 或直接复制 [CCC 中文 Prompt](prompts/copy-paste-prompt-cn.md) / [CCC English Prompt](prompts/copy-paste-prompt-en.md) |
-| 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` / `CCC-workbuddy-pack-v0.1.1-beta.zip` 或复制 [WorkBuddy System Prompt](workbuddy/system-prompt.md) |
-| 想研究完整项目 | `CCC-full-pack.zip` / `CCC-full-pack-v0.1.1-beta.zip` |
+| 在普通聊天模型里马上试用 | `CCC-prompt-pack.zip` / `CCC-prompt-pack-v0.1.2-beta.zip` 或直接复制 [CCC 中文 Prompt](prompts/copy-paste-prompt-cn.md) / [CCC English Prompt](prompts/copy-paste-prompt-en.md) |
+| 想部署 WorkBuddy | `CCC-workbuddy-pack.zip` / `CCC-workbuddy-pack-v0.1.2-beta.zip` 或复制 [WorkBuddy System Prompt](workbuddy/system-prompt.md) |
+| 想研究完整项目 | `CCC-full-pack.zip` / `CCC-full-pack-v0.1.2-beta.zip` |
 
 版本关系： [VERSION](VERSION) 决定构建版本；GitHub Release 是官方公开发行渠道；网盘是同一批 Release 文件的国内下载镜像。
 
@@ -44,26 +44,26 @@ https://github.com/Errno722/CCC-career-cognition-compass/releases/latest/downloa
 
 提取码：`2529`
 
-请优先下载带版本号的 ZIP。普通用户下载 `CCC-prompt-pack-v0.1.1-beta.zip` 就够了。
+请优先下载带版本号的 ZIP。普通用户下载 `CCC-prompt-pack-v0.1.2-beta.zip` 就够了。
 
 网盘文件夹内容：
 
 ```text
-CCC-v0.1.1-beta/
+CCC-v0.1.2-beta/
 ├─ 先看我.txt
 ├─ latest.txt
 ├─ 更新指南.md
 ├─ 版本更新说明.txt
-├─ CCC-prompt-pack-v0.1.1-beta.zip
-├─ CCC-workbuddy-pack-v0.1.1-beta.zip
-└─ CCC-full-pack-v0.1.1-beta.zip
+├─ CCC-prompt-pack-v0.1.2-beta.zip
+├─ CCC-workbuddy-pack-v0.1.2-beta.zip
+└─ CCC-full-pack-v0.1.2-beta.zip
 ```
 
 网盘推荐顺序：
 
-1. 普通用户优先下载 `CCC-prompt-pack-v0.1.1-beta.zip`。
-2. WorkBuddy 用户下载 `CCC-workbuddy-pack-v0.1.1-beta.zip`。
-3. 维护者、开发者或想研究完整项目的人下载 `CCC-full-pack-v0.1.1-beta.zip`。
+1. 普通用户优先下载 `CCC-prompt-pack-v0.1.2-beta.zip`。
+2. WorkBuddy 用户下载 `CCC-workbuddy-pack-v0.1.2-beta.zip`。
+3. 维护者、开发者或想研究完整项目的人下载 `CCC-full-pack-v0.1.2-beta.zip`。
 
 如果你之前已经下载过旧版，不要直接混用旧版和新版 Prompt。先看 [CCC 更新指南](docs/update-guide.md)，再替换对应文件。
 
@@ -149,16 +149,16 @@ node scripts/package-release.mjs
 dist/release/CCC-prompt-pack.zip
 dist/release/CCC-workbuddy-pack.zip
 dist/release/CCC-full-pack.zip
-dist/mirror/CCC-v0.1.1-beta/先看我.txt
-dist/mirror/CCC-v0.1.1-beta/latest.txt
-dist/mirror/CCC-v0.1.1-beta/更新指南.md
-dist/mirror/CCC-v0.1.1-beta/版本更新说明.txt
-dist/mirror/CCC-v0.1.1-beta/CCC-prompt-pack-v0.1.1-beta.zip
-dist/mirror/CCC-v0.1.1-beta/CCC-workbuddy-pack-v0.1.1-beta.zip
-dist/mirror/CCC-v0.1.1-beta/CCC-full-pack-v0.1.1-beta.zip
+dist/mirror/CCC-v0.1.2-beta/先看我.txt
+dist/mirror/CCC-v0.1.2-beta/latest.txt
+dist/mirror/CCC-v0.1.2-beta/更新指南.md
+dist/mirror/CCC-v0.1.2-beta/版本更新说明.txt
+dist/mirror/CCC-v0.1.2-beta/CCC-prompt-pack-v0.1.2-beta.zip
+dist/mirror/CCC-v0.1.2-beta/CCC-workbuddy-pack-v0.1.2-beta.zip
+dist/mirror/CCC-v0.1.2-beta/CCC-full-pack-v0.1.2-beta.zip
 ```
 
-无版本号 ZIP 适合上传 GitHub Release 并配合 `/latest/download/` 直链使用；`dist/mirror/CCC-v0.1.1-beta/` 适合直接拖到网盘，带版本号 ZIP 解压后也会得到带版本号的目录，避免多版本同名覆盖。
+无版本号 ZIP 适合上传 GitHub Release 并配合 `/latest/download/` 直链使用；`dist/mirror/CCC-v0.1.2-beta/` 适合直接拖到网盘，带版本号 ZIP 解压后也会得到带版本号的目录，避免多版本同名覆盖。
 
 发布新版本时，不要覆盖旧版本。建议把旧版本移入网盘历史版本文件夹，并更新 `latest.txt`。
 

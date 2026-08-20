@@ -37,14 +37,14 @@ CCC-full-pack.zip
 For netdisk mirrors, upload the generated mirror folder:
 
 ```text
-dist/mirror/CCC-v0.1.1-beta/
+dist/mirror/CCC-vX.Y.Z/
 ├─ 先看我.txt
 ├─ latest.txt
 ├─ 更新指南.md
 ├─ 版本更新说明.txt
-├─ CCC-prompt-pack-v0.1.1-beta.zip
-├─ CCC-workbuddy-pack-v0.1.1-beta.zip
-└─ CCC-full-pack-v0.1.1-beta.zip
+├─ CCC-prompt-pack-vX.Y.Z.zip
+├─ CCC-workbuddy-pack-vX.Y.Z.zip
+└─ CCC-full-pack-vX.Y.Z.zip
 ```
 
 Version chain: `VERSION` defines the build version; GitHub Release is the official distribution channel; netdisk folders are download mirrors only.
